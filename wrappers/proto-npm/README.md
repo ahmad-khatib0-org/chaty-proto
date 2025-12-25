@@ -1,4 +1,4 @@
-# @chaty/proto
+# @chaty-app/proto
 
 TypeScript Protobuf bindings for Chaty services.
 
@@ -7,9 +7,9 @@ Includes message definitions and gRPC client/server stubs for both Node.js and w
 ## Installation
 
 ```bash
-npm install @chaty/proto
+npm install @chaty-app/proto
 # or
-pnpm add @chaty/proto
+pnpm add @chaty-app/proto
 ```
 
 ## Usage
@@ -17,26 +17,38 @@ pnpm add @chaty/proto
 ### Node.js (gRPC-JS)
 
 ```typescript
-import { UsersClient } from '@chaty/proto/users/v1';
+import { ChatyServiceClient } from '@chaty-app/proto/service/v1';
 import { createChannel } from '@grpc/grpc-js';
 
 const channel = createChannel('localhost:50051');
-const client = new UsersClient(channel);
+const client = new ChatyServiceClient(channel);
+
+// Call UsersLogin RPC
+const response = await client.usersLogin({
+  email: 'user@example.com',
+  password: 'password123'
+});
 ```
 
 ### Browser (gRPC-Web)
 
 ```typescript
-import { UsersClient } from '@chaty/proto/web/users/v1';
+import { ChatyServiceClient } from '@chaty-app/proto/web/service/v1';
 
-const client = new UsersClient({
+const client = new ChatyServiceClient({
   host: 'http://localhost:8080'
+});
+
+// Call UsersLogin RPC
+const response = await client.usersLogin({
+  email: 'user@example.com',
+  password: 'password123'
 });
 ```
 
 ## Exports
 
-- `./users/v1` - Users service messages and client
+- `./service/v1` - Chaty unified service (authentication, user management)
 - `./shared/v1` - Shared message definitions
-- `./web/users/v1` - Browser-compatible gRPC-Web client for users
+- `./web/service/v1` - Browser-compatible gRPC-Web for Chaty service
 - `./web/shared/v1` - Browser-compatible shared definitions

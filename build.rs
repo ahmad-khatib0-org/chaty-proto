@@ -11,8 +11,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     .compile_protos(
       &[
         "shared/v1/error.proto",
-        "users/v1/users.proto",
-        "users/v1/auth.proto",
+        "service/v1/main.proto",
+        "service/v1/users.proto",
       ],
       &["."],
     )?;

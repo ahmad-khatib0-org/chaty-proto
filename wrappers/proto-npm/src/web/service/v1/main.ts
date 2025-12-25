@@ -2,37 +2,37 @@
 // versions:
 //   protoc-gen-ts_proto  v2.10.0
 //   protoc               unknown
-// source: users/v1/users.proto
+// source: service/v1/main.proto
 
 /* eslint-disable */
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { LoginRequest, LoginResponse } from "./auth.js";
+import { LoginRequest, LoginResponse } from "./users.js";
 
-export const protobufPackage = "users.v1";
+export const protobufPackage = "service.v1";
 
-export interface UsersService {
-  Login(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse>;
+export interface ChatyService {
+  UsersLogin(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse>;
 }
 
-export class UsersServiceClientImpl implements UsersService {
+export class ChatyServiceClientImpl implements ChatyService {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.Login = this.Login.bind(this);
+    this.UsersLogin = this.UsersLogin.bind(this);
   }
 
-  Login(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse> {
-    return this.rpc.unary(UsersServiceLoginDesc, LoginRequest.fromPartial(request), metadata);
+  UsersLogin(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse> {
+    return this.rpc.unary(ChatyServiceUsersLoginDesc, LoginRequest.fromPartial(request), metadata);
   }
 }
 
-export const UsersServiceDesc = { serviceName: "users.v1.UsersService" };
+export const ChatyServiceDesc = { serviceName: "service.v1.ChatyService" };
 
-export const UsersServiceLoginDesc: UnaryMethodDefinitionish = {
-  methodName: "Login",
-  service: UsersServiceDesc,
+export const ChatyServiceUsersLoginDesc: UnaryMethodDefinitionish = {
+  methodName: "UsersLogin",
+  service: ChatyServiceDesc,
   requestStream: false,
   responseStream: false,
   requestType: {

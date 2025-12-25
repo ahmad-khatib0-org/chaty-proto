@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v2.10.0
 //   protoc               unknown
-// source: users/v1/users.proto
+// source: service/v1/main.proto
 
 /* eslint-disable */
 import {
@@ -17,14 +17,14 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { LoginRequest, LoginResponse } from "./auth";
+import { LoginRequest, LoginResponse } from "./users";
 
-export const protobufPackage = "users.v1";
+export const protobufPackage = "service.v1";
 
-export type UsersServiceService = typeof UsersServiceService;
-export const UsersServiceService = {
-  login: {
-    path: "/users.v1.UsersService/Login",
+export type ChatyServiceService = typeof ChatyServiceService;
+export const ChatyServiceService = {
+  usersLogin: {
+    path: "/service.v1.ChatyService/UsersLogin",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: LoginRequest): Buffer => Buffer.from(LoginRequest.encode(value).finish()),
@@ -34,21 +34,21 @@ export const UsersServiceService = {
   },
 } as const;
 
-export interface UsersServiceServer extends UntypedServiceImplementation {
-  login: handleUnaryCall<LoginRequest, LoginResponse>;
+export interface ChatyServiceServer extends UntypedServiceImplementation {
+  usersLogin: handleUnaryCall<LoginRequest, LoginResponse>;
 }
 
-export interface UsersServiceClient extends Client {
-  login(
+export interface ChatyServiceClient extends Client {
+  usersLogin(
     request: LoginRequest,
     callback: (error: ServiceError | null, response: LoginResponse) => void,
   ): ClientUnaryCall;
-  login(
+  usersLogin(
     request: LoginRequest,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: LoginResponse) => void,
   ): ClientUnaryCall;
-  login(
+  usersLogin(
     request: LoginRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
@@ -56,11 +56,11 @@ export interface UsersServiceClient extends Client {
   ): ClientUnaryCall;
 }
 
-export const UsersServiceClient = makeGenericClientConstructor(
-  UsersServiceService,
-  "users.v1.UsersService",
+export const ChatyServiceClient = makeGenericClientConstructor(
+  ChatyServiceService,
+  "service.v1.ChatyService",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): UsersServiceClient;
-  service: typeof UsersServiceService;
+  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): ChatyServiceClient;
+  service: typeof ChatyServiceService;
   serviceName: string;
 };

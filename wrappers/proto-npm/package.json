@@ -1,6 +1,6 @@
 {
   "name": "@chaty-app/proto",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "TypeScript Protobuf bindings for Chaty",
   "license": "MIT",
   "types": "dist/index.d.ts",
@@ -34,14 +34,6 @@
       "import": "./dist/node/*",
       "require": "./dist/node-cjs/*"
     },
-    "./users/v1": {
-      "import": "./dist/node/users/v1/index.js",
-      "require": "./dist/node-cjs/users/v1/index.js"
-    },
-    "./users/v1/*": {
-      "import": "./dist/node/users/v1/*.js",
-      "require": "./dist/node-cjs/users/v1/*.js"
-    },
     "./shared/v1": {
       "import": "./dist/node/shared/v1/index.js",
       "require": "./dist/node-cjs/shared/v1/index.js"
@@ -50,36 +42,44 @@
       "import": "./dist/node/shared/v1/*.js",
       "require": "./dist/node-cjs/shared/v1/*.js"
     },
-    "./web/users/v1": "./dist/web/users/v1/index.js",
-    "./web/users/v1/*": "./dist/web/users/v1/*.js",
+    "./service/v1": {
+      "import": "./dist/node/service/v1/index.js",
+      "require": "./dist/node-cjs/service/v1/index.js"
+    },
+    "./service/v1/*": {
+      "import": "./dist/node/service/v1/*.js",
+      "require": "./dist/node-cjs/service/v1/*.js"
+    },
     "./web/shared/v1": "./dist/web/shared/v1/index.js",
-    "./web/shared/v1/*": "./dist/web/shared/v1/*.js"
+    "./web/shared/v1/*": "./dist/web/shared/v1/*.js",
+    "./web/service/v1": "./dist/web/service/v1/index.js",
+    "./web/service/v1/*": "./dist/web/service/v1/*.js"
   },
   "typesVersions": {
     "*": {
-      "users/v1": [
-        "dist/node/users/v1/index.d.ts"
-      ],
-      "users/v1/*": [
-        "dist/node/users/v1/*.d.ts"
-      ],
       "shared/v1": [
         "dist/node/shared/v1/index.d.ts"
       ],
       "shared/v1/*": [
         "dist/node/shared/v1/*.d.ts"
       ],
-      "web/users/v1": [
-        "dist/web/users/v1/index.d.ts"
+      "service/v1": [
+        "dist/node/service/v1/index.d.ts"
       ],
-      "web/users/v1/*": [
-        "dist/web/users/v1/*.d.ts"
+      "service/v1/*": [
+        "dist/node/service/v1/*.d.ts"
       ],
       "web/shared/v1": [
         "dist/web/shared/v1/index.d.ts"
       ],
       "web/shared/v1/*": [
         "dist/web/shared/v1/*.d.ts"
+      ],
+      "web/service/v1": [
+        "dist/web/service/v1/index.d.ts"
+      ],
+      "web/service/v1/*": [
+        "dist/web/service/v1/*.d.ts"
       ]
     }
   }

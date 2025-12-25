@@ -6,12 +6,12 @@ pub mod shared {
   }
 }
 
-pub mod users {
+pub mod service {
   pub mod v1 {
-    include!("users.v1.rs");
+    include!("service.v1.rs");
   }
 }
 
 // Re-export main types at crate root
 pub use shared::v1::*;
-pub use users::v1::*;
+pub use service::v1::*;

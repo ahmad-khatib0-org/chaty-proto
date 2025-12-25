@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package users.v1;
+package service.v1;
 
 import "shared/v1/error.proto";
 

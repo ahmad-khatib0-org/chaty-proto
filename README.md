@@ -6,8 +6,8 @@ Protobuf definitions for Chaty services. Generates Rust crates and TypeScript pa
 
 ```
 chaty-proto/
-├── users/v1/              # User service proto definitions
-├── shared.v1/             # Shared message definitions
+├── service/v1/            # Chaty unified service definition (RPC calls)
+├── shared/v1/             # Shared message definitions
 ├── wrappers/
 │   ├── proto-crate/       # Rust crate (@crates.io)
 │   └── proto-npm/         # NPM package (@chaty/proto)
@@ -52,9 +52,10 @@ cd wrappers/proto-crate
 cargo publish
 ```
 
-### TypeScript: `@chaty/proto`
+### TypeScript: `@chaty-app/proto`
 
 Dual exports:
+
 - **Node.js**: gRPC-JS client/server
 - **Browser**: gRPC-Web client
 

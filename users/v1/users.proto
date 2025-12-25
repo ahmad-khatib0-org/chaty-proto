@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package users.v1;
-
-import "users/v1/auth.proto";
-
-service UsersService {
-  rpc Login(users.v1.LoginRequest) returns (users.v1.LoginResponse);
-}

@@ -32,7 +32,7 @@ pub mod login_response {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LoginResponseData {}
 /// Generated client implementations.
-pub mod users_service_client {
+pub mod chaty_service_client {
     #![allow(
         unused_variables,
         dead_code,
@@ -43,10 +43,10 @@ pub mod users_service_client {
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct UsersServiceClient<T> {
+    pub struct ChatyServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl UsersServiceClient<tonic::transport::Channel> {
+    impl ChatyServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -57,7 +57,7 @@ pub mod users_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> UsersServiceClient<T>
+    impl<T> ChatyServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::Body>,
         T::Error: Into<StdError>,
@@ -75,7 +75,7 @@ pub mod users_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> UsersServiceClient<InterceptedService<T, F>>
+        ) -> ChatyServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -89,7 +89,7 @@ pub mod users_service_client {
                 http::Request<tonic::body::Body>,
             >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
-            UsersServiceClient::new(InterceptedService::new(inner, interceptor))
+            ChatyServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -122,7 +122,7 @@ pub mod users_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn login(
+        pub async fn users_login(
             &mut self,
             request: impl tonic::IntoRequest<super::LoginRequest>,
         ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status> {
@@ -136,17 +136,17 @@ pub mod users_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/users.v1.UsersService/Login",
+                "/service.v1.ChatyService/UsersLogin",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("users.v1.UsersService", "Login"));
+                .insert(GrpcMethod::new("service.v1.ChatyService", "UsersLogin"));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod users_service_server {
+pub mod chaty_service_server {
     #![allow(
         unused_variables,
         dead_code,
@@ -155,23 +155,23 @@ pub mod users_service_server {
         clippy::let_unit_value,
     )]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with UsersServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with ChatyServiceServer.
     #[async_trait]
-    pub trait UsersService: std::marker::Send + std::marker::Sync + 'static {
-        async fn login(
+    pub trait ChatyService: std::marker::Send + std::marker::Sync + 'static {
+        async fn users_login(
             &self,
             request: tonic::Request<super::LoginRequest>,
         ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status>;
     }
     #[derive(Debug)]
-    pub struct UsersServiceServer<T> {
+    pub struct ChatyServiceServer<T> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T> UsersServiceServer<T> {
+    impl<T> ChatyServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -222,9 +222,9 @@ pub mod users_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for UsersServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChatyServiceServer<T>
     where
-        T: UsersService,
+        T: ChatyService,
         B: Body + std::marker::Send + 'static,
         B::Error: Into<StdError> + std::marker::Send + 'static,
     {
@@ -239,12 +239,13 @@ pub mod users_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/users.v1.UsersService/Login" => {
+                "/service.v1.ChatyService/UsersLogin" => {
                     #[allow(non_camel_case_types)]
-                    struct LoginSvc<T: UsersService>(pub Arc<T>);
+                    struct UsersLoginSvc<T: ChatyService>(pub Arc<T>);
                     impl<
-                        T: UsersService,
-                    > tonic::server::UnaryService<super::LoginRequest> for LoginSvc<T> {
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::LoginRequest>
+                    for UsersLoginSvc<T> {
                         type Response = super::LoginResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
@@ -256,7 +257,7 @@ pub mod users_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as UsersService>::login(&inner, request).await
+                                <T as ChatyService>::users_login(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -267,7 +268,7 @@ pub mod users_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = LoginSvc(inner);
+                        let method = UsersLoginSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -305,7 +306,7 @@ pub mod users_service_server {
             }
         }
     }
-    impl<T> Clone for UsersServiceServer<T> {
+    impl<T> Clone for ChatyServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -318,8 +319,8 @@ pub mod users_service_server {
         }
     }
     /// Generated gRPC service name
-    pub const SERVICE_NAME: &str = "users.v1.UsersService";
-    impl<T> tonic::server::NamedService for UsersServiceServer<T> {
+    pub const SERVICE_NAME: &str = "service.v1.ChatyService";
+    impl<T> tonic::server::NamedService for ChatyServiceServer<T> {
         const NAME: &'static str = SERVICE_NAME;
     }
 }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "service/v1/users.proto";
+
+service ChatyService {
+  rpc UsersLogin(LoginRequest) returns (LoginResponse);
+}

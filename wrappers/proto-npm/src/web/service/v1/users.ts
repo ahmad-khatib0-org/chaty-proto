@@ -2,13 +2,13 @@
 // versions:
 //   protoc-gen-ts_proto  v2.10.0
 //   protoc               unknown
-// source: users/v1/auth.proto
+// source: service/v1/users.proto
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { AppError } from "../../shared/v1/error";
+import { AppError } from "../../shared/v1/error.js";
 
-export const protobufPackage = "users.v1";
+export const protobufPackage = "service.v1";
 
 export interface LoginRequest {
   email: string;
