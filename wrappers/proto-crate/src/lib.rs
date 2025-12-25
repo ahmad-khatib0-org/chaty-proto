@@ -1,14 +1,17 @@
-// Re-export all generated proto modules
+#![allow(clippy::all)]
+
 pub mod shared {
-    pub mod v1 {
-        #![allow(clippy::derive_partial_eq_without_eq)]
-        include!(concat!(env!("OUT_DIR"), "/shared.v1.rs"));
-    }
+  pub mod v1 {
+    include!("shared.v1.rs");
+  }
 }
 
 pub mod users {
-    pub mod v1 {
-        #![allow(clippy::derive_partial_eq_without_eq)]
-        include!(concat!(env!("OUT_DIR"), "/users.v1.rs"));
-    }
+  pub mod v1 {
+    include!("users.v1.rs");
+  }
 }
+
+// Re-export main types at crate root
+pub use shared::v1::*;
+pub use users::v1::*;
