@@ -1,0 +1,25 @@
+---
+version: v1
+plugins:
+  # Node.js TypeScript (server-side + gRPC-JS client)
+  - name: ts
+    path: ./node_modules/.bin/protoc-gen-ts_proto
+    out: wrappers/proto-npm/src/node
+    opt:
+      - env=true
+      - outputServices=grpc-js
+      - forceLong=string
+      - useOptionals=true
+
+  # Browser TypeScript (gRPC-Web client)
+  - name: ts
+    path: ./node_modules/.bin/protoc-gen-ts_proto
+    out: wrappers/proto-npm/src/web
+    opt:
+      - env=browser
+      - outputClientImpl=grpc-web
+      - outputServices=default
+      - forceLong=string
+      - useOptionals=true
+      - esModuleInterop=true
+      - importSuffix=.js

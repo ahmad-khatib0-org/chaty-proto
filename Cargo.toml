@@ -1,0 +1,28 @@
+[package]
+name = "chaty-proto-root"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[lib]
+path = "wrappers/lib.rs"
+
+[build-dependencies]
+tonic-build = "0.13.1"
+
+[workspace]
+members = ["wrappers/proto-crate"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+
+[workspace.dependencies]
+prost = "0.14.1"
+prost-types = "0.14.1"
+tonic = "0.14.2"
+tonic-build = "0.14.2"
+
+[dependencies]
+tonic-build = "0.14.2"

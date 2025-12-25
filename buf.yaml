@@ -1,0 +1,8 @@
+---
+version: v1
+name: buf.build/ahmad-khatib-org/chaty-proto
+
+build:
+  excludes:
+    - node_modules
+    - wrappers/proto-npm/node_modules
