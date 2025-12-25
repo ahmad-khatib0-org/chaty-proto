@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package users.v1;
+
+import "shared/v1/error.proto";
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+  string mfa = 3;
+  string login_challenge = 4;
+}
+
+message LoginResponse {
+  oneof response {
+    LoginResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message LoginResponseData {}
