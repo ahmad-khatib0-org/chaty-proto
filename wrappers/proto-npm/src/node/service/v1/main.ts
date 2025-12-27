@@ -17,12 +17,21 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { LoginRequest, LoginResponse } from "./users";
+import { LoginRequest, LoginResponse, UserCreateRequest, UserCreateResponse } from "./users";
 
 export const protobufPackage = "service.v1";
 
 export type ChatyServiceService = typeof ChatyServiceService;
 export const ChatyServiceService = {
+  usersCreate: {
+    path: "/service.v1.ChatyService/UsersCreate",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: UserCreateRequest): Buffer => Buffer.from(UserCreateRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): UserCreateRequest => UserCreateRequest.decode(value),
+    responseSerialize: (value: UserCreateResponse): Buffer => Buffer.from(UserCreateResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): UserCreateResponse => UserCreateResponse.decode(value),
+  },
   usersLogin: {
     path: "/service.v1.ChatyService/UsersLogin",
     requestStream: false,
@@ -35,10 +44,26 @@ export const ChatyServiceService = {
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
+  usersCreate: handleUnaryCall<UserCreateRequest, UserCreateResponse>;
   usersLogin: handleUnaryCall<LoginRequest, LoginResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
+  usersCreate(
+    request: UserCreateRequest,
+    callback: (error: ServiceError | null, response: UserCreateResponse) => void,
+  ): ClientUnaryCall;
+  usersCreate(
+    request: UserCreateRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UserCreateResponse) => void,
+  ): ClientUnaryCall;
+  usersCreate(
+    request: UserCreateRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UserCreateResponse) => void,
+  ): ClientUnaryCall;
   usersLogin(
     request: LoginRequest,
     callback: (error: ServiceError | null, response: LoginResponse) => void,

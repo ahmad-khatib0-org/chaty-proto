@@ -7,11 +7,12 @@
 /* eslint-disable */
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { LoginRequest, LoginResponse } from "./users.js";
+import { LoginRequest, LoginResponse, UserCreateRequest, UserCreateResponse } from "./users.js";
 
 export const protobufPackage = "service.v1";
 
 export interface ChatyService {
+  UsersCreate(request: DeepPartial<UserCreateRequest>, metadata?: grpc.Metadata): Promise<UserCreateResponse>;
   UsersLogin(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse>;
 }
 
@@ -20,7 +21,12 @@ export class ChatyServiceClientImpl implements ChatyService {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.UsersCreate = this.UsersCreate.bind(this);
     this.UsersLogin = this.UsersLogin.bind(this);
+  }
+
+  UsersCreate(request: DeepPartial<UserCreateRequest>, metadata?: grpc.Metadata): Promise<UserCreateResponse> {
+    return this.rpc.unary(ChatyServiceUsersCreateDesc, UserCreateRequest.fromPartial(request), metadata);
   }
 
   UsersLogin(request: DeepPartial<LoginRequest>, metadata?: grpc.Metadata): Promise<LoginResponse> {
@@ -29,6 +35,29 @@ export class ChatyServiceClientImpl implements ChatyService {
 }
 
 export const ChatyServiceDesc = { serviceName: "service.v1.ChatyService" };
+
+export const ChatyServiceUsersCreateDesc: UnaryMethodDefinitionish = {
+  methodName: "UsersCreate",
+  service: ChatyServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return UserCreateRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = UserCreateResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
 
 export const ChatyServiceUsersLoginDesc: UnaryMethodDefinitionish = {
   methodName: "UsersLogin",

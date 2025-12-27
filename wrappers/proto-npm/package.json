@@ -1,6 +1,6 @@
 {
   "name": "@chaty-app/proto",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "TypeScript Protobuf bindings for Chaty",
   "license": "MIT",
   "types": "dist/index.d.ts",

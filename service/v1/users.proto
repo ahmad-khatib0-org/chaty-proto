@@ -4,6 +4,47 @@ package service.v1;
 
 import "shared/v1/error.proto";
 
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+  optional string display_name = 5;
+  optional uint32 badges = 6;
+  optional string status_text = 7;
+  optional UserStatus status_presence = 8;
+  optional string profile_content = 9;
+  optional string profile_background_id = 10;
+  bool privileged = 11;
+  optional uint64 suspended_until = 12;
+  uint64 created_at = 13; // unix timestamp
+  uint64 updated_at = 14; // unix timestamp
+}
+
+enum UserStatus {
+  USER_STATUS_ONLINE = 0;
+  USER_STATUS_IDLE = 1;
+  USER_STATUS_FOCUS = 2;
+  USER_STATUS_BUSY = 3;
+  USER_STATUS_INVISIBLE = 4;
+}
+
+enum UserFlag {
+  USER_FLAG_UNSPECIFIED = 0;
+  USER_FLAG_SUSPENDED_UNTIL = 1;
+  USER_FLAG_DELETED = 2;
+  USER_FLAG_BANNED = 4;
+  USER_FLAG_SPAM = 8;
+}
+
+message UserCreateRequest {
+  string email = 1;
+  string password = 2;
+  string username = 3;
+}
+
+message UserCreateResponse {}
+
 message LoginRequest {
   string email = 1;
   string password = 2;

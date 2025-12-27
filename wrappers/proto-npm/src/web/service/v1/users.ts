@@ -10,6 +10,138 @@ import { AppError } from "../../shared/v1/error.js";
 
 export const protobufPackage = "service.v1";
 
+export enum UserStatus {
+  USER_STATUS_ONLINE = 0,
+  USER_STATUS_IDLE = 1,
+  USER_STATUS_FOCUS = 2,
+  USER_STATUS_BUSY = 3,
+  USER_STATUS_INVISIBLE = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function userStatusFromJSON(object: any): UserStatus {
+  switch (object) {
+    case 0:
+    case "USER_STATUS_ONLINE":
+      return UserStatus.USER_STATUS_ONLINE;
+    case 1:
+    case "USER_STATUS_IDLE":
+      return UserStatus.USER_STATUS_IDLE;
+    case 2:
+    case "USER_STATUS_FOCUS":
+      return UserStatus.USER_STATUS_FOCUS;
+    case 3:
+    case "USER_STATUS_BUSY":
+      return UserStatus.USER_STATUS_BUSY;
+    case 4:
+    case "USER_STATUS_INVISIBLE":
+      return UserStatus.USER_STATUS_INVISIBLE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UserStatus.UNRECOGNIZED;
+  }
+}
+
+export function userStatusToJSON(object: UserStatus): string {
+  switch (object) {
+    case UserStatus.USER_STATUS_ONLINE:
+      return "USER_STATUS_ONLINE";
+    case UserStatus.USER_STATUS_IDLE:
+      return "USER_STATUS_IDLE";
+    case UserStatus.USER_STATUS_FOCUS:
+      return "USER_STATUS_FOCUS";
+    case UserStatus.USER_STATUS_BUSY:
+      return "USER_STATUS_BUSY";
+    case UserStatus.USER_STATUS_INVISIBLE:
+      return "USER_STATUS_INVISIBLE";
+    case UserStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum UserFlag {
+  USER_FLAG_UNSPECIFIED = 0,
+  USER_FLAG_SUSPENDED_UNTIL = 1,
+  USER_FLAG_DELETED = 2,
+  USER_FLAG_BANNED = 4,
+  USER_FLAG_SPAM = 8,
+  UNRECOGNIZED = -1,
+}
+
+export function userFlagFromJSON(object: any): UserFlag {
+  switch (object) {
+    case 0:
+    case "USER_FLAG_UNSPECIFIED":
+      return UserFlag.USER_FLAG_UNSPECIFIED;
+    case 1:
+    case "USER_FLAG_SUSPENDED_UNTIL":
+      return UserFlag.USER_FLAG_SUSPENDED_UNTIL;
+    case 2:
+    case "USER_FLAG_DELETED":
+      return UserFlag.USER_FLAG_DELETED;
+    case 4:
+    case "USER_FLAG_BANNED":
+      return UserFlag.USER_FLAG_BANNED;
+    case 8:
+    case "USER_FLAG_SPAM":
+      return UserFlag.USER_FLAG_SPAM;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UserFlag.UNRECOGNIZED;
+  }
+}
+
+export function userFlagToJSON(object: UserFlag): string {
+  switch (object) {
+    case UserFlag.USER_FLAG_UNSPECIFIED:
+      return "USER_FLAG_UNSPECIFIED";
+    case UserFlag.USER_FLAG_SUSPENDED_UNTIL:
+      return "USER_FLAG_SUSPENDED_UNTIL";
+    case UserFlag.USER_FLAG_DELETED:
+      return "USER_FLAG_DELETED";
+    case UserFlag.USER_FLAG_BANNED:
+      return "USER_FLAG_BANNED";
+    case UserFlag.USER_FLAG_SPAM:
+      return "USER_FLAG_SPAM";
+    case UserFlag.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  displayName?: string | undefined;
+  badges?: number | undefined;
+  statusText?: string | undefined;
+  statusPresence?: UserStatus | undefined;
+  profileContent?: string | undefined;
+  profileBackgroundId?: string | undefined;
+  privileged: boolean;
+  suspendedUntil?:
+    | string
+    | undefined;
+  /** unix timestamp */
+  createdAt: string;
+  /** unix timestamp */
+  updatedAt: string;
+}
+
+export interface UserCreateRequest {
+  email: string;
+  password: string;
+  username: string;
+}
+
+export interface UserCreateResponse {
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -24,6 +156,426 @@ export interface LoginResponse {
 
 export interface LoginResponseData {
 }
+
+function createBaseUser(): User {
+  return {
+    id: "",
+    username: "",
+    email: "",
+    password: "",
+    displayName: undefined,
+    badges: undefined,
+    statusText: undefined,
+    statusPresence: undefined,
+    profileContent: undefined,
+    profileBackgroundId: undefined,
+    privileged: false,
+    suspendedUntil: undefined,
+    createdAt: "0",
+    updatedAt: "0",
+  };
+}
+
+export const User: MessageFns<User> = {
+  encode(message: User, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    if (message.username !== "") {
+      writer.uint32(18).string(message.username);
+    }
+    if (message.email !== "") {
+      writer.uint32(26).string(message.email);
+    }
+    if (message.password !== "") {
+      writer.uint32(34).string(message.password);
+    }
+    if (message.displayName !== undefined) {
+      writer.uint32(42).string(message.displayName);
+    }
+    if (message.badges !== undefined) {
+      writer.uint32(48).uint32(message.badges);
+    }
+    if (message.statusText !== undefined) {
+      writer.uint32(58).string(message.statusText);
+    }
+    if (message.statusPresence !== undefined) {
+      writer.uint32(64).int32(message.statusPresence);
+    }
+    if (message.profileContent !== undefined) {
+      writer.uint32(74).string(message.profileContent);
+    }
+    if (message.profileBackgroundId !== undefined) {
+      writer.uint32(82).string(message.profileBackgroundId);
+    }
+    if (message.privileged !== false) {
+      writer.uint32(88).bool(message.privileged);
+    }
+    if (message.suspendedUntil !== undefined) {
+      writer.uint32(96).uint64(message.suspendedUntil);
+    }
+    if (message.createdAt !== "0") {
+      writer.uint32(104).uint64(message.createdAt);
+    }
+    if (message.updatedAt !== "0") {
+      writer.uint32(112).uint64(message.updatedAt);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): User {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUser();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.username = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.password = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.displayName = reader.string();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.badges = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.statusText = reader.string();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.statusPresence = reader.int32() as any;
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.profileContent = reader.string();
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.profileBackgroundId = reader.string();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.privileged = reader.bool();
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.suspendedUntil = reader.uint64().toString();
+          continue;
+        }
+        case 13: {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.createdAt = reader.uint64().toString();
+          continue;
+        }
+        case 14: {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.updatedAt = reader.uint64().toString();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): User {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      username: isSet(object.username) ? globalThis.String(object.username) : "",
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
+      password: isSet(object.password) ? globalThis.String(object.password) : "",
+      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : undefined,
+      badges: isSet(object.badges) ? globalThis.Number(object.badges) : undefined,
+      statusText: isSet(object.statusText) ? globalThis.String(object.statusText) : undefined,
+      statusPresence: isSet(object.statusPresence) ? userStatusFromJSON(object.statusPresence) : undefined,
+      profileContent: isSet(object.profileContent) ? globalThis.String(object.profileContent) : undefined,
+      profileBackgroundId: isSet(object.profileBackgroundId)
+        ? globalThis.String(object.profileBackgroundId)
+        : undefined,
+      privileged: isSet(object.privileged) ? globalThis.Boolean(object.privileged) : false,
+      suspendedUntil: isSet(object.suspendedUntil) ? globalThis.String(object.suspendedUntil) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+    };
+  },
+
+  toJSON(message: User): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.username !== "") {
+      obj.username = message.username;
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    if (message.password !== "") {
+      obj.password = message.password;
+    }
+    if (message.displayName !== undefined) {
+      obj.displayName = message.displayName;
+    }
+    if (message.badges !== undefined) {
+      obj.badges = Math.round(message.badges);
+    }
+    if (message.statusText !== undefined) {
+      obj.statusText = message.statusText;
+    }
+    if (message.statusPresence !== undefined) {
+      obj.statusPresence = userStatusToJSON(message.statusPresence);
+    }
+    if (message.profileContent !== undefined) {
+      obj.profileContent = message.profileContent;
+    }
+    if (message.profileBackgroundId !== undefined) {
+      obj.profileBackgroundId = message.profileBackgroundId;
+    }
+    if (message.privileged !== false) {
+      obj.privileged = message.privileged;
+    }
+    if (message.suspendedUntil !== undefined) {
+      obj.suspendedUntil = message.suspendedUntil;
+    }
+    if (message.createdAt !== "0") {
+      obj.createdAt = message.createdAt;
+    }
+    if (message.updatedAt !== "0") {
+      obj.updatedAt = message.updatedAt;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<User>, I>>(base?: I): User {
+    return User.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<User>, I>>(object: I): User {
+    const message = createBaseUser();
+    message.id = object.id ?? "";
+    message.username = object.username ?? "";
+    message.email = object.email ?? "";
+    message.password = object.password ?? "";
+    message.displayName = object.displayName ?? undefined;
+    message.badges = object.badges ?? undefined;
+    message.statusText = object.statusText ?? undefined;
+    message.statusPresence = object.statusPresence ?? undefined;
+    message.profileContent = object.profileContent ?? undefined;
+    message.profileBackgroundId = object.profileBackgroundId ?? undefined;
+    message.privileged = object.privileged ?? false;
+    message.suspendedUntil = object.suspendedUntil ?? undefined;
+    message.createdAt = object.createdAt ?? "0";
+    message.updatedAt = object.updatedAt ?? "0";
+    return message;
+  },
+};
+
+function createBaseUserCreateRequest(): UserCreateRequest {
+  return { email: "", password: "", username: "" };
+}
+
+export const UserCreateRequest: MessageFns<UserCreateRequest> = {
+  encode(message: UserCreateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.email !== "") {
+      writer.uint32(10).string(message.email);
+    }
+    if (message.password !== "") {
+      writer.uint32(18).string(message.password);
+    }
+    if (message.username !== "") {
+      writer.uint32(26).string(message.username);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UserCreateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserCreateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.password = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.username = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserCreateRequest {
+    return {
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
+      password: isSet(object.password) ? globalThis.String(object.password) : "",
+      username: isSet(object.username) ? globalThis.String(object.username) : "",
+    };
+  },
+
+  toJSON(message: UserCreateRequest): unknown {
+    const obj: any = {};
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    if (message.password !== "") {
+      obj.password = message.password;
+    }
+    if (message.username !== "") {
+      obj.username = message.username;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserCreateRequest>, I>>(base?: I): UserCreateRequest {
+    return UserCreateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserCreateRequest>, I>>(object: I): UserCreateRequest {
+    const message = createBaseUserCreateRequest();
+    message.email = object.email ?? "";
+    message.password = object.password ?? "";
+    message.username = object.username ?? "";
+    return message;
+  },
+};
+
+function createBaseUserCreateResponse(): UserCreateResponse {
+  return {};
+}
+
+export const UserCreateResponse: MessageFns<UserCreateResponse> = {
+  encode(_: UserCreateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UserCreateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserCreateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UserCreateResponse {
+    return {};
+  },
+
+  toJSON(_: UserCreateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserCreateResponse>, I>>(base?: I): UserCreateResponse {
+    return UserCreateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserCreateResponse>, I>>(_: I): UserCreateResponse {
+    const message = createBaseUserCreateResponse();
+    return message;
+  },
+};
 
 function createBaseLoginRequest(): LoginRequest {
   return { email: "", password: "", mfa: "", loginChallenge: "" };

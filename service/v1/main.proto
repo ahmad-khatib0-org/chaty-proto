@@ -5,5 +5,6 @@ package service.v1;
 import "service/v1/users.proto";
 
 service ChatyService {
+  rpc UsersCreate(UserCreateRequest) returns (UserCreateResponse);
   rpc UsersLogin(LoginRequest) returns (LoginResponse);
 }
