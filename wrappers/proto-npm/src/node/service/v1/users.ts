@@ -140,21 +140,26 @@ export interface UserCreateRequest {
 }
 
 export interface UserCreateResponse {
+  data?: UserCreateResponseData | undefined;
+  error?: AppError | undefined;
 }
 
-export interface LoginRequest {
+export interface UserCreateResponseData {
+}
+
+export interface UsersLoginRequest {
   email: string;
   password: string;
   mfa: string;
   loginChallenge: string;
 }
 
-export interface LoginResponse {
-  data?: LoginResponseData | undefined;
+export interface UsersLoginResponse {
+  data?: UsersLoginResponseData | undefined;
   error?: AppError | undefined;
 }
 
-export interface LoginResponseData {
+export interface UsersLoginResponseData {
 }
 
 function createBaseUser(): User {
@@ -535,11 +540,17 @@ export const UserCreateRequest: MessageFns<UserCreateRequest> = {
 };
 
 function createBaseUserCreateResponse(): UserCreateResponse {
-  return {};
+  return { data: undefined, error: undefined };
 }
 
 export const UserCreateResponse: MessageFns<UserCreateResponse> = {
-  encode(_: UserCreateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: UserCreateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      UserCreateResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
     return writer;
   },
 
@@ -547,6 +558,80 @@ export const UserCreateResponse: MessageFns<UserCreateResponse> = {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUserCreateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = UserCreateResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserCreateResponse {
+    return {
+      data: isSet(object.data) ? UserCreateResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: UserCreateResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = UserCreateResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserCreateResponse>, I>>(base?: I): UserCreateResponse {
+    return UserCreateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserCreateResponse>, I>>(object: I): UserCreateResponse {
+    const message = createBaseUserCreateResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? UserCreateResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUserCreateResponseData(): UserCreateResponseData {
+  return {};
+}
+
+export const UserCreateResponseData: MessageFns<UserCreateResponseData> = {
+  encode(_: UserCreateResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UserCreateResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserCreateResponseData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -559,30 +644,30 @@ export const UserCreateResponse: MessageFns<UserCreateResponse> = {
     return message;
   },
 
-  fromJSON(_: any): UserCreateResponse {
+  fromJSON(_: any): UserCreateResponseData {
     return {};
   },
 
-  toJSON(_: UserCreateResponse): unknown {
+  toJSON(_: UserCreateResponseData): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UserCreateResponse>, I>>(base?: I): UserCreateResponse {
-    return UserCreateResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UserCreateResponseData>, I>>(base?: I): UserCreateResponseData {
+    return UserCreateResponseData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<UserCreateResponse>, I>>(_: I): UserCreateResponse {
-    const message = createBaseUserCreateResponse();
+  fromPartial<I extends Exact<DeepPartial<UserCreateResponseData>, I>>(_: I): UserCreateResponseData {
+    const message = createBaseUserCreateResponseData();
     return message;
   },
 };
 
-function createBaseLoginRequest(): LoginRequest {
+function createBaseUsersLoginRequest(): UsersLoginRequest {
   return { email: "", password: "", mfa: "", loginChallenge: "" };
 }
 
-export const LoginRequest: MessageFns<LoginRequest> = {
-  encode(message: LoginRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const UsersLoginRequest: MessageFns<UsersLoginRequest> = {
+  encode(message: UsersLoginRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
     }
@@ -598,10 +683,10 @@ export const LoginRequest: MessageFns<LoginRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LoginRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersLoginRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLoginRequest();
+    const message = createBaseUsersLoginRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -646,7 +731,7 @@ export const LoginRequest: MessageFns<LoginRequest> = {
     return message;
   },
 
-  fromJSON(object: any): LoginRequest {
+  fromJSON(object: any): UsersLoginRequest {
     return {
       email: isSet(object.email) ? globalThis.String(object.email) : "",
       password: isSet(object.password) ? globalThis.String(object.password) : "",
@@ -655,7 +740,7 @@ export const LoginRequest: MessageFns<LoginRequest> = {
     };
   },
 
-  toJSON(message: LoginRequest): unknown {
+  toJSON(message: UsersLoginRequest): unknown {
     const obj: any = {};
     if (message.email !== "") {
       obj.email = message.email;
@@ -672,11 +757,11 @@ export const LoginRequest: MessageFns<LoginRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LoginRequest>, I>>(base?: I): LoginRequest {
-    return LoginRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UsersLoginRequest>, I>>(base?: I): UsersLoginRequest {
+    return UsersLoginRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LoginRequest>, I>>(object: I): LoginRequest {
-    const message = createBaseLoginRequest();
+  fromPartial<I extends Exact<DeepPartial<UsersLoginRequest>, I>>(object: I): UsersLoginRequest {
+    const message = createBaseUsersLoginRequest();
     message.email = object.email ?? "";
     message.password = object.password ?? "";
     message.mfa = object.mfa ?? "";
@@ -685,14 +770,14 @@ export const LoginRequest: MessageFns<LoginRequest> = {
   },
 };
 
-function createBaseLoginResponse(): LoginResponse {
+function createBaseUsersLoginResponse(): UsersLoginResponse {
   return { data: undefined, error: undefined };
 }
 
-export const LoginResponse: MessageFns<LoginResponse> = {
-  encode(message: LoginResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const UsersLoginResponse: MessageFns<UsersLoginResponse> = {
+  encode(message: UsersLoginResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.data !== undefined) {
-      LoginResponseData.encode(message.data, writer.uint32(10).fork()).join();
+      UsersLoginResponseData.encode(message.data, writer.uint32(10).fork()).join();
     }
     if (message.error !== undefined) {
       AppError.encode(message.error, writer.uint32(18).fork()).join();
@@ -700,10 +785,10 @@ export const LoginResponse: MessageFns<LoginResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LoginResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersLoginResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLoginResponse();
+    const message = createBaseUsersLoginResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -712,7 +797,7 @@ export const LoginResponse: MessageFns<LoginResponse> = {
             break;
           }
 
-          message.data = LoginResponseData.decode(reader, reader.uint32());
+          message.data = UsersLoginResponseData.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -732,17 +817,17 @@ export const LoginResponse: MessageFns<LoginResponse> = {
     return message;
   },
 
-  fromJSON(object: any): LoginResponse {
+  fromJSON(object: any): UsersLoginResponse {
     return {
-      data: isSet(object.data) ? LoginResponseData.fromJSON(object.data) : undefined,
+      data: isSet(object.data) ? UsersLoginResponseData.fromJSON(object.data) : undefined,
       error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
     };
   },
 
-  toJSON(message: LoginResponse): unknown {
+  toJSON(message: UsersLoginResponse): unknown {
     const obj: any = {};
     if (message.data !== undefined) {
-      obj.data = LoginResponseData.toJSON(message.data);
+      obj.data = UsersLoginResponseData.toJSON(message.data);
     }
     if (message.error !== undefined) {
       obj.error = AppError.toJSON(message.error);
@@ -750,13 +835,13 @@ export const LoginResponse: MessageFns<LoginResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LoginResponse>, I>>(base?: I): LoginResponse {
-    return LoginResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UsersLoginResponse>, I>>(base?: I): UsersLoginResponse {
+    return UsersLoginResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LoginResponse>, I>>(object: I): LoginResponse {
-    const message = createBaseLoginResponse();
+  fromPartial<I extends Exact<DeepPartial<UsersLoginResponse>, I>>(object: I): UsersLoginResponse {
+    const message = createBaseUsersLoginResponse();
     message.data = (object.data !== undefined && object.data !== null)
-      ? LoginResponseData.fromPartial(object.data)
+      ? UsersLoginResponseData.fromPartial(object.data)
       : undefined;
     message.error = (object.error !== undefined && object.error !== null)
       ? AppError.fromPartial(object.error)
@@ -765,19 +850,19 @@ export const LoginResponse: MessageFns<LoginResponse> = {
   },
 };
 
-function createBaseLoginResponseData(): LoginResponseData {
+function createBaseUsersLoginResponseData(): UsersLoginResponseData {
   return {};
 }
 
-export const LoginResponseData: MessageFns<LoginResponseData> = {
-  encode(_: LoginResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
+  encode(_: UsersLoginResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LoginResponseData {
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersLoginResponseData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLoginResponseData();
+    const message = createBaseUsersLoginResponseData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -790,20 +875,20 @@ export const LoginResponseData: MessageFns<LoginResponseData> = {
     return message;
   },
 
-  fromJSON(_: any): LoginResponseData {
+  fromJSON(_: any): UsersLoginResponseData {
     return {};
   },
 
-  toJSON(_: LoginResponseData): unknown {
+  toJSON(_: UsersLoginResponseData): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LoginResponseData>, I>>(base?: I): LoginResponseData {
-    return LoginResponseData.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UsersLoginResponseData>, I>>(base?: I): UsersLoginResponseData {
+    return UsersLoginResponseData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LoginResponseData>, I>>(_: I): LoginResponseData {
-    const message = createBaseLoginResponseData();
+  fromPartial<I extends Exact<DeepPartial<UsersLoginResponseData>, I>>(_: I): UsersLoginResponseData {
+    const message = createBaseUsersLoginResponseData();
     return message;
   },
 };

@@ -43,20 +43,27 @@ message UserCreateRequest {
   string username = 3;
 }
 
-message UserCreateResponse {}
+message UserCreateResponse {
+  oneof response {
+    UserCreateResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
 
-message LoginRequest {
+message UserCreateResponseData {}
+
+message UsersLoginRequest {
   string email = 1;
   string password = 2;
   string mfa = 3;
   string login_challenge = 4;
 }
 
-message LoginResponse {
+message UsersLoginResponse {
   oneof response {
-    LoginResponseData data = 1;
+    UsersLoginResponseData data = 1;
     shared.v1.AppError error = 2;
   }
 }
 
-message LoginResponseData {}
+message UsersLoginResponseData {}

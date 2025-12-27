@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { LoginRequest, LoginResponse, UserCreateRequest, UserCreateResponse } from "./users";
+import { UserCreateRequest, UserCreateResponse, UsersLoginRequest, UsersLoginResponse } from "./users";
 
 export const protobufPackage = "service.v1";
 
@@ -36,16 +36,16 @@ export const ChatyServiceService = {
     path: "/service.v1.ChatyService/UsersLogin",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: LoginRequest): Buffer => Buffer.from(LoginRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): LoginRequest => LoginRequest.decode(value),
-    responseSerialize: (value: LoginResponse): Buffer => Buffer.from(LoginResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): LoginResponse => LoginResponse.decode(value),
+    requestSerialize: (value: UsersLoginRequest): Buffer => Buffer.from(UsersLoginRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): UsersLoginRequest => UsersLoginRequest.decode(value),
+    responseSerialize: (value: UsersLoginResponse): Buffer => Buffer.from(UsersLoginResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): UsersLoginResponse => UsersLoginResponse.decode(value),
   },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersCreate: handleUnaryCall<UserCreateRequest, UserCreateResponse>;
-  usersLogin: handleUnaryCall<LoginRequest, LoginResponse>;
+  usersLogin: handleUnaryCall<UsersLoginRequest, UsersLoginResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -65,19 +65,19 @@ export interface ChatyServiceClient extends Client {
     callback: (error: ServiceError | null, response: UserCreateResponse) => void,
   ): ClientUnaryCall;
   usersLogin(
-    request: LoginRequest,
-    callback: (error: ServiceError | null, response: LoginResponse) => void,
+    request: UsersLoginRequest,
+    callback: (error: ServiceError | null, response: UsersLoginResponse) => void,
   ): ClientUnaryCall;
   usersLogin(
-    request: LoginRequest,
+    request: UsersLoginRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: LoginResponse) => void,
+    callback: (error: ServiceError | null, response: UsersLoginResponse) => void,
   ): ClientUnaryCall;
   usersLogin(
-    request: LoginRequest,
+    request: UsersLoginRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: LoginResponse) => void,
+    callback: (error: ServiceError | null, response: UsersLoginResponse) => void,
   ): ClientUnaryCall;
 }
 

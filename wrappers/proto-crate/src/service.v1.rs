@@ -44,11 +44,28 @@ pub struct UserCreateRequest {
     pub username: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserCreateResponse {
+    #[prost(oneof = "user_create_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<user_create_response::Response>,
+}
+/// Nested message and enum types in `UserCreateResponse`.
+pub mod user_create_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UserCreateResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct UserCreateResponse {}
+pub struct UserCreateResponseData {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LoginRequest {
+pub struct UsersLoginRequest {
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -60,24 +77,24 @@ pub struct LoginRequest {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LoginResponse {
-    #[prost(oneof = "login_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<login_response::Response>,
+pub struct UsersLoginResponse {
+    #[prost(oneof = "users_login_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_login_response::Response>,
 }
-/// Nested message and enum types in `LoginResponse`.
-pub mod login_response {
+/// Nested message and enum types in `UsersLoginResponse`.
+pub mod users_login_response {
     #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         #[prost(message, tag = "1")]
-        Data(super::LoginResponseData),
+        Data(super::UsersLoginResponseData),
         #[prost(message, tag = "2")]
         Error(super::super::super::shared::v1::AppError),
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct LoginResponseData {}
+pub struct UsersLoginResponseData {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -267,8 +284,11 @@ pub mod chaty_service_client {
         }
         pub async fn users_login(
             &mut self,
-            request: impl tonic::IntoRequest<super::LoginRequest>,
-        ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UsersLoginRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersLoginResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -310,8 +330,11 @@ pub mod chaty_service_server {
         >;
         async fn users_login(
             &self,
-            request: tonic::Request<super::LoginRequest>,
-        ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status>;
+            request: tonic::Request<super::UsersLoginRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersLoginResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct ChatyServiceServer<T> {
@@ -439,16 +462,16 @@ pub mod chaty_service_server {
                     struct UsersLoginSvc<T: ChatyService>(pub Arc<T>);
                     impl<
                         T: ChatyService,
-                    > tonic::server::UnaryService<super::LoginRequest>
+                    > tonic::server::UnaryService<super::UsersLoginRequest>
                     for UsersLoginSvc<T> {
-                        type Response = super::LoginResponse;
+                        type Response = super::UsersLoginResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::LoginRequest>,
+                            request: tonic::Request<super::UsersLoginRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
