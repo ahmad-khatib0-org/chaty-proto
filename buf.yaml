@@ -6,3 +6,7 @@ build:
   excludes:
     - node_modules
     - wrappers/proto-npm/node_modules
+    - third_party/proto/envoyproxy
+    - third_party/proto/googleapis
+    - third_party/proto/udpa
+    - third_party/proto/validate

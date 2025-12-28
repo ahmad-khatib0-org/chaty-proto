@@ -17,5 +17,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       &["."],
     )?;
 
+  // Generate Envoy external_auth proto + minimal dependencies
+  tonic_build::configure()
+    .out_dir(format!("{}/envoy", out_dir))
+    .build_server(true)
+    .compile_well_known_types(true)
+    .file_descriptor_set_path(format!("{}/envoy_descriptor.bin", out_dir))
+    .compile_protos(
+      &["envoy/service/auth/v3/external_auth.proto"], // path relative to include folder
+      &[
+        "third_party/proto/envoyproxy/api", // Envoy protos
+        "third_party/proto/googleapis",
+        "third_party/proto/udpa",
+        "third_party/proto/validate",
+      ],
+    )?;
+
   Ok(())
 }
