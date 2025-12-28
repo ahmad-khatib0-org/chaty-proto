@@ -1,7 +1,7 @@
 #![allow(clippy::all)]
 
 mod envoy {
-  pub mod service {
+  pub mod envoy_service {
     pub mod auth {
       pub mod v3 {
         include!("envoy/envoy.service.auth.v3.rs");
