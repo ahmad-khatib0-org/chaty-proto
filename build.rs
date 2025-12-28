@@ -11,6 +11,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     .compile_protos(
       &[
         "shared/v1/error.proto",
+        "shared/v1/struct.proto",
+        "shared/v1/time.proto",
+        "shared/v1/types.proto",
+        "shared/v1/wrappers.proto",
         "service/v1/main.proto",
         "service/v1/users.proto",
       ],
