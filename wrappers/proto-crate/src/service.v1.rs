@@ -71,8 +71,11 @@ pub mod user_create_response {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct UserCreateResponseData {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserCreateResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsersLoginRequest {

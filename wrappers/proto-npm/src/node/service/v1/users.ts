@@ -162,6 +162,7 @@ export interface UserCreateResponse {
 }
 
 export interface UserCreateResponseData {
+  message: string;
 }
 
 export interface UsersLoginRequest {
@@ -655,11 +656,14 @@ export const UserCreateResponse: MessageFns<UserCreateResponse> = {
 };
 
 function createBaseUserCreateResponseData(): UserCreateResponseData {
-  return {};
+  return { message: "" };
 }
 
 export const UserCreateResponseData: MessageFns<UserCreateResponseData> = {
-  encode(_: UserCreateResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: UserCreateResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.message !== "") {
+      writer.uint32(10).string(message.message);
+    }
     return writer;
   },
 
@@ -670,6 +674,14 @@ export const UserCreateResponseData: MessageFns<UserCreateResponseData> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.message = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -679,20 +691,24 @@ export const UserCreateResponseData: MessageFns<UserCreateResponseData> = {
     return message;
   },
 
-  fromJSON(_: any): UserCreateResponseData {
-    return {};
+  fromJSON(object: any): UserCreateResponseData {
+    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
   },
 
-  toJSON(_: UserCreateResponseData): unknown {
+  toJSON(message: UserCreateResponseData): unknown {
     const obj: any = {};
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<UserCreateResponseData>, I>>(base?: I): UserCreateResponseData {
     return UserCreateResponseData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<UserCreateResponseData>, I>>(_: I): UserCreateResponseData {
+  fromPartial<I extends Exact<DeepPartial<UserCreateResponseData>, I>>(object: I): UserCreateResponseData {
     const message = createBaseUserCreateResponseData();
+    message.message = object.message ?? "";
     return message;
   },
 };

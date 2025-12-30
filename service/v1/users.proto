@@ -51,7 +51,9 @@ message UserCreateResponse {
   }
 }
 
-message UserCreateResponseData {}
+message UserCreateResponseData {
+  string message = 1;
+}
 
 message UsersLoginRequest {
   string email = 1;
