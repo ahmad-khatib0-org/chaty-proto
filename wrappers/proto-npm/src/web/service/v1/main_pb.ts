@@ -4,14 +4,14 @@
 
 import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import type { UserCreateRequestSchema, UserCreateResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema } from "./users_pb.js";
+import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema } from "./users_pb.js";
 import { file_service_v1_users } from "./users_pb.js";
 
 /**
  * Describes the file service/v1/main.proto.
  */
 export const file_service_v1_main: GenFile = /*@__PURE__*/
-  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEyqQEKDENoYXR5U2VydmljZRJMCgtVc2Vyc0NyZWF0ZRIdLnNlcnZpY2UudjEuVXNlckNyZWF0ZVJlcXVlc3QaHi5zZXJ2aWNlLnYxLlVzZXJDcmVhdGVSZXNwb25zZRJLCgpVc2Vyc0xvZ2luEh0uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVxdWVzdBoeLnNlcnZpY2UudjEuVXNlcnNMb2dpblJlc3BvbnNlYgZwcm90bzM", [file_service_v1_users]);
+  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEyqwEKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2ViBnByb3RvMw", [file_service_v1_users]);
 
 /**
  * @generated from service service.v1.ChatyService
@@ -22,8 +22,8 @@ export const ChatyService: GenService<{
    */
   usersCreate: {
     methodKind: "unary";
-    input: typeof UserCreateRequestSchema;
-    output: typeof UserCreateResponseSchema;
+    input: typeof UsersCreateRequestSchema;
+    output: typeof UsersCreateResponseSchema;
   },
   /**
    * @generated from rpc service.v1.ChatyService.UsersLogin

@@ -45,7 +45,7 @@ pub struct User {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UserCreateRequest {
+pub struct UsersCreateRequest {
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -55,24 +55,24 @@ pub struct UserCreateRequest {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UserCreateResponse {
-    #[prost(oneof = "user_create_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<user_create_response::Response>,
+pub struct UsersCreateResponse {
+    #[prost(oneof = "users_create_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_create_response::Response>,
 }
-/// Nested message and enum types in `UserCreateResponse`.
-pub mod user_create_response {
+/// Nested message and enum types in `UsersCreateResponse`.
+pub mod users_create_response {
     #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         #[prost(message, tag = "1")]
-        Data(super::UserCreateResponseData),
+        Data(super::UsersCreateResponseData),
         #[prost(message, tag = "2")]
         Error(super::super::super::shared::v1::AppError),
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UserCreateResponseData {
+pub struct UsersCreateResponseData {
     #[prost(string, tag = "1")]
     pub message: ::prost::alloc::string::String,
 }
@@ -276,9 +276,9 @@ pub mod chaty_service_client {
         }
         pub async fn users_create(
             &mut self,
-            request: impl tonic::IntoRequest<super::UserCreateRequest>,
+            request: impl tonic::IntoRequest<super::UsersCreateRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::UserCreateResponse>,
+            tonic::Response<super::UsersCreateResponse>,
             tonic::Status,
         > {
             self.inner
@@ -339,9 +339,9 @@ pub mod chaty_service_server {
     pub trait ChatyService: std::marker::Send + std::marker::Sync + 'static {
         async fn users_create(
             &self,
-            request: tonic::Request<super::UserCreateRequest>,
+            request: tonic::Request<super::UsersCreateRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::UserCreateResponse>,
+            tonic::Response<super::UsersCreateResponse>,
             tonic::Status,
         >;
         async fn users_login(
@@ -433,16 +433,16 @@ pub mod chaty_service_server {
                     struct UsersCreateSvc<T: ChatyService>(pub Arc<T>);
                     impl<
                         T: ChatyService,
-                    > tonic::server::UnaryService<super::UserCreateRequest>
+                    > tonic::server::UnaryService<super::UsersCreateRequest>
                     for UsersCreateSvc<T> {
-                        type Response = super::UserCreateResponse;
+                        type Response = super::UsersCreateResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UserCreateRequest>,
+                            request: tonic::Request<super::UsersCreateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {

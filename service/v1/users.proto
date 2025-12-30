@@ -38,20 +38,20 @@ enum UserFlag {
   USER_FLAG_SPAM = 8;
 }
 
-message UserCreateRequest {
+message UsersCreateRequest {
   string email = 1;
   string password = 2;
   string username = 3;
 }
 
-message UserCreateResponse {
+message UsersCreateResponse {
   oneof response {
-    UserCreateResponseData data = 1;
+    UsersCreateResponseData data = 1;
     shared.v1.AppError error = 2;
   }
 }
 
-message UserCreateResponseData {
+message UsersCreateResponseData {
   string message = 1;
 }
 

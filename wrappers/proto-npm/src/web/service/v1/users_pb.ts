@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/users.proto.
  */
 export const file_service_v1_users: GenFile = /*@__PURE__*/
-  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsIkYKEVVzZXJDcmVhdGVSZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEhAKCHVzZXJuYW1lGAMgASgJInoKElVzZXJDcmVhdGVSZXNwb25zZRIyCgRkYXRhGAEgASgLMiIuc2VydmljZS52MS5Vc2VyQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIpChZVc2VyQ3JlYXRlUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiWgoRVXNlcnNMb2dpblJlcXVlc3QSDQoFZW1haWwYASABKAkSEAoIcGFzc3dvcmQYAiABKAkSCwoDbWZhGAMgASgJEhcKD2xvZ2luX2NoYWxsZW5nZRgEIAEoCSJ6ChJVc2Vyc0xvZ2luUmVzcG9uc2USMgoEZGF0YRgBIAEoCzIiLnNlcnZpY2UudjEuVXNlcnNMb2dpblJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UiKQoWVXNlcnNMb2dpblJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJKoIBCgpVc2VyU3RhdHVzEhYKElVTRVJfU1RBVFVTX09OTElORRAAEhQKEFVTRVJfU1RBVFVTX0lETEUQARIVChFVU0VSX1NUQVRVU19GT0NVUxACEhQKEFVTRVJfU1RBVFVTX0JVU1kQAxIZChVVU0VSX1NUQVRVU19JTlZJU0lCTEUQBCqFAQoIVXNlckZsYWcSGQoVVVNFUl9GTEFHX1VOU1BFQ0lGSUVEEAASHQoZVVNFUl9GTEFHX1NVU1BFTkRFRF9VTlRJTBABEhUKEVVTRVJfRkxBR19ERUxFVEVEEAISFAoQVVNFUl9GTEFHX0JBTk5FRBAEEhIKDlVTRVJfRkxBR19TUEFNEAhiBnByb3RvMw", [file_shared_v1_error]);
+  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsIkcKElVzZXJzQ3JlYXRlUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIQCgh1c2VybmFtZRgDIAEoCSJ8ChNVc2Vyc0NyZWF0ZVJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLlVzZXJzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIqChdVc2Vyc0NyZWF0ZVJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJIloKEVVzZXJzTG9naW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEgsKA21mYRgDIAEoCRIXCg9sb2dpbl9jaGFsbGVuZ2UYBCABKAkiegoSVXNlcnNMb2dpblJlc3BvbnNlEjIKBGRhdGEYASABKAsyIi5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXNwb25zZURhdGFIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIikKFlVzZXJzTG9naW5SZXNwb25zZURhdGESDwoHbWVzc2FnZRgBIAEoCSqCAQoKVXNlclN0YXR1cxIWChJVU0VSX1NUQVRVU19PTkxJTkUQABIUChBVU0VSX1NUQVRVU19JRExFEAESFQoRVVNFUl9TVEFUVVNfRk9DVVMQAhIUChBVU0VSX1NUQVRVU19CVVNZEAMSGQoVVVNFUl9TVEFUVVNfSU5WSVNJQkxFEAQqhQEKCFVzZXJGbGFnEhkKFVVTRVJfRkxBR19VTlNQRUNJRklFRBAAEh0KGVVTRVJfRkxBR19TVVNQRU5ERURfVU5USUwQARIVChFVU0VSX0ZMQUdfREVMRVRFRBACEhQKEFVTRVJfRkxBR19CQU5ORUQQBBISCg5VU0VSX0ZMQUdfU1BBTRAIYgZwcm90bzM", [file_shared_v1_error]);
 
 /**
  * @generated from message service.v1.User
@@ -122,9 +122,9 @@ export const UserSchema: GenMessage<User> = /*@__PURE__*/
   messageDesc(file_service_v1_users, 0);
 
 /**
- * @generated from message service.v1.UserCreateRequest
+ * @generated from message service.v1.UsersCreateRequest
  */
-export type UserCreateRequest = Message<"service.v1.UserCreateRequest"> & {
+export type UsersCreateRequest = Message<"service.v1.UsersCreateRequest"> & {
   /**
    * @generated from field: string email = 1;
    */
@@ -142,24 +142,24 @@ export type UserCreateRequest = Message<"service.v1.UserCreateRequest"> & {
 };
 
 /**
- * Describes the message service.v1.UserCreateRequest.
- * Use `create(UserCreateRequestSchema)` to create a new message.
+ * Describes the message service.v1.UsersCreateRequest.
+ * Use `create(UsersCreateRequestSchema)` to create a new message.
  */
-export const UserCreateRequestSchema: GenMessage<UserCreateRequest> = /*@__PURE__*/
+export const UsersCreateRequestSchema: GenMessage<UsersCreateRequest> = /*@__PURE__*/
   messageDesc(file_service_v1_users, 1);
 
 /**
- * @generated from message service.v1.UserCreateResponse
+ * @generated from message service.v1.UsersCreateResponse
  */
-export type UserCreateResponse = Message<"service.v1.UserCreateResponse"> & {
+export type UsersCreateResponse = Message<"service.v1.UsersCreateResponse"> & {
   /**
-   * @generated from oneof service.v1.UserCreateResponse.response
+   * @generated from oneof service.v1.UsersCreateResponse.response
    */
   response: {
     /**
-     * @generated from field: service.v1.UserCreateResponseData data = 1;
+     * @generated from field: service.v1.UsersCreateResponseData data = 1;
      */
-    value: UserCreateResponseData;
+    value: UsersCreateResponseData;
     case: "data";
   } | {
     /**
@@ -171,16 +171,16 @@ export type UserCreateResponse = Message<"service.v1.UserCreateResponse"> & {
 };
 
 /**
- * Describes the message service.v1.UserCreateResponse.
- * Use `create(UserCreateResponseSchema)` to create a new message.
+ * Describes the message service.v1.UsersCreateResponse.
+ * Use `create(UsersCreateResponseSchema)` to create a new message.
  */
-export const UserCreateResponseSchema: GenMessage<UserCreateResponse> = /*@__PURE__*/
+export const UsersCreateResponseSchema: GenMessage<UsersCreateResponse> = /*@__PURE__*/
   messageDesc(file_service_v1_users, 2);
 
 /**
- * @generated from message service.v1.UserCreateResponseData
+ * @generated from message service.v1.UsersCreateResponseData
  */
-export type UserCreateResponseData = Message<"service.v1.UserCreateResponseData"> & {
+export type UsersCreateResponseData = Message<"service.v1.UsersCreateResponseData"> & {
   /**
    * @generated from field: string message = 1;
    */
@@ -188,10 +188,10 @@ export type UserCreateResponseData = Message<"service.v1.UserCreateResponseData"
 };
 
 /**
- * Describes the message service.v1.UserCreateResponseData.
- * Use `create(UserCreateResponseDataSchema)` to create a new message.
+ * Describes the message service.v1.UsersCreateResponseData.
+ * Use `create(UsersCreateResponseDataSchema)` to create a new message.
  */
-export const UserCreateResponseDataSchema: GenMessage<UserCreateResponseData> = /*@__PURE__*/
+export const UsersCreateResponseDataSchema: GenMessage<UsersCreateResponseData> = /*@__PURE__*/
   messageDesc(file_service_v1_users, 3);
 
 /**
