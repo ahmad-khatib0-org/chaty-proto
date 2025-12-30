@@ -1,73 +1,38 @@
 {
   "name": "@chaty-app/proto",
-  "version": "0.1.18",
-  "description": "TypeScript Protobuf bindings for Chaty",
+  "version": "0.1.19",
+  "description": "TypeScript Protobuf bindings for Chaty (Pure ESM)",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsc"
   },
-  "devDependencies": {
-    "@types/node": "^24.2.0",
-    "typescript": "^5.9.2"
-  },
   "dependencies": {
-    "@grpc/grpc-js": "^1.13.4",
-    "@improbable-eng/grpc-web": "^0.15.0",
-    "browser-headers": "^0.4.1",
-    "grpc-web": "^2.0.2"
+    "@connectrpc/connect": "^2.0.0",
+    "@connectrpc/connect-web": "^2.0.0",
+    "@bufbuild/protobuf": "^2.2.3",
+    "@grpc/grpc-js": "^1.13.4"
   },
   "publishConfig": {
     "access": "public"
   },
-  "packageManager": "pnpm@10.10.0",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    },
-    "./*": {
-      "import": "./dist/node/*",
-      "require": "./dist/node-cjs/*"
-    },
-    "./shared/v1": {
-      "import": "./dist/node/shared/v1/index.js",
-      "require": "./dist/node-cjs/shared/v1/index.js"
-    },
-    "./shared/v1/*": {
-      "import": "./dist/node/shared/v1/*.js",
-      "require": "./dist/node-cjs/shared/v1/*.js"
-    },
-    "./service/v1": {
-      "import": "./dist/node/service/v1/index.js",
-      "require": "./dist/node-cjs/service/v1/index.js"
-    },
-    "./service/v1/*": {
-      "import": "./dist/node/service/v1/*.js",
-      "require": "./dist/node-cjs/service/v1/*.js"
-    },
-    "./web/shared/v1": "./dist/web/shared/v1/index.js",
-    "./web/shared/v1/*": "./dist/web/shared/v1/*.js",
-    "./web/service/v1": "./dist/web/service/v1/index.js",
-    "./web/service/v1/*": "./dist/web/service/v1/*.js"
+    ".": "./dist/index.js",
+    "./web/*": "./dist/web/*.js",
+    "./node/*": "./dist/node/*.js"
   },
   "typesVersions": {
     "*": {
-      "shared/v1": [
-        "dist/node/shared/v1/index.d.ts"
+      "web/service/v1": [
+        "dist/web/service/v1/index.d.ts"
       ],
-      "shared/v1/*": [
-        "dist/node/shared/v1/*.d.ts"
-      ],
-      "service/v1": [
-        "dist/node/service/v1/index.d.ts"
-      ],
-      "service/v1/*": [
-        "dist/node/service/v1/*.d.ts"
+      "web/service/v1/*": [
+        "dist/web/service/v1/*.d.ts"
       ],
       "web/shared/v1": [
         "dist/web/shared/v1/index.d.ts"
@@ -75,11 +40,17 @@
       "web/shared/v1/*": [
         "dist/web/shared/v1/*.d.ts"
       ],
-      "web/service/v1": [
-        "dist/web/service/v1/index.d.ts"
+      "node/service/v1": [
+        "dist/node/service/v1/index.d.ts"
       ],
-      "web/service/v1/*": [
-        "dist/web/service/v1/*.d.ts"
+      "node/service/v1/*": [
+        "dist/node/service/v1/*.d.ts"
+      ],
+      "node/shared/v1": [
+        "dist/node/shared/v1/index.d.ts"
+      ],
+      "node/shared/v1/*": [
+        "dist/node/shared/v1/*.d.ts"
       ]
     }
   }

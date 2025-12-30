@@ -8,31 +8,19 @@ MSG ?=
 # -----------------------------------------------------------------------------
 generate:
 	@echo "Cleaning previous generated code..."
-	rm -rf gen/
-	cd wrappers/proto-npm/ && rm -rf dist src/node src/web
-
-	@echo "Generating protobuf files for local module..."
-	echo "Using buf at: $(shell which buf)"
-	buf --version || true
+	rm -rf wrappers/proto-npm/dist wrappers/proto-npm/src/node wrappers/proto-npm/src/web
 	
-	# Update deps and lockfile 
-	buf dep update .
+	@echo "Generating protobuf files..."
+	# Injected PATH ensures buf finds the plugins in root node_modules
+	PATH="$(shell pwd)/node_modules/.bin:$(PATH)" buf generate 
 
-	buf generate 
-
-	@echo "Generating Rust protobuf files..."
-	find wrappers/proto-crate/src -name "*.rs" -not -name "lib.rs" -o -name "descriptor.bin" -delete
-	cargo build --verbose
-	
 	@echo "Generating TypeScript barrel files..."
 	pnpm exec tsx scripts/gen-barrels.ts
-	@echo "Compiling TypeScript (tsc)..."
-	cd wrappers/proto-npm && pnpm run build
-	@echo "Building proto CJS artifacts..."
-	@node ./scripts/build-cjs.js ./wrappers/proto-npm/dist
+
+	@echo "Compiling TypeScript (Pure ESM)..."
+	pnpm --filter @chaty-app/proto exec tsc
 
 	@echo "✅ Generation complete"
-
 # -----------------------------------------------------------------------------
 # Release: commit + tag + push
 # -----------------------------------------------------------------------------

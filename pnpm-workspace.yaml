@@ -1,2 +1,6 @@
 packages:
-  - 'wrappers/proto-npm'
+  - wrappers/proto-npm
+onlyBuiltDependencies:
+  - '@bufbuild/buf'
+  - esbuild
+  - protobufjs

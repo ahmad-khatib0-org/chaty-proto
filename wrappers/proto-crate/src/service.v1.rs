@@ -2,36 +2,46 @@
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
+    /// ulid
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
+    /// 64 char
     #[prost(string, tag = "2")]
     pub username: ::prost::alloc::string::String,
+    /// 255 char
     #[prost(string, tag = "3")]
     pub email: ::prost::alloc::string::String,
     #[prost(string, tag = "4")]
     pub password: ::prost::alloc::string::String,
+    /// 64 char
     #[prost(string, optional, tag = "5")]
     pub display_name: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(uint32, optional, tag = "6")]
     pub badges: ::core::option::Option<u32>,
+    /// 510 char
     #[prost(string, optional, tag = "7")]
     pub status_text: ::core::option::Option<::prost::alloc::string::String>,
+    /// 32 char
     #[prost(enumeration = "UserStatus", optional, tag = "8")]
     pub status_presence: ::core::option::Option<i32>,
+    /// text
     #[prost(string, optional, tag = "9")]
     pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
+    /// ulid (26 chars) Reference to files collection
     #[prost(string, optional, tag = "10")]
     pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(bool, tag = "11")]
     pub privileged: bool,
     #[prost(uint64, optional, tag = "12")]
     pub suspended_until: ::core::option::Option<u64>,
-    /// unix timestamp
+    /// unix timestamp miliseconds
     #[prost(uint64, tag = "13")]
     pub created_at: u64,
-    /// unix timestamp
+    /// unix timestamp miliseconds
     #[prost(uint64, tag = "14")]
     pub updated_at: u64,
+    #[prost(bool, tag = "15")]
+    pub verified: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

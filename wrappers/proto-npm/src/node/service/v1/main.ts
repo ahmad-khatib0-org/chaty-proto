@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { UserCreateRequest, UserCreateResponse, UsersLoginRequest, UsersLoginResponse } from "./users";
+import { UserCreateRequest, UserCreateResponse, UsersLoginRequest, UsersLoginResponse } from "./users.js";
 
 export const protobufPackage = "service.v1";
 

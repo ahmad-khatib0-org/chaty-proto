@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { AppError } from "../../shared/v1/error";
+import { AppError } from "../../shared/v1/error.js";
 
 export const protobufPackage = "service.v1";
 
@@ -113,24 +113,41 @@ export function userFlagToJSON(object: UserFlag): string {
 }
 
 export interface User {
+  /** ulid */
   id: string;
+  /** 64 char */
   username: string;
+  /** 255 char */
   email: string;
   password: string;
+  /** 64 char */
   displayName?: string | undefined;
-  badges?: number | undefined;
-  statusText?: string | undefined;
-  statusPresence?: UserStatus | undefined;
-  profileContent?: string | undefined;
+  badges?:
+    | number
+    | undefined;
+  /** 510 char */
+  statusText?:
+    | string
+    | undefined;
+  /** 32 char */
+  statusPresence?:
+    | UserStatus
+    | undefined;
+  /** text */
+  profileContent?:
+    | string
+    | undefined;
+  /** ulid (26 chars) Reference to files collection */
   profileBackgroundId?: string | undefined;
   privileged: boolean;
   suspendedUntil?:
     | string
     | undefined;
-  /** unix timestamp */
+  /** unix timestamp miliseconds */
   createdAt: string;
-  /** unix timestamp */
+  /** unix timestamp miliseconds */
   updatedAt: string;
+  verified: boolean;
 }
 
 export interface UserCreateRequest {
@@ -178,6 +195,7 @@ function createBaseUser(): User {
     suspendedUntil: undefined,
     createdAt: "0",
     updatedAt: "0",
+    verified: false,
   };
 }
 
@@ -224,6 +242,9 @@ export const User: MessageFns<User> = {
     }
     if (message.updatedAt !== "0") {
       writer.uint32(112).uint64(message.updatedAt);
+    }
+    if (message.verified !== false) {
+      writer.uint32(120).bool(message.verified);
     }
     return writer;
   },
@@ -347,6 +368,14 @@ export const User: MessageFns<User> = {
           message.updatedAt = reader.uint64().toString();
           continue;
         }
+        case 15: {
+          if (tag !== 120) {
+            break;
+          }
+
+          message.verified = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -374,6 +403,7 @@ export const User: MessageFns<User> = {
       suspendedUntil: isSet(object.suspendedUntil) ? globalThis.String(object.suspendedUntil) : undefined,
       createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
       updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+      verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
     };
   },
 
@@ -421,6 +451,9 @@ export const User: MessageFns<User> = {
     if (message.updatedAt !== "0") {
       obj.updatedAt = message.updatedAt;
     }
+    if (message.verified !== false) {
+      obj.verified = message.verified;
+    }
     return obj;
   },
 
@@ -443,6 +476,7 @@ export const User: MessageFns<User> = {
     message.suspendedUntil = object.suspendedUntil ?? undefined;
     message.createdAt = object.createdAt ?? "0";
     message.updatedAt = object.updatedAt ?? "0";
+    message.verified = object.verified ?? false;
     return message;
   },
 };

@@ -8,64 +8,104 @@ importers:
 
   .:
     dependencies:
-      '@bufbuild/connect':
-        specifier: ^0.13.0
-        version: 0.13.0(@bufbuild/protobuf@2.10.2)
       '@bufbuild/protobuf':
-        specifier: ^2.10.0
+        specifier: ^2.2.3
         version: 2.10.2
+      '@connectrpc/connect':
+        specifier: ^2.0.0
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)
+      '@connectrpc/connect-web':
+        specifier: ^2.0.0
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       '@grpc/grpc-js':
         specifier: ^1.13.4
         version: 1.14.3
-      grpc-web:
-        specifier: ^2.0.2
-        version: 2.0.2
     devDependencies:
+      '@bufbuild/buf':
+        specifier: ^1.47.2
+        version: 1.62.1
       '@bufbuild/protoc-gen-es':
-        specifier: ^2.10.0
+        specifier: ^2.2.3
         version: 2.10.2(@bufbuild/protobuf@2.10.2)
       esbuild:
         specifier: ^0.27.0
         version: 0.27.2
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.10.4)(typescript@5.4.5)
+        version: 10.9.2(@types/node@24.10.4)(typescript@5.9.3)
       ts-proto:
         specifier: ^2.10.0
         version: 2.10.0
       tsx:
         specifier: ^4.20.3
         version: 4.21.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   wrappers/proto-npm:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.2.3
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: ^2.0.0
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)
+      '@connectrpc/connect-web':
+        specifier: ^2.0.0
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       '@grpc/grpc-js':
         specifier: ^1.13.4
         version: 1.14.3
-      '@improbable-eng/grpc-web':
-        specifier: ^0.15.0
-        version: 0.15.0(google-protobuf@3.21.4)
-      browser-headers:
-        specifier: ^0.4.1
-        version: 0.4.1
-      grpc-web:
-        specifier: ^2.0.2
-        version: 2.0.2
-    devDependencies:
-      '@types/node':
-        specifier: ^24.2.0
-        version: 24.10.4
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
 
 packages:
 
-  '@bufbuild/connect@0.13.0':
-    resolution: {integrity: sha512-eZSMbVLyUFtXiZNORgCEvv580xKZeYQdMOWj2i/nxOcpXQcrEzTMTA7SZzWv4k4gveWCOSRoWmYDeOhfWXJv0g==}
-    deprecated: Connect has moved to its own org @connectrpc and has a stable v1. Run `npx @connectrpc/connect-migrate@latest` to update. See https://github.com/connectrpc/connect-es/releases/tag/v0.13.1 for details.
-    peerDependencies:
-      '@bufbuild/protobuf': ^1.2.1
+  '@bufbuild/buf-darwin-arm64@1.62.1':
+    resolution: {integrity: sha512-qklVRzBgdzLv9fVa9OX/ewpgX4H34b4mKezJsDPGRwAwykgswgF39jhihIRDJNI40/Gi2Ik0tvmg4v8aO2E/1Q==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@bufbuild/buf-darwin-x64@1.62.1':
+    resolution: {integrity: sha512-HUEiPeIL9mFHSM5z9ZdD0ZgjQaDxwFnDr4sv62/ajgMZd0h/rXe212CPrrLxmufhNx1jnDuxiSyhhAvl6lS5bA==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@bufbuild/buf-linux-aarch64@1.62.1':
+    resolution: {integrity: sha512-NdLOdRSkhKDlOmRhwywbC0Bo5TcPuRscqwVLOWWkarDNG1mybMCZYTvzXyuvdHVILsq8aA3T5w9yfuzMsVNfQg==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@bufbuild/buf-linux-armv7@1.62.1':
+    resolution: {integrity: sha512-BVaXXud1YQ++vK7OVH3CiQwSXqmzSU+f03Jhy+FxiXQZuCQ9+EQsqsCIdVYdTFTCNd4O8l66d290+smLVDf1/A==}
+    engines: {node: '>=12'}
+    cpu: [arm]
+    os: [linux]
+
+  '@bufbuild/buf-linux-x64@1.62.1':
+    resolution: {integrity: sha512-lmN5op+lRlcaOLohfAhYh6VkEnj0mDxuhVAEXOtG9rTpxDguOgFFDzoYzoVdxtGDAg9npgQaUl7W58KO9kfTHw==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [linux]
+
+  '@bufbuild/buf-win32-arm64@1.62.1':
+    resolution: {integrity: sha512-jXO8TXIY8yVC/1br687WAJx7feRfccqOZYRDy9AaPupQ40Cv8l0L4TWckGketaftDcnJCWBStO5+rwjAmN7fug==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@bufbuild/buf-win32-x64@1.62.1':
+    resolution: {integrity: sha512-djH6dYHCLBCNilXHzAZDxo39EIS2/etiShgznSI/mQe8ybsaObqoK8CCxLu+kpUXYFaDd4onbFQKos2fxONDqQ==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [win32]
+
+  '@bufbuild/buf@1.62.1':
+    resolution: {integrity: sha512-0S+7jXEl9LXdG8+lyoqGbHFiKgFjRK/EuuFxw+szMT9qVOhg4//j0wIfZ/visOCU2FB1fQNuesb1MB4WVnwH0A==}
+    engines: {node: '>=12'}
+    hasBin: true
 
   '@bufbuild/protobuf@2.10.2':
     resolution: {integrity: sha512-uFsRXwIGyu+r6AMdz+XijIIZJYpoWeYzILt5yZ2d3mCjQrWUTVpVD9WL/jZAbvp+Ed04rOhrsk7FiTcEDseB5A==}
@@ -82,6 +122,17 @@ packages:
 
   '@bufbuild/protoplugin@2.10.2':
     resolution: {integrity: sha512-RAWVs9tCzRqSS3tUtaFhOcauOAazCrm7tlGh0WHFq/44n5Fj6YgefdlZEPIaAK6VAA+FdOoFgtOJK2Ji5U24pw==}
+
+  '@connectrpc/connect-web@2.1.1':
+    resolution: {integrity: sha512-J8317Q2MaFRCT1jzVR1o06bZhDIBmU0UAzWx6xOIXzOq8+k71/+k7MUF7AwcBUX+34WIvbm5syRgC5HXQA8fOg==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.7.0
+      '@connectrpc/connect': 2.1.1
+
+  '@connectrpc/connect@2.1.1':
+    resolution: {integrity: sha512-JzhkaTvM73m2K1URT6tv53k2RwngSmCXLZJgK580qNQOXRzZRR/BCMfZw3h+90JpnG6XksP5bYT+cz0rpUzUWQ==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.7.0
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -252,11 +303,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  '@improbable-eng/grpc-web@0.15.0':
-    resolution: {integrity: sha512-ERft9/0/8CmYalqOVnJnpdDry28q+j+nAlFFARdjyxXDJ+Mhgv9+F600QC8BR9ygOfrXRlAk6CvST2j+JCpQPg==}
-    peerDependencies:
-      google-protobuf: ^3.14.0
-
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
     engines: {node: '>=6.0.0'}
@@ -340,9 +386,6 @@ packages:
   arg@4.1.3:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
 
-  browser-headers@0.4.1:
-    resolution: {integrity: sha512-CA9hsySZVo9371qEHjHZtYxV2cFtVj5Wj/ZHi8ooEsrtm4vOnl9Y9HmyYWk9q+05d7K3rdoAE0j3MVEFVvtQtg==}
-
   case-anything@2.1.13:
     resolution: {integrity: sha512-zlOQ80VrQ2Ue+ymH5OuM/DlDq64mEm+B9UTdHULv5osUMD6HalNTblf2b1u/m6QecjsnOkBpqVZ+XPwIVsy7Ng==}
     engines: {node: '>=12.13'}
@@ -405,12 +448,6 @@ packages:
 
   get-tsconfig@4.13.0:
     resolution: {integrity: sha512-1VKTZJCwBrvbd+Wn3AOgQP/2Av+TfTCOlE4AcRJE72W1ksZXbAx8PPBR9RzgTeSPzlPMHrbANMH3LbltH73wxQ==}
-
-  google-protobuf@3.21.4:
-    resolution: {integrity: sha512-MnG7N936zcKTco4Jd2PX2U96Kf9PxygAPKBug+74LHzmHXmceN16MmRcdgZv+DGef/S9YvQAfRsNCn4cjf9yyQ==}
-
-  grpc-web@2.0.2:
-    resolution: {integrity: sha512-bvBP0/d5jyVM3eGxxffJhRLAPpH6eXhJeUzBT+bSIEgUKkG4a/BotEimVeW3phP0WLnsJnkRl8uQdRf2yDLaVA==}
 
   is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
@@ -514,9 +551,36 @@ packages:
 
 snapshots:
 
-  '@bufbuild/connect@0.13.0(@bufbuild/protobuf@2.10.2)':
-    dependencies:
-      '@bufbuild/protobuf': 2.10.2
+  '@bufbuild/buf-darwin-arm64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-darwin-x64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-linux-aarch64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-linux-armv7@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-linux-x64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-win32-arm64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf-win32-x64@1.62.1':
+    optional: true
+
+  '@bufbuild/buf@1.62.1':
+    optionalDependencies:
+      '@bufbuild/buf-darwin-arm64': 1.62.1
+      '@bufbuild/buf-darwin-x64': 1.62.1
+      '@bufbuild/buf-linux-aarch64': 1.62.1
+      '@bufbuild/buf-linux-armv7': 1.62.1
+      '@bufbuild/buf-linux-x64': 1.62.1
+      '@bufbuild/buf-win32-arm64': 1.62.1
+      '@bufbuild/buf-win32-x64': 1.62.1
 
   '@bufbuild/protobuf@2.10.2': {}
 
@@ -535,6 +599,15 @@ snapshots:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
+
+  '@connectrpc/connect-web@2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))':
+    dependencies:
+      '@bufbuild/protobuf': 2.10.2
+      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.2)
+
+  '@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2)':
+    dependencies:
+      '@bufbuild/protobuf': 2.10.2
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -630,11 +703,6 @@ snapshots:
       protobufjs: 7.5.4
       yargs: 17.7.2
 
-  '@improbable-eng/grpc-web@0.15.0(google-protobuf@3.21.4)':
-    dependencies:
-      browser-headers: 0.4.1
-      google-protobuf: 3.21.4
-
   '@jridgewell/resolve-uri@3.1.2': {}
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
@@ -701,8 +769,6 @@ snapshots:
       color-convert: 2.0.1
 
   arg@4.1.3: {}
-
-  browser-headers@0.4.1: {}
 
   case-anything@2.1.13: {}
 
@@ -774,10 +840,6 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  google-protobuf@3.21.4: {}
-
-  grpc-web@2.0.2: {}
-
   is-fullwidth-code-point@3.0.0: {}
 
   lodash.camelcase@4.3.0: {}
@@ -817,7 +879,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
 
-  ts-node@10.9.2(@types/node@24.10.4)(typescript@5.4.5):
+  ts-node@10.9.2(@types/node@24.10.4)(typescript@5.9.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.12
@@ -831,7 +893,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.4.5
+      typescript: 5.9.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
