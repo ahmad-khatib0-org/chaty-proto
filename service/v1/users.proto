@@ -67,4 +67,6 @@ message UsersLoginResponse {
   }
 }
 
-message UsersLoginResponseData {}
+message UsersLoginResponseData {
+  string message = 1;
+}
