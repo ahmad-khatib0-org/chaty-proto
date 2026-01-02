@@ -70,5 +70,5 @@ message UsersLoginResponse {
 }
 
 message UsersLoginResponseData {
-  string message = 1;
+  string redirect_to = 1;
 }

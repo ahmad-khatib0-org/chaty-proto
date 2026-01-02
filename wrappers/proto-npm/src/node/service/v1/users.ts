@@ -178,7 +178,7 @@ export interface UsersLoginResponse {
 }
 
 export interface UsersLoginResponseData {
-  message: string;
+  redirectTo: string;
 }
 
 function createBaseUser(): User {
@@ -902,13 +902,13 @@ export const UsersLoginResponse: MessageFns<UsersLoginResponse> = {
 };
 
 function createBaseUsersLoginResponseData(): UsersLoginResponseData {
-  return { message: "" };
+  return { redirectTo: "" };
 }
 
 export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
   encode(message: UsersLoginResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.message !== "") {
-      writer.uint32(10).string(message.message);
+    if (message.redirectTo !== "") {
+      writer.uint32(10).string(message.redirectTo);
     }
     return writer;
   },
@@ -925,7 +925,7 @@ export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
             break;
           }
 
-          message.message = reader.string();
+          message.redirectTo = reader.string();
           continue;
         }
       }
@@ -938,13 +938,13 @@ export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
   },
 
   fromJSON(object: any): UsersLoginResponseData {
-    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
+    return { redirectTo: isSet(object.redirectTo) ? globalThis.String(object.redirectTo) : "" };
   },
 
   toJSON(message: UsersLoginResponseData): unknown {
     const obj: any = {};
-    if (message.message !== "") {
-      obj.message = message.message;
+    if (message.redirectTo !== "") {
+      obj.redirectTo = message.redirectTo;
     }
     return obj;
   },
@@ -954,7 +954,7 @@ export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
   },
   fromPartial<I extends Exact<DeepPartial<UsersLoginResponseData>, I>>(object: I): UsersLoginResponseData {
     const message = createBaseUsersLoginResponseData();
-    message.message = object.message ?? "";
+    message.redirectTo = object.redirectTo ?? "";
     return message;
   },
 };

@@ -109,7 +109,7 @@ pub mod users_login_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsersLoginResponseData {
     #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
+    pub redirect_to: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
