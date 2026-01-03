@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/users.proto.
  */
 export const file_service_v1_users: GenFile = /*@__PURE__*/
-  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsIkcKElVzZXJzQ3JlYXRlUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIQCgh1c2VybmFtZRgDIAEoCSJ8ChNVc2Vyc0NyZWF0ZVJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLlVzZXJzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIqChdVc2Vyc0NyZWF0ZVJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJIloKEVVzZXJzTG9naW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEgsKA21mYRgDIAEoCRIXCg9sb2dpbl9jaGFsbGVuZ2UYBCABKAkiegoSVXNlcnNMb2dpblJlc3BvbnNlEjIKBGRhdGEYASABKAsyIi5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXNwb25zZURhdGFIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIi0KFlVzZXJzTG9naW5SZXNwb25zZURhdGESEwoLcmVkaXJlY3RfdG8YASABKAkiLgodVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QSDQoFdG9rZW4YASABKAkikgEKHlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRI+CgRkYXRhGAEgASgLMi4uc2VydmljZS52MS5Vc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSI1CiJVc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkqggEKClVzZXJTdGF0dXMSFgoSVVNFUl9TVEFUVVNfT05MSU5FEAASFAoQVVNFUl9TVEFUVVNfSURMRRABEhUKEVVTRVJfU1RBVFVTX0ZPQ1VTEAISFAoQVVNFUl9TVEFUVVNfQlVTWRADEhkKFVVTRVJfU1RBVFVTX0lOVklTSUJMRRAEKoUBCghVc2VyRmxhZxIZChVVU0VSX0ZMQUdfVU5TUEVDSUZJRUQQABIdChlVU0VSX0ZMQUdfU1VTUEVOREVEX1VOVElMEAESFQoRVVNFUl9GTEFHX0RFTEVURUQQAhIUChBVU0VSX0ZMQUdfQkFOTkVEEAQSEgoOVVNFUl9GTEFHX1NQQU0QCGIGcHJvdG8z", [file_shared_v1_error]);
+  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsIkcKElVzZXJzQ3JlYXRlUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIQCgh1c2VybmFtZRgDIAEoCSJ8ChNVc2Vyc0NyZWF0ZVJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLlVzZXJzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIqChdVc2Vyc0NyZWF0ZVJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJIloKEVVzZXJzTG9naW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEgsKA21mYRgDIAEoCRIXCg9sb2dpbl9jaGFsbGVuZ2UYBCABKAkiegoSVXNlcnNMb2dpblJlc3BvbnNlEjIKBGRhdGEYASABKAsyIi5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXNwb25zZURhdGFIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIi0KFlVzZXJzTG9naW5SZXNwb25zZURhdGESEwoLcmVkaXJlY3RfdG8YASABKAkiLgodVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QSDQoFdG9rZW4YASABKAkikgEKHlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRI+CgRkYXRhGAEgASgLMi4uc2VydmljZS52MS5Vc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSI1CiJVc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiKwoaVXNlcnNGb3Jnb3RQYXNzd29yZFJlcXVlc3QSDQoFZW1haWwYASABKAkijAEKG1VzZXJzRm9yZ290UGFzc3dvcmRSZXNwb25zZRI7CgRkYXRhGAEgASgLMisuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIyCh9Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkqggEKClVzZXJTdGF0dXMSFgoSVVNFUl9TVEFUVVNfT05MSU5FEAASFAoQVVNFUl9TVEFUVVNfSURMRRABEhUKEVVTRVJfU1RBVFVTX0ZPQ1VTEAISFAoQVVNFUl9TVEFUVVNfQlVTWRADEhkKFVVTRVJfU1RBVFVTX0lOVklTSUJMRRAEKoUBCghVc2VyRmxhZxIZChVVU0VSX0ZMQUdfVU5TUEVDSUZJRUQQABIdChlVU0VSX0ZMQUdfU1VTUEVOREVEX1VOVElMEAESFQoRVVNFUl9GTEFHX0RFTEVURUQQAhIUChBVU0VSX0ZMQUdfQkFOTkVEEAQSEgoOVVNFUl9GTEFHX1NQQU0QCGIGcHJvdG8z", [file_shared_v1_error]);
 
 /**
  * @generated from message service.v1.User
@@ -334,6 +334,69 @@ export type UsersEmailConfirmationResponseData = Message<"service.v1.UsersEmailC
  */
 export const UsersEmailConfirmationResponseDataSchema: GenMessage<UsersEmailConfirmationResponseData> = /*@__PURE__*/
   messageDesc(file_service_v1_users, 9);
+
+/**
+ * @generated from message service.v1.UsersForgotPasswordRequest
+ */
+export type UsersForgotPasswordRequest = Message<"service.v1.UsersForgotPasswordRequest"> & {
+  /**
+   * @generated from field: string email = 1;
+   */
+  email: string;
+};
+
+/**
+ * Describes the message service.v1.UsersForgotPasswordRequest.
+ * Use `create(UsersForgotPasswordRequestSchema)` to create a new message.
+ */
+export const UsersForgotPasswordRequestSchema: GenMessage<UsersForgotPasswordRequest> = /*@__PURE__*/
+  messageDesc(file_service_v1_users, 10);
+
+/**
+ * @generated from message service.v1.UsersForgotPasswordResponse
+ */
+export type UsersForgotPasswordResponse = Message<"service.v1.UsersForgotPasswordResponse"> & {
+  /**
+   * @generated from oneof service.v1.UsersForgotPasswordResponse.response
+   */
+  response: {
+    /**
+     * @generated from field: service.v1.UsersForgotPasswordResponseData data = 1;
+     */
+    value: UsersForgotPasswordResponseData;
+    case: "data";
+  } | {
+    /**
+     * @generated from field: shared.v1.AppError error = 2;
+     */
+    value: AppError;
+    case: "error";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message service.v1.UsersForgotPasswordResponse.
+ * Use `create(UsersForgotPasswordResponseSchema)` to create a new message.
+ */
+export const UsersForgotPasswordResponseSchema: GenMessage<UsersForgotPasswordResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_users, 11);
+
+/**
+ * @generated from message service.v1.UsersForgotPasswordResponseData
+ */
+export type UsersForgotPasswordResponseData = Message<"service.v1.UsersForgotPasswordResponseData"> & {
+  /**
+   * @generated from field: string message = 1;
+   */
+  message: string;
+};
+
+/**
+ * Describes the message service.v1.UsersForgotPasswordResponseData.
+ * Use `create(UsersForgotPasswordResponseDataSchema)` to create a new message.
+ */
+export const UsersForgotPasswordResponseDataSchema: GenMessage<UsersForgotPasswordResponseData> = /*@__PURE__*/
+  messageDesc(file_service_v1_users, 12);
 
 /**
  * @generated from enum service.v1.UserStatus

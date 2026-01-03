@@ -141,6 +141,35 @@ pub struct UsersEmailConfirmationResponseData {
     pub message: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordRequest {
+    #[prost(string, tag = "1")]
+    pub email: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordResponse {
+    #[prost(oneof = "users_forgot_password_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_forgot_password_response::Response>,
+}
+/// Nested message and enum types in `UsersForgotPasswordResponse`.
+pub mod users_forgot_password_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersForgotPasswordResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum UserStatus {
@@ -377,6 +406,32 @@ pub mod chaty_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn users_forgot_password(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersForgotPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersForgotPasswordResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersForgotPassword",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("service.v1.ChatyService", "UsersForgotPassword"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -411,6 +466,13 @@ pub mod chaty_service_server {
             request: tonic::Request<super::UsersEmailConfirmationRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UsersEmailConfirmationResponse>,
+            tonic::Status,
+        >;
+        async fn users_forgot_password(
+            &self,
+            request: tonic::Request<super::UsersForgotPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersForgotPasswordResponse>,
             tonic::Status,
         >;
     }
@@ -614,6 +676,52 @@ pub mod chaty_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = UsersEmailConfirmationSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/UsersForgotPassword" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersForgotPasswordSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersForgotPasswordRequest>
+                    for UsersForgotPasswordSvc<T> {
+                        type Response = super::UsersForgotPasswordResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersForgotPasswordRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_forgot_password(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersForgotPasswordSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

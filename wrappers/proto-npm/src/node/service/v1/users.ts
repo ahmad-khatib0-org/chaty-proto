@@ -194,6 +194,19 @@ export interface UsersEmailConfirmationResponseData {
   message: string;
 }
 
+export interface UsersForgotPasswordRequest {
+  email: string;
+}
+
+export interface UsersForgotPasswordResponse {
+  data?: UsersForgotPasswordResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface UsersForgotPasswordResponseData {
+  message: string;
+}
+
 function createBaseUser(): User {
   return {
     id: "",
@@ -1171,6 +1184,204 @@ export const UsersEmailConfirmationResponseData: MessageFns<UsersEmailConfirmati
     object: I,
   ): UsersEmailConfirmationResponseData {
     const message = createBaseUsersEmailConfirmationResponseData();
+    message.message = object.message ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersForgotPasswordRequest(): UsersForgotPasswordRequest {
+  return { email: "" };
+}
+
+export const UsersForgotPasswordRequest: MessageFns<UsersForgotPasswordRequest> = {
+  encode(message: UsersForgotPasswordRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.email !== "") {
+      writer.uint32(10).string(message.email);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersForgotPasswordRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersForgotPasswordRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersForgotPasswordRequest {
+    return { email: isSet(object.email) ? globalThis.String(object.email) : "" };
+  },
+
+  toJSON(message: UsersForgotPasswordRequest): unknown {
+    const obj: any = {};
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersForgotPasswordRequest>, I>>(base?: I): UsersForgotPasswordRequest {
+    return UsersForgotPasswordRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersForgotPasswordRequest>, I>>(object: I): UsersForgotPasswordRequest {
+    const message = createBaseUsersForgotPasswordRequest();
+    message.email = object.email ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersForgotPasswordResponse(): UsersForgotPasswordResponse {
+  return { data: undefined, error: undefined };
+}
+
+export const UsersForgotPasswordResponse: MessageFns<UsersForgotPasswordResponse> = {
+  encode(message: UsersForgotPasswordResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      UsersForgotPasswordResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersForgotPasswordResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersForgotPasswordResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = UsersForgotPasswordResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersForgotPasswordResponse {
+    return {
+      data: isSet(object.data) ? UsersForgotPasswordResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: UsersForgotPasswordResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = UsersForgotPasswordResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersForgotPasswordResponse>, I>>(base?: I): UsersForgotPasswordResponse {
+    return UsersForgotPasswordResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersForgotPasswordResponse>, I>>(object: I): UsersForgotPasswordResponse {
+    const message = createBaseUsersForgotPasswordResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? UsersForgotPasswordResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUsersForgotPasswordResponseData(): UsersForgotPasswordResponseData {
+  return { message: "" };
+}
+
+export const UsersForgotPasswordResponseData: MessageFns<UsersForgotPasswordResponseData> = {
+  encode(message: UsersForgotPasswordResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.message !== "") {
+      writer.uint32(10).string(message.message);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersForgotPasswordResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersForgotPasswordResponseData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.message = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersForgotPasswordResponseData {
+    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
+  },
+
+  toJSON(message: UsersForgotPasswordResponseData): unknown {
+    const obj: any = {};
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersForgotPasswordResponseData>, I>>(base?: I): UsersForgotPasswordResponseData {
+    return UsersForgotPasswordResponseData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersForgotPasswordResponseData>, I>>(
+    object: I,
+  ): UsersForgotPasswordResponseData {
+    const message = createBaseUsersForgotPasswordResponseData();
     message.message = object.message ?? "";
     return message;
   },

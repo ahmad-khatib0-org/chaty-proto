@@ -4,14 +4,14 @@
 
 import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersEmailConfirmationRequestSchema, UsersEmailConfirmationResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema } from "./users_pb.js";
+import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersEmailConfirmationRequestSchema, UsersEmailConfirmationResponseSchema, UsersForgotPasswordRequestSchema, UsersForgotPasswordResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema } from "./users_pb.js";
 import { file_service_v1_users } from "./users_pb.js";
 
 /**
  * Describes the file service/v1/main.proto.
  */
 export const file_service_v1_main: GenFile = /*@__PURE__*/
-  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEynAIKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZWIGcHJvdG8z", [file_service_v1_users]);
+  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEyhAMKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRJmChNVc2Vyc0ZvcmdvdFBhc3N3b3JkEiYuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVxdWVzdBonLnNlcnZpY2UudjEuVXNlcnNGb3Jnb3RQYXNzd29yZFJlc3BvbnNlYgZwcm90bzM", [file_service_v1_users]);
 
 /**
  * @generated from service service.v1.ChatyService
@@ -40,6 +40,14 @@ export const ChatyService: GenService<{
     methodKind: "unary";
     input: typeof UsersEmailConfirmationRequestSchema;
     output: typeof UsersEmailConfirmationResponseSchema;
+  },
+  /**
+   * @generated from rpc service.v1.ChatyService.UsersForgotPassword
+   */
+  usersForgotPassword: {
+    methodKind: "unary";
+    input: typeof UsersForgotPasswordRequestSchema;
+    output: typeof UsersForgotPasswordResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_service_v1_main, 0);

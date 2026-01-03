@@ -87,3 +87,18 @@ message UsersEmailConfirmationResponse {
 message UsersEmailConfirmationResponseData {
   string message = 1;
 }
+
+message UsersForgotPasswordRequest {
+  string email = 1;
+}
+
+message UsersForgotPasswordResponse {
+  oneof response {
+    UsersForgotPasswordResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message UsersForgotPasswordResponseData {
+  string message = 1;
+}

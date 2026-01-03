@@ -22,6 +22,8 @@ import {
   UsersCreateResponse,
   UsersEmailConfirmationRequest,
   UsersEmailConfirmationResponse,
+  UsersForgotPasswordRequest,
+  UsersForgotPasswordResponse,
   UsersLoginRequest,
   UsersLoginResponse,
 } from "./users.js";
@@ -60,12 +62,24 @@ export const ChatyServiceService = {
     responseDeserialize: (value: Buffer): UsersEmailConfirmationResponse =>
       UsersEmailConfirmationResponse.decode(value),
   },
+  usersForgotPassword: {
+    path: "/service.v1.ChatyService/UsersForgotPassword",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: UsersForgotPasswordRequest): Buffer =>
+      Buffer.from(UsersForgotPasswordRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): UsersForgotPasswordRequest => UsersForgotPasswordRequest.decode(value),
+    responseSerialize: (value: UsersForgotPasswordResponse): Buffer =>
+      Buffer.from(UsersForgotPasswordResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): UsersForgotPasswordResponse => UsersForgotPasswordResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersCreate: handleUnaryCall<UsersCreateRequest, UsersCreateResponse>;
   usersLogin: handleUnaryCall<UsersLoginRequest, UsersLoginResponse>;
   usersEmailConfirmation: handleUnaryCall<UsersEmailConfirmationRequest, UsersEmailConfirmationResponse>;
+  usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -113,6 +127,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UsersEmailConfirmationResponse) => void,
+  ): ClientUnaryCall;
+  usersForgotPassword(
+    request: UsersForgotPasswordRequest,
+    callback: (error: ServiceError | null, response: UsersForgotPasswordResponse) => void,
+  ): ClientUnaryCall;
+  usersForgotPassword(
+    request: UsersForgotPasswordRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UsersForgotPasswordResponse) => void,
+  ): ClientUnaryCall;
+  usersForgotPassword(
+    request: UsersForgotPasswordRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UsersForgotPasswordResponse) => void,
   ): ClientUnaryCall;
 }
 

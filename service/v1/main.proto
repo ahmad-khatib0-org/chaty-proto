@@ -8,4 +8,5 @@ service ChatyService {
   rpc UsersCreate(UsersCreateRequest) returns (UsersCreateResponse);
   rpc UsersLogin(UsersLoginRequest) returns (UsersLoginResponse);
   rpc UsersEmailConfirmation(UsersEmailConfirmationRequest) returns (UsersEmailConfirmationResponse);
+  rpc UsersForgotPassword(UsersForgotPasswordRequest) returns (UsersForgotPasswordResponse);
 }
