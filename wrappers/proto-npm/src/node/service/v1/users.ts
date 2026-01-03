@@ -181,6 +181,19 @@ export interface UsersLoginResponseData {
   redirectTo: string;
 }
 
+export interface UsersEmailConfirmationRequest {
+  token: string;
+}
+
+export interface UsersEmailConfirmationResponse {
+  data?: UsersEmailConfirmationResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface UsersEmailConfirmationResponseData {
+  message: string;
+}
+
 function createBaseUser(): User {
   return {
     id: "",
@@ -955,6 +968,210 @@ export const UsersLoginResponseData: MessageFns<UsersLoginResponseData> = {
   fromPartial<I extends Exact<DeepPartial<UsersLoginResponseData>, I>>(object: I): UsersLoginResponseData {
     const message = createBaseUsersLoginResponseData();
     message.redirectTo = object.redirectTo ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersEmailConfirmationRequest(): UsersEmailConfirmationRequest {
+  return { token: "" };
+}
+
+export const UsersEmailConfirmationRequest: MessageFns<UsersEmailConfirmationRequest> = {
+  encode(message: UsersEmailConfirmationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.token !== "") {
+      writer.uint32(10).string(message.token);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersEmailConfirmationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersEmailConfirmationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.token = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersEmailConfirmationRequest {
+    return { token: isSet(object.token) ? globalThis.String(object.token) : "" };
+  },
+
+  toJSON(message: UsersEmailConfirmationRequest): unknown {
+    const obj: any = {};
+    if (message.token !== "") {
+      obj.token = message.token;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersEmailConfirmationRequest>, I>>(base?: I): UsersEmailConfirmationRequest {
+    return UsersEmailConfirmationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersEmailConfirmationRequest>, I>>(
+    object: I,
+  ): UsersEmailConfirmationRequest {
+    const message = createBaseUsersEmailConfirmationRequest();
+    message.token = object.token ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersEmailConfirmationResponse(): UsersEmailConfirmationResponse {
+  return { data: undefined, error: undefined };
+}
+
+export const UsersEmailConfirmationResponse: MessageFns<UsersEmailConfirmationResponse> = {
+  encode(message: UsersEmailConfirmationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      UsersEmailConfirmationResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersEmailConfirmationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersEmailConfirmationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = UsersEmailConfirmationResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersEmailConfirmationResponse {
+    return {
+      data: isSet(object.data) ? UsersEmailConfirmationResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: UsersEmailConfirmationResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = UsersEmailConfirmationResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersEmailConfirmationResponse>, I>>(base?: I): UsersEmailConfirmationResponse {
+    return UsersEmailConfirmationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersEmailConfirmationResponse>, I>>(
+    object: I,
+  ): UsersEmailConfirmationResponse {
+    const message = createBaseUsersEmailConfirmationResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? UsersEmailConfirmationResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUsersEmailConfirmationResponseData(): UsersEmailConfirmationResponseData {
+  return { message: "" };
+}
+
+export const UsersEmailConfirmationResponseData: MessageFns<UsersEmailConfirmationResponseData> = {
+  encode(message: UsersEmailConfirmationResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.message !== "") {
+      writer.uint32(10).string(message.message);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersEmailConfirmationResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersEmailConfirmationResponseData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.message = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersEmailConfirmationResponseData {
+    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
+  },
+
+  toJSON(message: UsersEmailConfirmationResponseData): unknown {
+    const obj: any = {};
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersEmailConfirmationResponseData>, I>>(
+    base?: I,
+  ): UsersEmailConfirmationResponseData {
+    return UsersEmailConfirmationResponseData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersEmailConfirmationResponseData>, I>>(
+    object: I,
+  ): UsersEmailConfirmationResponseData {
+    const message = createBaseUsersEmailConfirmationResponseData();
+    message.message = object.message ?? "";
     return message;
   },
 };

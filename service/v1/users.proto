@@ -72,3 +72,18 @@ message UsersLoginResponse {
 message UsersLoginResponseData {
   string redirect_to = 1;
 }
+
+message UsersEmailConfirmationRequest {
+  string token = 1;
+}
+
+message UsersEmailConfirmationResponse {
+  oneof response {
+    UsersEmailConfirmationResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message UsersEmailConfirmationResponseData {
+  string message = 1;
+}

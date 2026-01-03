@@ -7,4 +7,5 @@ import "service/v1/users.proto";
 service ChatyService {
   rpc UsersCreate(UsersCreateRequest) returns (UsersCreateResponse);
   rpc UsersLogin(UsersLoginRequest) returns (UsersLoginResponse);
+  rpc UsersEmailConfirmation(UsersEmailConfirmationRequest) returns (UsersEmailConfirmationResponse);
 }

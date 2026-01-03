@@ -17,7 +17,14 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { UsersCreateRequest, UsersCreateResponse, UsersLoginRequest, UsersLoginResponse } from "./users.js";
+import {
+  UsersCreateRequest,
+  UsersCreateResponse,
+  UsersEmailConfirmationRequest,
+  UsersEmailConfirmationResponse,
+  UsersLoginRequest,
+  UsersLoginResponse,
+} from "./users.js";
 
 export const protobufPackage = "service.v1";
 
@@ -41,11 +48,24 @@ export const ChatyServiceService = {
     responseSerialize: (value: UsersLoginResponse): Buffer => Buffer.from(UsersLoginResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): UsersLoginResponse => UsersLoginResponse.decode(value),
   },
+  usersEmailConfirmation: {
+    path: "/service.v1.ChatyService/UsersEmailConfirmation",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: UsersEmailConfirmationRequest): Buffer =>
+      Buffer.from(UsersEmailConfirmationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): UsersEmailConfirmationRequest => UsersEmailConfirmationRequest.decode(value),
+    responseSerialize: (value: UsersEmailConfirmationResponse): Buffer =>
+      Buffer.from(UsersEmailConfirmationResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): UsersEmailConfirmationResponse =>
+      UsersEmailConfirmationResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersCreate: handleUnaryCall<UsersCreateRequest, UsersCreateResponse>;
   usersLogin: handleUnaryCall<UsersLoginRequest, UsersLoginResponse>;
+  usersEmailConfirmation: handleUnaryCall<UsersEmailConfirmationRequest, UsersEmailConfirmationResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -78,6 +98,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UsersLoginResponse) => void,
+  ): ClientUnaryCall;
+  usersEmailConfirmation(
+    request: UsersEmailConfirmationRequest,
+    callback: (error: ServiceError | null, response: UsersEmailConfirmationResponse) => void,
+  ): ClientUnaryCall;
+  usersEmailConfirmation(
+    request: UsersEmailConfirmationRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UsersEmailConfirmationResponse) => void,
+  ): ClientUnaryCall;
+  usersEmailConfirmation(
+    request: UsersEmailConfirmationRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UsersEmailConfirmationResponse) => void,
   ): ClientUnaryCall;
 }
 
