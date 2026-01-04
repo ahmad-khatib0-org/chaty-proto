@@ -26,6 +26,8 @@ import {
   UsersForgotPasswordResponse,
   UsersLoginRequest,
   UsersLoginResponse,
+  UsersResetPasswordRequest,
+  UsersResetPasswordResponse,
 } from "./users.js";
 
 export const protobufPackage = "service.v1";
@@ -73,6 +75,17 @@ export const ChatyServiceService = {
       Buffer.from(UsersForgotPasswordResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): UsersForgotPasswordResponse => UsersForgotPasswordResponse.decode(value),
   },
+  usersResetPassword: {
+    path: "/service.v1.ChatyService/UsersResetPassword",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: UsersResetPasswordRequest): Buffer =>
+      Buffer.from(UsersResetPasswordRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): UsersResetPasswordRequest => UsersResetPasswordRequest.decode(value),
+    responseSerialize: (value: UsersResetPasswordResponse): Buffer =>
+      Buffer.from(UsersResetPasswordResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): UsersResetPasswordResponse => UsersResetPasswordResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -80,6 +93,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersLogin: handleUnaryCall<UsersLoginRequest, UsersLoginResponse>;
   usersEmailConfirmation: handleUnaryCall<UsersEmailConfirmationRequest, UsersEmailConfirmationResponse>;
   usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
+  usersResetPassword: handleUnaryCall<UsersResetPasswordRequest, UsersResetPasswordResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -142,6 +156,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UsersForgotPasswordResponse) => void,
+  ): ClientUnaryCall;
+  usersResetPassword(
+    request: UsersResetPasswordRequest,
+    callback: (error: ServiceError | null, response: UsersResetPasswordResponse) => void,
+  ): ClientUnaryCall;
+  usersResetPassword(
+    request: UsersResetPasswordRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UsersResetPasswordResponse) => void,
+  ): ClientUnaryCall;
+  usersResetPassword(
+    request: UsersResetPasswordRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UsersResetPasswordResponse) => void,
   ): ClientUnaryCall;
 }
 

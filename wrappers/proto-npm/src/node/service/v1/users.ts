@@ -207,6 +207,21 @@ export interface UsersForgotPasswordResponseData {
   message: string;
 }
 
+export interface UsersResetPasswordRequest {
+  token: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface UsersResetPasswordResponse {
+  data?: UsersResetPasswordResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface UsersResetPasswordResponseData {
+  message: string;
+}
+
 function createBaseUser(): User {
   return {
     id: "",
@@ -1382,6 +1397,238 @@ export const UsersForgotPasswordResponseData: MessageFns<UsersForgotPasswordResp
     object: I,
   ): UsersForgotPasswordResponseData {
     const message = createBaseUsersForgotPasswordResponseData();
+    message.message = object.message ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersResetPasswordRequest(): UsersResetPasswordRequest {
+  return { token: "", password: "", passwordConfirmation: "" };
+}
+
+export const UsersResetPasswordRequest: MessageFns<UsersResetPasswordRequest> = {
+  encode(message: UsersResetPasswordRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.token !== "") {
+      writer.uint32(10).string(message.token);
+    }
+    if (message.password !== "") {
+      writer.uint32(18).string(message.password);
+    }
+    if (message.passwordConfirmation !== "") {
+      writer.uint32(26).string(message.passwordConfirmation);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersResetPasswordRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersResetPasswordRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.token = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.password = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.passwordConfirmation = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersResetPasswordRequest {
+    return {
+      token: isSet(object.token) ? globalThis.String(object.token) : "",
+      password: isSet(object.password) ? globalThis.String(object.password) : "",
+      passwordConfirmation: isSet(object.passwordConfirmation) ? globalThis.String(object.passwordConfirmation) : "",
+    };
+  },
+
+  toJSON(message: UsersResetPasswordRequest): unknown {
+    const obj: any = {};
+    if (message.token !== "") {
+      obj.token = message.token;
+    }
+    if (message.password !== "") {
+      obj.password = message.password;
+    }
+    if (message.passwordConfirmation !== "") {
+      obj.passwordConfirmation = message.passwordConfirmation;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersResetPasswordRequest>, I>>(base?: I): UsersResetPasswordRequest {
+    return UsersResetPasswordRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersResetPasswordRequest>, I>>(object: I): UsersResetPasswordRequest {
+    const message = createBaseUsersResetPasswordRequest();
+    message.token = object.token ?? "";
+    message.password = object.password ?? "";
+    message.passwordConfirmation = object.passwordConfirmation ?? "";
+    return message;
+  },
+};
+
+function createBaseUsersResetPasswordResponse(): UsersResetPasswordResponse {
+  return { data: undefined, error: undefined };
+}
+
+export const UsersResetPasswordResponse: MessageFns<UsersResetPasswordResponse> = {
+  encode(message: UsersResetPasswordResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      UsersResetPasswordResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersResetPasswordResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersResetPasswordResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = UsersResetPasswordResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersResetPasswordResponse {
+    return {
+      data: isSet(object.data) ? UsersResetPasswordResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: UsersResetPasswordResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = UsersResetPasswordResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersResetPasswordResponse>, I>>(base?: I): UsersResetPasswordResponse {
+    return UsersResetPasswordResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersResetPasswordResponse>, I>>(object: I): UsersResetPasswordResponse {
+    const message = createBaseUsersResetPasswordResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? UsersResetPasswordResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUsersResetPasswordResponseData(): UsersResetPasswordResponseData {
+  return { message: "" };
+}
+
+export const UsersResetPasswordResponseData: MessageFns<UsersResetPasswordResponseData> = {
+  encode(message: UsersResetPasswordResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.message !== "") {
+      writer.uint32(10).string(message.message);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UsersResetPasswordResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUsersResetPasswordResponseData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.message = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UsersResetPasswordResponseData {
+    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
+  },
+
+  toJSON(message: UsersResetPasswordResponseData): unknown {
+    const obj: any = {};
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UsersResetPasswordResponseData>, I>>(base?: I): UsersResetPasswordResponseData {
+    return UsersResetPasswordResponseData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UsersResetPasswordResponseData>, I>>(
+    object: I,
+  ): UsersResetPasswordResponseData {
+    const message = createBaseUsersResetPasswordResponseData();
     message.message = object.message ?? "";
     return message;
   },

@@ -102,3 +102,20 @@ message UsersForgotPasswordResponse {
 message UsersForgotPasswordResponseData {
   string message = 1;
 }
+
+message UsersResetPasswordRequest {
+  string token = 1;
+  string password = 2;
+  string password_confirmation = 3;
+}
+
+message UsersResetPasswordResponse {
+  oneof response {
+    UsersResetPasswordResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message UsersResetPasswordResponseData {
+  string message = 1;
+}
