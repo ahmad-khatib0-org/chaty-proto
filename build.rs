@@ -17,6 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "shared/v1/wrappers.proto",
         "service/v1/main.proto",
         "service/v1/users.proto",
+        "service/v1/groups.proto",
       ],
       &["."],
     )?;

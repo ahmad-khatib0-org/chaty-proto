@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/groups.proto";
 import "service/v1/users.proto";
 
 service ChatyService {
@@ -10,4 +11,5 @@ service ChatyService {
   rpc UsersEmailConfirmation(UsersEmailConfirmationRequest) returns (UsersEmailConfirmationResponse);
   rpc UsersForgotPassword(UsersForgotPasswordRequest) returns (UsersForgotPasswordResponse);
   rpc UsersResetPassword(UsersResetPasswordRequest) returns (UsersResetPasswordResponse);
+  rpc GroupsCreate(GroupsCreateRequest) returns (GroupsCreateResponse);
 }

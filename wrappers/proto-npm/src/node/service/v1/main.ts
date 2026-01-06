@@ -17,6 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
+import { GroupsCreateRequest, GroupsCreateResponse } from "./groups.js";
 import {
   UsersCreateRequest,
   UsersCreateResponse,
@@ -86,6 +87,16 @@ export const ChatyServiceService = {
       Buffer.from(UsersResetPasswordResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): UsersResetPasswordResponse => UsersResetPasswordResponse.decode(value),
   },
+  groupsCreate: {
+    path: "/service.v1.ChatyService/GroupsCreate",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: GroupsCreateRequest): Buffer => Buffer.from(GroupsCreateRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GroupsCreateRequest => GroupsCreateRequest.decode(value),
+    responseSerialize: (value: GroupsCreateResponse): Buffer =>
+      Buffer.from(GroupsCreateResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GroupsCreateResponse => GroupsCreateResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -94,6 +105,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersEmailConfirmation: handleUnaryCall<UsersEmailConfirmationRequest, UsersEmailConfirmationResponse>;
   usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
   usersResetPassword: handleUnaryCall<UsersResetPasswordRequest, UsersResetPasswordResponse>;
+  groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -171,6 +183,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UsersResetPasswordResponse) => void,
+  ): ClientUnaryCall;
+  groupsCreate(
+    request: GroupsCreateRequest,
+    callback: (error: ServiceError | null, response: GroupsCreateResponse) => void,
+  ): ClientUnaryCall;
+  groupsCreate(
+    request: GroupsCreateRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: GroupsCreateResponse) => void,
+  ): ClientUnaryCall;
+  groupsCreate(
+    request: GroupsCreateRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: GroupsCreateResponse) => void,
   ): ClientUnaryCall;
 }
 

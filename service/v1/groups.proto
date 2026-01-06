@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/error.proto";
+
+message GroupsCreateRequest {
+  string name = 1;
+  optional string description = 2;
+  repeated string recipients = 3;
+  optional bool nsfw = 4;
+}
+
+message GroupsCreateResponse {
+  oneof response {
+    GroupsCreateResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message GroupsCreateResponseData {
+  string message = 1;
+}
