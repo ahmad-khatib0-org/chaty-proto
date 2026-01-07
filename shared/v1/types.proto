@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package shared.v1;
 
+// StringArray repeated string of items
+message StringArray {
+  repeated string items = 1;
+}
+
 message PingRequest {}
 
 message PingResponse {}

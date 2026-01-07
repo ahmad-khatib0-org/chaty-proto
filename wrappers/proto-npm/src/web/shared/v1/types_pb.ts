@@ -10,7 +10,26 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/types.proto.
  */
 export const file_shared_v1_types: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvdHlwZXMucHJvdG8SCXNoYXJlZC52MSINCgtQaW5nUmVxdWVzdCIOCgxQaW5nUmVzcG9uc2UiOAoOT3JkZXJEaXJlY3Rpb24SDQoDYXNjGAEgASgISAASDgoEZGVzYxgCIAEoCEgAQgcKBW9yZGVyIiIKBklETmFtZRIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJYgZwcm90bzM");
+  fileDesc("ChVzaGFyZWQvdjEvdHlwZXMucHJvdG8SCXNoYXJlZC52MSIcCgtTdHJpbmdBcnJheRINCgVpdGVtcxgBIAMoCSINCgtQaW5nUmVxdWVzdCIOCgxQaW5nUmVzcG9uc2UiOAoOT3JkZXJEaXJlY3Rpb24SDQoDYXNjGAEgASgISAASDgoEZGVzYxgCIAEoCEgAQgcKBW9yZGVyIiIKBklETmFtZRIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJYgZwcm90bzM");
+
+/**
+ * StringArray repeated string of items
+ *
+ * @generated from message shared.v1.StringArray
+ */
+export type StringArray = Message<"shared.v1.StringArray"> & {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[];
+};
+
+/**
+ * Describes the message shared.v1.StringArray.
+ * Use `create(StringArraySchema)` to create a new message.
+ */
+export const StringArraySchema: GenMessage<StringArray> = /*@__PURE__*/
+  messageDesc(file_shared_v1_types, 0);
 
 /**
  * @generated from message shared.v1.PingRequest
@@ -23,7 +42,7 @@ export type PingRequest = Message<"shared.v1.PingRequest"> & {
  * Use `create(PingRequestSchema)` to create a new message.
  */
 export const PingRequestSchema: GenMessage<PingRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_types, 0);
+  messageDesc(file_shared_v1_types, 1);
 
 /**
  * @generated from message shared.v1.PingResponse
@@ -36,7 +55,7 @@ export type PingResponse = Message<"shared.v1.PingResponse"> & {
  * Use `create(PingResponseSchema)` to create a new message.
  */
 export const PingResponseSchema: GenMessage<PingResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_types, 1);
+  messageDesc(file_shared_v1_types, 2);
 
 /**
  * @generated from message shared.v1.OrderDirection
@@ -65,7 +84,7 @@ export type OrderDirection = Message<"shared.v1.OrderDirection"> & {
  * Use `create(OrderDirectionSchema)` to create a new message.
  */
 export const OrderDirectionSchema: GenMessage<OrderDirection> = /*@__PURE__*/
-  messageDesc(file_shared_v1_types, 2);
+  messageDesc(file_shared_v1_types, 3);
 
 /**
  * @generated from message shared.v1.IDName
@@ -87,5 +106,5 @@ export type IDName = Message<"shared.v1.IDName"> & {
  * Use `create(IDNameSchema)` to create a new message.
  */
 export const IDNameSchema: GenMessage<IDName> = /*@__PURE__*/
-  messageDesc(file_shared_v1_types, 3);
+  messageDesc(file_shared_v1_types, 4);
 

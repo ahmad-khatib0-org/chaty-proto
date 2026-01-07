@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package shared.v1;
+
+import "shared/v1/time.proto";
+
+// ===========================================
+// FILE TYPE
+// ===========================================
+message File {
+  // Unique Id
+  string id = 1;
+
+  // ID of user who uploaded this file
+  string uploader_id = 2;
+
+  // Tag / bucket this file was uploaded to
+  string bucket = 3;
+
+  // Original filename
+  string filename = 4;
+
+  // Raw content type of this file
+  string content_type = 5;
+
+  // Size of this file (in bytes)
+  int64 size = 6;
+
+  // Hash of this file
+  string hash = 7;
+
+  // When this file was uploaded
+  shared.v1.Timestamp uploaded_at = 8;
+
+  // Whether this file was deleted
+  optional bool deleted = 9;
+
+  // Whether this file was reported
+  optional bool reported = 10;
+}

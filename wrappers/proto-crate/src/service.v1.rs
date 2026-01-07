@@ -36,50 +36,6 @@ pub struct GroupsCreateResponseData {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct User {
-    /// ulid
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, tag = "2")]
-    pub username: ::prost::alloc::string::String,
-    /// 255 char
-    #[prost(string, tag = "3")]
-    pub email: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub password: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, optional, tag = "5")]
-    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, optional, tag = "6")]
-    pub badges: ::core::option::Option<u32>,
-    /// 510 char
-    #[prost(string, optional, tag = "7")]
-    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
-    /// 32 char
-    #[prost(enumeration = "UserStatus", optional, tag = "8")]
-    pub status_presence: ::core::option::Option<i32>,
-    /// text
-    #[prost(string, optional, tag = "9")]
-    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
-    /// ulid (26 chars) Reference to files collection
-    #[prost(string, optional, tag = "10")]
-    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(bool, tag = "11")]
-    pub privileged: bool,
-    #[prost(uint64, optional, tag = "12")]
-    pub suspended_until: ::core::option::Option<u64>,
-    /// unix timestamp miliseconds
-    #[prost(uint64, tag = "13")]
-    pub created_at: u64,
-    /// unix timestamp miliseconds
-    #[prost(uint64, tag = "14")]
-    pub updated_at: u64,
-    #[prost(bool, tag = "15")]
-    pub verified: bool,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsersCreateRequest {
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
@@ -236,42 +192,6 @@ pub mod users_reset_password_response {
 pub struct UsersResetPasswordResponseData {
     #[prost(string, tag = "1")]
     pub message: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum UserStatus {
-    Online = 0,
-    Idle = 1,
-    Focus = 2,
-    Busy = 3,
-    Invisible = 4,
-}
-impl UserStatus {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Online => "USER_STATUS_ONLINE",
-            Self::Idle => "USER_STATUS_IDLE",
-            Self::Focus => "USER_STATUS_FOCUS",
-            Self::Busy => "USER_STATUS_BUSY",
-            Self::Invisible => "USER_STATUS_INVISIBLE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "USER_STATUS_ONLINE" => Some(Self::Online),
-            "USER_STATUS_IDLE" => Some(Self::Idle),
-            "USER_STATUS_FOCUS" => Some(Self::Focus),
-            "USER_STATUS_BUSY" => Some(Self::Busy),
-            "USER_STATUS_INVISIBLE" => Some(Self::Invisible),
-            _ => None,
-        }
-    }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -998,5 +918,673 @@ pub mod chaty_service_server {
     pub const SERVICE_NAME: &str = "service.v1.ChatyService";
     impl<T> tonic::server::NamedService for ChatyServiceServer<T> {
         const NAME: &'static str = SERVICE_NAME;
+    }
+}
+/// ===========================================
+/// MESSAGE WEBHOOK
+/// ===========================================
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageWebhook {
+    /// The name of the webhook - 1 to 32 chars
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// The id of the avatar of the webhook, if it has one (optional)
+    #[prost(string, optional, tag = "2")]
+    pub avatar: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ===========================================
+/// SYSTEM MESSAGE (oneof for enum variants)
+/// ===========================================
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystem {
+    #[prost(
+        oneof = "message_system::Type",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
+    )]
+    pub r#type: ::core::option::Option<message_system::Type>,
+}
+/// Nested message and enum types in `MessageSystem`.
+pub mod message_system {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "1")]
+        Text(super::MessageSystemText),
+        #[prost(message, tag = "2")]
+        UserAdded(super::MessageSystemUserAdded),
+        #[prost(message, tag = "3")]
+        UserRemove(super::MessageSystemUserRemove),
+        #[prost(message, tag = "4")]
+        UserJoined(super::MessageSystemUserJoined),
+        #[prost(message, tag = "5")]
+        UserLeft(super::MessageSystemUserLeft),
+        #[prost(message, tag = "6")]
+        UserKicked(super::MessageSystemUserKicked),
+        #[prost(message, tag = "7")]
+        UserBanned(super::MessageSystemUserBanned),
+        #[prost(message, tag = "8")]
+        ChannelRenamed(super::MessageSystemChannelRenamed),
+        #[prost(message, tag = "9")]
+        ChannelDescriptionChanged(super::MessageSystemChannelDescriptionChanged),
+        #[prost(message, tag = "10")]
+        ChannelIconChanged(super::MessageSystemChannelIconChanged),
+        #[prost(message, tag = "11")]
+        ChannelOwnershipChanged(super::MessageSystemChannelOwnershipChanged),
+        #[prost(message, tag = "12")]
+        MessagePinned(super::MessageSystemMessagePinned),
+        #[prost(message, tag = "13")]
+        MessageUnpinned(super::MessageSystemMessageUnpinned),
+        #[prost(message, tag = "14")]
+        CallStarted(super::MessageSystemCallStarted),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemText {
+    #[prost(string, tag = "1")]
+    pub content: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserAdded {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserRemove {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserJoined {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserLeft {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserKicked {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemUserBanned {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemChannelRenamed {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemChannelDescriptionChanged {
+    #[prost(string, tag = "1")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemChannelIconChanged {
+    #[prost(string, tag = "1")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemChannelOwnershipChanged {
+    #[prost(string, tag = "1")]
+    pub from: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub to: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemMessagePinned {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemMessageUnpinned {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub by: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageSystemCallStarted {
+    #[prost(string, tag = "1")]
+    pub by: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub finished_at: ::core::option::Option<super::super::shared::v1::Timestamp>,
+}
+/// Image
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedImage {
+    /// URL to the original image
+    #[prost(string, tag = "1")]
+    pub url: ::prost::alloc::string::String,
+    /// Width of the image
+    #[prost(uint32, tag = "2")]
+    pub width: u32,
+    /// Height of the image
+    #[prost(uint32, tag = "3")]
+    pub height: u32,
+    /// Positioning and size
+    #[prost(enumeration = "ImageSize", tag = "4")]
+    pub size: i32,
+}
+/// Video
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedVideo {
+    /// URL to the original video
+    #[prost(string, tag = "1")]
+    pub url: ::prost::alloc::string::String,
+    /// Width of the video
+    #[prost(uint32, tag = "2")]
+    pub width: u32,
+    /// Height of the video
+    #[prost(uint32, tag = "3")]
+    pub height: u32,
+}
+/// Information about special remote content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedWebsiteMetadataSpecial {
+    #[prost(
+        oneof = "embed_website_metadata_special::Type",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+    )]
+    pub r#type: ::core::option::Option<embed_website_metadata_special::Type>,
+}
+/// Nested message and enum types in `EmbedWebsiteMetadataSpecial`.
+pub mod embed_website_metadata_special {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        /// No remote content
+        #[prost(message, tag = "1")]
+        None(super::super::super::shared::v1::Empty),
+        /// Content hint that this contains a GIF (use metadata to find video or image to play)
+        #[prost(message, tag = "2")]
+        Gif(super::super::super::shared::v1::Empty),
+        /// YouTube video
+        #[prost(message, tag = "3")]
+        Youtube(super::EmbedYouTube),
+        /// Lightspeed.tv stream
+        #[prost(message, tag = "4")]
+        Lightspeed(super::EmbedLightspeed),
+        /// Twitch stream or clip
+        #[prost(message, tag = "5")]
+        Twitch(super::EmbedTwitch),
+        /// Spotify track
+        #[prost(message, tag = "6")]
+        Spotify(super::EmbedSpotify),
+        /// Soundcloud track
+        #[prost(message, tag = "7")]
+        Soundcloud(super::super::super::shared::v1::Empty),
+        /// Bandcamp track
+        #[prost(message, tag = "8")]
+        Bandcamp(super::EmbedBandcamp),
+        /// Apple Music
+        #[prost(message, tag = "9")]
+        AppleMusic(super::EmbedAppleMusic),
+        /// Streamable Video
+        #[prost(message, tag = "10")]
+        Streamable(super::EmbedStreamable),
+    }
+}
+/// YouTube video
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedYouTube {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, optional, tag = "2")]
+    pub timestamp: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Lightspeed.tv stream
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedLightspeed {
+    #[prost(enumeration = "LightspeedType", tag = "1")]
+    pub content_type: i32,
+    #[prost(string, tag = "2")]
+    pub id: ::prost::alloc::string::String,
+}
+/// Twitch stream or clip
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedTwitch {
+    #[prost(enumeration = "TwitchType", tag = "1")]
+    pub content_type: i32,
+    #[prost(string, tag = "2")]
+    pub id: ::prost::alloc::string::String,
+}
+/// Spotify track
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedSpotify {
+    /// Free-form string
+    #[prost(string, tag = "1")]
+    pub content_type: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub id: ::prost::alloc::string::String,
+}
+/// Bandcamp track
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedBandcamp {
+    #[prost(enumeration = "BandcampType", tag = "1")]
+    pub content_type: i32,
+    #[prost(string, tag = "2")]
+    pub id: ::prost::alloc::string::String,
+}
+/// Apple Music
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedAppleMusic {
+    #[prost(string, tag = "1")]
+    pub album_id: ::prost::alloc::string::String,
+    /// optional
+    #[prost(string, tag = "2")]
+    pub track_id: ::prost::alloc::string::String,
+}
+/// Streamable Video
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedStreamable {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// Website metadata
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedWebsiteMetadata {
+    /// Direct URL to web page (optional)
+    #[prost(string, optional, tag = "1")]
+    pub url: ::core::option::Option<::prost::alloc::string::String>,
+    /// Original direct URL (optional)
+    #[prost(string, optional, tag = "2")]
+    pub original_url: ::core::option::Option<::prost::alloc::string::String>,
+    /// Remote content (optional)
+    #[prost(message, optional, tag = "3")]
+    pub special: ::core::option::Option<EmbedWebsiteMetadataSpecial>,
+    /// Title of website (optional)
+    #[prost(string, optional, tag = "4")]
+    pub title: ::core::option::Option<::prost::alloc::string::String>,
+    /// Description of website (optional)
+    #[prost(string, optional, tag = "5")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// Embedded image (optional)
+    #[prost(message, optional, tag = "6")]
+    pub image: ::core::option::Option<EmbedImage>,
+    /// Embedded video (optional)
+    #[prost(message, optional, tag = "7")]
+    pub video: ::core::option::Option<EmbedVideo>,
+    /// Site name (optional)
+    #[prost(string, optional, tag = "8")]
+    pub site_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// URL to site icon (optional)
+    #[prost(string, optional, tag = "9")]
+    pub icon_url: ::core::option::Option<::prost::alloc::string::String>,
+    /// CSS Colour (optional)
+    #[prost(string, optional, tag = "10")]
+    pub colour: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Text Embed
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedText {
+    /// URL to icon (optional)
+    #[prost(string, optional, tag = "1")]
+    pub icon_url: ::core::option::Option<::prost::alloc::string::String>,
+    /// URL for title (optional)
+    #[prost(string, optional, tag = "2")]
+    pub url: ::core::option::Option<::prost::alloc::string::String>,
+    /// Title of text embed (optional)
+    #[prost(string, optional, tag = "3")]
+    pub title: ::core::option::Option<::prost::alloc::string::String>,
+    /// Description of text embed (optional)
+    #[prost(string, optional, tag = "4")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// ID of uploaded autumn file (optional)
+    #[prost(message, optional, tag = "5")]
+    pub media: ::core::option::Option<super::super::shared::v1::File>,
+    /// CSS Colour (optional)
+    #[prost(string, optional, tag = "6")]
+    pub colour: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Embed (oneof for different embed types)
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Embed {
+    #[prost(oneof = "embed::Type", tags = "1, 2, 3, 4, 5")]
+    pub r#type: ::core::option::Option<embed::Type>,
+}
+/// Nested message and enum types in `Embed`.
+pub mod embed {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "1")]
+        Website(super::EmbedWebsiteMetadata),
+        #[prost(message, tag = "2")]
+        Image(super::EmbedImage),
+        #[prost(message, tag = "3")]
+        Video(super::EmbedVideo),
+        #[prost(message, tag = "4")]
+        Text(super::EmbedText),
+        #[prost(message, tag = "5")]
+        None(super::super::super::shared::v1::Empty),
+    }
+}
+/// ===========================================
+/// INTERACTIONS
+/// ===========================================
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Interactions {
+    /// Reactions which should always appear and be distinct (optional)
+    #[prost(string, repeated, tag = "1")]
+    pub reactions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Whether reactions should be restricted to the given list
+    #[prost(bool, tag = "2")]
+    pub restrict_reactions: bool,
+}
+/// ===========================================
+/// MASQUERADE
+/// ===========================================
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Masquerade {
+    /// Replace the display name shown on this message (optional)
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Replace the avatar shown on this message (URL to image file) (optional)
+    #[prost(string, optional, tag = "2")]
+    pub avatar: ::core::option::Option<::prost::alloc::string::String>,
+    /// Replace the display role colour shown on this message (optional)
+    #[prost(string, optional, tag = "3")]
+    pub colour: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ===========================================
+/// MAIN MESSAGE
+/// ===========================================
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Message {
+    /// Unique Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Unique value generated by client sending this message (optional)
+    #[prost(string, optional, tag = "2")]
+    pub nonce: ::core::option::Option<::prost::alloc::string::String>,
+    /// Id of the channel this message was sent in
+    #[prost(string, tag = "3")]
+    pub channel_id: ::prost::alloc::string::String,
+    /// Id of the user or webhook that sent this message
+    #[prost(string, tag = "4")]
+    pub author_id: ::prost::alloc::string::String,
+    /// The webhook that sent this message (optional)
+    #[prost(message, optional, tag = "5")]
+    pub webhook: ::core::option::Option<MessageWebhook>,
+    /// Message content (optional)
+    #[prost(string, optional, tag = "6")]
+    pub content: ::core::option::Option<::prost::alloc::string::String>,
+    /// System message (optional)
+    #[prost(message, optional, tag = "7")]
+    pub system: ::core::option::Option<MessageSystem>,
+    /// Array of attachments (optional)
+    #[prost(message, repeated, tag = "8")]
+    pub attachments: ::prost::alloc::vec::Vec<super::super::shared::v1::File>,
+    /// Time at which this message was last edited (optional)
+    #[prost(message, optional, tag = "9")]
+    pub edited: ::core::option::Option<super::super::shared::v1::Timestamp>,
+    /// Attached embeds to this message (optional)
+    #[prost(message, repeated, tag = "10")]
+    pub embeds: ::prost::alloc::vec::Vec<Embed>,
+    /// Array of user ids mentioned in this message (optional)
+    #[prost(string, repeated, tag = "11")]
+    pub mentions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Array of role ids mentioned in this message (optional)
+    #[prost(string, repeated, tag = "12")]
+    pub role_mentions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Array of message ids this message is replying to (optional)
+    #[prost(string, repeated, tag = "13")]
+    pub replies: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Hashmap of emoji IDs to array of user IDs
+    #[prost(map = "string, message", tag = "14")]
+    pub reactions: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        super::super::shared::v1::StringArray,
+    >,
+    /// Information about how this message should be interacted with
+    #[prost(message, optional, tag = "15")]
+    pub interactions: ::core::option::Option<Interactions>,
+    /// Name and / or avatar overrides for this message (optional)
+    #[prost(message, optional, tag = "16")]
+    pub masquerade: ::core::option::Option<Masquerade>,
+    /// Whether or not the message is pinned (optional)
+    #[prost(bool, optional, tag = "17")]
+    pub pinned: ::core::option::Option<bool>,
+    /// Bitfield of message flags (optional)
+    #[prost(uint32, optional, tag = "18")]
+    pub flags: ::core::option::Option<u32>,
+}
+/// Image positioning and size
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ImageSize {
+    /// Show large preview at the bottom of the embed
+    Large = 0,
+    /// Show small preview to the side of the embed
+    Preview = 1,
+}
+impl ImageSize {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Large => "LARGE",
+            Self::Preview => "PREVIEW",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LARGE" => Some(Self::Large),
+            "PREVIEW" => Some(Self::Preview),
+            _ => None,
+        }
+    }
+}
+/// Type of remote Twitch content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum TwitchType {
+    TwitchChannel = 0,
+    TwitchVideo = 1,
+    TwitchClip = 2,
+}
+impl TwitchType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::TwitchChannel => "TWITCH_CHANNEL",
+            Self::TwitchVideo => "TWITCH_VIDEO",
+            Self::TwitchClip => "TWITCH_CLIP",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TWITCH_CHANNEL" => Some(Self::TwitchChannel),
+            "TWITCH_VIDEO" => Some(Self::TwitchVideo),
+            "TWITCH_CLIP" => Some(Self::TwitchClip),
+            _ => None,
+        }
+    }
+}
+/// Type of remote Lightspeed.tv content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum LightspeedType {
+    LightspeedChannel = 0,
+}
+impl LightspeedType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::LightspeedChannel => "LIGHTSPEED_CHANNEL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LIGHTSPEED_CHANNEL" => Some(Self::LightspeedChannel),
+            _ => None,
+        }
+    }
+}
+/// Type of remote Bandcamp content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BandcampType {
+    BandcampAlbum = 0,
+    BandcampTrack = 1,
+}
+impl BandcampType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::BandcampAlbum => "BANDCAMP_ALBUM",
+            Self::BandcampTrack => "BANDCAMP_TRACK",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BANDCAMP_ALBUM" => Some(Self::BandcampAlbum),
+            "BANDCAMP_TRACK" => Some(Self::BandcampTrack),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct User {
+    /// ulid
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    /// 255 char
+    #[prost(string, tag = "3")]
+    pub email: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub password: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, optional, tag = "5")]
+    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(uint32, optional, tag = "6")]
+    pub badges: ::core::option::Option<u32>,
+    /// 510 char
+    #[prost(string, optional, tag = "7")]
+    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
+    /// 32 char
+    #[prost(enumeration = "UserStatus", optional, tag = "8")]
+    pub status_presence: ::core::option::Option<i32>,
+    /// text
+    #[prost(string, optional, tag = "9")]
+    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
+    /// ulid (26 chars) Reference to files collection
+    #[prost(string, optional, tag = "10")]
+    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(bool, tag = "11")]
+    pub privileged: bool,
+    #[prost(uint64, optional, tag = "12")]
+    pub suspended_until: ::core::option::Option<u64>,
+    /// unix timestamp miliseconds
+    #[prost(uint64, tag = "13")]
+    pub created_at: u64,
+    /// unix timestamp miliseconds
+    #[prost(uint64, tag = "14")]
+    pub updated_at: u64,
+    #[prost(bool, tag = "15")]
+    pub verified: bool,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserStatus {
+    Online = 0,
+    Idle = 1,
+    Focus = 2,
+    Busy = 3,
+    Invisible = 4,
+}
+impl UserStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Online => "USER_STATUS_ONLINE",
+            Self::Idle => "USER_STATUS_IDLE",
+            Self::Focus => "USER_STATUS_FOCUS",
+            Self::Busy => "USER_STATUS_BUSY",
+            Self::Invisible => "USER_STATUS_INVISIBLE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "USER_STATUS_ONLINE" => Some(Self::Online),
+            "USER_STATUS_IDLE" => Some(Self::Idle),
+            "USER_STATUS_FOCUS" => Some(Self::Focus),
+            "USER_STATUS_BUSY" => Some(Self::Busy),
+            "USER_STATUS_INVISIBLE" => Some(Self::Invisible),
+            _ => None,
+        }
     }
 }

@@ -1,0 +1,378 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/files.proto";
+import "shared/v1/time.proto";
+import "shared/v1/types.proto";
+import "shared/v1/wrappers.proto";
+
+// ===========================================
+// MESSAGE WEBHOOK
+// ===========================================
+message MessageWebhook {
+  // The name of the webhook - 1 to 32 chars
+  string name = 1;
+
+  // The id of the avatar of the webhook, if it has one (optional)
+  optional string avatar = 2;
+}
+
+// ===========================================
+// SYSTEM MESSAGE (oneof for enum variants)
+// ===========================================
+message MessageSystem {
+  oneof type {
+    MessageSystemText text = 1;
+    MessageSystemUserAdded user_added = 2;
+    MessageSystemUserRemove user_remove = 3;
+    MessageSystemUserJoined user_joined = 4;
+    MessageSystemUserLeft user_left = 5;
+    MessageSystemUserKicked user_kicked = 6;
+    MessageSystemUserBanned user_banned = 7;
+    MessageSystemChannelRenamed channel_renamed = 8;
+    MessageSystemChannelDescriptionChanged channel_description_changed = 9;
+    MessageSystemChannelIconChanged channel_icon_changed = 10;
+    MessageSystemChannelOwnershipChanged channel_ownership_changed = 11;
+    MessageSystemMessagePinned message_pinned = 12;
+    MessageSystemMessageUnpinned message_unpinned = 13;
+    MessageSystemCallStarted call_started = 14;
+  }
+}
+
+// System message variants
+
+message MessageSystemText {
+  string content = 1;
+}
+
+message MessageSystemUserAdded {
+  string id = 1;
+  string by = 2;
+}
+
+message MessageSystemUserRemove {
+  string id = 1;
+  string by = 2;
+}
+
+message MessageSystemUserJoined {
+  string id = 1;
+}
+
+message MessageSystemUserLeft {
+  string id = 1;
+}
+
+message MessageSystemUserKicked {
+  string id = 1;
+}
+
+message MessageSystemUserBanned {
+  string id = 1;
+}
+
+message MessageSystemChannelRenamed {
+  string name = 1;
+  string by = 2;
+}
+
+message MessageSystemChannelDescriptionChanged {
+  string by = 1;
+}
+
+message MessageSystemChannelIconChanged {
+  string by = 1;
+}
+
+message MessageSystemChannelOwnershipChanged {
+  string from = 1;
+  string to = 2;
+}
+
+message MessageSystemMessagePinned {
+  string id = 1;
+  string by = 2;
+}
+
+message MessageSystemMessageUnpinned {
+  string id = 1;
+  string by = 2;
+}
+
+message MessageSystemCallStarted {
+  string by = 1;
+  shared.v1.Timestamp finished_at = 2;
+}
+
+// ===========================================
+// EMBED SUPPORT TYPES
+// ===========================================
+
+// Image positioning and size
+enum ImageSize {
+  // Show large preview at the bottom of the embed
+  LARGE = 0;
+
+  // Show small preview to the side of the embed
+  PREVIEW = 1;
+}
+
+// Image
+message EmbedImage {
+  // URL to the original image
+  string url = 1;
+
+  // Width of the image
+  uint32 width = 2;
+
+  // Height of the image
+  uint32 height = 3;
+
+  // Positioning and size
+  ImageSize size = 4;
+}
+
+// Video
+message EmbedVideo {
+  // URL to the original video
+  string url = 1;
+
+  // Width of the video
+  uint32 width = 2;
+
+  // Height of the video
+  uint32 height = 3;
+}
+
+// Type of remote Twitch content
+enum TwitchType {
+  TWITCH_CHANNEL = 0;
+  TWITCH_VIDEO = 1;
+  TWITCH_CLIP = 2;
+}
+
+// Type of remote Lightspeed.tv content
+enum LightspeedType {
+  LIGHTSPEED_CHANNEL = 0;
+}
+
+// Type of remote Bandcamp content
+enum BandcampType {
+  BANDCAMP_ALBUM = 0;
+  BANDCAMP_TRACK = 1;
+}
+
+// Information about special remote content
+message EmbedWebsiteMetadataSpecial {
+  oneof type {
+    // No remote content
+    shared.v1.Empty none = 1;
+    // Content hint that this contains a GIF (use metadata to find video or image to play)
+    shared.v1.Empty gif = 2;
+    // YouTube video
+    EmbedYouTube youtube = 3;
+    // Lightspeed.tv stream
+    EmbedLightspeed lightspeed = 4;
+    // Twitch stream or clip
+    EmbedTwitch twitch = 5;
+    // Spotify track
+    EmbedSpotify spotify = 6;
+    // Soundcloud track
+    shared.v1.Empty soundcloud = 7;
+    // Bandcamp track
+    EmbedBandcamp bandcamp = 8;
+    // Apple Music
+    EmbedAppleMusic apple_music = 9;
+    // Streamable Video
+    EmbedStreamable streamable = 10;
+  }
+}
+
+// YouTube video
+message EmbedYouTube {
+  string id = 1;
+  optional string timestamp = 2;
+}
+
+// Lightspeed.tv stream
+message EmbedLightspeed {
+  LightspeedType content_type = 1;
+  string id = 2;
+}
+
+// Twitch stream or clip
+message EmbedTwitch {
+  TwitchType content_type = 1;
+  string id = 2;
+}
+
+// Spotify track
+message EmbedSpotify {
+  string content_type = 1; // Free-form string
+  string id = 2;
+}
+
+// Bandcamp track
+message EmbedBandcamp {
+  BandcampType content_type = 1;
+  string id = 2;
+}
+
+// Apple Music
+message EmbedAppleMusic {
+  string album_id = 1;
+  string track_id = 2; // optional
+}
+
+// Streamable Video
+message EmbedStreamable {
+  string id = 1;
+}
+
+// Website metadata
+message EmbedWebsiteMetadata {
+  // Direct URL to web page (optional)
+  optional string url = 1;
+
+  // Original direct URL (optional)
+  optional string original_url = 2;
+
+  // Remote content (optional)
+  EmbedWebsiteMetadataSpecial special = 3;
+
+  // Title of website (optional)
+  optional string title = 4;
+
+  // Description of website (optional)
+  optional string description = 5;
+
+  // Embedded image (optional)
+  EmbedImage image = 6;
+
+  // Embedded video (optional)
+  EmbedVideo video = 7;
+
+  // Site name (optional)
+  optional string site_name = 8;
+
+  // URL to site icon (optional)
+  optional string icon_url = 9;
+
+  // CSS Colour (optional)
+  optional string colour = 10;
+}
+
+// Text Embed
+message EmbedText {
+  // URL to icon (optional)
+  optional string icon_url = 1;
+
+  // URL for title (optional)
+  optional string url = 2;
+
+  // Title of text embed (optional)
+  optional string title = 3;
+
+  // Description of text embed (optional)
+  optional string description = 4;
+
+  // ID of uploaded autumn file (optional)
+  optional shared.v1.File media = 5;
+
+  // CSS Colour (optional)
+  optional string colour = 6;
+}
+
+// Embed (oneof for different embed types)
+message Embed {
+  oneof type {
+    EmbedWebsiteMetadata website = 1;
+    EmbedImage image = 2;
+    EmbedVideo video = 3;
+    EmbedText text = 4;
+    shared.v1.Empty none = 5;
+  }
+}
+
+// ===========================================
+// INTERACTIONS
+// ===========================================
+message Interactions {
+  // Reactions which should always appear and be distinct (optional)
+  repeated string reactions = 1;
+  // Whether reactions should be restricted to the given list
+  bool restrict_reactions = 2;
+}
+
+// ===========================================
+// MASQUERADE
+// ===========================================
+message Masquerade {
+  // Replace the display name shown on this message (optional)
+  optional string name = 1;
+
+  // Replace the avatar shown on this message (URL to image file) (optional)
+  optional string avatar = 2;
+
+  // Replace the display role colour shown on this message (optional)
+  optional string colour = 3;
+}
+
+// ===========================================
+// MAIN MESSAGE
+// ===========================================
+message Message {
+  string id = 1; // Unique Id
+
+  // Unique value generated by client sending this message (optional)
+  optional string nonce = 2;
+
+  // Id of the channel this message was sent in
+  string channel_id = 3;
+
+  // Id of the user or webhook that sent this message
+  string author_id = 4;
+
+  // The webhook that sent this message (optional)
+  MessageWebhook webhook = 5;
+
+  // Message content (optional)
+  optional string content = 6;
+
+  // System message (optional)
+  MessageSystem system = 7;
+
+  // Array of attachments (optional)
+  repeated shared.v1.File attachments = 8;
+
+  // Time at which this message was last edited (optional)
+  optional shared.v1.Timestamp edited = 9;
+
+  // Attached embeds to this message (optional)
+  repeated Embed embeds = 10;
+
+  // Array of user ids mentioned in this message (optional)
+  repeated string mentions = 11;
+
+  // Array of role ids mentioned in this message (optional)
+  repeated string role_mentions = 12;
+
+  // Array of message ids this message is replying to (optional)
+  repeated string replies = 13;
+
+  // Hashmap of emoji IDs to array of user IDs
+  map<string, shared.v1.StringArray> reactions = 14;
+
+  // Information about how this message should be interacted with
+  Interactions interactions = 15;
+
+  // Name and / or avatar overrides for this message (optional)
+  Masquerade masquerade = 16;
+
+  // Whether or not the message is pinned (optional)
+  optional bool pinned = 17;
+
+  // Bitfield of message flags (optional)
+  optional uint32 flags = 18;
+}

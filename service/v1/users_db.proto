@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package service.v1;
+
+message User {
+  string id = 1; // ulid
+  string username = 2; // 64 char
+  string email = 3; // 255 char
+  string password = 4;
+  optional string display_name = 5; // 64 char
+  optional uint32 badges = 6;
+  optional string status_text = 7; // 510 char
+  optional UserStatus status_presence = 8; // 32 char
+  optional string profile_content = 9; // text
+  // ulid (26 chars) Reference to files collection
+  optional string profile_background_id = 10; 
+  bool privileged = 11;
+  optional uint64 suspended_until = 12;
+  uint64 created_at = 13; // unix timestamp miliseconds
+  uint64 updated_at = 14; // unix timestamp miliseconds
+  bool verified = 15;
+}
+
+enum UserStatus {
+  USER_STATUS_ONLINE = 0;
+  USER_STATUS_IDLE = 1;
+  USER_STATUS_FOCUS = 2;
+  USER_STATUS_BUSY = 3;
+  USER_STATUS_INVISIBLE = 4;
+}
+

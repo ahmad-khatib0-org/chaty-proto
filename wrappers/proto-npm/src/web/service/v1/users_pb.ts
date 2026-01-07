@@ -12,114 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/users.proto.
  */
 export const file_service_v1_users: GenFile = /*@__PURE__*/
-  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsIkcKElVzZXJzQ3JlYXRlUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIQCgh1c2VybmFtZRgDIAEoCSJ8ChNVc2Vyc0NyZWF0ZVJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLlVzZXJzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIqChdVc2Vyc0NyZWF0ZVJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJIloKEVVzZXJzTG9naW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEgsKA21mYRgDIAEoCRIXCg9sb2dpbl9jaGFsbGVuZ2UYBCABKAkiegoSVXNlcnNMb2dpblJlc3BvbnNlEjIKBGRhdGEYASABKAsyIi5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXNwb25zZURhdGFIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIi0KFlVzZXJzTG9naW5SZXNwb25zZURhdGESEwoLcmVkaXJlY3RfdG8YASABKAkiLgodVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QSDQoFdG9rZW4YASABKAkikgEKHlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRI+CgRkYXRhGAEgASgLMi4uc2VydmljZS52MS5Vc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSI1CiJVc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiKwoaVXNlcnNGb3Jnb3RQYXNzd29yZFJlcXVlc3QSDQoFZW1haWwYASABKAkijAEKG1VzZXJzRm9yZ290UGFzc3dvcmRSZXNwb25zZRI7CgRkYXRhGAEgASgLMisuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIyCh9Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiWwoZVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBINCgV0b2tlbhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIdChVwYXNzd29yZF9jb25maXJtYXRpb24YAyABKAkiigEKGlVzZXJzUmVzZXRQYXNzd29yZFJlc3BvbnNlEjoKBGRhdGEYASABKAsyKi5zZXJ2aWNlLnYxLlVzZXJzUmVzZXRQYXNzd29yZFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UiMQoeVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkqggEKClVzZXJTdGF0dXMSFgoSVVNFUl9TVEFUVVNfT05MSU5FEAASFAoQVVNFUl9TVEFUVVNfSURMRRABEhUKEVVTRVJfU1RBVFVTX0ZPQ1VTEAISFAoQVVNFUl9TVEFUVVNfQlVTWRADEhkKFVVTRVJfU1RBVFVTX0lOVklTSUJMRRAEKoUBCghVc2VyRmxhZxIZChVVU0VSX0ZMQUdfVU5TUEVDSUZJRUQQABIdChlVU0VSX0ZMQUdfU1VTUEVOREVEX1VOVElMEAESFQoRVVNFUl9GTEFHX0RFTEVURUQQAhIUChBVU0VSX0ZMQUdfQkFOTkVEEAQSEgoOVVNFUl9GTEFHX1NQQU0QCGIGcHJvdG8z", [file_shared_v1_error]);
-
-/**
- * @generated from message service.v1.User
- */
-export type User = Message<"service.v1.User"> & {
-  /**
-   * ulid
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * 64 char
-   *
-   * @generated from field: string username = 2;
-   */
-  username: string;
-
-  /**
-   * 255 char
-   *
-   * @generated from field: string email = 3;
-   */
-  email: string;
-
-  /**
-   * @generated from field: string password = 4;
-   */
-  password: string;
-
-  /**
-   * 64 char
-   *
-   * @generated from field: optional string display_name = 5;
-   */
-  displayName?: string;
-
-  /**
-   * @generated from field: optional uint32 badges = 6;
-   */
-  badges?: number;
-
-  /**
-   * 510 char
-   *
-   * @generated from field: optional string status_text = 7;
-   */
-  statusText?: string;
-
-  /**
-   * 32 char
-   *
-   * @generated from field: optional service.v1.UserStatus status_presence = 8;
-   */
-  statusPresence?: UserStatus;
-
-  /**
-   * text
-   *
-   * @generated from field: optional string profile_content = 9;
-   */
-  profileContent?: string;
-
-  /**
-   * ulid (26 chars) Reference to files collection
-   *
-   * @generated from field: optional string profile_background_id = 10;
-   */
-  profileBackgroundId?: string;
-
-  /**
-   * @generated from field: bool privileged = 11;
-   */
-  privileged: boolean;
-
-  /**
-   * @generated from field: optional uint64 suspended_until = 12;
-   */
-  suspendedUntil?: bigint;
-
-  /**
-   * unix timestamp miliseconds
-   *
-   * @generated from field: uint64 created_at = 13;
-   */
-  createdAt: bigint;
-
-  /**
-   * unix timestamp miliseconds
-   *
-   * @generated from field: uint64 updated_at = 14;
-   */
-  updatedAt: bigint;
-
-  /**
-   * @generated from field: bool verified = 15;
-   */
-  verified: boolean;
-};
-
-/**
- * Describes the message service.v1.User.
- * Use `create(UserSchema)` to create a new message.
- */
-export const UserSchema: GenMessage<User> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 0);
+  fileDesc("ChZzZXJ2aWNlL3YxL3VzZXJzLnByb3RvEgpzZXJ2aWNlLnYxIkcKElVzZXJzQ3JlYXRlUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIQCgh1c2VybmFtZRgDIAEoCSJ8ChNVc2Vyc0NyZWF0ZVJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLlVzZXJzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIqChdVc2Vyc0NyZWF0ZVJlc3BvbnNlRGF0YRIPCgdtZXNzYWdlGAEgASgJIloKEVVzZXJzTG9naW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEgsKA21mYRgDIAEoCRIXCg9sb2dpbl9jaGFsbGVuZ2UYBCABKAkiegoSVXNlcnNMb2dpblJlc3BvbnNlEjIKBGRhdGEYASABKAsyIi5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXNwb25zZURhdGFIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIi0KFlVzZXJzTG9naW5SZXNwb25zZURhdGESEwoLcmVkaXJlY3RfdG8YASABKAkiLgodVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QSDQoFdG9rZW4YASABKAkikgEKHlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRI+CgRkYXRhGAEgASgLMi4uc2VydmljZS52MS5Vc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSI1CiJVc2Vyc0VtYWlsQ29uZmlybWF0aW9uUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiKwoaVXNlcnNGb3Jnb3RQYXNzd29yZFJlcXVlc3QSDQoFZW1haWwYASABKAkijAEKG1VzZXJzRm9yZ290UGFzc3dvcmRSZXNwb25zZRI7CgRkYXRhGAEgASgLMisuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIyCh9Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkiWwoZVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBINCgV0b2tlbhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIdChVwYXNzd29yZF9jb25maXJtYXRpb24YAyABKAkiigEKGlVzZXJzUmVzZXRQYXNzd29yZFJlc3BvbnNlEjoKBGRhdGEYASABKAsyKi5zZXJ2aWNlLnYxLlVzZXJzUmVzZXRQYXNzd29yZFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UiMQoeVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2VEYXRhEg8KB21lc3NhZ2UYASABKAkqhQEKCFVzZXJGbGFnEhkKFVVTRVJfRkxBR19VTlNQRUNJRklFRBAAEh0KGVVTRVJfRkxBR19TVVNQRU5ERURfVU5USUwQARIVChFVU0VSX0ZMQUdfREVMRVRFRBACEhQKEFVTRVJfRkxBR19CQU5ORUQQBBISCg5VU0VSX0ZMQUdfU1BBTRAIYgZwcm90bzM", [file_shared_v1_error]);
 
 /**
  * @generated from message service.v1.UsersCreateRequest
@@ -146,7 +39,7 @@ export type UsersCreateRequest = Message<"service.v1.UsersCreateRequest"> & {
  * Use `create(UsersCreateRequestSchema)` to create a new message.
  */
 export const UsersCreateRequestSchema: GenMessage<UsersCreateRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 1);
+  messageDesc(file_service_v1_users, 0);
 
 /**
  * @generated from message service.v1.UsersCreateResponse
@@ -175,7 +68,7 @@ export type UsersCreateResponse = Message<"service.v1.UsersCreateResponse"> & {
  * Use `create(UsersCreateResponseSchema)` to create a new message.
  */
 export const UsersCreateResponseSchema: GenMessage<UsersCreateResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 2);
+  messageDesc(file_service_v1_users, 1);
 
 /**
  * @generated from message service.v1.UsersCreateResponseData
@@ -192,7 +85,7 @@ export type UsersCreateResponseData = Message<"service.v1.UsersCreateResponseDat
  * Use `create(UsersCreateResponseDataSchema)` to create a new message.
  */
 export const UsersCreateResponseDataSchema: GenMessage<UsersCreateResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 3);
+  messageDesc(file_service_v1_users, 2);
 
 /**
  * @generated from message service.v1.UsersLoginRequest
@@ -224,7 +117,7 @@ export type UsersLoginRequest = Message<"service.v1.UsersLoginRequest"> & {
  * Use `create(UsersLoginRequestSchema)` to create a new message.
  */
 export const UsersLoginRequestSchema: GenMessage<UsersLoginRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 4);
+  messageDesc(file_service_v1_users, 3);
 
 /**
  * @generated from message service.v1.UsersLoginResponse
@@ -253,7 +146,7 @@ export type UsersLoginResponse = Message<"service.v1.UsersLoginResponse"> & {
  * Use `create(UsersLoginResponseSchema)` to create a new message.
  */
 export const UsersLoginResponseSchema: GenMessage<UsersLoginResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 5);
+  messageDesc(file_service_v1_users, 4);
 
 /**
  * @generated from message service.v1.UsersLoginResponseData
@@ -270,7 +163,7 @@ export type UsersLoginResponseData = Message<"service.v1.UsersLoginResponseData"
  * Use `create(UsersLoginResponseDataSchema)` to create a new message.
  */
 export const UsersLoginResponseDataSchema: GenMessage<UsersLoginResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 6);
+  messageDesc(file_service_v1_users, 5);
 
 /**
  * @generated from message service.v1.UsersEmailConfirmationRequest
@@ -287,7 +180,7 @@ export type UsersEmailConfirmationRequest = Message<"service.v1.UsersEmailConfir
  * Use `create(UsersEmailConfirmationRequestSchema)` to create a new message.
  */
 export const UsersEmailConfirmationRequestSchema: GenMessage<UsersEmailConfirmationRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 7);
+  messageDesc(file_service_v1_users, 6);
 
 /**
  * @generated from message service.v1.UsersEmailConfirmationResponse
@@ -316,7 +209,7 @@ export type UsersEmailConfirmationResponse = Message<"service.v1.UsersEmailConfi
  * Use `create(UsersEmailConfirmationResponseSchema)` to create a new message.
  */
 export const UsersEmailConfirmationResponseSchema: GenMessage<UsersEmailConfirmationResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 8);
+  messageDesc(file_service_v1_users, 7);
 
 /**
  * @generated from message service.v1.UsersEmailConfirmationResponseData
@@ -333,7 +226,7 @@ export type UsersEmailConfirmationResponseData = Message<"service.v1.UsersEmailC
  * Use `create(UsersEmailConfirmationResponseDataSchema)` to create a new message.
  */
 export const UsersEmailConfirmationResponseDataSchema: GenMessage<UsersEmailConfirmationResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 9);
+  messageDesc(file_service_v1_users, 8);
 
 /**
  * @generated from message service.v1.UsersForgotPasswordRequest
@@ -350,7 +243,7 @@ export type UsersForgotPasswordRequest = Message<"service.v1.UsersForgotPassword
  * Use `create(UsersForgotPasswordRequestSchema)` to create a new message.
  */
 export const UsersForgotPasswordRequestSchema: GenMessage<UsersForgotPasswordRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 10);
+  messageDesc(file_service_v1_users, 9);
 
 /**
  * @generated from message service.v1.UsersForgotPasswordResponse
@@ -379,7 +272,7 @@ export type UsersForgotPasswordResponse = Message<"service.v1.UsersForgotPasswor
  * Use `create(UsersForgotPasswordResponseSchema)` to create a new message.
  */
 export const UsersForgotPasswordResponseSchema: GenMessage<UsersForgotPasswordResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 11);
+  messageDesc(file_service_v1_users, 10);
 
 /**
  * @generated from message service.v1.UsersForgotPasswordResponseData
@@ -396,7 +289,7 @@ export type UsersForgotPasswordResponseData = Message<"service.v1.UsersForgotPas
  * Use `create(UsersForgotPasswordResponseDataSchema)` to create a new message.
  */
 export const UsersForgotPasswordResponseDataSchema: GenMessage<UsersForgotPasswordResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 12);
+  messageDesc(file_service_v1_users, 11);
 
 /**
  * @generated from message service.v1.UsersResetPasswordRequest
@@ -423,7 +316,7 @@ export type UsersResetPasswordRequest = Message<"service.v1.UsersResetPasswordRe
  * Use `create(UsersResetPasswordRequestSchema)` to create a new message.
  */
 export const UsersResetPasswordRequestSchema: GenMessage<UsersResetPasswordRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 13);
+  messageDesc(file_service_v1_users, 12);
 
 /**
  * @generated from message service.v1.UsersResetPasswordResponse
@@ -452,7 +345,7 @@ export type UsersResetPasswordResponse = Message<"service.v1.UsersResetPasswordR
  * Use `create(UsersResetPasswordResponseSchema)` to create a new message.
  */
 export const UsersResetPasswordResponseSchema: GenMessage<UsersResetPasswordResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 14);
+  messageDesc(file_service_v1_users, 13);
 
 /**
  * @generated from message service.v1.UsersResetPasswordResponseData
@@ -469,43 +362,7 @@ export type UsersResetPasswordResponseData = Message<"service.v1.UsersResetPassw
  * Use `create(UsersResetPasswordResponseDataSchema)` to create a new message.
  */
 export const UsersResetPasswordResponseDataSchema: GenMessage<UsersResetPasswordResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_users, 15);
-
-/**
- * @generated from enum service.v1.UserStatus
- */
-export enum UserStatus {
-  /**
-   * @generated from enum value: USER_STATUS_ONLINE = 0;
-   */
-  ONLINE = 0,
-
-  /**
-   * @generated from enum value: USER_STATUS_IDLE = 1;
-   */
-  IDLE = 1,
-
-  /**
-   * @generated from enum value: USER_STATUS_FOCUS = 2;
-   */
-  FOCUS = 2,
-
-  /**
-   * @generated from enum value: USER_STATUS_BUSY = 3;
-   */
-  BUSY = 3,
-
-  /**
-   * @generated from enum value: USER_STATUS_INVISIBLE = 4;
-   */
-  INVISIBLE = 4,
-}
-
-/**
- * Describes the enum service.v1.UserStatus.
- */
-export const UserStatusSchema: GenEnum<UserStatus> = /*@__PURE__*/
-  enumDesc(file_service_v1_users, 0);
+  messageDesc(file_service_v1_users, 14);
 
 /**
  * @generated from enum service.v1.UserFlag
@@ -541,5 +398,5 @@ export enum UserFlag {
  * Describes the enum service.v1.UserFlag.
  */
 export const UserFlagSchema: GenEnum<UserFlag> = /*@__PURE__*/
-  enumDesc(file_service_v1_users, 1);
+  enumDesc(file_service_v1_users, 0);
 
