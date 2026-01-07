@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/files.proto";
+import "shared/v1/time.proto";
+
+// ===========================================
+// OVERRIDE FIELD TYPE (permissions)
+// ===========================================
+message OverrideField {
+  // Allowed permissions
+  int64 allow = 1;
+  // Denied permissions
+  int64 deny = 2;
+}
+
+// ===========================================
+// CHANNEL TYPES
+// ===========================================
+
+// Group channel type
+message ChannelGroup {
+  // User id of the owner of the group
+  string user_id = 1;
+  // Display name of the channel
+  string name = 2;
+  // Channel description
+  optional string description = 3;
+  // Array of user ids participating in channel
+  repeated string recipients = 4;
+  // Custom icon attachment
+  shared.v1.File icon = 5;
+  // Id of the last message sent in this channel
+  optional string last_message_id = 6;
+  // Permissions assigned to members of this group (does not apply to owner)
+  optional int64 permissions = 7;
+  // Whether this group is marked as not safe for work
+  bool nsfw = 8;
+}
+
+// Saved messages channel type
+message ChannelSavedMessages {
+  // Id of the user this channel belongs to
+  string user_id = 1;
+}
+
+// Text channel type
+message ChannelText {
+  // Id of the server this channel belongs to
+  string server_id = 1;
+  // Display name of the channel
+  string name = 2;
+  // Channel description (optional)
+  optional string description = 3;
+  // Custom icon attachment (optional)
+  shared.v1.File icon = 4;
+  // Id of the last message sent in this channel (optional)
+  optional string last_message_id = 5;
+  // Default permissions assigned to users in this channel (optional)
+  OverrideField default_permissions = 6;
+  // Map of role_id -> permissions
+  map<string, OverrideField> role_permissions = 7;
+  // Whether this channel is marked as not safe for work
+  bool nsfw = 8;
+}
+
+// Direct message channel type
+message ChannelDirectMessage {
+  // Whether this direct message channel is currently open on both sides
+  bool active = 1;
+  // 2-tuple of user ids participating in direct message
+  repeated string recipients = 2;
+  // Id of the last message sent in this channel
+  optional string last_message_id = 3;
+}
+
+// ===========================================
+// MAIN CHANNELS TABLE
+// ===========================================
+message Channel {
+  // ULID
+  string id = 1;
+  // 'saved_messages', 'direct_message', 'group', 'text_channel'
+  string channel_type = 2;
+
+  // Channel types (oneof - only one is set based on channel_type)
+  oneof channel_data {
+    ChannelSavedMessages saved = 3;
+    ChannelDirectMessage direct = 4;
+    ChannelGroup group = 5;
+    ChannelText text = 6;
+  }
+
+  // Maximum users allowed in voice channel
+  optional int32 voice_max_users = 7;
+
+  shared.v1.Timestamp created_at = 8;
+  shared.v1.Timestamp updated_at = 9;
+}
