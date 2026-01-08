@@ -1888,10 +1888,10 @@ export const EmbedImage: MessageFns<EmbedImage> = {
       writer.uint32(10).string(message.url);
     }
     if (message.width !== 0) {
-      writer.uint32(16).uint32(message.width);
+      writer.uint32(16).int32(message.width);
     }
     if (message.height !== 0) {
-      writer.uint32(24).uint32(message.height);
+      writer.uint32(24).int32(message.height);
     }
     if (message.size !== 0) {
       writer.uint32(32).int32(message.size);
@@ -1919,7 +1919,7 @@ export const EmbedImage: MessageFns<EmbedImage> = {
             break;
           }
 
-          message.width = reader.uint32();
+          message.width = reader.int32();
           continue;
         }
         case 3: {
@@ -1927,7 +1927,7 @@ export const EmbedImage: MessageFns<EmbedImage> = {
             break;
           }
 
-          message.height = reader.uint32();
+          message.height = reader.int32();
           continue;
         }
         case 4: {
@@ -1996,10 +1996,10 @@ export const EmbedVideo: MessageFns<EmbedVideo> = {
       writer.uint32(10).string(message.url);
     }
     if (message.width !== 0) {
-      writer.uint32(16).uint32(message.width);
+      writer.uint32(16).int32(message.width);
     }
     if (message.height !== 0) {
-      writer.uint32(24).uint32(message.height);
+      writer.uint32(24).int32(message.height);
     }
     return writer;
   },
@@ -2024,7 +2024,7 @@ export const EmbedVideo: MessageFns<EmbedVideo> = {
             break;
           }
 
-          message.width = reader.uint32();
+          message.width = reader.int32();
           continue;
         }
         case 3: {
@@ -2032,7 +2032,7 @@ export const EmbedVideo: MessageFns<EmbedVideo> = {
             break;
           }
 
-          message.height = reader.uint32();
+          message.height = reader.int32();
           continue;
         }
       }
@@ -3568,7 +3568,7 @@ export const Message: MessageFns<Message> = {
       writer.uint32(136).bool(message.pinned);
     }
     if (message.flags !== undefined) {
-      writer.uint32(144).uint32(message.flags);
+      writer.uint32(144).int32(message.flags);
     }
     return writer;
   },
@@ -3724,7 +3724,7 @@ export const Message: MessageFns<Message> = {
             break;
           }
 
-          message.flags = reader.uint32();
+          message.flags = reader.int32();
           continue;
         }
       }

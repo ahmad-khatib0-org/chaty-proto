@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/users_db.proto.
  */
 export const file_service_v1_users_db: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL3VzZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoDUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKARIBogBARISCgpjcmVhdGVkX2F0GA0gASgEEhIKCnVwZGF0ZWRfYXQYDiABKAQSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsKoIBCgpVc2VyU3RhdHVzEhYKElVTRVJfU1RBVFVTX09OTElORRAAEhQKEFVTRVJfU1RBVFVTX0lETEUQARIVChFVU0VSX1NUQVRVU19GT0NVUxACEhQKEFVTRVJfU1RBVFVTX0JVU1kQAxIZChVVU0VSX1NUQVRVU19JTlZJU0lCTEUQBGIGcHJvdG8z");
+  fileDesc("ChlzZXJ2aWNlL3YxL3VzZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoBUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKANIBogBARISCgpjcmVhdGVkX2F0GA0gASgDEhIKCnVwZGF0ZWRfYXQYDiABKAMSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsKoIBCgpVc2VyU3RhdHVzEhYKElVTRVJfU1RBVFVTX09OTElORRAAEhQKEFVTRVJfU1RBVFVTX0lETEUQARIVChFVU0VSX1NUQVRVU19GT0NVUxACEhQKEFVTRVJfU1RBVFVTX0JVU1kQAxIZChVVU0VSX1NUQVRVU19JTlZJU0lCTEUQBGIGcHJvdG8z");
 
 /**
  * @generated from message service.v1.User
@@ -50,7 +50,7 @@ export type User = Message<"service.v1.User"> & {
   displayName?: string;
 
   /**
-   * @generated from field: optional uint32 badges = 6;
+   * @generated from field: optional int32 badges = 6;
    */
   badges?: number;
 
@@ -88,21 +88,21 @@ export type User = Message<"service.v1.User"> & {
   privileged: boolean;
 
   /**
-   * @generated from field: optional uint64 suspended_until = 12;
+   * @generated from field: optional int64 suspended_until = 12;
    */
   suspendedUntil?: bigint;
 
   /**
    * unix timestamp miliseconds
    *
-   * @generated from field: uint64 created_at = 13;
+   * @generated from field: int64 created_at = 13;
    */
   createdAt: bigint;
 
   /**
    * unix timestamp miliseconds
    *
-   * @generated from field: uint64 updated_at = 14;
+   * @generated from field: int64 updated_at = 14;
    */
   updatedAt: bigint;
 

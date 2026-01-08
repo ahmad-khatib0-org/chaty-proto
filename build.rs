@@ -7,6 +7,143 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     .build_server(true)
     .build_client(true)
     .type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]")
+    // NOTE: Scylla derives for simple types only (no Enum, no oneof, no HashMap, )
+    .type_attribute(
+      "service.v1.OverrideField",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.ChannelGroup",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.ChannelSavedMessages",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.ChannelDirectMessage",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.User",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageWebhook",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemText",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserAdded",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserRemove",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserJoined",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserLeft",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserKicked",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemUserBanned",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemChannelRenamed",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemChannelDescriptionChanged",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemChannelIconChanged",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemChannelOwnershipChanged",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemMessagePinned",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemMessageUnpinned",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.MessageSystemCallStarted",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedImage",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedVideo",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedYouTube",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedLightspeed",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedTwitch",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedSpotify",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedBandcamp",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedAppleMusic",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedStreamable",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedText",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.StringArray",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.Timestamp",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.Empty",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.File",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
     .file_descriptor_set_path(format!("{}/descriptor.bin", out_dir))
     .compile_protos(
       &[

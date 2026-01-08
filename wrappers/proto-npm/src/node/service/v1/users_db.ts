@@ -136,7 +136,7 @@ export const User: MessageFns<User> = {
       writer.uint32(42).string(message.displayName);
     }
     if (message.badges !== undefined) {
-      writer.uint32(48).uint32(message.badges);
+      writer.uint32(48).int32(message.badges);
     }
     if (message.statusText !== undefined) {
       writer.uint32(58).string(message.statusText);
@@ -154,13 +154,13 @@ export const User: MessageFns<User> = {
       writer.uint32(88).bool(message.privileged);
     }
     if (message.suspendedUntil !== undefined) {
-      writer.uint32(96).uint64(message.suspendedUntil);
+      writer.uint32(96).int64(message.suspendedUntil);
     }
     if (message.createdAt !== "0") {
-      writer.uint32(104).uint64(message.createdAt);
+      writer.uint32(104).int64(message.createdAt);
     }
     if (message.updatedAt !== "0") {
-      writer.uint32(112).uint64(message.updatedAt);
+      writer.uint32(112).int64(message.updatedAt);
     }
     if (message.verified !== false) {
       writer.uint32(120).bool(message.verified);
@@ -220,7 +220,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.badges = reader.uint32();
+          message.badges = reader.int32();
           continue;
         }
         case 7: {
@@ -268,7 +268,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.suspendedUntil = reader.uint64().toString();
+          message.suspendedUntil = reader.int64().toString();
           continue;
         }
         case 13: {
@@ -276,7 +276,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.createdAt = reader.uint64().toString();
+          message.createdAt = reader.int64().toString();
           continue;
         }
         case 14: {
@@ -284,7 +284,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.updatedAt = reader.uint64().toString();
+          message.updatedAt = reader.int64().toString();
           continue;
         }
         case 15: {

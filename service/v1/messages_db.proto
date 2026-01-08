@@ -124,10 +124,10 @@ message EmbedImage {
   string url = 1;
 
   // Width of the image
-  uint32 width = 2;
+  int32 width = 2;
 
   // Height of the image
-  uint32 height = 3;
+  int32 height = 3;
 
   // Positioning and size
   ImageSize size = 4;
@@ -139,10 +139,10 @@ message EmbedVideo {
   string url = 1;
 
   // Width of the video
-  uint32 width = 2;
+  int32 width = 2;
 
   // Height of the video
-  uint32 height = 3;
+  int32 height = 3;
 }
 
 // Type of remote Twitch content
@@ -374,5 +374,5 @@ message Message {
   optional bool pinned = 17;
 
   // Bitfield of message flags (optional)
-  optional uint32 flags = 18;
+  optional int32 flags = 18;
 }

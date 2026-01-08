@@ -115,6 +115,7 @@ pub struct AppError {
 /// ) to obtain a formatter capable of generating timestamps in this format.
 ///
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Timestamp {
     /// Represents seconds of UTC time since Unix epoch
@@ -132,6 +133,7 @@ pub struct Timestamp {
 /// FILE TYPE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct File {
     /// Unique Id
@@ -260,6 +262,7 @@ impl NullValue {
 }
 /// StringArray repeated string of items
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StringArray {
     #[prost(string, repeated, tag = "1")]
@@ -425,5 +428,6 @@ pub struct Any {
     pub value: ::prost::alloc::vec::Vec<u8>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Empty {}

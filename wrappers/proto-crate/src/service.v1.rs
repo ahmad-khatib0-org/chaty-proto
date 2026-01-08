@@ -3,6 +3,7 @@
 /// OVERRIDE FIELD TYPE (permissions)
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OverrideField {
     /// Allowed permissions
@@ -14,6 +15,7 @@ pub struct OverrideField {
 }
 /// Group channel type
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroup {
     /// User id of the owner of the group
@@ -43,6 +45,7 @@ pub struct ChannelGroup {
 }
 /// Saved messages channel type
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelSavedMessages {
     /// Id of the user this channel belongs to
@@ -83,6 +86,7 @@ pub struct ChannelText {
 }
 /// Direct message channel type
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelDirectMessage {
     /// Whether this direct message channel is currently open on both sides
@@ -1059,6 +1063,7 @@ pub mod chaty_service_server {
 /// MESSAGE WEBHOOK
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageWebhook {
     /// The name of the webhook - 1 to 32 chars
@@ -1116,12 +1121,14 @@ pub mod message_system {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemText {
     #[prost(string, tag = "1")]
     pub content: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserAdded {
     #[prost(string, tag = "1")]
@@ -1130,6 +1137,7 @@ pub struct MessageSystemUserAdded {
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserRemove {
     #[prost(string, tag = "1")]
@@ -1138,30 +1146,35 @@ pub struct MessageSystemUserRemove {
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserJoined {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserLeft {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserKicked {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemUserBanned {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemChannelRenamed {
     #[prost(string, tag = "1")]
@@ -1170,18 +1183,21 @@ pub struct MessageSystemChannelRenamed {
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemChannelDescriptionChanged {
     #[prost(string, tag = "1")]
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemChannelIconChanged {
     #[prost(string, tag = "1")]
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemChannelOwnershipChanged {
     #[prost(string, tag = "1")]
@@ -1190,6 +1206,7 @@ pub struct MessageSystemChannelOwnershipChanged {
     pub to: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemMessagePinned {
     #[prost(string, tag = "1")]
@@ -1198,6 +1215,7 @@ pub struct MessageSystemMessagePinned {
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemMessageUnpinned {
     #[prost(string, tag = "1")]
@@ -1206,6 +1224,7 @@ pub struct MessageSystemMessageUnpinned {
     pub by: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystemCallStarted {
     #[prost(string, tag = "1")]
@@ -1215,34 +1234,36 @@ pub struct MessageSystemCallStarted {
 }
 /// Image
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedImage {
     /// URL to the original image
     #[prost(string, tag = "1")]
     pub url: ::prost::alloc::string::String,
     /// Width of the image
-    #[prost(uint32, tag = "2")]
-    pub width: u32,
+    #[prost(int32, tag = "2")]
+    pub width: i32,
     /// Height of the image
-    #[prost(uint32, tag = "3")]
-    pub height: u32,
+    #[prost(int32, tag = "3")]
+    pub height: i32,
     /// Positioning and size
     #[prost(enumeration = "ImageSize", tag = "4")]
     pub size: i32,
 }
 /// Video
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedVideo {
     /// URL to the original video
     #[prost(string, tag = "1")]
     pub url: ::prost::alloc::string::String,
     /// Width of the video
-    #[prost(uint32, tag = "2")]
-    pub width: u32,
+    #[prost(int32, tag = "2")]
+    pub width: i32,
     /// Height of the video
-    #[prost(uint32, tag = "3")]
-    pub height: u32,
+    #[prost(int32, tag = "3")]
+    pub height: i32,
 }
 /// Information about special remote content
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1293,6 +1314,7 @@ pub mod embed_website_metadata_special {
 }
 /// YouTube video
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedYouTube {
     #[prost(string, tag = "1")]
@@ -1302,6 +1324,7 @@ pub struct EmbedYouTube {
 }
 /// Lightspeed.tv stream
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedLightspeed {
     #[prost(enumeration = "LightspeedType", tag = "1")]
@@ -1311,6 +1334,7 @@ pub struct EmbedLightspeed {
 }
 /// Twitch stream or clip
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTwitch {
     #[prost(enumeration = "TwitchType", tag = "1")]
@@ -1320,6 +1344,7 @@ pub struct EmbedTwitch {
 }
 /// Spotify track
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedSpotify {
     /// Free-form string
@@ -1330,6 +1355,7 @@ pub struct EmbedSpotify {
 }
 /// Bandcamp track
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedBandcamp {
     #[prost(enumeration = "BandcampType", tag = "1")]
@@ -1339,6 +1365,7 @@ pub struct EmbedBandcamp {
 }
 /// Apple Music
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedAppleMusic {
     #[prost(string, tag = "1")]
@@ -1349,6 +1376,7 @@ pub struct EmbedAppleMusic {
 }
 /// Streamable Video
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedStreamable {
     #[prost(string, tag = "1")]
@@ -1391,6 +1419,7 @@ pub struct EmbedWebsiteMetadata {
 }
 /// Text Embed
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedText {
     /// URL to icon (optional)
@@ -1526,8 +1555,8 @@ pub struct Message {
     #[prost(bool, optional, tag = "17")]
     pub pinned: ::core::option::Option<bool>,
     /// Bitfield of message flags (optional)
-    #[prost(uint32, optional, tag = "18")]
-    pub flags: ::core::option::Option<u32>,
+    #[prost(int32, optional, tag = "18")]
+    pub flags: ::core::option::Option<i32>,
 }
 /// Image positioning and size
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1644,6 +1673,7 @@ impl BandcampType {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
     /// ulid
@@ -1660,8 +1690,8 @@ pub struct User {
     /// 64 char
     #[prost(string, optional, tag = "5")]
     pub display_name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, optional, tag = "6")]
-    pub badges: ::core::option::Option<u32>,
+    #[prost(int32, optional, tag = "6")]
+    pub badges: ::core::option::Option<i32>,
     /// 510 char
     #[prost(string, optional, tag = "7")]
     pub status_text: ::core::option::Option<::prost::alloc::string::String>,
@@ -1676,14 +1706,14 @@ pub struct User {
     pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(bool, tag = "11")]
     pub privileged: bool,
-    #[prost(uint64, optional, tag = "12")]
-    pub suspended_until: ::core::option::Option<u64>,
+    #[prost(int64, optional, tag = "12")]
+    pub suspended_until: ::core::option::Option<i64>,
     /// unix timestamp miliseconds
-    #[prost(uint64, tag = "13")]
-    pub created_at: u64,
+    #[prost(int64, tag = "13")]
+    pub created_at: i64,
     /// unix timestamp miliseconds
-    #[prost(uint64, tag = "14")]
-    pub updated_at: u64,
+    #[prost(int64, tag = "14")]
+    pub updated_at: i64,
     #[prost(bool, tag = "15")]
     pub verified: bool,
 }
