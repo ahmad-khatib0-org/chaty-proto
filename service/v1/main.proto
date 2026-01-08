@@ -4,6 +4,7 @@ package service.v1;
 
 import "service/v1/groups.proto";
 import "service/v1/users.proto";
+import "service/v1/search.proto";
 
 service ChatyService {
   rpc UsersCreate(UsersCreateRequest) returns (UsersCreateResponse);
@@ -12,4 +13,5 @@ service ChatyService {
   rpc UsersForgotPassword(UsersForgotPasswordRequest) returns (UsersForgotPasswordResponse);
   rpc UsersResetPassword(UsersResetPasswordRequest) returns (UsersResetPasswordResponse);
   rpc GroupsCreate(GroupsCreateRequest) returns (GroupsCreateResponse);
+  rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
 }

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/error.proto";
+
+message SearchUsernamesRequest {
+  string query = 1;
+  int32 limit = 2;
+}
+
+message SearchUsernamesResponse {
+  oneof response {
+    SearchUsernamesResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message SearchUsernamesResponseData {
+  repeated SearchUser users = 1;
+}
+
+message SearchUser {
+  string id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar = 4;
+}

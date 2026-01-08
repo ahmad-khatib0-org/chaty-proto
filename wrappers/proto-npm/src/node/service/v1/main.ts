@@ -18,6 +18,7 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import { GroupsCreateRequest, GroupsCreateResponse } from "./groups.js";
+import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
 import {
   UsersCreateRequest,
   UsersCreateResponse,
@@ -97,6 +98,17 @@ export const ChatyServiceService = {
       Buffer.from(GroupsCreateResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): GroupsCreateResponse => GroupsCreateResponse.decode(value),
   },
+  searchUsernames: {
+    path: "/service.v1.ChatyService/SearchUsernames",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: SearchUsernamesRequest): Buffer =>
+      Buffer.from(SearchUsernamesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): SearchUsernamesRequest => SearchUsernamesRequest.decode(value),
+    responseSerialize: (value: SearchUsernamesResponse): Buffer =>
+      Buffer.from(SearchUsernamesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): SearchUsernamesResponse => SearchUsernamesResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -106,6 +118,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
   usersResetPassword: handleUnaryCall<UsersResetPasswordRequest, UsersResetPasswordResponse>;
   groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
+  searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -198,6 +211,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: GroupsCreateResponse) => void,
+  ): ClientUnaryCall;
+  searchUsernames(
+    request: SearchUsernamesRequest,
+    callback: (error: ServiceError | null, response: SearchUsernamesResponse) => void,
+  ): ClientUnaryCall;
+  searchUsernames(
+    request: SearchUsernamesRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: SearchUsernamesResponse) => void,
+  ): ClientUnaryCall;
+  searchUsernames(
+    request: SearchUsernamesRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: SearchUsernamesResponse) => void,
   ): ClientUnaryCall;
 }
 

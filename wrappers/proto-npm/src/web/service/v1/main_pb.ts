@@ -8,12 +8,14 @@ import type { GroupsCreateRequestSchema, GroupsCreateResponseSchema } from "./gr
 import { file_service_v1_groups } from "./groups_pb.js";
 import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersEmailConfirmationRequestSchema, UsersEmailConfirmationResponseSchema, UsersForgotPasswordRequestSchema, UsersForgotPasswordResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema, UsersResetPasswordRequestSchema, UsersResetPasswordResponseSchema } from "./users_pb.js";
 import { file_service_v1_users } from "./users_pb.js";
+import type { SearchUsernamesRequestSchema, SearchUsernamesResponseSchema } from "./search_pb.js";
+import { file_service_v1_search } from "./search_pb.js";
 
 /**
  * Describes the file service/v1/main.proto.
  */
 export const file_service_v1_main: GenFile = /*@__PURE__*/
-  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEyvAQKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRJmChNVc2Vyc0ZvcmdvdFBhc3N3b3JkEiYuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVxdWVzdBonLnNlcnZpY2UudjEuVXNlcnNGb3Jnb3RQYXNzd29yZFJlc3BvbnNlEmMKElVzZXJzUmVzZXRQYXNzd29yZBIlLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBomLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2USUQoMR3JvdXBzQ3JlYXRlEh8uc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXF1ZXN0GiAuc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXNwb25zZWIGcHJvdG8z", [file_service_v1_groups, file_service_v1_users]);
+  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEymAUKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRJmChNVc2Vyc0ZvcmdvdFBhc3N3b3JkEiYuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVxdWVzdBonLnNlcnZpY2UudjEuVXNlcnNGb3Jnb3RQYXNzd29yZFJlc3BvbnNlEmMKElVzZXJzUmVzZXRQYXNzd29yZBIlLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBomLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2USUQoMR3JvdXBzQ3JlYXRlEh8uc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXF1ZXN0GiAuc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXNwb25zZRJaCg9TZWFyY2hVc2VybmFtZXMSIi5zZXJ2aWNlLnYxLlNlYXJjaFVzZXJuYW1lc1JlcXVlc3QaIy5zZXJ2aWNlLnYxLlNlYXJjaFVzZXJuYW1lc1Jlc3BvbnNlYgZwcm90bzM", [file_service_v1_groups, file_service_v1_users, file_service_v1_search]);
 
 /**
  * @generated from service service.v1.ChatyService
@@ -66,6 +68,14 @@ export const ChatyService: GenService<{
     methodKind: "unary";
     input: typeof GroupsCreateRequestSchema;
     output: typeof GroupsCreateResponseSchema;
+  },
+  /**
+   * @generated from rpc service.v1.ChatyService.SearchUsernames
+   */
+  searchUsernames: {
+    methodKind: "unary";
+    input: typeof SearchUsernamesRequestSchema;
+    output: typeof SearchUsernamesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_service_v1_main, 0);

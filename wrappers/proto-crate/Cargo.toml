@@ -1,6 +1,6 @@
 [package]
 name = "chaty-proto"
-version = "0.1.34"
+version = "0.1.36"
 edition = "2021"
 description = "Generated gRPC protobuf definitions for Chaty"
 license = "MIT OR Apache-2.0"
