@@ -7,7 +7,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error.js";
-import { PaginationRequest } from "../../shared/v1/pagination.js";
+import { PaginationRequest, PaginationResponse } from "../../shared/v1/pagination.js";
 import { ChannelGroup } from "./channels_db.js";
 
 export const protobufPackage = "service.v1";
@@ -39,6 +39,7 @@ export interface GroupsListResponse {
 
 export interface GroupsListResponseData {
   groups: GroupsListItem[];
+  pagination?: PaginationResponse | undefined;
 }
 
 export interface GroupsListItem {
@@ -437,13 +438,16 @@ export const GroupsListResponse: MessageFns<GroupsListResponse> = {
 };
 
 function createBaseGroupsListResponseData(): GroupsListResponseData {
-  return { groups: [] };
+  return { groups: [], pagination: undefined };
 }
 
 export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
   encode(message: GroupsListResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     for (const v of message.groups) {
       GroupsListItem.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.pagination !== undefined) {
+      PaginationResponse.encode(message.pagination, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -463,6 +467,14 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
           message.groups.push(GroupsListItem.decode(reader, reader.uint32()));
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.pagination = PaginationResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -475,6 +487,7 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
   fromJSON(object: any): GroupsListResponseData {
     return {
       groups: globalThis.Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupsListItem.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PaginationResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -482,6 +495,9 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
     const obj: any = {};
     if (message.groups?.length) {
       obj.groups = message.groups.map((e) => GroupsListItem.toJSON(e));
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = PaginationResponse.toJSON(message.pagination);
     }
     return obj;
   },
@@ -492,6 +508,9 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
   fromPartial<I extends Exact<DeepPartial<GroupsListResponseData>, I>>(object: I): GroupsListResponseData {
     const message = createBaseGroupsListResponseData();
     message.groups = object.groups?.map((e) => GroupsListItem.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PaginationResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };

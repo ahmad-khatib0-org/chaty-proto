@@ -201,6 +201,8 @@ pub mod groups_list_response {
 pub struct GroupsListResponseData {
     #[prost(message, repeated, tag = "1")]
     pub groups: ::prost::alloc::vec::Vec<GroupsListItem>,
+    #[prost(message, optional, tag = "2")]
+    pub pagination: ::core::option::Option<super::super::shared::v1::PaginationResponse>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

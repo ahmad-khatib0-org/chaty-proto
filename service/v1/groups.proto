@@ -37,6 +37,7 @@ message GroupsListResponse {
 
 message GroupsListResponseData {
   repeated GroupsListItem groups = 1;
+  shared.v1.PaginationResponse pagination = 2;
 }
 
 message GroupsListItem {
