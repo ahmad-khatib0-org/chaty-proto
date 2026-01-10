@@ -7,6 +7,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error.js";
+import { PaginationRequest } from "../../shared/v1/pagination.js";
 
 export const protobufPackage = "service.v1";
 
@@ -24,6 +25,23 @@ export interface GroupsCreateResponse {
 
 export interface GroupsCreateResponseData {
   message: string;
+}
+
+export interface GroupsListRequest {
+  pagination?: PaginationRequest | undefined;
+}
+
+export interface GroupsListResponse {
+  data?: GroupsListResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface GroupsListResponseData {
+  items: GroupsListItem[];
+}
+
+export interface GroupsListItem {
+  id: string;
 }
 
 function createBaseGroupsCreateRequest(): GroupsCreateRequest {
@@ -270,6 +288,264 @@ export const GroupsCreateResponseData: MessageFns<GroupsCreateResponseData> = {
   fromPartial<I extends Exact<DeepPartial<GroupsCreateResponseData>, I>>(object: I): GroupsCreateResponseData {
     const message = createBaseGroupsCreateResponseData();
     message.message = object.message ?? "";
+    return message;
+  },
+};
+
+function createBaseGroupsListRequest(): GroupsListRequest {
+  return { pagination: undefined };
+}
+
+export const GroupsListRequest: MessageFns<GroupsListRequest> = {
+  encode(message: GroupsListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.pagination !== undefined) {
+      PaginationRequest.encode(message.pagination, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupsListRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGroupsListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.pagination = PaginationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GroupsListRequest {
+    return { pagination: isSet(object.pagination) ? PaginationRequest.fromJSON(object.pagination) : undefined };
+  },
+
+  toJSON(message: GroupsListRequest): unknown {
+    const obj: any = {};
+    if (message.pagination !== undefined) {
+      obj.pagination = PaginationRequest.toJSON(message.pagination);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GroupsListRequest>, I>>(base?: I): GroupsListRequest {
+    return GroupsListRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupsListRequest>, I>>(object: I): GroupsListRequest {
+    const message = createBaseGroupsListRequest();
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PaginationRequest.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseGroupsListResponse(): GroupsListResponse {
+  return { data: undefined, error: undefined };
+}
+
+export const GroupsListResponse: MessageFns<GroupsListResponse> = {
+  encode(message: GroupsListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      GroupsListResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupsListResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGroupsListResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = GroupsListResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GroupsListResponse {
+    return {
+      data: isSet(object.data) ? GroupsListResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: GroupsListResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = GroupsListResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GroupsListResponse>, I>>(base?: I): GroupsListResponse {
+    return GroupsListResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupsListResponse>, I>>(object: I): GroupsListResponse {
+    const message = createBaseGroupsListResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? GroupsListResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseGroupsListResponseData(): GroupsListResponseData {
+  return { items: [] };
+}
+
+export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
+  encode(message: GroupsListResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.items) {
+      GroupsListItem.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupsListResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGroupsListResponseData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.items.push(GroupsListItem.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GroupsListResponseData {
+    return {
+      items: globalThis.Array.isArray(object?.items) ? object.items.map((e: any) => GroupsListItem.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: GroupsListResponseData): unknown {
+    const obj: any = {};
+    if (message.items?.length) {
+      obj.items = message.items.map((e) => GroupsListItem.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GroupsListResponseData>, I>>(base?: I): GroupsListResponseData {
+    return GroupsListResponseData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupsListResponseData>, I>>(object: I): GroupsListResponseData {
+    const message = createBaseGroupsListResponseData();
+    message.items = object.items?.map((e) => GroupsListItem.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseGroupsListItem(): GroupsListItem {
+  return { id: "" };
+}
+
+export const GroupsListItem: MessageFns<GroupsListItem> = {
+  encode(message: GroupsListItem, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupsListItem {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGroupsListItem();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GroupsListItem {
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
+  },
+
+  toJSON(message: GroupsListItem): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GroupsListItem>, I>>(base?: I): GroupsListItem {
+    return GroupsListItem.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupsListItem>, I>>(object: I): GroupsListItem {
+    const message = createBaseGroupsListItem();
+    message.id = object.id ?? "";
     return message;
   },
 };

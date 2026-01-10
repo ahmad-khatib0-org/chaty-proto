@@ -3,6 +3,7 @@ syntax = "proto3";
 package service.v1;
 
 import "shared/v1/error.proto";
+import "shared/v1/pagination.proto";
 
 message GroupsCreateRequest {
   string name = 1;
@@ -20,4 +21,23 @@ message GroupsCreateResponse {
 
 message GroupsCreateResponseData {
   string message = 1;
+}
+
+message GroupsListRequest {
+  shared.v1.PaginationRequest pagination = 1;
+}
+
+message GroupsListResponse {
+  oneof response {
+    GroupsListResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message GroupsListResponseData {
+  repeated GroupsListItem items = 1;
+}
+
+message GroupsListItem {
+  string id = 1;
 }

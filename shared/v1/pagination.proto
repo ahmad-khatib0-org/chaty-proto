@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package shared.v1;
+
+message PaginationSort {
+  string name = 1; // data field name (E,g created at)
+  optional SortDirection direction = 2;
+}
+
+enum SortDirection {
+  SORT_DIRECTION_UNSPECIFIED = 0;
+  SORT_DIRECTION_ASC = 1;
+  SORT_DIRECTION_DESC = 2;
+}
+
+message PaginationRequest {
+  // Basic pagination
+  optional string last_id = 1; // ULID, UUID, or cursor
+  optional uint32 page = 2; // Page number (1-based)
+  optional uint32 page_size = 3; // Items per page (default: 20, max: 100)
+  optional string page_token = 4; // Opaque token for complex pagination
+
+  // Cursor-based pagination
+  optional string after = 5; // Get items after this ID/cursor
+  optional string after_including = 6; // Get items including and after this ID
+  optional string before = 7; // Get items before this ID/cursor
+  optional string before_including = 8; // Get items including and before this ID
+
+  // Date range filters (common for time-series data)
+  optional uint64 created_after = 9; // Unix timestamp
+  optional uint64 created_before = 10; // Unix timestamp
+  optional uint64 updated_after = 11; // Unix timestamp
+  optional uint64 updated_before = 12; // Unix timestamp
+
+  // Sorting
+  repeated PaginationSort sort_by = 13; // Fields to sort by: "created_at", "price", "name"
+}
+
+message PaginationResponse {
+  optional string next_page_token = 1;
+  optional string previous_page_token = 2;
+  optional bool has_next = 3;
+  optional bool has_previous = 4;
+}

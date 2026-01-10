@@ -6,13 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { AppError } from "../../shared/v1/error_pb.js";
 import { file_shared_v1_error } from "../../shared/v1/error_pb.js";
+import type { PaginationRequest } from "../../shared/v1/pagination_pb.js";
+import { file_shared_v1_pagination } from "../../shared/v1/pagination_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/groups.proto.
  */
 export const file_service_v1_groups: GenFile = /*@__PURE__*/
-  fileDesc("ChdzZXJ2aWNlL3YxL2dyb3Vwcy5wcm90bxIKc2VydmljZS52MSJ9ChNHcm91cHNDcmVhdGVSZXF1ZXN0EgwKBG5hbWUYASABKAkSGAoLZGVzY3JpcHRpb24YAiABKAlIAIgBARISCgpyZWNpcGllbnRzGAMgAygJEhEKBG5zZncYBCABKAhIAYgBAUIOCgxfZGVzY3JpcHRpb25CBwoFX25zZncifgoUR3JvdXBzQ3JlYXRlUmVzcG9uc2USNAoEZGF0YRgBIAEoCzIkLnNlcnZpY2UudjEuR3JvdXBzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIrChhHcm91cHNDcmVhdGVSZXNwb25zZURhdGESDwoHbWVzc2FnZRgBIAEoCWIGcHJvdG8z", [file_shared_v1_error]);
+  fileDesc("ChdzZXJ2aWNlL3YxL2dyb3Vwcy5wcm90bxIKc2VydmljZS52MSJ9ChNHcm91cHNDcmVhdGVSZXF1ZXN0EgwKBG5hbWUYASABKAkSGAoLZGVzY3JpcHRpb24YAiABKAlIAIgBARISCgpyZWNpcGllbnRzGAMgAygJEhEKBG5zZncYBCABKAhIAYgBAUIOCgxfZGVzY3JpcHRpb25CBwoFX25zZncifgoUR3JvdXBzQ3JlYXRlUmVzcG9uc2USNAoEZGF0YRgBIAEoCzIkLnNlcnZpY2UudjEuR3JvdXBzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIrChhHcm91cHNDcmVhdGVSZXNwb25zZURhdGESDwoHbWVzc2FnZRgBIAEoCSJFChFHcm91cHNMaXN0UmVxdWVzdBIwCgpwYWdpbmF0aW9uGAEgASgLMhwuc2hhcmVkLnYxLlBhZ2luYXRpb25SZXF1ZXN0InoKEkdyb3Vwc0xpc3RSZXNwb25zZRIyCgRkYXRhGAEgASgLMiIuc2VydmljZS52MS5Hcm91cHNMaXN0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSJDChZHcm91cHNMaXN0UmVzcG9uc2VEYXRhEikKBWl0ZW1zGAEgAygLMhouc2VydmljZS52MS5Hcm91cHNMaXN0SXRlbSIcCg5Hcm91cHNMaXN0SXRlbRIKCgJpZBgBIAEoCWIGcHJvdG8z", [file_shared_v1_error, file_shared_v1_pagination]);
 
 /**
  * @generated from message service.v1.GroupsCreateRequest
@@ -91,4 +93,84 @@ export type GroupsCreateResponseData = Message<"service.v1.GroupsCreateResponseD
  */
 export const GroupsCreateResponseDataSchema: GenMessage<GroupsCreateResponseData> = /*@__PURE__*/
   messageDesc(file_service_v1_groups, 2);
+
+/**
+ * @generated from message service.v1.GroupsListRequest
+ */
+export type GroupsListRequest = Message<"service.v1.GroupsListRequest"> & {
+  /**
+   * @generated from field: shared.v1.PaginationRequest pagination = 1;
+   */
+  pagination?: PaginationRequest;
+};
+
+/**
+ * Describes the message service.v1.GroupsListRequest.
+ * Use `create(GroupsListRequestSchema)` to create a new message.
+ */
+export const GroupsListRequestSchema: GenMessage<GroupsListRequest> = /*@__PURE__*/
+  messageDesc(file_service_v1_groups, 3);
+
+/**
+ * @generated from message service.v1.GroupsListResponse
+ */
+export type GroupsListResponse = Message<"service.v1.GroupsListResponse"> & {
+  /**
+   * @generated from oneof service.v1.GroupsListResponse.response
+   */
+  response: {
+    /**
+     * @generated from field: service.v1.GroupsListResponseData data = 1;
+     */
+    value: GroupsListResponseData;
+    case: "data";
+  } | {
+    /**
+     * @generated from field: shared.v1.AppError error = 2;
+     */
+    value: AppError;
+    case: "error";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message service.v1.GroupsListResponse.
+ * Use `create(GroupsListResponseSchema)` to create a new message.
+ */
+export const GroupsListResponseSchema: GenMessage<GroupsListResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_groups, 4);
+
+/**
+ * @generated from message service.v1.GroupsListResponseData
+ */
+export type GroupsListResponseData = Message<"service.v1.GroupsListResponseData"> & {
+  /**
+   * @generated from field: repeated service.v1.GroupsListItem items = 1;
+   */
+  items: GroupsListItem[];
+};
+
+/**
+ * Describes the message service.v1.GroupsListResponseData.
+ * Use `create(GroupsListResponseDataSchema)` to create a new message.
+ */
+export const GroupsListResponseDataSchema: GenMessage<GroupsListResponseData> = /*@__PURE__*/
+  messageDesc(file_service_v1_groups, 5);
+
+/**
+ * @generated from message service.v1.GroupsListItem
+ */
+export type GroupsListItem = Message<"service.v1.GroupsListItem"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+};
+
+/**
+ * Describes the message service.v1.GroupsListItem.
+ * Use `create(GroupsListItemSchema)` to create a new message.
+ */
+export const GroupsListItemSchema: GenMessage<GroupsListItem> = /*@__PURE__*/
+  messageDesc(file_service_v1_groups, 6);
 

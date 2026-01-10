@@ -167,6 +167,108 @@ pub struct File {
     #[prost(bool, optional, tag = "10")]
     pub reported: ::core::option::Option<bool>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PaginationSort {
+    /// data field name (E,g created at)
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(enumeration = "SortDirection", optional, tag = "2")]
+    pub direction: ::core::option::Option<i32>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PaginationRequest {
+    /// Basic pagination
+    ///
+    /// ULID, UUID, or cursor
+    #[prost(string, optional, tag = "1")]
+    pub last_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Page number (1-based)
+    #[prost(uint32, optional, tag = "2")]
+    pub page: ::core::option::Option<u32>,
+    /// Items per page (default: 20, max: 100)
+    #[prost(uint32, optional, tag = "3")]
+    pub page_size: ::core::option::Option<u32>,
+    /// Opaque token for complex pagination
+    #[prost(string, optional, tag = "4")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// Cursor-based pagination
+    ///
+    /// Get items after this ID/cursor
+    #[prost(string, optional, tag = "5")]
+    pub after: ::core::option::Option<::prost::alloc::string::String>,
+    /// Get items including and after this ID
+    #[prost(string, optional, tag = "6")]
+    pub after_including: ::core::option::Option<::prost::alloc::string::String>,
+    /// Get items before this ID/cursor
+    #[prost(string, optional, tag = "7")]
+    pub before: ::core::option::Option<::prost::alloc::string::String>,
+    /// Get items including and before this ID
+    #[prost(string, optional, tag = "8")]
+    pub before_including: ::core::option::Option<::prost::alloc::string::String>,
+    /// Date range filters (common for time-series data)
+    ///
+    /// Unix timestamp
+    #[prost(uint64, optional, tag = "9")]
+    pub created_after: ::core::option::Option<u64>,
+    /// Unix timestamp
+    #[prost(uint64, optional, tag = "10")]
+    pub created_before: ::core::option::Option<u64>,
+    /// Unix timestamp
+    #[prost(uint64, optional, tag = "11")]
+    pub updated_after: ::core::option::Option<u64>,
+    /// Unix timestamp
+    #[prost(uint64, optional, tag = "12")]
+    pub updated_before: ::core::option::Option<u64>,
+    /// Sorting
+    ///
+    /// Fields to sort by: "created_at", "price", "name"
+    #[prost(message, repeated, tag = "13")]
+    pub sort_by: ::prost::alloc::vec::Vec<PaginationSort>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PaginationResponse {
+    #[prost(string, optional, tag = "1")]
+    pub next_page_token: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "2")]
+    pub previous_page_token: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(bool, optional, tag = "3")]
+    pub has_next: ::core::option::Option<bool>,
+    #[prost(bool, optional, tag = "4")]
+    pub has_previous: ::core::option::Option<bool>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum SortDirection {
+    Unspecified = 0,
+    Asc = 1,
+    Desc = 2,
+}
+impl SortDirection {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "SORT_DIRECTION_UNSPECIFIED",
+            Self::Asc => "SORT_DIRECTION_ASC",
+            Self::Desc => "SORT_DIRECTION_DESC",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SORT_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
+            "SORT_DIRECTION_ASC" => Some(Self::Asc),
+            "SORT_DIRECTION_DESC" => Some(Self::Desc),
+            _ => None,
+        }
+    }
+}
 /// `Struct` represents a structured data value, consisting of fields
 /// which map to dynamically typed values. In some languages, `Struct`
 /// might be supported by a native representation. For example, in

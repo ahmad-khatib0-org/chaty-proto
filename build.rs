@@ -149,6 +149,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       &[
         "shared/v1/error.proto",
         "shared/v1/files.proto",
+        "shared/v1/pagination.proto",
         "shared/v1/struct.proto",
         "shared/v1/time.proto",
         "shared/v1/types.proto",
