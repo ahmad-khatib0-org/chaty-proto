@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { ChannelGroup } from "./channels_db_pb.js";
+import { file_service_v1_channels_db } from "./channels_db_pb.js";
 import type { AppError } from "../../shared/v1/error_pb.js";
 import { file_shared_v1_error } from "../../shared/v1/error_pb.js";
 import type { PaginationRequest } from "../../shared/v1/pagination_pb.js";
@@ -14,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/groups.proto.
  */
 export const file_service_v1_groups: GenFile = /*@__PURE__*/
-  fileDesc("ChdzZXJ2aWNlL3YxL2dyb3Vwcy5wcm90bxIKc2VydmljZS52MSJ9ChNHcm91cHNDcmVhdGVSZXF1ZXN0EgwKBG5hbWUYASABKAkSGAoLZGVzY3JpcHRpb24YAiABKAlIAIgBARISCgpyZWNpcGllbnRzGAMgAygJEhEKBG5zZncYBCABKAhIAYgBAUIOCgxfZGVzY3JpcHRpb25CBwoFX25zZncifgoUR3JvdXBzQ3JlYXRlUmVzcG9uc2USNAoEZGF0YRgBIAEoCzIkLnNlcnZpY2UudjEuR3JvdXBzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIrChhHcm91cHNDcmVhdGVSZXNwb25zZURhdGESDwoHbWVzc2FnZRgBIAEoCSJFChFHcm91cHNMaXN0UmVxdWVzdBIwCgpwYWdpbmF0aW9uGAEgASgLMhwuc2hhcmVkLnYxLlBhZ2luYXRpb25SZXF1ZXN0InoKEkdyb3Vwc0xpc3RSZXNwb25zZRIyCgRkYXRhGAEgASgLMiIuc2VydmljZS52MS5Hcm91cHNMaXN0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSJDChZHcm91cHNMaXN0UmVzcG9uc2VEYXRhEikKBWl0ZW1zGAEgAygLMhouc2VydmljZS52MS5Hcm91cHNMaXN0SXRlbSIcCg5Hcm91cHNMaXN0SXRlbRIKCgJpZBgBIAEoCWIGcHJvdG8z", [file_shared_v1_error, file_shared_v1_pagination]);
+  fileDesc("ChdzZXJ2aWNlL3YxL2dyb3Vwcy5wcm90bxIKc2VydmljZS52MSJ9ChNHcm91cHNDcmVhdGVSZXF1ZXN0EgwKBG5hbWUYASABKAkSGAoLZGVzY3JpcHRpb24YAiABKAlIAIgBARISCgpyZWNpcGllbnRzGAMgAygJEhEKBG5zZncYBCABKAhIAYgBAUIOCgxfZGVzY3JpcHRpb25CBwoFX25zZncifgoUR3JvdXBzQ3JlYXRlUmVzcG9uc2USNAoEZGF0YRgBIAEoCzIkLnNlcnZpY2UudjEuR3JvdXBzQ3JlYXRlUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSIrChhHcm91cHNDcmVhdGVSZXNwb25zZURhdGESDwoHbWVzc2FnZRgBIAEoCSJFChFHcm91cHNMaXN0UmVxdWVzdBIwCgpwYWdpbmF0aW9uGAEgASgLMhwuc2hhcmVkLnYxLlBhZ2luYXRpb25SZXF1ZXN0InoKEkdyb3Vwc0xpc3RSZXNwb25zZRIyCgRkYXRhGAEgASgLMiIuc2VydmljZS52MS5Hcm91cHNMaXN0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSJEChZHcm91cHNMaXN0UmVzcG9uc2VEYXRhEioKBmdyb3VwcxgBIAMoCzIaLnNlcnZpY2UudjEuR3JvdXBzTGlzdEl0ZW0iWQoOR3JvdXBzTGlzdEl0ZW0SCgoCaWQYASABKAkSJwoFZ3JvdXAYAiABKAsyGC5zZXJ2aWNlLnYxLkNoYW5uZWxHcm91cBISCgpjcmVhdGVkX2F0GAMgASgDYgZwcm90bzM", [file_service_v1_channels_db, file_shared_v1_error, file_shared_v1_pagination]);
 
 /**
  * @generated from message service.v1.GroupsCreateRequest
@@ -145,9 +147,9 @@ export const GroupsListResponseSchema: GenMessage<GroupsListResponse> = /*@__PUR
  */
 export type GroupsListResponseData = Message<"service.v1.GroupsListResponseData"> & {
   /**
-   * @generated from field: repeated service.v1.GroupsListItem items = 1;
+   * @generated from field: repeated service.v1.GroupsListItem groups = 1;
    */
-  items: GroupsListItem[];
+  groups: GroupsListItem[];
 };
 
 /**
@@ -162,9 +164,21 @@ export const GroupsListResponseDataSchema: GenMessage<GroupsListResponseData> = 
  */
 export type GroupsListItem = Message<"service.v1.GroupsListItem"> & {
   /**
+   * channel id
+   *
    * @generated from field: string id = 1;
    */
   id: string;
+
+  /**
+   * @generated from field: service.v1.ChannelGroup group = 2;
+   */
+  group?: ChannelGroup;
+
+  /**
+   * @generated from field: int64 created_at = 3;
+   */
+  createdAt: bigint;
 };
 
 /**

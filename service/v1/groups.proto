@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/channels_db.proto";
 import "shared/v1/error.proto";
 import "shared/v1/pagination.proto";
 
@@ -35,9 +36,11 @@ message GroupsListResponse {
 }
 
 message GroupsListResponseData {
-  repeated GroupsListItem items = 1;
+  repeated GroupsListItem groups = 1;
 }
 
 message GroupsListItem {
-  string id = 1;
+  string id = 1; // channel id
+  service.v1.ChannelGroup group = 2;
+  int64 created_at = 3;
 }

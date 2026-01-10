@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { GroupsCreateRequest, GroupsCreateResponse } from "./groups.js";
+import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
 import {
   UsersCreateRequest,
@@ -98,6 +98,15 @@ export const ChatyServiceService = {
       Buffer.from(GroupsCreateResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): GroupsCreateResponse => GroupsCreateResponse.decode(value),
   },
+  groupsList: {
+    path: "/service.v1.ChatyService/GroupsList",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: GroupsListRequest): Buffer => Buffer.from(GroupsListRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GroupsListRequest => GroupsListRequest.decode(value),
+    responseSerialize: (value: GroupsListResponse): Buffer => Buffer.from(GroupsListResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GroupsListResponse => GroupsListResponse.decode(value),
+  },
   searchUsernames: {
     path: "/service.v1.ChatyService/SearchUsernames",
     requestStream: false,
@@ -118,6 +127,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
   usersResetPassword: handleUnaryCall<UsersResetPasswordRequest, UsersResetPasswordResponse>;
   groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
+  groupsList: handleUnaryCall<GroupsListRequest, GroupsListResponse>;
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
 }
 
@@ -211,6 +221,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: GroupsCreateResponse) => void,
+  ): ClientUnaryCall;
+  groupsList(
+    request: GroupsListRequest,
+    callback: (error: ServiceError | null, response: GroupsListResponse) => void,
+  ): ClientUnaryCall;
+  groupsList(
+    request: GroupsListRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: GroupsListResponse) => void,
+  ): ClientUnaryCall;
+  groupsList(
+    request: GroupsListRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: GroupsListResponse) => void,
   ): ClientUnaryCall;
   searchUsernames(
     request: SearchUsernamesRequest,

@@ -13,5 +13,6 @@ service ChatyService {
   rpc UsersForgotPassword(UsersForgotPasswordRequest) returns (UsersForgotPasswordResponse);
   rpc UsersResetPassword(UsersResetPasswordRequest) returns (UsersResetPasswordResponse);
   rpc GroupsCreate(GroupsCreateRequest) returns (GroupsCreateResponse);
+  rpc GroupsList(GroupsListRequest) returns (GroupsListResponse);
   rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
 }

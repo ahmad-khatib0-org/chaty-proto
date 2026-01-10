@@ -8,6 +8,7 @@
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error.js";
 import { PaginationRequest } from "../../shared/v1/pagination.js";
+import { ChannelGroup } from "./channels_db.js";
 
 export const protobufPackage = "service.v1";
 
@@ -37,11 +38,14 @@ export interface GroupsListResponse {
 }
 
 export interface GroupsListResponseData {
-  items: GroupsListItem[];
+  groups: GroupsListItem[];
 }
 
 export interface GroupsListItem {
+  /** channel id */
   id: string;
+  group?: ChannelGroup | undefined;
+  createdAt: string;
 }
 
 function createBaseGroupsCreateRequest(): GroupsCreateRequest {
@@ -433,12 +437,12 @@ export const GroupsListResponse: MessageFns<GroupsListResponse> = {
 };
 
 function createBaseGroupsListResponseData(): GroupsListResponseData {
-  return { items: [] };
+  return { groups: [] };
 }
 
 export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
   encode(message: GroupsListResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.items) {
+    for (const v of message.groups) {
       GroupsListItem.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
@@ -456,7 +460,7 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
             break;
           }
 
-          message.items.push(GroupsListItem.decode(reader, reader.uint32()));
+          message.groups.push(GroupsListItem.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -470,14 +474,14 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
 
   fromJSON(object: any): GroupsListResponseData {
     return {
-      items: globalThis.Array.isArray(object?.items) ? object.items.map((e: any) => GroupsListItem.fromJSON(e)) : [],
+      groups: globalThis.Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupsListItem.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: GroupsListResponseData): unknown {
     const obj: any = {};
-    if (message.items?.length) {
-      obj.items = message.items.map((e) => GroupsListItem.toJSON(e));
+    if (message.groups?.length) {
+      obj.groups = message.groups.map((e) => GroupsListItem.toJSON(e));
     }
     return obj;
   },
@@ -487,19 +491,25 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
   },
   fromPartial<I extends Exact<DeepPartial<GroupsListResponseData>, I>>(object: I): GroupsListResponseData {
     const message = createBaseGroupsListResponseData();
-    message.items = object.items?.map((e) => GroupsListItem.fromPartial(e)) || [];
+    message.groups = object.groups?.map((e) => GroupsListItem.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseGroupsListItem(): GroupsListItem {
-  return { id: "" };
+  return { id: "", group: undefined, createdAt: "0" };
 }
 
 export const GroupsListItem: MessageFns<GroupsListItem> = {
   encode(message: GroupsListItem, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
+    }
+    if (message.group !== undefined) {
+      ChannelGroup.encode(message.group, writer.uint32(18).fork()).join();
+    }
+    if (message.createdAt !== "0") {
+      writer.uint32(24).int64(message.createdAt);
     }
     return writer;
   },
@@ -519,6 +529,22 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
           message.id = reader.string();
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.group = ChannelGroup.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.createdAt = reader.int64().toString();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -529,13 +555,23 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
   },
 
   fromJSON(object: any): GroupsListItem {
-    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      group: isSet(object.group) ? ChannelGroup.fromJSON(object.group) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+    };
   },
 
   toJSON(message: GroupsListItem): unknown {
     const obj: any = {};
     if (message.id !== "") {
       obj.id = message.id;
+    }
+    if (message.group !== undefined) {
+      obj.group = ChannelGroup.toJSON(message.group);
+    }
+    if (message.createdAt !== "0") {
+      obj.createdAt = message.createdAt;
     }
     return obj;
   },
@@ -546,6 +582,10 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
   fromPartial<I extends Exact<DeepPartial<GroupsListItem>, I>>(object: I): GroupsListItem {
     const message = createBaseGroupsListItem();
     message.id = object.id ?? "";
+    message.group = (object.group !== undefined && object.group !== null)
+      ? ChannelGroup.fromPartial(object.group)
+      : undefined;
+    message.createdAt = object.createdAt ?? "0";
     return message;
   },
 };
