@@ -3,7 +3,6 @@ syntax = "proto3";
 package service.v1;
 
 import "shared/v1/files.proto";
-import "shared/v1/time.proto";
 import "shared/v1/types.proto";
 import "shared/v1/wrappers.proto";
 
@@ -102,7 +101,7 @@ message MessageSystemMessageUnpinned {
 
 message MessageSystemCallStarted {
   string by = 1;
-  shared.v1.Timestamp finished_at = 2;
+  int64 finished_at = 2;
 }
 
 // ===========================================
@@ -347,7 +346,7 @@ message Message {
   repeated shared.v1.File attachments = 8;
 
   // Time at which this message was last edited (optional)
-  optional shared.v1.Timestamp edited = 9;
+  optional int64 edited = 9;
 
   // Attached embeds to this message (optional)
   repeated Embed embeds = 10;

@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package shared.v1;
 
-import "shared/v1/time.proto";
-
 // ===========================================
 // FILE TYPE
 // ===========================================
@@ -30,7 +28,7 @@ message File {
   string hash = 7;
 
   // When this file was uploaded
-  shared.v1.Timestamp uploaded_at = 8;
+  int64 uploaded_at = 8;
 
   // Whether this file was deleted
   optional bool deleted = 9;

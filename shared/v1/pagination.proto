@@ -16,8 +16,8 @@ enum SortDirection {
 message PaginationRequest {
   // Basic pagination
   optional string last_id = 1; // ULID, UUID, or cursor
-  optional uint32 page = 2; // Page number (1-based)
-  optional uint32 page_size = 3; // Items per page (default: 20, max: 100)
+  optional int32 page = 2; // Page number (1-based)
+  optional int32 page_size = 3; // Items per page (default: 20, max: 100)
   optional string page_token = 4; // Opaque token for complex pagination
 
   // Cursor-based pagination
@@ -27,10 +27,10 @@ message PaginationRequest {
   optional string before_including = 8; // Get items including and before this ID
 
   // Date range filters (common for time-series data)
-  optional uint64 created_after = 9; // Unix timestamp
-  optional uint64 created_before = 10; // Unix timestamp
-  optional uint64 updated_after = 11; // Unix timestamp
-  optional uint64 updated_before = 12; // Unix timestamp
+  optional int64 created_after = 9; // Unix timestamp
+  optional int64 created_before = 10; // Unix timestamp
+  optional int64 updated_after = 11; // Unix timestamp
+  optional int64 updated_before = 12; // Unix timestamp
 
   // Sorting
   repeated PaginationSort sort_by = 13; // Fields to sort by: "created_at", "price", "name"

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/pagination.proto.
  */
 export const file_shared_v1_pagination: GenFile = /*@__PURE__*/
-  fileDesc("ChpzaGFyZWQvdjEvcGFnaW5hdGlvbi5wcm90bxIJc2hhcmVkLnYxIl4KDlBhZ2luYXRpb25Tb3J0EgwKBG5hbWUYASABKAkSMAoJZGlyZWN0aW9uGAIgASgOMhguc2hhcmVkLnYxLlNvcnREaXJlY3Rpb25IAIgBAUIMCgpfZGlyZWN0aW9uIqsEChFQYWdpbmF0aW9uUmVxdWVzdBIUCgdsYXN0X2lkGAEgASgJSACIAQESEQoEcGFnZRgCIAEoDUgBiAEBEhYKCXBhZ2Vfc2l6ZRgDIAEoDUgCiAEBEhcKCnBhZ2VfdG9rZW4YBCABKAlIA4gBARISCgVhZnRlchgFIAEoCUgEiAEBEhwKD2FmdGVyX2luY2x1ZGluZxgGIAEoCUgFiAEBEhMKBmJlZm9yZRgHIAEoCUgGiAEBEh0KEGJlZm9yZV9pbmNsdWRpbmcYCCABKAlIB4gBARIaCg1jcmVhdGVkX2FmdGVyGAkgASgESAiIAQESGwoOY3JlYXRlZF9iZWZvcmUYCiABKARICYgBARIaCg11cGRhdGVkX2FmdGVyGAsgASgESAqIAQESGwoOdXBkYXRlZF9iZWZvcmUYDCABKARIC4gBARIqCgdzb3J0X2J5GA0gAygLMhkuc2hhcmVkLnYxLlBhZ2luYXRpb25Tb3J0QgoKCF9sYXN0X2lkQgcKBV9wYWdlQgwKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW5CCAoGX2FmdGVyQhIKEF9hZnRlcl9pbmNsdWRpbmdCCQoHX2JlZm9yZUITChFfYmVmb3JlX2luY2x1ZGluZ0IQCg5fY3JlYXRlZF9hZnRlckIRCg9fY3JlYXRlZF9iZWZvcmVCEAoOX3VwZGF0ZWRfYWZ0ZXJCEQoPX3VwZGF0ZWRfYmVmb3JlItABChJQYWdpbmF0aW9uUmVzcG9uc2USHAoPbmV4dF9wYWdlX3Rva2VuGAEgASgJSACIAQESIAoTcHJldmlvdXNfcGFnZV90b2tlbhgCIAEoCUgBiAEBEhUKCGhhc19uZXh0GAMgASgISAKIAQESGQoMaGFzX3ByZXZpb3VzGAQgASgISAOIAQFCEgoQX25leHRfcGFnZV90b2tlbkIWChRfcHJldmlvdXNfcGFnZV90b2tlbkILCglfaGFzX25leHRCDwoNX2hhc19wcmV2aW91cypgCg1Tb3J0RGlyZWN0aW9uEh4KGlNPUlRfRElSRUNUSU9OX1VOU1BFQ0lGSUVEEAASFgoSU09SVF9ESVJFQ1RJT05fQVNDEAESFwoTU09SVF9ESVJFQ1RJT05fREVTQxACYgZwcm90bzM");
+  fileDesc("ChpzaGFyZWQvdjEvcGFnaW5hdGlvbi5wcm90bxIJc2hhcmVkLnYxIl4KDlBhZ2luYXRpb25Tb3J0EgwKBG5hbWUYASABKAkSMAoJZGlyZWN0aW9uGAIgASgOMhguc2hhcmVkLnYxLlNvcnREaXJlY3Rpb25IAIgBAUIMCgpfZGlyZWN0aW9uIqsEChFQYWdpbmF0aW9uUmVxdWVzdBIUCgdsYXN0X2lkGAEgASgJSACIAQESEQoEcGFnZRgCIAEoBUgBiAEBEhYKCXBhZ2Vfc2l6ZRgDIAEoBUgCiAEBEhcKCnBhZ2VfdG9rZW4YBCABKAlIA4gBARISCgVhZnRlchgFIAEoCUgEiAEBEhwKD2FmdGVyX2luY2x1ZGluZxgGIAEoCUgFiAEBEhMKBmJlZm9yZRgHIAEoCUgGiAEBEh0KEGJlZm9yZV9pbmNsdWRpbmcYCCABKAlIB4gBARIaCg1jcmVhdGVkX2FmdGVyGAkgASgDSAiIAQESGwoOY3JlYXRlZF9iZWZvcmUYCiABKANICYgBARIaCg11cGRhdGVkX2FmdGVyGAsgASgDSAqIAQESGwoOdXBkYXRlZF9iZWZvcmUYDCABKANIC4gBARIqCgdzb3J0X2J5GA0gAygLMhkuc2hhcmVkLnYxLlBhZ2luYXRpb25Tb3J0QgoKCF9sYXN0X2lkQgcKBV9wYWdlQgwKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW5CCAoGX2FmdGVyQhIKEF9hZnRlcl9pbmNsdWRpbmdCCQoHX2JlZm9yZUITChFfYmVmb3JlX2luY2x1ZGluZ0IQCg5fY3JlYXRlZF9hZnRlckIRCg9fY3JlYXRlZF9iZWZvcmVCEAoOX3VwZGF0ZWRfYWZ0ZXJCEQoPX3VwZGF0ZWRfYmVmb3JlItABChJQYWdpbmF0aW9uUmVzcG9uc2USHAoPbmV4dF9wYWdlX3Rva2VuGAEgASgJSACIAQESIAoTcHJldmlvdXNfcGFnZV90b2tlbhgCIAEoCUgBiAEBEhUKCGhhc19uZXh0GAMgASgISAKIAQESGQoMaGFzX3ByZXZpb3VzGAQgASgISAOIAQFCEgoQX25leHRfcGFnZV90b2tlbkIWChRfcHJldmlvdXNfcGFnZV90b2tlbkILCglfaGFzX25leHRCDwoNX2hhc19wcmV2aW91cypgCg1Tb3J0RGlyZWN0aW9uEh4KGlNPUlRfRElSRUNUSU9OX1VOU1BFQ0lGSUVEEAASFgoSU09SVF9ESVJFQ1RJT05fQVNDEAESFwoTU09SVF9ESVJFQ1RJT05fREVTQxACYgZwcm90bzM");
 
 /**
  * @generated from message shared.v1.PaginationSort
@@ -52,14 +52,14 @@ export type PaginationRequest = Message<"shared.v1.PaginationRequest"> & {
   /**
    * Page number (1-based)
    *
-   * @generated from field: optional uint32 page = 2;
+   * @generated from field: optional int32 page = 2;
    */
   page?: number;
 
   /**
    * Items per page (default: 20, max: 100)
    *
-   * @generated from field: optional uint32 page_size = 3;
+   * @generated from field: optional int32 page_size = 3;
    */
   pageSize?: number;
 
@@ -105,28 +105,28 @@ export type PaginationRequest = Message<"shared.v1.PaginationRequest"> & {
    *
    * Unix timestamp
    *
-   * @generated from field: optional uint64 created_after = 9;
+   * @generated from field: optional int64 created_after = 9;
    */
   createdAfter?: bigint;
 
   /**
    * Unix timestamp
    *
-   * @generated from field: optional uint64 created_before = 10;
+   * @generated from field: optional int64 created_before = 10;
    */
   createdBefore?: bigint;
 
   /**
    * Unix timestamp
    *
-   * @generated from field: optional uint64 updated_after = 11;
+   * @generated from field: optional int64 updated_after = 11;
    */
   updatedAfter?: bigint;
 
   /**
    * Unix timestamp
    *
-   * @generated from field: optional uint64 updated_before = 12;
+   * @generated from field: optional int64 updated_before = 12;
    */
   updatedBefore?: bigint;
 

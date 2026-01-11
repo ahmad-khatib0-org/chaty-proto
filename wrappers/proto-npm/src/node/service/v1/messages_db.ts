@@ -7,7 +7,6 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { File } from "../../shared/v1/files.js";
-import { Timestamp } from "../../shared/v1/time.js";
 import { StringArray } from "../../shared/v1/types.js";
 import { Empty } from "../../shared/v1/wrappers.js";
 
@@ -245,7 +244,7 @@ export interface MessageSystemMessageUnpinned {
 
 export interface MessageSystemCallStarted {
   by: string;
-  finishedAt?: Timestamp | undefined;
+  finishedAt: string;
 }
 
 /** Image */
@@ -494,7 +493,7 @@ export interface Message {
   attachments: File[];
   /** Time at which this message was last edited (optional) */
   edited?:
-    | Timestamp
+    | string
     | undefined;
   /** Attached embeds to this message (optional) */
   embeds: Embed[];
@@ -1801,7 +1800,7 @@ export const MessageSystemMessageUnpinned: MessageFns<MessageSystemMessageUnpinn
 };
 
 function createBaseMessageSystemCallStarted(): MessageSystemCallStarted {
-  return { by: "", finishedAt: undefined };
+  return { by: "", finishedAt: "0" };
 }
 
 export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
@@ -1809,8 +1808,8 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
     if (message.by !== "") {
       writer.uint32(10).string(message.by);
     }
-    if (message.finishedAt !== undefined) {
-      Timestamp.encode(message.finishedAt, writer.uint32(18).fork()).join();
+    if (message.finishedAt !== "0") {
+      writer.uint32(16).int64(message.finishedAt);
     }
     return writer;
   },
@@ -1831,11 +1830,11 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
           continue;
         }
         case 2: {
-          if (tag !== 18) {
+          if (tag !== 16) {
             break;
           }
 
-          message.finishedAt = Timestamp.decode(reader, reader.uint32());
+          message.finishedAt = reader.int64().toString();
           continue;
         }
       }
@@ -1850,7 +1849,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
   fromJSON(object: any): MessageSystemCallStarted {
     return {
       by: isSet(object.by) ? globalThis.String(object.by) : "",
-      finishedAt: isSet(object.finishedAt) ? Timestamp.fromJSON(object.finishedAt) : undefined,
+      finishedAt: isSet(object.finishedAt) ? globalThis.String(object.finishedAt) : "0",
     };
   },
 
@@ -1859,8 +1858,8 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
     if (message.by !== "") {
       obj.by = message.by;
     }
-    if (message.finishedAt !== undefined) {
-      obj.finishedAt = Timestamp.toJSON(message.finishedAt);
+    if (message.finishedAt !== "0") {
+      obj.finishedAt = message.finishedAt;
     }
     return obj;
   },
@@ -1871,9 +1870,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
   fromPartial<I extends Exact<DeepPartial<MessageSystemCallStarted>, I>>(object: I): MessageSystemCallStarted {
     const message = createBaseMessageSystemCallStarted();
     message.by = object.by ?? "";
-    message.finishedAt = (object.finishedAt !== undefined && object.finishedAt !== null)
-      ? Timestamp.fromPartial(object.finishedAt)
-      : undefined;
+    message.finishedAt = object.finishedAt ?? "0";
     return message;
   },
 };
@@ -3541,7 +3538,7 @@ export const Message: MessageFns<Message> = {
       File.encode(v!, writer.uint32(66).fork()).join();
     }
     if (message.edited !== undefined) {
-      Timestamp.encode(message.edited, writer.uint32(74).fork()).join();
+      writer.uint32(72).int64(message.edited);
     }
     for (const v of message.embeds) {
       Embed.encode(v!, writer.uint32(82).fork()).join();
@@ -3645,11 +3642,11 @@ export const Message: MessageFns<Message> = {
           continue;
         }
         case 9: {
-          if (tag !== 74) {
+          if (tag !== 72) {
             break;
           }
 
-          message.edited = Timestamp.decode(reader, reader.uint32());
+          message.edited = reader.int64().toString();
           continue;
         }
         case 10: {
@@ -3748,7 +3745,7 @@ export const Message: MessageFns<Message> = {
       attachments: globalThis.Array.isArray(object?.attachments)
         ? object.attachments.map((e: any) => File.fromJSON(e))
         : [],
-      edited: isSet(object.edited) ? Timestamp.fromJSON(object.edited) : undefined,
+      edited: isSet(object.edited) ? globalThis.String(object.edited) : undefined,
       embeds: globalThis.Array.isArray(object?.embeds) ? object.embeds.map((e: any) => Embed.fromJSON(e)) : [],
       mentions: globalThis.Array.isArray(object?.mentions) ? object.mentions.map((e: any) => globalThis.String(e)) : [],
       roleMentions: globalThis.Array.isArray(object?.roleMentions)
@@ -3795,7 +3792,7 @@ export const Message: MessageFns<Message> = {
       obj.attachments = message.attachments.map((e) => File.toJSON(e));
     }
     if (message.edited !== undefined) {
-      obj.edited = Timestamp.toJSON(message.edited);
+      obj.edited = message.edited;
     }
     if (message.embeds?.length) {
       obj.embeds = message.embeds.map((e) => Embed.toJSON(e));
@@ -3850,9 +3847,7 @@ export const Message: MessageFns<Message> = {
       ? MessageSystem.fromPartial(object.system)
       : undefined;
     message.attachments = object.attachments?.map((e) => File.fromPartial(e)) || [];
-    message.edited = (object.edited !== undefined && object.edited !== null)
-      ? Timestamp.fromPartial(object.edited)
-      : undefined;
+    message.edited = object.edited ?? undefined;
     message.embeds = object.embeds?.map((e) => Embed.fromPartial(e)) || [];
     message.mentions = object.mentions?.map((e) => e) || [];
     message.roleMentions = object.roleMentions?.map((e) => e) || [];

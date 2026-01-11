@@ -6,7 +6,6 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Timestamp } from "./time.js";
 
 export const protobufPackage = "shared.v1";
 
@@ -31,9 +30,7 @@ export interface File {
   /** Hash of this file */
   hash: string;
   /** When this file was uploaded */
-  uploadedAt?:
-    | Timestamp
-    | undefined;
+  uploadedAt: string;
   /** Whether this file was deleted */
   deleted?:
     | boolean
@@ -51,7 +48,7 @@ function createBaseFile(): File {
     contentType: "",
     size: "0",
     hash: "",
-    uploadedAt: undefined,
+    uploadedAt: "0",
     deleted: undefined,
     reported: undefined,
   };
@@ -80,8 +77,8 @@ export const File: MessageFns<File> = {
     if (message.hash !== "") {
       writer.uint32(58).string(message.hash);
     }
-    if (message.uploadedAt !== undefined) {
-      Timestamp.encode(message.uploadedAt, writer.uint32(66).fork()).join();
+    if (message.uploadedAt !== "0") {
+      writer.uint32(64).int64(message.uploadedAt);
     }
     if (message.deleted !== undefined) {
       writer.uint32(72).bool(message.deleted);
@@ -156,11 +153,11 @@ export const File: MessageFns<File> = {
           continue;
         }
         case 8: {
-          if (tag !== 66) {
+          if (tag !== 64) {
             break;
           }
 
-          message.uploadedAt = Timestamp.decode(reader, reader.uint32());
+          message.uploadedAt = reader.int64().toString();
           continue;
         }
         case 9: {
@@ -197,7 +194,7 @@ export const File: MessageFns<File> = {
       contentType: isSet(object.contentType) ? globalThis.String(object.contentType) : "",
       size: isSet(object.size) ? globalThis.String(object.size) : "0",
       hash: isSet(object.hash) ? globalThis.String(object.hash) : "",
-      uploadedAt: isSet(object.uploadedAt) ? Timestamp.fromJSON(object.uploadedAt) : undefined,
+      uploadedAt: isSet(object.uploadedAt) ? globalThis.String(object.uploadedAt) : "0",
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
     };
@@ -226,8 +223,8 @@ export const File: MessageFns<File> = {
     if (message.hash !== "") {
       obj.hash = message.hash;
     }
-    if (message.uploadedAt !== undefined) {
-      obj.uploadedAt = Timestamp.toJSON(message.uploadedAt);
+    if (message.uploadedAt !== "0") {
+      obj.uploadedAt = message.uploadedAt;
     }
     if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
@@ -250,9 +247,7 @@ export const File: MessageFns<File> = {
     message.contentType = object.contentType ?? "";
     message.size = object.size ?? "0";
     message.hash = object.hash ?? "";
-    message.uploadedAt = (object.uploadedAt !== undefined && object.uploadedAt !== null)
-      ? Timestamp.fromPartial(object.uploadedAt)
-      : undefined;
+    message.uploadedAt = object.uploadedAt ?? "0";
     message.deleted = object.deleted ?? undefined;
     message.reported = object.reported ?? undefined;
     return message;

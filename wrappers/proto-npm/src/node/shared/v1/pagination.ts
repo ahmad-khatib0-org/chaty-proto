@@ -214,10 +214,10 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       writer.uint32(10).string(message.lastId);
     }
     if (message.page !== undefined) {
-      writer.uint32(16).uint32(message.page);
+      writer.uint32(16).int32(message.page);
     }
     if (message.pageSize !== undefined) {
-      writer.uint32(24).uint32(message.pageSize);
+      writer.uint32(24).int32(message.pageSize);
     }
     if (message.pageToken !== undefined) {
       writer.uint32(34).string(message.pageToken);
@@ -235,16 +235,16 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       writer.uint32(66).string(message.beforeIncluding);
     }
     if (message.createdAfter !== undefined) {
-      writer.uint32(72).uint64(message.createdAfter);
+      writer.uint32(72).int64(message.createdAfter);
     }
     if (message.createdBefore !== undefined) {
-      writer.uint32(80).uint64(message.createdBefore);
+      writer.uint32(80).int64(message.createdBefore);
     }
     if (message.updatedAfter !== undefined) {
-      writer.uint32(88).uint64(message.updatedAfter);
+      writer.uint32(88).int64(message.updatedAfter);
     }
     if (message.updatedBefore !== undefined) {
-      writer.uint32(96).uint64(message.updatedBefore);
+      writer.uint32(96).int64(message.updatedBefore);
     }
     for (const v of message.sortBy) {
       PaginationSort.encode(v!, writer.uint32(106).fork()).join();
@@ -272,7 +272,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.page = reader.uint32();
+          message.page = reader.int32();
           continue;
         }
         case 3: {
@@ -280,7 +280,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.pageSize = reader.uint32();
+          message.pageSize = reader.int32();
           continue;
         }
         case 4: {
@@ -328,7 +328,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdAfter = reader.uint64().toString();
+          message.createdAfter = reader.int64().toString();
           continue;
         }
         case 10: {
@@ -336,7 +336,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdBefore = reader.uint64().toString();
+          message.createdBefore = reader.int64().toString();
           continue;
         }
         case 11: {
@@ -344,7 +344,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedAfter = reader.uint64().toString();
+          message.updatedAfter = reader.int64().toString();
           continue;
         }
         case 12: {
@@ -352,7 +352,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedBefore = reader.uint64().toString();
+          message.updatedBefore = reader.int64().toString();
           continue;
         }
         case 13: {

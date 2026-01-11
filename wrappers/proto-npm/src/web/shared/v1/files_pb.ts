@@ -4,15 +4,13 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Timestamp } from "./time_pb.js";
-import { file_shared_v1_time } from "./time_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file shared/v1/files.proto.
  */
 export const file_shared_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSLsAQoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRIpCgt1cGxvYWRlZF9hdBgIIAEoCzIULnNoYXJlZC52MS5UaW1lc3RhbXASFAoHZGVsZXRlZBgJIAEoCEgAiAEBEhUKCHJlcG9ydGVkGAogASgISAGIAQFCCgoIX2RlbGV0ZWRCCwoJX3JlcG9ydGVkYgZwcm90bzM", [file_shared_v1_time]);
+  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSLWAQoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBAUIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWRiBnByb3RvMw");
 
 /**
  * ===========================================
@@ -74,9 +72,9 @@ export type File = Message<"shared.v1.File"> & {
   /**
    * When this file was uploaded
    *
-   * @generated from field: shared.v1.Timestamp uploaded_at = 8;
+   * @generated from field: int64 uploaded_at = 8;
    */
-  uploadedAt?: Timestamp;
+  uploadedAt: bigint;
 
   /**
    * Whether this file was deleted

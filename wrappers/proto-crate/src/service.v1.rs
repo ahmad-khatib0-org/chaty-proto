@@ -1466,8 +1466,8 @@ pub struct MessageSystemMessageUnpinned {
 pub struct MessageSystemCallStarted {
     #[prost(string, tag = "1")]
     pub by: ::prost::alloc::string::String,
-    #[prost(message, optional, tag = "2")]
-    pub finished_at: ::core::option::Option<super::super::shared::v1::Timestamp>,
+    #[prost(int64, tag = "2")]
+    pub finished_at: i64,
 }
 /// Image
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1762,8 +1762,8 @@ pub struct Message {
     #[prost(message, repeated, tag = "8")]
     pub attachments: ::prost::alloc::vec::Vec<super::super::shared::v1::File>,
     /// Time at which this message was last edited (optional)
-    #[prost(message, optional, tag = "9")]
-    pub edited: ::core::option::Option<super::super::shared::v1::Timestamp>,
+    #[prost(int64, optional, tag = "9")]
+    pub edited: ::core::option::Option<i64>,
     /// Attached embeds to this message (optional)
     #[prost(message, repeated, tag = "10")]
     pub embeds: ::prost::alloc::vec::Vec<Embed>,
