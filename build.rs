@@ -13,6 +13,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "service.v1.Role",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "service.v1.ChannelGroup",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
@@ -22,10 +26,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.ChannelDirectMessage",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
-    )
-    .type_attribute(
-      "service.v1.User",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
@@ -144,6 +144,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "shared.v1.File",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
+    .type_attribute(
+      "service.v1.Server",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.Category",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.ServerSystemMessagesChannels",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.ServerStats",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
     .file_descriptor_set_path(format!("{}/descriptor.bin", out_dir))
     .compile_protos(
       &[
@@ -159,7 +175,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "service/v1/main.proto",
         "service/v1/messages.proto",
         "service/v1/messages_db.proto",
+        "service/v1/roles_db.proto",
         "service/v1/search.proto",
+        "service/v1/servers_db.proto",
         "service/v1/users.proto",
         "service/v1/users_db.proto",
       ],

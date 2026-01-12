@@ -8,43 +8,15 @@ import type { File } from "../../shared/v1/files_pb.js";
 import { file_shared_v1_files } from "../../shared/v1/files_pb.js";
 import type { Timestamp } from "../../shared/v1/time_pb.js";
 import { file_shared_v1_time } from "../../shared/v1/time_pb.js";
+import type { OverrideField } from "./roles_db_pb.js";
+import { file_service_v1_roles_db } from "./roles_db_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/channels_db.proto.
  */
 export const file_service_v1_channels_db: GenFile = /*@__PURE__*/
-  fileDesc("ChxzZXJ2aWNlL3YxL2NoYW5uZWxzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIiwKDU92ZXJyaWRlRmllbGQSDQoFYWxsb3cYASABKAMSDAoEZGVueRgCIAEoAyL0AQoMQ2hhbm5lbEdyb3VwEg8KB3VzZXJfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEhIKCnJlY2lwaWVudHMYBCADKAkSHQoEaWNvbhgFIAEoCzIPLnNoYXJlZC52MS5GaWxlEhwKD2xhc3RfbWVzc2FnZV9pZBgGIAEoCUgBiAEBEhgKC3Blcm1pc3Npb25zGAcgASgDSAKIAQESDAoEbnNmdxgIIAEoCEIOCgxfZGVzY3JpcHRpb25CEgoQX2xhc3RfbWVzc2FnZV9pZEIOCgxfcGVybWlzc2lvbnMiJwoUQ2hhbm5lbFNhdmVkTWVzc2FnZXMSDwoHdXNlcl9pZBgBIAEoCSKKAwoLQ2hhbm5lbFRleHQSEQoJc2VydmVyX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSGAoLZGVzY3JpcHRpb24YAyABKAlIAIgBARIdCgRpY29uGAQgASgLMg8uc2hhcmVkLnYxLkZpbGUSHAoPbGFzdF9tZXNzYWdlX2lkGAUgASgJSAGIAQESNgoTZGVmYXVsdF9wZXJtaXNzaW9ucxgGIAEoCzIZLnNlcnZpY2UudjEuT3ZlcnJpZGVGaWVsZBJGChByb2xlX3Blcm1pc3Npb25zGAcgAygLMiwuc2VydmljZS52MS5DaGFubmVsVGV4dC5Sb2xlUGVybWlzc2lvbnNFbnRyeRIMCgRuc2Z3GAggASgIGlEKFFJvbGVQZXJtaXNzaW9uc0VudHJ5EgsKA2tleRgBIAEoCRIoCgV2YWx1ZRgCIAEoCzIZLnNlcnZpY2UudjEuT3ZlcnJpZGVGaWVsZDoCOAFCDgoMX2Rlc2NyaXB0aW9uQhIKEF9sYXN0X21lc3NhZ2VfaWQibAoUQ2hhbm5lbERpcmVjdE1lc3NhZ2USDgoGYWN0aXZlGAEgASgIEhIKCnJlY2lwaWVudHMYAiADKAkSHAoPbGFzdF9tZXNzYWdlX2lkGAMgASgJSACIAQFCEgoQX2xhc3RfbWVzc2FnZV9pZCL8AgoHQ2hhbm5lbBIKCgJpZBgBIAEoCRIUCgxjaGFubmVsX3R5cGUYAiABKAkSMQoFc2F2ZWQYAyABKAsyIC5zZXJ2aWNlLnYxLkNoYW5uZWxTYXZlZE1lc3NhZ2VzSAASMgoGZGlyZWN0GAQgASgLMiAuc2VydmljZS52MS5DaGFubmVsRGlyZWN0TWVzc2FnZUgAEikKBWdyb3VwGAUgASgLMhguc2VydmljZS52MS5DaGFubmVsR3JvdXBIABInCgR0ZXh0GAYgASgLMhcuc2VydmljZS52MS5DaGFubmVsVGV4dEgAEhwKD3ZvaWNlX21heF91c2VycxgHIAEoBUgBiAEBEigKCmNyZWF0ZWRfYXQYCCABKAsyFC5zaGFyZWQudjEuVGltZXN0YW1wEigKCnVwZGF0ZWRfYXQYCSABKAsyFC5zaGFyZWQudjEuVGltZXN0YW1wQg4KDGNoYW5uZWxfZGF0YUISChBfdm9pY2VfbWF4X3VzZXJzYgZwcm90bzM", [file_shared_v1_files, file_shared_v1_time]);
-
-/**
- * ===========================================
- * OVERRIDE FIELD TYPE (permissions)
- * ===========================================
- *
- * @generated from message service.v1.OverrideField
- */
-export type OverrideField = Message<"service.v1.OverrideField"> & {
-  /**
-   * Allowed permissions
-   *
-   * @generated from field: int64 allow = 1;
-   */
-  allow: bigint;
-
-  /**
-   * Denied permissions
-   *
-   * @generated from field: int64 deny = 2;
-   */
-  deny: bigint;
-};
-
-/**
- * Describes the message service.v1.OverrideField.
- * Use `create(OverrideFieldSchema)` to create a new message.
- */
-export const OverrideFieldSchema: GenMessage<OverrideField> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 0);
+  fileDesc("ChxzZXJ2aWNlL3YxL2NoYW5uZWxzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvQBCgxDaGFubmVsR3JvdXASDwoHdXNlcl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhgKC2Rlc2NyaXB0aW9uGAMgASgJSACIAQESEgoKcmVjaXBpZW50cxgEIAMoCRIdCgRpY29uGAUgASgLMg8uc2hhcmVkLnYxLkZpbGUSHAoPbGFzdF9tZXNzYWdlX2lkGAYgASgJSAGIAQESGAoLcGVybWlzc2lvbnMYByABKANIAogBARIMCgRuc2Z3GAggASgIQg4KDF9kZXNjcmlwdGlvbkISChBfbGFzdF9tZXNzYWdlX2lkQg4KDF9wZXJtaXNzaW9ucyInChRDaGFubmVsU2F2ZWRNZXNzYWdlcxIPCgd1c2VyX2lkGAEgASgJIooDCgtDaGFubmVsVGV4dBIRCglzZXJ2ZXJfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEh0KBGljb24YBCABKAsyDy5zaGFyZWQudjEuRmlsZRIcCg9sYXN0X21lc3NhZ2VfaWQYBSABKAlIAYgBARI2ChNkZWZhdWx0X3Blcm1pc3Npb25zGAYgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEkYKEHJvbGVfcGVybWlzc2lvbnMYByADKAsyLC5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0LlJvbGVQZXJtaXNzaW9uc0VudHJ5EgwKBG5zZncYCCABKAgaUQoUUm9sZVBlcm1pc3Npb25zRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkOgI4AUIOCgxfZGVzY3JpcHRpb25CEgoQX2xhc3RfbWVzc2FnZV9pZCJsChRDaGFubmVsRGlyZWN0TWVzc2FnZRIOCgZhY3RpdmUYASABKAgSEgoKcmVjaXBpZW50cxgCIAMoCRIcCg9sYXN0X21lc3NhZ2VfaWQYAyABKAlIAIgBAUISChBfbGFzdF9tZXNzYWdlX2lkIvwCCgdDaGFubmVsEgoKAmlkGAEgASgJEhQKDGNoYW5uZWxfdHlwZRgCIAEoCRIxCgVzYXZlZBgDIAEoCzIgLnNlcnZpY2UudjEuQ2hhbm5lbFNhdmVkTWVzc2FnZXNIABIyCgZkaXJlY3QYBCABKAsyIC5zZXJ2aWNlLnYxLkNoYW5uZWxEaXJlY3RNZXNzYWdlSAASKQoFZ3JvdXAYBSABKAsyGC5zZXJ2aWNlLnYxLkNoYW5uZWxHcm91cEgAEicKBHRleHQYBiABKAsyFy5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0SAASHAoPdm9pY2VfbWF4X3VzZXJzGAcgASgFSAGIAQESKAoKY3JlYXRlZF9hdBgIIAEoCzIULnNoYXJlZC52MS5UaW1lc3RhbXASKAoKdXBkYXRlZF9hdBgJIAEoCzIULnNoYXJlZC52MS5UaW1lc3RhbXBCDgoMY2hhbm5lbF9kYXRhQhIKEF92b2ljZV9tYXhfdXNlcnNiBnByb3RvMw", [file_shared_v1_files, file_shared_v1_time, file_service_v1_roles_db]);
 
 /**
  * Group channel type
@@ -114,7 +86,7 @@ export type ChannelGroup = Message<"service.v1.ChannelGroup"> & {
  * Use `create(ChannelGroupSchema)` to create a new message.
  */
 export const ChannelGroupSchema: GenMessage<ChannelGroup> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 1);
+  messageDesc(file_service_v1_channels_db, 0);
 
 /**
  * Saved messages channel type
@@ -135,7 +107,7 @@ export type ChannelSavedMessages = Message<"service.v1.ChannelSavedMessages"> & 
  * Use `create(ChannelSavedMessagesSchema)` to create a new message.
  */
 export const ChannelSavedMessagesSchema: GenMessage<ChannelSavedMessages> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 2);
+  messageDesc(file_service_v1_channels_db, 1);
 
 /**
  * Text channel type
@@ -205,7 +177,7 @@ export type ChannelText = Message<"service.v1.ChannelText"> & {
  * Use `create(ChannelTextSchema)` to create a new message.
  */
 export const ChannelTextSchema: GenMessage<ChannelText> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 3);
+  messageDesc(file_service_v1_channels_db, 2);
 
 /**
  * Direct message channel type
@@ -240,7 +212,7 @@ export type ChannelDirectMessage = Message<"service.v1.ChannelDirectMessage"> & 
  * Use `create(ChannelDirectMessageSchema)` to create a new message.
  */
 export const ChannelDirectMessageSchema: GenMessage<ChannelDirectMessage> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 4);
+  messageDesc(file_service_v1_channels_db, 3);
 
 /**
  * ===========================================
@@ -318,5 +290,5 @@ export type Channel = Message<"service.v1.Channel"> & {
  * Use `create(ChannelSchema)` to create a new message.
  */
 export const ChannelSchema: GenMessage<Channel> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels_db, 5);
+  messageDesc(file_service_v1_channels_db, 4);
 

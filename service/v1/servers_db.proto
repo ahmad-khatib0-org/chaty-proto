@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "service/v1/roles_db.proto";
+import "shared/v1/error.proto";
+import "shared/v1/files.proto";
+
+message Server {
+  string id = 1;
+
+  string owner_id = 2;
+
+  string name = 3;
+
+  // Description for the server
+  optional string description = 4;
+
+  // Default set of server and channel permissions
+  int64 default_permissions = 5;
+
+  // Icon attachment
+  optional shared.v1.File icon = 6;
+
+  // Banner attachment
+  optional shared.v1.File banner = 7;
+
+  // Bitfield of server flags
+  optional int32 flags = 8;
+
+  // Whether this server is flagged as not safe for work
+  bool nsfw = 9;
+  // Whether to enable analytics
+  bool analytics = 10;
+  // Whether this server should be publicly discoverable
+  bool discoverable = 11;
+  // Roles for this server
+  map<string, service.v1.Role> roles = 12;
+
+  // Categories for this server
+  repeated Category categories = 13;
+
+  // Configuration for sending system event messages
+  optional ServerSystemMessagesChannels system_messages = 14;
+
+  ServerStats stats = 15;
+
+  // Channels within this server
+  repeated string channels = 16;
+
+  int64 created_at = 17;
+  int64 updated_at = 18;
+}
+
+message Category {
+  // Unique ID for this category (1-32 chars)
+  string id = 1;
+  // Title for this category (1-32 chars)
+  string title = 2;
+  // Channels in this category
+  repeated string channels = 3;
+}
+
+message ServerSystemMessagesChannels {
+  // ID of channel to send user join messages in (optional)
+  optional string user_joined = 1;
+  // ID of channel to send user left messages in (optional)
+  optional string user_left = 2;
+  // ID of channel to send user kicked messages in (optional)
+  optional string user_kicked = 3;
+  // ID of channel to send user banned messages in (optional)
+  optional string user_banned = 4;
+}
+
+message ServerStats {
+  int32 members_count = 1;
+  int32 channels_count = 2;
+}

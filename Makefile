@@ -9,10 +9,14 @@ MSG ?=
 generate:
 	@echo "Cleaning previous generated code..."
 	rm -rf wrappers/proto-npm/dist wrappers/proto-npm/src/node wrappers/proto-npm/src/web
+	find wrappers/proto-crate/src -name "*.rs" -not -name "lib.rs" -o -name "descriptor.bin" -o -name "envoy_descriptor.bin" -delete
 	
 	@echo "Generating protobuf files..."
 	# Injected PATH ensures buf finds the plugins in root node_modules
 	PATH="$(shell pwd)/node_modules/.bin:$(PATH)" buf generate 
+	
+	@echo "Generating Rust protobuf files..."
+	cargo build --verbose
 
 	@echo "Generating TypeScript barrel files..."
 	pnpm exec tsx scripts/gen-barrels.ts
@@ -21,6 +25,7 @@ generate:
 	pnpm --filter @chaty-app/proto exec tsc
 
 	@echo "✅ Generation complete"
+	
 # -----------------------------------------------------------------------------
 # Release: commit + tag + push
 # -----------------------------------------------------------------------------

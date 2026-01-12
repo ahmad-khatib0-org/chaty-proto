@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/error.proto";
+
+// ===========================================
+// OVERRIDE FIELD TYPE (permissions)
+// ===========================================
+message OverrideField {
+  // Allowed permissions
+  int64 allow = 1;
+  // Denied permissions
+  int64 deny = 2;
+}
+
+message Role {
+  // Role name
+  string name = 1;
+  // Permissions available to this role
+  OverrideField permissions = 2;
+  // Colour used for this role (any valid CSS colour, optional)
+  optional string colour = 3;
+  // Whether this role should be shown separately on the member sidebar
+  bool hoist = 4;
+  // Ranking of this role
+  int64 rank = 5;
+}

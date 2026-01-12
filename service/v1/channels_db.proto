@@ -4,16 +4,7 @@ package service.v1;
 
 import "shared/v1/files.proto";
 import "shared/v1/time.proto";
-
-// ===========================================
-// OVERRIDE FIELD TYPE (permissions)
-// ===========================================
-message OverrideField {
-  // Allowed permissions
-  int64 allow = 1;
-  // Denied permissions
-  int64 deny = 2;
-}
+import "service/v1/roles_db.proto";
 
 // ===========================================
 // CHANNEL TYPES
@@ -58,9 +49,9 @@ message ChannelText {
   // Id of the last message sent in this channel (optional)
   optional string last_message_id = 5;
   // Default permissions assigned to users in this channel (optional)
-  OverrideField default_permissions = 6;
+  service.v1.OverrideField default_permissions = 6;
   // Map of role_id -> permissions
-  map<string, OverrideField> role_permissions = 7;
+  map<string, service.v1.OverrideField> role_permissions = 7;
   // Whether this channel is marked as not safe for work
   bool nsfw = 8;
 }

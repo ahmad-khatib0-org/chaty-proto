@@ -8,20 +8,9 @@
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { File } from "../../shared/v1/files.js";
 import { Timestamp } from "../../shared/v1/time.js";
+import { OverrideField } from "./roles_db.js";
 
 export const protobufPackage = "service.v1";
-
-/**
- * ===========================================
- * OVERRIDE FIELD TYPE (permissions)
- * ===========================================
- */
-export interface OverrideField {
-  /** Allowed permissions */
-  allow: string;
-  /** Denied permissions */
-  deny: string;
-}
 
 /** Group channel type */
 export interface ChannelGroup {
@@ -121,82 +110,6 @@ export interface Channel {
   createdAt?: Timestamp | undefined;
   updatedAt?: Timestamp | undefined;
 }
-
-function createBaseOverrideField(): OverrideField {
-  return { allow: "0", deny: "0" };
-}
-
-export const OverrideField: MessageFns<OverrideField> = {
-  encode(message: OverrideField, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.allow !== "0") {
-      writer.uint32(8).int64(message.allow);
-    }
-    if (message.deny !== "0") {
-      writer.uint32(16).int64(message.deny);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): OverrideField {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOverrideField();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.allow = reader.int64().toString();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.deny = reader.int64().toString();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): OverrideField {
-    return {
-      allow: isSet(object.allow) ? globalThis.String(object.allow) : "0",
-      deny: isSet(object.deny) ? globalThis.String(object.deny) : "0",
-    };
-  },
-
-  toJSON(message: OverrideField): unknown {
-    const obj: any = {};
-    if (message.allow !== "0") {
-      obj.allow = message.allow;
-    }
-    if (message.deny !== "0") {
-      obj.deny = message.deny;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<OverrideField>, I>>(base?: I): OverrideField {
-    return OverrideField.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<OverrideField>, I>>(object: I): OverrideField {
-    const message = createBaseOverrideField();
-    message.allow = object.allow ?? "0";
-    message.deny = object.deny ?? "0";
-    return message;
-  },
-};
 
 function createBaseChannelGroup(): ChannelGroup {
   return {
