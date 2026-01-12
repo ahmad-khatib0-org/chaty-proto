@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package service.v1;
 
+import "shared/v1/files.proto";
+
 message User {
   string id = 1; // ulid
   string username = 2; // 64 char
@@ -19,6 +21,8 @@ message User {
   int64 created_at = 13; // unix timestamp miliseconds
   int64 updated_at = 14; // unix timestamp miliseconds
   bool verified = 15;
+  optional shared.v1.File avatar = 16;
+  repeated UserRelationship relations = 17;
 }
 
 enum UserStatus {
@@ -27,4 +31,19 @@ enum UserStatus {
   USER_STATUS_FOCUS = 2;
   USER_STATUS_BUSY = 3;
   USER_STATUS_INVISIBLE = 4;
+}
+
+message UserRelationship {
+  string id = 1;
+  UserRelationshipStatus status = 2;
+}
+
+enum UserRelationshipStatus {
+  USER_RELATIONSHIP_STATUS_NONE = 0;
+  USER_RELATIONSHIP_STATUS_USER = 1; // Self
+  USER_RELATIONSHIP_STATUS_FRIEND = 2;
+  USER_RELATIONSHIP_STATUS_OUTGOING = 3; // Friend request sent
+  USER_RELATIONSHIP_STATUS_INCOMING = 4; // Friend request received
+  USER_RELATIONSHIP_STATUS_BLOCKED = 5; // You blocked them
+  USER_RELATIONSHIP_STATUS_BLOCKED_OTHER = 6; // They blocked you
 }

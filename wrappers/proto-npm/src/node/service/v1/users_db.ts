@@ -6,6 +6,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { File } from "../../shared/v1/files.js";
 
 export const protobufPackage = "service.v1";
 
@@ -60,6 +61,74 @@ export function userStatusToJSON(object: UserStatus): string {
   }
 }
 
+export enum UserRelationshipStatus {
+  USER_RELATIONSHIP_STATUS_NONE = 0,
+  /** USER_RELATIONSHIP_STATUS_USER - Self */
+  USER_RELATIONSHIP_STATUS_USER = 1,
+  USER_RELATIONSHIP_STATUS_FRIEND = 2,
+  /** USER_RELATIONSHIP_STATUS_OUTGOING - Friend request sent */
+  USER_RELATIONSHIP_STATUS_OUTGOING = 3,
+  /** USER_RELATIONSHIP_STATUS_INCOMING - Friend request received */
+  USER_RELATIONSHIP_STATUS_INCOMING = 4,
+  /** USER_RELATIONSHIP_STATUS_BLOCKED - You blocked them */
+  USER_RELATIONSHIP_STATUS_BLOCKED = 5,
+  /** USER_RELATIONSHIP_STATUS_BLOCKED_OTHER - They blocked you */
+  USER_RELATIONSHIP_STATUS_BLOCKED_OTHER = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function userRelationshipStatusFromJSON(object: any): UserRelationshipStatus {
+  switch (object) {
+    case 0:
+    case "USER_RELATIONSHIP_STATUS_NONE":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_NONE;
+    case 1:
+    case "USER_RELATIONSHIP_STATUS_USER":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_USER;
+    case 2:
+    case "USER_RELATIONSHIP_STATUS_FRIEND":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_FRIEND;
+    case 3:
+    case "USER_RELATIONSHIP_STATUS_OUTGOING":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_OUTGOING;
+    case 4:
+    case "USER_RELATIONSHIP_STATUS_INCOMING":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_INCOMING;
+    case 5:
+    case "USER_RELATIONSHIP_STATUS_BLOCKED":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_BLOCKED;
+    case 6:
+    case "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER":
+      return UserRelationshipStatus.USER_RELATIONSHIP_STATUS_BLOCKED_OTHER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UserRelationshipStatus.UNRECOGNIZED;
+  }
+}
+
+export function userRelationshipStatusToJSON(object: UserRelationshipStatus): string {
+  switch (object) {
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_NONE:
+      return "USER_RELATIONSHIP_STATUS_NONE";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_USER:
+      return "USER_RELATIONSHIP_STATUS_USER";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_FRIEND:
+      return "USER_RELATIONSHIP_STATUS_FRIEND";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_OUTGOING:
+      return "USER_RELATIONSHIP_STATUS_OUTGOING";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_INCOMING:
+      return "USER_RELATIONSHIP_STATUS_INCOMING";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_BLOCKED:
+      return "USER_RELATIONSHIP_STATUS_BLOCKED";
+    case UserRelationshipStatus.USER_RELATIONSHIP_STATUS_BLOCKED_OTHER:
+      return "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER";
+    case UserRelationshipStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface User {
   /** ulid */
   id: string;
@@ -96,6 +165,13 @@ export interface User {
   /** unix timestamp miliseconds */
   updatedAt: string;
   verified: boolean;
+  avatar?: File | undefined;
+  relations: UserRelationship[];
+}
+
+export interface UserRelationship {
+  id: string;
+  status: UserRelationshipStatus;
 }
 
 function createBaseUser(): User {
@@ -115,6 +191,8 @@ function createBaseUser(): User {
     createdAt: "0",
     updatedAt: "0",
     verified: false,
+    avatar: undefined,
+    relations: [],
   };
 }
 
@@ -164,6 +242,12 @@ export const User: MessageFns<User> = {
     }
     if (message.verified !== false) {
       writer.uint32(120).bool(message.verified);
+    }
+    if (message.avatar !== undefined) {
+      File.encode(message.avatar, writer.uint32(130).fork()).join();
+    }
+    for (const v of message.relations) {
+      UserRelationship.encode(v!, writer.uint32(138).fork()).join();
     }
     return writer;
   },
@@ -295,6 +379,22 @@ export const User: MessageFns<User> = {
           message.verified = reader.bool();
           continue;
         }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.avatar = File.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.relations.push(UserRelationship.decode(reader, reader.uint32()));
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -323,6 +423,10 @@ export const User: MessageFns<User> = {
       createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
       updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
       verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
+      avatar: isSet(object.avatar) ? File.fromJSON(object.avatar) : undefined,
+      relations: globalThis.Array.isArray(object?.relations)
+        ? object.relations.map((e: any) => UserRelationship.fromJSON(e))
+        : [],
     };
   },
 
@@ -373,6 +477,12 @@ export const User: MessageFns<User> = {
     if (message.verified !== false) {
       obj.verified = message.verified;
     }
+    if (message.avatar !== undefined) {
+      obj.avatar = File.toJSON(message.avatar);
+    }
+    if (message.relations?.length) {
+      obj.relations = message.relations.map((e) => UserRelationship.toJSON(e));
+    }
     return obj;
   },
 
@@ -396,6 +506,86 @@ export const User: MessageFns<User> = {
     message.createdAt = object.createdAt ?? "0";
     message.updatedAt = object.updatedAt ?? "0";
     message.verified = object.verified ?? false;
+    message.avatar = (object.avatar !== undefined && object.avatar !== null)
+      ? File.fromPartial(object.avatar)
+      : undefined;
+    message.relations = object.relations?.map((e) => UserRelationship.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseUserRelationship(): UserRelationship {
+  return { id: "", status: 0 };
+}
+
+export const UserRelationship: MessageFns<UserRelationship> = {
+  encode(message: UserRelationship, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UserRelationship {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserRelationship();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserRelationship {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      status: isSet(object.status) ? userRelationshipStatusFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: UserRelationship): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.status !== 0) {
+      obj.status = userRelationshipStatusToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserRelationship>, I>>(base?: I): UserRelationship {
+    return UserRelationship.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserRelationship>, I>>(object: I): UserRelationship {
+    const message = createBaseUserRelationship();
+    message.id = object.id ?? "";
+    message.status = object.status ?? 0;
     return message;
   },
 };

@@ -1953,6 +1953,18 @@ pub struct User {
     pub updated_at: i64,
     #[prost(bool, tag = "15")]
     pub verified: bool,
+    #[prost(message, optional, tag = "16")]
+    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
+    #[prost(message, repeated, tag = "17")]
+    pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserRelationship {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(enumeration = "UserRelationshipStatus", tag = "2")]
+    pub status: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1986,6 +1998,53 @@ impl UserStatus {
             "USER_STATUS_FOCUS" => Some(Self::Focus),
             "USER_STATUS_BUSY" => Some(Self::Busy),
             "USER_STATUS_INVISIBLE" => Some(Self::Invisible),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserRelationshipStatus {
+    None = 0,
+    /// Self
+    User = 1,
+    Friend = 2,
+    /// Friend request sent
+    Outgoing = 3,
+    /// Friend request received
+    Incoming = 4,
+    /// You blocked them
+    Blocked = 5,
+    /// They blocked you
+    BlockedOther = 6,
+}
+impl UserRelationshipStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::None => "USER_RELATIONSHIP_STATUS_NONE",
+            Self::User => "USER_RELATIONSHIP_STATUS_USER",
+            Self::Friend => "USER_RELATIONSHIP_STATUS_FRIEND",
+            Self::Outgoing => "USER_RELATIONSHIP_STATUS_OUTGOING",
+            Self::Incoming => "USER_RELATIONSHIP_STATUS_INCOMING",
+            Self::Blocked => "USER_RELATIONSHIP_STATUS_BLOCKED",
+            Self::BlockedOther => "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "USER_RELATIONSHIP_STATUS_NONE" => Some(Self::None),
+            "USER_RELATIONSHIP_STATUS_USER" => Some(Self::User),
+            "USER_RELATIONSHIP_STATUS_FRIEND" => Some(Self::Friend),
+            "USER_RELATIONSHIP_STATUS_OUTGOING" => Some(Self::Outgoing),
+            "USER_RELATIONSHIP_STATUS_INCOMING" => Some(Self::Incoming),
+            "USER_RELATIONSHIP_STATUS_BLOCKED" => Some(Self::Blocked),
+            "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER" => Some(Self::BlockedOther),
             _ => None,
         }
     }

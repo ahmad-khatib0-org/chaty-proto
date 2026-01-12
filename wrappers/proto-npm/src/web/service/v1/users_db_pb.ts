@@ -4,13 +4,15 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { File } from "../../shared/v1/files_pb.js";
+import { file_shared_v1_files } from "../../shared/v1/files_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/users_db.proto.
  */
 export const file_service_v1_users_db: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL3VzZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvUDCgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoBUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKANIBogBARISCgpjcmVhdGVkX2F0GA0gASgDEhIKCnVwZGF0ZWRfYXQYDiABKAMSEAoIdmVyaWZpZWQYDyABKAhCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsKoIBCgpVc2VyU3RhdHVzEhYKElVTRVJfU1RBVFVTX09OTElORRAAEhQKEFVTRVJfU1RBVFVTX0lETEUQARIVChFVU0VSX1NUQVRVU19GT0NVUxACEhQKEFVTRVJfU1RBVFVTX0JVU1kQAxIZChVVU0VSX1NUQVRVU19JTlZJU0lCTEUQBGIGcHJvdG8z");
+  fileDesc("ChlzZXJ2aWNlL3YxL3VzZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxItcECgRVc2VyEgoKAmlkGAEgASgJEhAKCHVzZXJuYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEhAKCHBhc3N3b3JkGAQgASgJEhkKDGRpc3BsYXlfbmFtZRgFIAEoCUgAiAEBEhMKBmJhZGdlcxgGIAEoBUgBiAEBEhgKC3N0YXR1c190ZXh0GAcgASgJSAKIAQESNAoPc3RhdHVzX3ByZXNlbmNlGAggASgOMhYuc2VydmljZS52MS5Vc2VyU3RhdHVzSAOIAQESHAoPcHJvZmlsZV9jb250ZW50GAkgASgJSASIAQESIgoVcHJvZmlsZV9iYWNrZ3JvdW5kX2lkGAogASgJSAWIAQESEgoKcHJpdmlsZWdlZBgLIAEoCBIcCg9zdXNwZW5kZWRfdW50aWwYDCABKANIBogBARISCgpjcmVhdGVkX2F0GA0gASgDEhIKCnVwZGF0ZWRfYXQYDiABKAMSEAoIdmVyaWZpZWQYDyABKAgSJAoGYXZhdGFyGBAgASgLMg8uc2hhcmVkLnYxLkZpbGVIB4gBARIvCglyZWxhdGlvbnMYESADKAsyHC5zZXJ2aWNlLnYxLlVzZXJSZWxhdGlvbnNoaXBCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfYmFkZ2VzQg4KDF9zdGF0dXNfdGV4dEISChBfc3RhdHVzX3ByZXNlbmNlQhIKEF9wcm9maWxlX2NvbnRlbnRCGAoWX3Byb2ZpbGVfYmFja2dyb3VuZF9pZEISChBfc3VzcGVuZGVkX3VudGlsQgkKB19hdmF0YXIiUgoQVXNlclJlbGF0aW9uc2hpcBIKCgJpZBgBIAEoCRIyCgZzdGF0dXMYAiABKA4yIi5zZXJ2aWNlLnYxLlVzZXJSZWxhdGlvbnNoaXBTdGF0dXMqggEKClVzZXJTdGF0dXMSFgoSVVNFUl9TVEFUVVNfT05MSU5FEAASFAoQVVNFUl9TVEFUVVNfSURMRRABEhUKEVVTRVJfU1RBVFVTX0ZPQ1VTEAISFAoQVVNFUl9TVEFUVVNfQlVTWRADEhkKFVVTRVJfU1RBVFVTX0lOVklTSUJMRRAEKqMCChZVc2VyUmVsYXRpb25zaGlwU3RhdHVzEiEKHVVTRVJfUkVMQVRJT05TSElQX1NUQVRVU19OT05FEAASIQodVVNFUl9SRUxBVElPTlNISVBfU1RBVFVTX1VTRVIQARIjCh9VU0VSX1JFTEFUSU9OU0hJUF9TVEFUVVNfRlJJRU5EEAISJQohVVNFUl9SRUxBVElPTlNISVBfU1RBVFVTX09VVEdPSU5HEAMSJQohVVNFUl9SRUxBVElPTlNISVBfU1RBVFVTX0lOQ09NSU5HEAQSJAogVVNFUl9SRUxBVElPTlNISVBfU1RBVFVTX0JMT0NLRUQQBRIqCiZVU0VSX1JFTEFUSU9OU0hJUF9TVEFUVVNfQkxPQ0tFRF9PVEhFUhAGYgZwcm90bzM", [file_shared_v1_files]);
 
 /**
  * @generated from message service.v1.User
@@ -110,6 +112,16 @@ export type User = Message<"service.v1.User"> & {
    * @generated from field: bool verified = 15;
    */
   verified: boolean;
+
+  /**
+   * @generated from field: optional shared.v1.File avatar = 16;
+   */
+  avatar?: File;
+
+  /**
+   * @generated from field: repeated service.v1.UserRelationship relations = 17;
+   */
+  relations: UserRelationship[];
 };
 
 /**
@@ -118,6 +130,28 @@ export type User = Message<"service.v1.User"> & {
  */
 export const UserSchema: GenMessage<User> = /*@__PURE__*/
   messageDesc(file_service_v1_users_db, 0);
+
+/**
+ * @generated from message service.v1.UserRelationship
+ */
+export type UserRelationship = Message<"service.v1.UserRelationship"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: service.v1.UserRelationshipStatus status = 2;
+   */
+  status: UserRelationshipStatus;
+};
+
+/**
+ * Describes the message service.v1.UserRelationship.
+ * Use `create(UserRelationshipSchema)` to create a new message.
+ */
+export const UserRelationshipSchema: GenMessage<UserRelationship> = /*@__PURE__*/
+  messageDesc(file_service_v1_users_db, 1);
 
 /**
  * @generated from enum service.v1.UserStatus
@@ -154,4 +188,60 @@ export enum UserStatus {
  */
 export const UserStatusSchema: GenEnum<UserStatus> = /*@__PURE__*/
   enumDesc(file_service_v1_users_db, 0);
+
+/**
+ * @generated from enum service.v1.UserRelationshipStatus
+ */
+export enum UserRelationshipStatus {
+  /**
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_NONE = 0;
+   */
+  NONE = 0,
+
+  /**
+   * Self
+   *
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_USER = 1;
+   */
+  USER = 1,
+
+  /**
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_FRIEND = 2;
+   */
+  FRIEND = 2,
+
+  /**
+   * Friend request sent
+   *
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_OUTGOING = 3;
+   */
+  OUTGOING = 3,
+
+  /**
+   * Friend request received
+   *
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_INCOMING = 4;
+   */
+  INCOMING = 4,
+
+  /**
+   * You blocked them
+   *
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_BLOCKED = 5;
+   */
+  BLOCKED = 5,
+
+  /**
+   * They blocked you
+   *
+   * @generated from enum value: USER_RELATIONSHIP_STATUS_BLOCKED_OTHER = 6;
+   */
+  BLOCKED_OTHER = 6,
+}
+
+/**
+ * Describes the enum service.v1.UserRelationshipStatus.
+ */
+export const UserRelationshipStatusSchema: GenEnum<UserRelationshipStatus> = /*@__PURE__*/
+  enumDesc(file_service_v1_users_db, 1);
 
