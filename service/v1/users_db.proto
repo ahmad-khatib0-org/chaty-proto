@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/bots_db.proto";
 import "shared/v1/files.proto";
 
 message User {
@@ -23,6 +24,7 @@ message User {
   bool verified = 15;
   optional shared.v1.File avatar = 16;
   repeated UserRelationship relations = 17;
+  optional service.v1.Bot bot = 18;
 }
 
 enum UserStatus {

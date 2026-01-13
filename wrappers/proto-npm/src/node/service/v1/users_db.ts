@@ -7,6 +7,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { File } from "../../shared/v1/files.js";
+import { Bot } from "./bots_db.js";
 
 export const protobufPackage = "service.v1";
 
@@ -167,6 +168,7 @@ export interface User {
   verified: boolean;
   avatar?: File | undefined;
   relations: UserRelationship[];
+  bot?: Bot | undefined;
 }
 
 export interface UserRelationship {
@@ -193,6 +195,7 @@ function createBaseUser(): User {
     verified: false,
     avatar: undefined,
     relations: [],
+    bot: undefined,
   };
 }
 
@@ -248,6 +251,9 @@ export const User: MessageFns<User> = {
     }
     for (const v of message.relations) {
       UserRelationship.encode(v!, writer.uint32(138).fork()).join();
+    }
+    if (message.bot !== undefined) {
+      Bot.encode(message.bot, writer.uint32(146).fork()).join();
     }
     return writer;
   },
@@ -395,6 +401,14 @@ export const User: MessageFns<User> = {
           message.relations.push(UserRelationship.decode(reader, reader.uint32()));
           continue;
         }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.bot = Bot.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -427,6 +441,7 @@ export const User: MessageFns<User> = {
       relations: globalThis.Array.isArray(object?.relations)
         ? object.relations.map((e: any) => UserRelationship.fromJSON(e))
         : [],
+      bot: isSet(object.bot) ? Bot.fromJSON(object.bot) : undefined,
     };
   },
 
@@ -483,6 +498,9 @@ export const User: MessageFns<User> = {
     if (message.relations?.length) {
       obj.relations = message.relations.map((e) => UserRelationship.toJSON(e));
     }
+    if (message.bot !== undefined) {
+      obj.bot = Bot.toJSON(message.bot);
+    }
     return obj;
   },
 
@@ -510,6 +528,7 @@ export const User: MessageFns<User> = {
       ? File.fromPartial(object.avatar)
       : undefined;
     message.relations = object.relations?.map((e) => UserRelationship.fromPartial(e)) || [];
+    message.bot = (object.bot !== undefined && object.bot !== null) ? Bot.fromPartial(object.bot) : undefined;
     return message;
   },
 };

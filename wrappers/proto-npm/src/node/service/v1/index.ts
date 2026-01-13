@@ -1,3 +1,4 @@
+export * as BotsDb from './bots_db.js';
 export * as ChannelsDb from './channels_db.js';
 export * as Groups from './groups.js';
 export * as Main from './main.js';

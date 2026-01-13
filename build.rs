@@ -170,6 +170,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "shared/v1/time.proto",
         "shared/v1/types.proto",
         "shared/v1/wrappers.proto",
+        "service/v1/bots_db.proto",
         "service/v1/channels_db.proto",
         "service/v1/groups.proto",
         "service/v1/main.proto",
