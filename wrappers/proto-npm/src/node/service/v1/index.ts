@@ -5,6 +5,7 @@ export * as Messages from './messages.js';
 export * as MessagesDb from './messages_db.js';
 export * as RolesDb from './roles_db.js';
 export * as Search from './search.js';
+export * as ServerMembersDb from './server_members_db.js';
 export * as ServersDb from './servers_db.js';
 export * as Users from './users.js';
 export * as UsersDb from './users_db.js';

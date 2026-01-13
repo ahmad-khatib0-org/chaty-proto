@@ -1932,6 +1932,38 @@ impl BandcampType {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServerMember {
+    /// Server ID (partition key)
+    #[prost(string, tag = "1")]
+    pub server_id: ::prost::alloc::string::String,
+    /// User ID
+    #[prost(string, tag = "2")]
+    pub user_id: ::prost::alloc::string::String,
+    /// User info (denormalized)
+    #[prost(string, tag = "3")]
+    pub username: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
+    /// Member-specific
+    #[prost(string, optional, tag = "5")]
+    pub nickname: ::core::option::Option<::prost::alloc::string::String>,
+    /// Time at which this user joined the server
+    #[prost(int64, tag = "6")]
+    pub joined_at: i64,
+    /// Role IDs assigned to this member
+    #[prost(string, repeated, tag = "7")]
+    pub roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Timestamp this member is timed out until
+    #[prost(int64, optional, tag = "8")]
+    pub timeout: ::core::option::Option<i64>,
+    /// Voice settings
+    #[prost(bool, tag = "9")]
+    pub can_publish: bool,
+    #[prost(bool, tag = "10")]
+    pub can_receive: bool,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Server {

@@ -177,6 +177,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "service/v1/messages_db.proto",
         "service/v1/roles_db.proto",
         "service/v1/search.proto",
+        "service/v1/server_members_db.proto",
         "service/v1/servers_db.proto",
         "service/v1/users.proto",
         "service/v1/users_db.proto",

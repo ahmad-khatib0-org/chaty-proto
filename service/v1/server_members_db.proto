@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/files.proto";
+
+message ServerMember {
+  // Server ID (partition key)
+  string server_id = 1;
+
+  // User ID
+  string user_id = 2;
+
+  // User info (denormalized)
+  string username = 3;
+  optional shared.v1.File avatar = 4;
+
+  // Member-specific
+  optional string nickname = 5;
+  // Time at which this user joined the server
+  int64 joined_at = 6;
+
+  // Role IDs assigned to this member
+  repeated string roles = 7;
+
+  // Timestamp this member is timed out until
+  optional int64 timeout = 8;
+
+  // Voice settings
+  bool can_publish = 9;
+  bool can_receive = 10;
+}
