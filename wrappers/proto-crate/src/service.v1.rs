@@ -1938,6 +1938,7 @@ impl BandcampType {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerMember {
     /// Server ID (partition key)
