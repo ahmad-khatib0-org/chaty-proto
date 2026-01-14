@@ -1971,7 +1971,7 @@ pub struct ServerMember {
     pub can_receive: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Server {
     #[prost(string, tag = "1")]
@@ -2024,7 +2024,7 @@ pub struct Server {
     pub updated_at: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Category {
     /// Unique ID for this category (1-32 chars)
@@ -2038,7 +2038,7 @@ pub struct Category {
     pub channels: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerSystemMessagesChannels {
     /// ID of channel to send user join messages in (optional)
@@ -2055,7 +2055,7 @@ pub struct ServerSystemMessagesChannels {
     pub user_banned: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ServerStats {
     #[prost(int32, tag = "1")]

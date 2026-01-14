@@ -150,19 +150,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.Server",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "service.v1.Category",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "service.v1.ServerSystemMessagesChannels",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "service.v1.ServerStats",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .file_descriptor_set_path(format!("{}/descriptor.bin", out_dir))
     .compile_protos(
