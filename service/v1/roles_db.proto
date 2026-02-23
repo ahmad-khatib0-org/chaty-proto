@@ -25,4 +25,6 @@ message Role {
   bool hoist = 4;
   // Ranking of this role
   int64 rank = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
 }

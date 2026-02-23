@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/roles_db.proto.
  */
 export const file_service_v1_roles_db: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL3JvbGVzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIiwKDU92ZXJyaWRlRmllbGQSDQoFYWxsb3cYASABKAMSDAoEZGVueRgCIAEoAyKBAQoEUm9sZRIMCgRuYW1lGAEgASgJEi4KC3Blcm1pc3Npb25zGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEhMKBmNvbG91chgDIAEoCUgAiAEBEg0KBWhvaXN0GAQgASgIEgwKBHJhbmsYBSABKANCCQoHX2NvbG91cmIGcHJvdG8z", [file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL3JvbGVzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIiwKDU92ZXJyaWRlRmllbGQSDQoFYWxsb3cYASABKAMSDAoEZGVueRgCIAEoAyKpAQoEUm9sZRIMCgRuYW1lGAEgASgJEi4KC3Blcm1pc3Npb25zGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEhMKBmNvbG91chgDIAEoCUgAiAEBEg0KBWhvaXN0GAQgASgIEgwKBHJhbmsYBSABKAMSEgoKY3JlYXRlZF9hdBgGIAEoAxISCgp1cGRhdGVkX2F0GAcgASgDQgkKB19jb2xvdXJiBnByb3RvMw", [file_shared_v1_error]);
 
 /**
  * ===========================================
@@ -81,6 +81,16 @@ export type Role = Message<"service.v1.Role"> & {
    * @generated from field: int64 rank = 5;
    */
   rank: bigint;
+
+  /**
+   * @generated from field: int64 created_at = 6;
+   */
+  createdAt: bigint;
+
+  /**
+   * @generated from field: int64 updated_at = 7;
+   */
+  updatedAt: bigint;
 };
 
 /**

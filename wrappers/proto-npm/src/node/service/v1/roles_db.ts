@@ -36,6 +36,8 @@ export interface Role {
   hoist: boolean;
   /** Ranking of this role */
   rank: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 function createBaseOverrideField(): OverrideField {
@@ -115,7 +117,15 @@ export const OverrideField: MessageFns<OverrideField> = {
 };
 
 function createBaseRole(): Role {
-  return { name: "", permissions: undefined, colour: undefined, hoist: false, rank: "0" };
+  return {
+    name: "",
+    permissions: undefined,
+    colour: undefined,
+    hoist: false,
+    rank: "0",
+    createdAt: "0",
+    updatedAt: "0",
+  };
 }
 
 export const Role: MessageFns<Role> = {
@@ -134,6 +144,12 @@ export const Role: MessageFns<Role> = {
     }
     if (message.rank !== "0") {
       writer.uint32(40).int64(message.rank);
+    }
+    if (message.createdAt !== "0") {
+      writer.uint32(48).int64(message.createdAt);
+    }
+    if (message.updatedAt !== "0") {
+      writer.uint32(56).int64(message.updatedAt);
     }
     return writer;
   },
@@ -185,6 +201,22 @@ export const Role: MessageFns<Role> = {
           message.rank = reader.int64().toString();
           continue;
         }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.createdAt = reader.int64().toString();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.updatedAt = reader.int64().toString();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -201,6 +233,8 @@ export const Role: MessageFns<Role> = {
       colour: isSet(object.colour) ? globalThis.String(object.colour) : undefined,
       hoist: isSet(object.hoist) ? globalThis.Boolean(object.hoist) : false,
       rank: isSet(object.rank) ? globalThis.String(object.rank) : "0",
+      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
     };
   },
 
@@ -221,6 +255,12 @@ export const Role: MessageFns<Role> = {
     if (message.rank !== "0") {
       obj.rank = message.rank;
     }
+    if (message.createdAt !== "0") {
+      obj.createdAt = message.createdAt;
+    }
+    if (message.updatedAt !== "0") {
+      obj.updatedAt = message.updatedAt;
+    }
     return obj;
   },
 
@@ -236,6 +276,8 @@ export const Role: MessageFns<Role> = {
     message.colour = object.colour ?? undefined;
     message.hoist = object.hoist ?? false;
     message.rank = object.rank ?? "0";
+    message.createdAt = object.createdAt ?? "0";
+    message.updatedAt = object.updatedAt ?? "0";
     return message;
   },
 };

@@ -7,7 +7,6 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { File } from "../../shared/v1/files.js";
-import { Timestamp } from "../../shared/v1/time.js";
 import { OverrideField } from "./roles_db.js";
 
 export const protobufPackage = "service.v1";
@@ -99,16 +98,26 @@ export interface Channel {
   id: string;
   /** 'saved_messages', 'direct_message', 'group', 'text_channel' */
   channelType: string;
-  saved?: ChannelSavedMessages | undefined;
-  direct?: ChannelDirectMessage | undefined;
-  group?: ChannelGroup | undefined;
+  /** saved messages by the user */
+  saved?:
+    | ChannelSavedMessages
+    | undefined;
+  /** direct messages (P2P) between 2 people */
+  direct?:
+    | ChannelDirectMessage
+    | undefined;
+  /** channel of type group */
+  group?:
+    | ChannelGroup
+    | undefined;
+  /** a channel related to server */
   text?:
     | ChannelText
     | undefined;
   /** Maximum users allowed in voice channel */
   voiceMaxUsers?: number | undefined;
-  createdAt?: Timestamp | undefined;
-  updatedAt?: Timestamp | undefined;
+  createdAt: string;
+  updatedAt: string;
 }
 
 function createBaseChannelGroup(): ChannelGroup {
@@ -744,8 +753,8 @@ function createBaseChannel(): Channel {
     group: undefined,
     text: undefined,
     voiceMaxUsers: undefined,
-    createdAt: undefined,
-    updatedAt: undefined,
+    createdAt: "0",
+    updatedAt: "0",
   };
 }
 
@@ -772,11 +781,11 @@ export const Channel: MessageFns<Channel> = {
     if (message.voiceMaxUsers !== undefined) {
       writer.uint32(56).int32(message.voiceMaxUsers);
     }
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(message.createdAt, writer.uint32(66).fork()).join();
+    if (message.createdAt !== "0") {
+      writer.uint32(64).int64(message.createdAt);
     }
-    if (message.updatedAt !== undefined) {
-      Timestamp.encode(message.updatedAt, writer.uint32(74).fork()).join();
+    if (message.updatedAt !== "0") {
+      writer.uint32(72).int64(message.updatedAt);
     }
     return writer;
   },
@@ -845,19 +854,19 @@ export const Channel: MessageFns<Channel> = {
           continue;
         }
         case 8: {
-          if (tag !== 66) {
+          if (tag !== 64) {
             break;
           }
 
-          message.createdAt = Timestamp.decode(reader, reader.uint32());
+          message.createdAt = reader.int64().toString();
           continue;
         }
         case 9: {
-          if (tag !== 74) {
+          if (tag !== 72) {
             break;
           }
 
-          message.updatedAt = Timestamp.decode(reader, reader.uint32());
+          message.updatedAt = reader.int64().toString();
           continue;
         }
       }
@@ -878,8 +887,8 @@ export const Channel: MessageFns<Channel> = {
       group: isSet(object.group) ? ChannelGroup.fromJSON(object.group) : undefined,
       text: isSet(object.text) ? ChannelText.fromJSON(object.text) : undefined,
       voiceMaxUsers: isSet(object.voiceMaxUsers) ? globalThis.Number(object.voiceMaxUsers) : undefined,
-      createdAt: isSet(object.createdAt) ? Timestamp.fromJSON(object.createdAt) : undefined,
-      updatedAt: isSet(object.updatedAt) ? Timestamp.fromJSON(object.updatedAt) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
     };
   },
 
@@ -906,11 +915,11 @@ export const Channel: MessageFns<Channel> = {
     if (message.voiceMaxUsers !== undefined) {
       obj.voiceMaxUsers = Math.round(message.voiceMaxUsers);
     }
-    if (message.createdAt !== undefined) {
-      obj.createdAt = Timestamp.toJSON(message.createdAt);
+    if (message.createdAt !== "0") {
+      obj.createdAt = message.createdAt;
     }
-    if (message.updatedAt !== undefined) {
-      obj.updatedAt = Timestamp.toJSON(message.updatedAt);
+    if (message.updatedAt !== "0") {
+      obj.updatedAt = message.updatedAt;
     }
     return obj;
   },
@@ -935,12 +944,8 @@ export const Channel: MessageFns<Channel> = {
       ? ChannelText.fromPartial(object.text)
       : undefined;
     message.voiceMaxUsers = object.voiceMaxUsers ?? undefined;
-    message.createdAt = (object.createdAt !== undefined && object.createdAt !== null)
-      ? Timestamp.fromPartial(object.createdAt)
-      : undefined;
-    message.updatedAt = (object.updatedAt !== undefined && object.updatedAt !== null)
-      ? Timestamp.fromPartial(object.updatedAt)
-      : undefined;
+    message.createdAt = object.createdAt ?? "0";
+    message.updatedAt = object.updatedAt ?? "0";
     return message;
   },
 };

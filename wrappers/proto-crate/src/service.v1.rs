@@ -38,6 +38,10 @@ pub struct Role {
     /// Ranking of this role
     #[prost(int64, tag = "5")]
     pub rank: i64,
+    #[prost(int64, tag = "6")]
+    pub created_at: i64,
+    #[prost(int64, tag = "7")]
+    pub updated_at: i64,
 }
 /// Group channel type
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -137,32 +141,25 @@ pub struct Channel {
     /// 'saved_messages', 'direct_message', 'group', 'text_channel'
     #[prost(string, tag = "2")]
     pub channel_type: ::prost::alloc::string::String,
+    /// saved messages by the user
+    #[prost(message, optional, tag = "3")]
+    pub saved: ::core::option::Option<ChannelSavedMessages>,
+    /// direct messages (P2P) between 2 people
+    #[prost(message, optional, tag = "4")]
+    pub direct: ::core::option::Option<ChannelDirectMessage>,
+    /// channel of type group
+    #[prost(message, optional, tag = "5")]
+    pub group: ::core::option::Option<ChannelGroup>,
+    /// a channel related to server
+    #[prost(message, optional, tag = "6")]
+    pub text: ::core::option::Option<ChannelText>,
     /// Maximum users allowed in voice channel
     #[prost(int32, optional, tag = "7")]
     pub voice_max_users: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "8")]
-    pub created_at: ::core::option::Option<super::super::shared::v1::Timestamp>,
-    #[prost(message, optional, tag = "9")]
-    pub updated_at: ::core::option::Option<super::super::shared::v1::Timestamp>,
-    /// Channel types (oneof - only one is set based on channel_type)
-    #[prost(oneof = "channel::ChannelData", tags = "3, 4, 5, 6")]
-    pub channel_data: ::core::option::Option<channel::ChannelData>,
-}
-/// Nested message and enum types in `Channel`.
-pub mod channel {
-    /// Channel types (oneof - only one is set based on channel_type)
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum ChannelData {
-        #[prost(message, tag = "3")]
-        Saved(super::ChannelSavedMessages),
-        #[prost(message, tag = "4")]
-        Direct(super::ChannelDirectMessage),
-        #[prost(message, tag = "5")]
-        Group(super::ChannelGroup),
-        #[prost(message, tag = "6")]
-        Text(super::ChannelText),
-    }
+    #[prost(int64, tag = "8")]
+    pub created_at: i64,
+    #[prost(int64, tag = "9")]
+    pub updated_at: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

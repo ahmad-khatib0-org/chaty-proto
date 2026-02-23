@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/roles_db.proto";
 import "shared/v1/files.proto";
 import "shared/v1/time.proto";
-import "service/v1/roles_db.proto";
 
 // ===========================================
 // CHANNEL TYPES
@@ -75,17 +75,20 @@ message Channel {
   // 'saved_messages', 'direct_message', 'group', 'text_channel'
   string channel_type = 2;
 
-  // Channel types (oneof - only one is set based on channel_type)
-  oneof channel_data {
-    ChannelSavedMessages saved = 3;
-    ChannelDirectMessage direct = 4;
-    ChannelGroup group = 5;
-    ChannelText text = 6;
-  }
+  // Channel types ( only one is set based on channel_type)
+
+  // saved messages by the user
+  ChannelSavedMessages saved = 3;
+  // direct messages (P2P) between 2 people
+  ChannelDirectMessage direct = 4;
+  // channel of type group
+  ChannelGroup group = 5;
+  // a channel related to server
+  ChannelText text = 6;
 
   // Maximum users allowed in voice channel
   optional int32 voice_max_users = 7;
 
-  shared.v1.Timestamp created_at = 8;
-  shared.v1.Timestamp updated_at = 9;
+  int64 created_at = 8;
+  int64 updated_at = 9;
 }

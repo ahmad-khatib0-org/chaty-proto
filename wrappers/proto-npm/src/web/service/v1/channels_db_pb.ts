@@ -4,19 +4,18 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { File } from "../../shared/v1/files_pb.js";
-import { file_shared_v1_files } from "../../shared/v1/files_pb.js";
-import type { Timestamp } from "../../shared/v1/time_pb.js";
-import { file_shared_v1_time } from "../../shared/v1/time_pb.js";
 import type { OverrideField } from "./roles_db_pb.js";
 import { file_service_v1_roles_db } from "./roles_db_pb.js";
+import type { File } from "../../shared/v1/files_pb.js";
+import { file_shared_v1_files } from "../../shared/v1/files_pb.js";
+import { file_shared_v1_time } from "../../shared/v1/time_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/channels_db.proto.
  */
 export const file_service_v1_channels_db: GenFile = /*@__PURE__*/
-  fileDesc("ChxzZXJ2aWNlL3YxL2NoYW5uZWxzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvQBCgxDaGFubmVsR3JvdXASDwoHdXNlcl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhgKC2Rlc2NyaXB0aW9uGAMgASgJSACIAQESEgoKcmVjaXBpZW50cxgEIAMoCRIdCgRpY29uGAUgASgLMg8uc2hhcmVkLnYxLkZpbGUSHAoPbGFzdF9tZXNzYWdlX2lkGAYgASgJSAGIAQESGAoLcGVybWlzc2lvbnMYByABKANIAogBARIMCgRuc2Z3GAggASgIQg4KDF9kZXNjcmlwdGlvbkISChBfbGFzdF9tZXNzYWdlX2lkQg4KDF9wZXJtaXNzaW9ucyInChRDaGFubmVsU2F2ZWRNZXNzYWdlcxIPCgd1c2VyX2lkGAEgASgJIooDCgtDaGFubmVsVGV4dBIRCglzZXJ2ZXJfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEh0KBGljb24YBCABKAsyDy5zaGFyZWQudjEuRmlsZRIcCg9sYXN0X21lc3NhZ2VfaWQYBSABKAlIAYgBARI2ChNkZWZhdWx0X3Blcm1pc3Npb25zGAYgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEkYKEHJvbGVfcGVybWlzc2lvbnMYByADKAsyLC5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0LlJvbGVQZXJtaXNzaW9uc0VudHJ5EgwKBG5zZncYCCABKAgaUQoUUm9sZVBlcm1pc3Npb25zRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkOgI4AUIOCgxfZGVzY3JpcHRpb25CEgoQX2xhc3RfbWVzc2FnZV9pZCJsChRDaGFubmVsRGlyZWN0TWVzc2FnZRIOCgZhY3RpdmUYASABKAgSEgoKcmVjaXBpZW50cxgCIAMoCRIcCg9sYXN0X21lc3NhZ2VfaWQYAyABKAlIAIgBAUISChBfbGFzdF9tZXNzYWdlX2lkIvwCCgdDaGFubmVsEgoKAmlkGAEgASgJEhQKDGNoYW5uZWxfdHlwZRgCIAEoCRIxCgVzYXZlZBgDIAEoCzIgLnNlcnZpY2UudjEuQ2hhbm5lbFNhdmVkTWVzc2FnZXNIABIyCgZkaXJlY3QYBCABKAsyIC5zZXJ2aWNlLnYxLkNoYW5uZWxEaXJlY3RNZXNzYWdlSAASKQoFZ3JvdXAYBSABKAsyGC5zZXJ2aWNlLnYxLkNoYW5uZWxHcm91cEgAEicKBHRleHQYBiABKAsyFy5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0SAASHAoPdm9pY2VfbWF4X3VzZXJzGAcgASgFSAGIAQESKAoKY3JlYXRlZF9hdBgIIAEoCzIULnNoYXJlZC52MS5UaW1lc3RhbXASKAoKdXBkYXRlZF9hdBgJIAEoCzIULnNoYXJlZC52MS5UaW1lc3RhbXBCDgoMY2hhbm5lbF9kYXRhQhIKEF92b2ljZV9tYXhfdXNlcnNiBnByb3RvMw", [file_shared_v1_files, file_shared_v1_time, file_service_v1_roles_db]);
+  fileDesc("ChxzZXJ2aWNlL3YxL2NoYW5uZWxzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIvQBCgxDaGFubmVsR3JvdXASDwoHdXNlcl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhgKC2Rlc2NyaXB0aW9uGAMgASgJSACIAQESEgoKcmVjaXBpZW50cxgEIAMoCRIdCgRpY29uGAUgASgLMg8uc2hhcmVkLnYxLkZpbGUSHAoPbGFzdF9tZXNzYWdlX2lkGAYgASgJSAGIAQESGAoLcGVybWlzc2lvbnMYByABKANIAogBARIMCgRuc2Z3GAggASgIQg4KDF9kZXNjcmlwdGlvbkISChBfbGFzdF9tZXNzYWdlX2lkQg4KDF9wZXJtaXNzaW9ucyInChRDaGFubmVsU2F2ZWRNZXNzYWdlcxIPCgd1c2VyX2lkGAEgASgJIooDCgtDaGFubmVsVGV4dBIRCglzZXJ2ZXJfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEh0KBGljb24YBCABKAsyDy5zaGFyZWQudjEuRmlsZRIcCg9sYXN0X21lc3NhZ2VfaWQYBSABKAlIAYgBARI2ChNkZWZhdWx0X3Blcm1pc3Npb25zGAYgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEkYKEHJvbGVfcGVybWlzc2lvbnMYByADKAsyLC5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0LlJvbGVQZXJtaXNzaW9uc0VudHJ5EgwKBG5zZncYCCABKAgaUQoUUm9sZVBlcm1pc3Npb25zRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkOgI4AUIOCgxfZGVzY3JpcHRpb25CEgoQX2xhc3RfbWVzc2FnZV9pZCJsChRDaGFubmVsRGlyZWN0TWVzc2FnZRIOCgZhY3RpdmUYASABKAgSEgoKcmVjaXBpZW50cxgCIAMoCRIcCg9sYXN0X21lc3NhZ2VfaWQYAyABKAlIAIgBAUISChBfbGFzdF9tZXNzYWdlX2lkIrgCCgdDaGFubmVsEgoKAmlkGAEgASgJEhQKDGNoYW5uZWxfdHlwZRgCIAEoCRIvCgVzYXZlZBgDIAEoCzIgLnNlcnZpY2UudjEuQ2hhbm5lbFNhdmVkTWVzc2FnZXMSMAoGZGlyZWN0GAQgASgLMiAuc2VydmljZS52MS5DaGFubmVsRGlyZWN0TWVzc2FnZRInCgVncm91cBgFIAEoCzIYLnNlcnZpY2UudjEuQ2hhbm5lbEdyb3VwEiUKBHRleHQYBiABKAsyFy5zZXJ2aWNlLnYxLkNoYW5uZWxUZXh0EhwKD3ZvaWNlX21heF91c2VycxgHIAEoBUgAiAEBEhIKCmNyZWF0ZWRfYXQYCCABKAMSEgoKdXBkYXRlZF9hdBgJIAEoA0ISChBfdm9pY2VfbWF4X3VzZXJzYgZwcm90bzM", [file_service_v1_roles_db, file_shared_v1_files, file_shared_v1_time]);
 
 /**
  * Group channel type
@@ -237,35 +236,32 @@ export type Channel = Message<"service.v1.Channel"> & {
   channelType: string;
 
   /**
-   * Channel types (oneof - only one is set based on channel_type)
+   * saved messages by the user
    *
-   * @generated from oneof service.v1.Channel.channel_data
+   * @generated from field: service.v1.ChannelSavedMessages saved = 3;
    */
-  channelData: {
-    /**
-     * @generated from field: service.v1.ChannelSavedMessages saved = 3;
-     */
-    value: ChannelSavedMessages;
-    case: "saved";
-  } | {
-    /**
-     * @generated from field: service.v1.ChannelDirectMessage direct = 4;
-     */
-    value: ChannelDirectMessage;
-    case: "direct";
-  } | {
-    /**
-     * @generated from field: service.v1.ChannelGroup group = 5;
-     */
-    value: ChannelGroup;
-    case: "group";
-  } | {
-    /**
-     * @generated from field: service.v1.ChannelText text = 6;
-     */
-    value: ChannelText;
-    case: "text";
-  } | { case: undefined; value?: undefined };
+  saved?: ChannelSavedMessages;
+
+  /**
+   * direct messages (P2P) between 2 people
+   *
+   * @generated from field: service.v1.ChannelDirectMessage direct = 4;
+   */
+  direct?: ChannelDirectMessage;
+
+  /**
+   * channel of type group
+   *
+   * @generated from field: service.v1.ChannelGroup group = 5;
+   */
+  group?: ChannelGroup;
+
+  /**
+   * a channel related to server
+   *
+   * @generated from field: service.v1.ChannelText text = 6;
+   */
+  text?: ChannelText;
 
   /**
    * Maximum users allowed in voice channel
@@ -275,14 +271,14 @@ export type Channel = Message<"service.v1.Channel"> & {
   voiceMaxUsers?: number;
 
   /**
-   * @generated from field: shared.v1.Timestamp created_at = 8;
+   * @generated from field: int64 created_at = 8;
    */
-  createdAt?: Timestamp;
+  createdAt: bigint;
 
   /**
-   * @generated from field: shared.v1.Timestamp updated_at = 9;
+   * @generated from field: int64 updated_at = 9;
    */
-  updatedAt?: Timestamp;
+  updatedAt: bigint;
 };
 
 /**
