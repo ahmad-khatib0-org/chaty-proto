@@ -1337,6 +1337,7 @@ pub struct MessageWebhook {
 /// SYSTEM MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystem {
     #[prost(message, optional, tag = "1")]
@@ -1519,6 +1520,7 @@ pub struct EmbedVideo {
 }
 /// Information about special remote content
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedWebsiteMetadataSpecial {
     /// No remote content
@@ -1624,6 +1626,7 @@ pub struct EmbedStreamable {
 }
 /// Website metadata
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedWebsiteMetadata {
     /// Direct URL to web page (optional)
@@ -1683,6 +1686,7 @@ pub struct EmbedText {
 }
 /// Embed (for different embed types)
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Embed {
     #[prost(message, optional, tag = "1")]
@@ -1700,6 +1704,7 @@ pub struct Embed {
 /// INTERACTIONS
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Interactions {
     /// Reactions which should always appear and be distinct (optional)
@@ -1713,6 +1718,7 @@ pub struct Interactions {
 /// MASQUERADE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Masquerade {
     /// Replace the display name shown on this message (optional)
@@ -1729,6 +1735,7 @@ pub struct Masquerade {
 /// MAIN MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
     /// Unique Id

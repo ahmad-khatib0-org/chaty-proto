@@ -89,6 +89,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "service.v1.MessageSystem",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "service.v1.EmbedImage",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
@@ -129,7 +133,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
-      "shared.v1.StringArray",
+      "service.v1.EmbedWebsiteMetadataSpecial",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.EmbedWebsiteMetadata",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.Embed",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.Interactions",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.Masquerade",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.Message",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
