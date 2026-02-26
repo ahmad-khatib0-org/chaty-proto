@@ -164,7 +164,7 @@ export interface MessageWebhook {
 
 /**
  * ===========================================
- * SYSTEM MESSAGE (oneof for enum variants)
+ * SYSTEM MESSAGE
  * ===========================================
  */
 export interface MessageSystem {
@@ -422,7 +422,7 @@ export interface EmbedText {
   colour?: string | undefined;
 }
 
-/** Embed (oneof for different embed types) */
+/** Embed (for different embed types) */
 export interface Embed {
   website?: EmbedWebsiteMetadata | undefined;
   image?: EmbedImage | undefined;

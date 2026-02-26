@@ -16,7 +16,7 @@ import type { Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages_db.proto.
  */
 export const file_service_v1_messages_db: GenFile = /*@__PURE__*/
-  fileDesc("ChxzZXJ2aWNlL3YxL21lc3NhZ2VzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIj4KDk1lc3NhZ2VXZWJob29rEgwKBG5hbWUYASABKAkSEwoGYXZhdGFyGAIgASgJSACIAQFCCQoHX2F2YXRhciKxBwoNTWVzc2FnZVN5c3RlbRItCgR0ZXh0GAEgASgLMh0uc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVGV4dEgAEjgKCnVzZXJfYWRkZWQYAiABKAsyIi5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1Vc2VyQWRkZWRIABI6Cgt1c2VyX3JlbW92ZRgDIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJSZW1vdmVIABI6Cgt1c2VyX2pvaW5lZBgEIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJKb2luZWRIABI2Cgl1c2VyX2xlZnQYBSABKAsyIS5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1Vc2VyTGVmdEgAEjoKC3VzZXJfa2lja2VkGAYgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlcktpY2tlZEgAEjoKC3VzZXJfYmFubmVkGAcgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlckJhbm5lZEgAEkIKD2NoYW5uZWxfcmVuYW1lZBgIIAEoCzInLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbUNoYW5uZWxSZW5hbWVkSAASWQobY2hhbm5lbF9kZXNjcmlwdGlvbl9jaGFuZ2VkGAkgASgLMjIuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbERlc2NyaXB0aW9uQ2hhbmdlZEgAEksKFGNoYW5uZWxfaWNvbl9jaGFuZ2VkGAogASgLMisuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbEljb25DaGFuZ2VkSAASVQoZY2hhbm5lbF9vd25lcnNoaXBfY2hhbmdlZBgLIAEoCzIwLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbUNoYW5uZWxPd25lcnNoaXBDaGFuZ2VkSAASQAoObWVzc2FnZV9waW5uZWQYDCABKAsyJi5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1NZXNzYWdlUGlubmVkSAASRAoQbWVzc2FnZV91bnBpbm5lZBgNIAEoCzIoLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbU1lc3NhZ2VVbnBpbm5lZEgAEjwKDGNhbGxfc3RhcnRlZBgOIAEoCzIkLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbUNhbGxTdGFydGVkSABCBgoEdHlwZSIkChFNZXNzYWdlU3lzdGVtVGV4dBIPCgdjb250ZW50GAEgASgJIjAKFk1lc3NhZ2VTeXN0ZW1Vc2VyQWRkZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiMQoXTWVzc2FnZVN5c3RlbVVzZXJSZW1vdmUSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiJQoXTWVzc2FnZVN5c3RlbVVzZXJKb2luZWQSCgoCaWQYASABKAkiIwoVTWVzc2FnZVN5c3RlbVVzZXJMZWZ0EgoKAmlkGAEgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VyS2lja2VkEgoKAmlkGAEgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VyQmFubmVkEgoKAmlkGAEgASgJIjcKG01lc3NhZ2VTeXN0ZW1DaGFubmVsUmVuYW1lZBIMCgRuYW1lGAEgASgJEgoKAmJ5GAIgASgJIjQKJk1lc3NhZ2VTeXN0ZW1DaGFubmVsRGVzY3JpcHRpb25DaGFuZ2VkEgoKAmJ5GAEgASgJIi0KH01lc3NhZ2VTeXN0ZW1DaGFubmVsSWNvbkNoYW5nZWQSCgoCYnkYASABKAkiQAokTWVzc2FnZVN5c3RlbUNoYW5uZWxPd25lcnNoaXBDaGFuZ2VkEgwKBGZyb20YASABKAkSCgoCdG8YAiABKAkiNAoaTWVzc2FnZVN5c3RlbU1lc3NhZ2VQaW5uZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiNgocTWVzc2FnZVN5c3RlbU1lc3NhZ2VVbnBpbm5lZBIKCgJpZBgBIAEoCRIKCgJieRgCIAEoCSI7ChhNZXNzYWdlU3lzdGVtQ2FsbFN0YXJ0ZWQSCgoCYnkYASABKAkSEwoLZmluaXNoZWRfYXQYAiABKAMiXQoKRW1iZWRJbWFnZRILCgN1cmwYASABKAkSDQoFd2lkdGgYAiABKAUSDgoGaGVpZ2h0GAMgASgFEiMKBHNpemUYBCABKA4yFS5zZXJ2aWNlLnYxLkltYWdlU2l6ZSI4CgpFbWJlZFZpZGVvEgsKA3VybBgBIAEoCRINCgV3aWR0aBgCIAEoBRIOCgZoZWlnaHQYAyABKAUi3gMKG0VtYmVkV2Vic2l0ZU1ldGFkYXRhU3BlY2lhbBIgCgRub25lGAEgASgLMhAuc2hhcmVkLnYxLkVtcHR5SAASHwoDZ2lmGAIgASgLMhAuc2hhcmVkLnYxLkVtcHR5SAASKwoHeW91dHViZRgDIAEoCzIYLnNlcnZpY2UudjEuRW1iZWRZb3VUdWJlSAASMQoKbGlnaHRzcGVlZBgEIAEoCzIbLnNlcnZpY2UudjEuRW1iZWRMaWdodHNwZWVkSAASKQoGdHdpdGNoGAUgASgLMhcuc2VydmljZS52MS5FbWJlZFR3aXRjaEgAEisKB3Nwb3RpZnkYBiABKAsyGC5zZXJ2aWNlLnYxLkVtYmVkU3BvdGlmeUgAEiYKCnNvdW5kY2xvdWQYByABKAsyEC5zaGFyZWQudjEuRW1wdHlIABItCghiYW5kY2FtcBgIIAEoCzIZLnNlcnZpY2UudjEuRW1iZWRCYW5kY2FtcEgAEjIKC2FwcGxlX211c2ljGAkgASgLMhsuc2VydmljZS52MS5FbWJlZEFwcGxlTXVzaWNIABIxCgpzdHJlYW1hYmxlGAogASgLMhsuc2VydmljZS52MS5FbWJlZFN0cmVhbWFibGVIAEIGCgR0eXBlIkAKDEVtYmVkWW91VHViZRIKCgJpZBgBIAEoCRIWCgl0aW1lc3RhbXAYAiABKAlIAIgBAUIMCgpfdGltZXN0YW1wIk8KD0VtYmVkTGlnaHRzcGVlZBIwCgxjb250ZW50X3R5cGUYASABKA4yGi5zZXJ2aWNlLnYxLkxpZ2h0c3BlZWRUeXBlEgoKAmlkGAIgASgJIkcKC0VtYmVkVHdpdGNoEiwKDGNvbnRlbnRfdHlwZRgBIAEoDjIWLnNlcnZpY2UudjEuVHdpdGNoVHlwZRIKCgJpZBgCIAEoCSIwCgxFbWJlZFNwb3RpZnkSFAoMY29udGVudF90eXBlGAEgASgJEgoKAmlkGAIgASgJIksKDUVtYmVkQmFuZGNhbXASLgoMY29udGVudF90eXBlGAEgASgOMhguc2VydmljZS52MS5CYW5kY2FtcFR5cGUSCgoCaWQYAiABKAkiNQoPRW1iZWRBcHBsZU11c2ljEhAKCGFsYnVtX2lkGAEgASgJEhAKCHRyYWNrX2lkGAIgASgJIh0KD0VtYmVkU3RyZWFtYWJsZRIKCgJpZBgBIAEoCSKWAwoURW1iZWRXZWJzaXRlTWV0YWRhdGESEAoDdXJsGAEgASgJSACIAQESGQoMb3JpZ2luYWxfdXJsGAIgASgJSAGIAQESOAoHc3BlY2lhbBgDIAEoCzInLnNlcnZpY2UudjEuRW1iZWRXZWJzaXRlTWV0YWRhdGFTcGVjaWFsEhIKBXRpdGxlGAQgASgJSAKIAQESGAoLZGVzY3JpcHRpb24YBSABKAlIA4gBARIlCgVpbWFnZRgGIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRJbWFnZRIlCgV2aWRlbxgHIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRWaWRlbxIWCglzaXRlX25hbWUYCCABKAlIBIgBARIVCghpY29uX3VybBgJIAEoCUgFiAEBEhMKBmNvbG91chgKIAEoCUgGiAEBQgYKBF91cmxCDwoNX29yaWdpbmFsX3VybEIICgZfdGl0bGVCDgoMX2Rlc2NyaXB0aW9uQgwKCl9zaXRlX25hbWVCCwoJX2ljb25fdXJsQgkKB19jb2xvdXIi4AEKCUVtYmVkVGV4dBIVCghpY29uX3VybBgBIAEoCUgAiAEBEhAKA3VybBgCIAEoCUgBiAEBEhIKBXRpdGxlGAMgASgJSAKIAQESGAoLZGVzY3JpcHRpb24YBCABKAlIA4gBARIjCgVtZWRpYRgFIAEoCzIPLnNoYXJlZC52MS5GaWxlSASIAQESEwoGY29sb3VyGAYgASgJSAWIAQFCCwoJX2ljb25fdXJsQgYKBF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIICgZfbWVkaWFCCQoHX2NvbG91ciLfAQoFRW1iZWQSMwoHd2Vic2l0ZRgBIAEoCzIgLnNlcnZpY2UudjEuRW1iZWRXZWJzaXRlTWV0YWRhdGFIABInCgVpbWFnZRgCIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRJbWFnZUgAEicKBXZpZGVvGAMgASgLMhYuc2VydmljZS52MS5FbWJlZFZpZGVvSAASJQoEdGV4dBgEIAEoCzIVLnNlcnZpY2UudjEuRW1iZWRUZXh0SAASIAoEbm9uZRgFIAEoCzIQLnNoYXJlZC52MS5FbXB0eUgAQgYKBHR5cGUiPQoMSW50ZXJhY3Rpb25zEhEKCXJlYWN0aW9ucxgBIAMoCRIaChJyZXN0cmljdF9yZWFjdGlvbnMYAiABKAgiaAoKTWFzcXVlcmFkZRIRCgRuYW1lGAEgASgJSACIAQESEwoGYXZhdGFyGAIgASgJSAGIAQESEwoGY29sb3VyGAMgASgJSAKIAQFCBwoFX25hbWVCCQoHX2F2YXRhckIJCgdfY29sb3VyIqwFCgdNZXNzYWdlEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoFbm9uY2UYAyABKAlIAIgBARIRCglhdXRob3JfaWQYBCABKAkSKwoHd2ViaG9vaxgFIAEoCzIaLnNlcnZpY2UudjEuTWVzc2FnZVdlYmhvb2sSFAoHY29udGVudBgGIAEoCUgBiAEBEikKBnN5c3RlbRgHIAEoCzIZLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbRIkCgthdHRhY2htZW50cxgIIAMoCzIPLnNoYXJlZC52MS5GaWxlEhIKBWZsYWdzGAkgASgFSAKIAQESIQoGZW1iZWRzGAogAygLMhEuc2VydmljZS52MS5FbWJlZBIQCghtZW50aW9ucxgLIAMoCRIVCg1yb2xlX21lbnRpb25zGAwgAygJEg8KB3JlcGxpZXMYDSADKAkSNQoJcmVhY3Rpb25zGA4gAygLMiIuc2VydmljZS52MS5NZXNzYWdlLlJlYWN0aW9uc0VudHJ5Ei4KDGludGVyYWN0aW9ucxgPIAEoCzIYLnNlcnZpY2UudjEuSW50ZXJhY3Rpb25zEioKCm1hc3F1ZXJhZGUYECABKAsyFi5zZXJ2aWNlLnYxLk1hc3F1ZXJhZGUSEwoGcGlubmVkGBEgASgISAOIAQESFgoJZWRpdGVkX2F0GBIgASgDSASIAQESEgoKY3JlYXRlZF9hdBgTIAEoAxpICg5SZWFjdGlvbnNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5zaGFyZWQudjEuU3RyaW5nQXJyYXk6AjgBQggKBl9ub25jZUIKCghfY29udGVudEIICgZfZmxhZ3NCCQoHX3Bpbm5lZEIMCgpfZWRpdGVkX2F0KiMKCUltYWdlU2l6ZRIJCgVMQVJHRRAAEgsKB1BSRVZJRVcQASpDCgpUd2l0Y2hUeXBlEhIKDlRXSVRDSF9DSEFOTkVMEAASEAoMVFdJVENIX1ZJREVPEAESDwoLVFdJVENIX0NMSVAQAiooCg5MaWdodHNwZWVkVHlwZRIWChJMSUdIVFNQRUVEX0NIQU5ORUwQACo2CgxCYW5kY2FtcFR5cGUSEgoOQkFORENBTVBfQUxCVU0QABISCg5CQU5EQ0FNUF9UUkFDSxABYgZwcm90bzM", [file_shared_v1_files, file_shared_v1_types, file_shared_v1_wrappers]);
+  fileDesc("ChxzZXJ2aWNlL3YxL21lc3NhZ2VzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIj4KDk1lc3NhZ2VXZWJob29rEgwKBG5hbWUYASABKAkSEwoGYXZhdGFyGAIgASgJSACIAQFCCQoHX2F2YXRhciKNBwoNTWVzc2FnZVN5c3RlbRIrCgR0ZXh0GAEgASgLMh0uc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVGV4dBI2Cgp1c2VyX2FkZGVkGAIgASgLMiIuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlckFkZGVkEjgKC3VzZXJfcmVtb3ZlGAMgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlclJlbW92ZRI4Cgt1c2VyX2pvaW5lZBgEIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJKb2luZWQSNAoJdXNlcl9sZWZ0GAUgASgLMiEuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlckxlZnQSOAoLdXNlcl9raWNrZWQYBiABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1Vc2VyS2lja2VkEjgKC3VzZXJfYmFubmVkGAcgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlckJhbm5lZBJACg9jaGFubmVsX3JlbmFtZWQYCCABKAsyJy5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1DaGFubmVsUmVuYW1lZBJXChtjaGFubmVsX2Rlc2NyaXB0aW9uX2NoYW5nZWQYCSABKAsyMi5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1DaGFubmVsRGVzY3JpcHRpb25DaGFuZ2VkEkkKFGNoYW5uZWxfaWNvbl9jaGFuZ2VkGAogASgLMisuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbEljb25DaGFuZ2VkElMKGWNoYW5uZWxfb3duZXJzaGlwX2NoYW5nZWQYCyABKAsyMC5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1DaGFubmVsT3duZXJzaGlwQ2hhbmdlZBI+Cg5tZXNzYWdlX3Bpbm5lZBgMIAEoCzImLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbU1lc3NhZ2VQaW5uZWQSQgoQbWVzc2FnZV91bnBpbm5lZBgNIAEoCzIoLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbU1lc3NhZ2VVbnBpbm5lZBI6CgxjYWxsX3N0YXJ0ZWQYDiABKAsyJC5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1DYWxsU3RhcnRlZCIkChFNZXNzYWdlU3lzdGVtVGV4dBIPCgdjb250ZW50GAEgASgJIjAKFk1lc3NhZ2VTeXN0ZW1Vc2VyQWRkZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiMQoXTWVzc2FnZVN5c3RlbVVzZXJSZW1vdmUSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiJQoXTWVzc2FnZVN5c3RlbVVzZXJKb2luZWQSCgoCaWQYASABKAkiIwoVTWVzc2FnZVN5c3RlbVVzZXJMZWZ0EgoKAmlkGAEgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VyS2lja2VkEgoKAmlkGAEgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VyQmFubmVkEgoKAmlkGAEgASgJIjcKG01lc3NhZ2VTeXN0ZW1DaGFubmVsUmVuYW1lZBIMCgRuYW1lGAEgASgJEgoKAmJ5GAIgASgJIjQKJk1lc3NhZ2VTeXN0ZW1DaGFubmVsRGVzY3JpcHRpb25DaGFuZ2VkEgoKAmJ5GAEgASgJIi0KH01lc3NhZ2VTeXN0ZW1DaGFubmVsSWNvbkNoYW5nZWQSCgoCYnkYASABKAkiQAokTWVzc2FnZVN5c3RlbUNoYW5uZWxPd25lcnNoaXBDaGFuZ2VkEgwKBGZyb20YASABKAkSCgoCdG8YAiABKAkiNAoaTWVzc2FnZVN5c3RlbU1lc3NhZ2VQaW5uZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiNgocTWVzc2FnZVN5c3RlbU1lc3NhZ2VVbnBpbm5lZBIKCgJpZBgBIAEoCRIKCgJieRgCIAEoCSI7ChhNZXNzYWdlU3lzdGVtQ2FsbFN0YXJ0ZWQSCgoCYnkYASABKAkSEwoLZmluaXNoZWRfYXQYAiABKAMiXQoKRW1iZWRJbWFnZRILCgN1cmwYASABKAkSDQoFd2lkdGgYAiABKAUSDgoGaGVpZ2h0GAMgASgFEiMKBHNpemUYBCABKA4yFS5zZXJ2aWNlLnYxLkltYWdlU2l6ZSI4CgpFbWJlZFZpZGVvEgsKA3VybBgBIAEoCRINCgV3aWR0aBgCIAEoBRIOCgZoZWlnaHQYAyABKAUiwgMKG0VtYmVkV2Vic2l0ZU1ldGFkYXRhU3BlY2lhbBIeCgRub25lGAEgASgLMhAuc2hhcmVkLnYxLkVtcHR5Eh0KA2dpZhgCIAEoCzIQLnNoYXJlZC52MS5FbXB0eRIpCgd5b3V0dWJlGAMgASgLMhguc2VydmljZS52MS5FbWJlZFlvdVR1YmUSLwoKbGlnaHRzcGVlZBgEIAEoCzIbLnNlcnZpY2UudjEuRW1iZWRMaWdodHNwZWVkEicKBnR3aXRjaBgFIAEoCzIXLnNlcnZpY2UudjEuRW1iZWRUd2l0Y2gSKQoHc3BvdGlmeRgGIAEoCzIYLnNlcnZpY2UudjEuRW1iZWRTcG90aWZ5EiQKCnNvdW5kY2xvdWQYByABKAsyEC5zaGFyZWQudjEuRW1wdHkSKwoIYmFuZGNhbXAYCCABKAsyGS5zZXJ2aWNlLnYxLkVtYmVkQmFuZGNhbXASMAoLYXBwbGVfbXVzaWMYCSABKAsyGy5zZXJ2aWNlLnYxLkVtYmVkQXBwbGVNdXNpYxIvCgpzdHJlYW1hYmxlGAogASgLMhsuc2VydmljZS52MS5FbWJlZFN0cmVhbWFibGUiQAoMRW1iZWRZb3VUdWJlEgoKAmlkGAEgASgJEhYKCXRpbWVzdGFtcBgCIAEoCUgAiAEBQgwKCl90aW1lc3RhbXAiTwoPRW1iZWRMaWdodHNwZWVkEjAKDGNvbnRlbnRfdHlwZRgBIAEoDjIaLnNlcnZpY2UudjEuTGlnaHRzcGVlZFR5cGUSCgoCaWQYAiABKAkiRwoLRW1iZWRUd2l0Y2gSLAoMY29udGVudF90eXBlGAEgASgOMhYuc2VydmljZS52MS5Ud2l0Y2hUeXBlEgoKAmlkGAIgASgJIjAKDEVtYmVkU3BvdGlmeRIUCgxjb250ZW50X3R5cGUYASABKAkSCgoCaWQYAiABKAkiSwoNRW1iZWRCYW5kY2FtcBIuCgxjb250ZW50X3R5cGUYASABKA4yGC5zZXJ2aWNlLnYxLkJhbmRjYW1wVHlwZRIKCgJpZBgCIAEoCSI1Cg9FbWJlZEFwcGxlTXVzaWMSEAoIYWxidW1faWQYASABKAkSEAoIdHJhY2tfaWQYAiABKAkiHQoPRW1iZWRTdHJlYW1hYmxlEgoKAmlkGAEgASgJIpYDChRFbWJlZFdlYnNpdGVNZXRhZGF0YRIQCgN1cmwYASABKAlIAIgBARIZCgxvcmlnaW5hbF91cmwYAiABKAlIAYgBARI4CgdzcGVjaWFsGAMgASgLMicuc2VydmljZS52MS5FbWJlZFdlYnNpdGVNZXRhZGF0YVNwZWNpYWwSEgoFdGl0bGUYBCABKAlIAogBARIYCgtkZXNjcmlwdGlvbhgFIAEoCUgDiAEBEiUKBWltYWdlGAYgASgLMhYuc2VydmljZS52MS5FbWJlZEltYWdlEiUKBXZpZGVvGAcgASgLMhYuc2VydmljZS52MS5FbWJlZFZpZGVvEhYKCXNpdGVfbmFtZRgIIAEoCUgEiAEBEhUKCGljb25fdXJsGAkgASgJSAWIAQESEwoGY29sb3VyGAogASgJSAaIAQFCBgoEX3VybEIPCg1fb3JpZ2luYWxfdXJsQggKBl90aXRsZUIOCgxfZGVzY3JpcHRpb25CDAoKX3NpdGVfbmFtZUILCglfaWNvbl91cmxCCQoHX2NvbG91ciLgAQoJRW1iZWRUZXh0EhUKCGljb25fdXJsGAEgASgJSACIAQESEAoDdXJsGAIgASgJSAGIAQESEgoFdGl0bGUYAyABKAlIAogBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgDiAEBEiMKBW1lZGlhGAUgASgLMg8uc2hhcmVkLnYxLkZpbGVIBIgBARITCgZjb2xvdXIYBiABKAlIBYgBAUILCglfaWNvbl91cmxCBgoEX3VybEIICgZfdGl0bGVCDgoMX2Rlc2NyaXB0aW9uQggKBl9tZWRpYUIJCgdfY29sb3VyIs0BCgVFbWJlZBIxCgd3ZWJzaXRlGAEgASgLMiAuc2VydmljZS52MS5FbWJlZFdlYnNpdGVNZXRhZGF0YRIlCgVpbWFnZRgCIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRJbWFnZRIlCgV2aWRlbxgDIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRWaWRlbxIjCgR0ZXh0GAQgASgLMhUuc2VydmljZS52MS5FbWJlZFRleHQSHgoEbm9uZRgFIAEoCzIQLnNoYXJlZC52MS5FbXB0eSI9CgxJbnRlcmFjdGlvbnMSEQoJcmVhY3Rpb25zGAEgAygJEhoKEnJlc3RyaWN0X3JlYWN0aW9ucxgCIAEoCCJoCgpNYXNxdWVyYWRlEhEKBG5hbWUYASABKAlIAIgBARITCgZhdmF0YXIYAiABKAlIAYgBARITCgZjb2xvdXIYAyABKAlIAogBAUIHCgVfbmFtZUIJCgdfYXZhdGFyQgkKB19jb2xvdXIirAUKB01lc3NhZ2USCgoCaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRISCgVub25jZRgDIAEoCUgAiAEBEhEKCWF1dGhvcl9pZBgEIAEoCRIrCgd3ZWJob29rGAUgASgLMhouc2VydmljZS52MS5NZXNzYWdlV2ViaG9vaxIUCgdjb250ZW50GAYgASgJSAGIAQESKQoGc3lzdGVtGAcgASgLMhkuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtEiQKC2F0dGFjaG1lbnRzGAggAygLMg8uc2hhcmVkLnYxLkZpbGUSEgoFZmxhZ3MYCSABKAVIAogBARIhCgZlbWJlZHMYCiADKAsyES5zZXJ2aWNlLnYxLkVtYmVkEhAKCG1lbnRpb25zGAsgAygJEhUKDXJvbGVfbWVudGlvbnMYDCADKAkSDwoHcmVwbGllcxgNIAMoCRI1CglyZWFjdGlvbnMYDiADKAsyIi5zZXJ2aWNlLnYxLk1lc3NhZ2UuUmVhY3Rpb25zRW50cnkSLgoMaW50ZXJhY3Rpb25zGA8gASgLMhguc2VydmljZS52MS5JbnRlcmFjdGlvbnMSKgoKbWFzcXVlcmFkZRgQIAEoCzIWLnNlcnZpY2UudjEuTWFzcXVlcmFkZRITCgZwaW5uZWQYESABKAhIA4gBARIWCgllZGl0ZWRfYXQYEiABKANIBIgBARISCgpjcmVhdGVkX2F0GBMgASgDGkgKDlJlYWN0aW9uc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLnNoYXJlZC52MS5TdHJpbmdBcnJheToCOAFCCAoGX25vbmNlQgoKCF9jb250ZW50QggKBl9mbGFnc0IJCgdfcGlubmVkQgwKCl9lZGl0ZWRfYXQqIwoJSW1hZ2VTaXplEgkKBUxBUkdFEAASCwoHUFJFVklFVxABKkMKClR3aXRjaFR5cGUSEgoOVFdJVENIX0NIQU5ORUwQABIQCgxUV0lUQ0hfVklERU8QARIPCgtUV0lUQ0hfQ0xJUBACKigKDkxpZ2h0c3BlZWRUeXBlEhYKEkxJR0hUU1BFRURfQ0hBTk5FTBAAKjYKDEJhbmRjYW1wVHlwZRISCg5CQU5EQ0FNUF9BTEJVTRAAEhIKDkJBTkRDQU1QX1RSQUNLEAFiBnByb3RvMw", [file_shared_v1_files, file_shared_v1_types, file_shared_v1_wrappers]);
 
 /**
  * ===========================================
@@ -50,100 +50,81 @@ export const MessageWebhookSchema: GenMessage<MessageWebhook> = /*@__PURE__*/
 
 /**
  * ===========================================
- * SYSTEM MESSAGE (oneof for enum variants)
+ * SYSTEM MESSAGE
  * ===========================================
  *
  * @generated from message service.v1.MessageSystem
  */
 export type MessageSystem = Message$1<"service.v1.MessageSystem"> & {
   /**
-   * @generated from oneof service.v1.MessageSystem.type
+   * @generated from field: service.v1.MessageSystemText text = 1;
    */
-  type: {
-    /**
-     * @generated from field: service.v1.MessageSystemText text = 1;
-     */
-    value: MessageSystemText;
-    case: "text";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserAdded user_added = 2;
-     */
-    value: MessageSystemUserAdded;
-    case: "userAdded";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserRemove user_remove = 3;
-     */
-    value: MessageSystemUserRemove;
-    case: "userRemove";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserJoined user_joined = 4;
-     */
-    value: MessageSystemUserJoined;
-    case: "userJoined";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserLeft user_left = 5;
-     */
-    value: MessageSystemUserLeft;
-    case: "userLeft";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserKicked user_kicked = 6;
-     */
-    value: MessageSystemUserKicked;
-    case: "userKicked";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemUserBanned user_banned = 7;
-     */
-    value: MessageSystemUserBanned;
-    case: "userBanned";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemChannelRenamed channel_renamed = 8;
-     */
-    value: MessageSystemChannelRenamed;
-    case: "channelRenamed";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemChannelDescriptionChanged channel_description_changed = 9;
-     */
-    value: MessageSystemChannelDescriptionChanged;
-    case: "channelDescriptionChanged";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemChannelIconChanged channel_icon_changed = 10;
-     */
-    value: MessageSystemChannelIconChanged;
-    case: "channelIconChanged";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemChannelOwnershipChanged channel_ownership_changed = 11;
-     */
-    value: MessageSystemChannelOwnershipChanged;
-    case: "channelOwnershipChanged";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemMessagePinned message_pinned = 12;
-     */
-    value: MessageSystemMessagePinned;
-    case: "messagePinned";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemMessageUnpinned message_unpinned = 13;
-     */
-    value: MessageSystemMessageUnpinned;
-    case: "messageUnpinned";
-  } | {
-    /**
-     * @generated from field: service.v1.MessageSystemCallStarted call_started = 14;
-     */
-    value: MessageSystemCallStarted;
-    case: "callStarted";
-  } | { case: undefined; value?: undefined };
+  text?: MessageSystemText;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserAdded user_added = 2;
+   */
+  userAdded?: MessageSystemUserAdded;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserRemove user_remove = 3;
+   */
+  userRemove?: MessageSystemUserRemove;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserJoined user_joined = 4;
+   */
+  userJoined?: MessageSystemUserJoined;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserLeft user_left = 5;
+   */
+  userLeft?: MessageSystemUserLeft;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserKicked user_kicked = 6;
+   */
+  userKicked?: MessageSystemUserKicked;
+
+  /**
+   * @generated from field: service.v1.MessageSystemUserBanned user_banned = 7;
+   */
+  userBanned?: MessageSystemUserBanned;
+
+  /**
+   * @generated from field: service.v1.MessageSystemChannelRenamed channel_renamed = 8;
+   */
+  channelRenamed?: MessageSystemChannelRenamed;
+
+  /**
+   * @generated from field: service.v1.MessageSystemChannelDescriptionChanged channel_description_changed = 9;
+   */
+  channelDescriptionChanged?: MessageSystemChannelDescriptionChanged;
+
+  /**
+   * @generated from field: service.v1.MessageSystemChannelIconChanged channel_icon_changed = 10;
+   */
+  channelIconChanged?: MessageSystemChannelIconChanged;
+
+  /**
+   * @generated from field: service.v1.MessageSystemChannelOwnershipChanged channel_ownership_changed = 11;
+   */
+  channelOwnershipChanged?: MessageSystemChannelOwnershipChanged;
+
+  /**
+   * @generated from field: service.v1.MessageSystemMessagePinned message_pinned = 12;
+   */
+  messagePinned?: MessageSystemMessagePinned;
+
+  /**
+   * @generated from field: service.v1.MessageSystemMessageUnpinned message_unpinned = 13;
+   */
+  messageUnpinned?: MessageSystemMessageUnpinned;
+
+  /**
+   * @generated from field: service.v1.MessageSystemCallStarted call_started = 14;
+   */
+  callStarted?: MessageSystemCallStarted;
 };
 
 /**
@@ -510,89 +491,74 @@ export const EmbedVideoSchema: GenMessage<EmbedVideo> = /*@__PURE__*/
  */
 export type EmbedWebsiteMetadataSpecial = Message$1<"service.v1.EmbedWebsiteMetadataSpecial"> & {
   /**
-   * @generated from oneof service.v1.EmbedWebsiteMetadataSpecial.type
+   * No remote content
+   *
+   * @generated from field: shared.v1.Empty none = 1;
    */
-  type: {
-    /**
-     * No remote content
-     *
-     * @generated from field: shared.v1.Empty none = 1;
-     */
-    value: Empty;
-    case: "none";
-  } | {
-    /**
-     * Content hint that this contains a GIF (use metadata to find video or image to play)
-     *
-     * @generated from field: shared.v1.Empty gif = 2;
-     */
-    value: Empty;
-    case: "gif";
-  } | {
-    /**
-     * YouTube video
-     *
-     * @generated from field: service.v1.EmbedYouTube youtube = 3;
-     */
-    value: EmbedYouTube;
-    case: "youtube";
-  } | {
-    /**
-     * Lightspeed.tv stream
-     *
-     * @generated from field: service.v1.EmbedLightspeed lightspeed = 4;
-     */
-    value: EmbedLightspeed;
-    case: "lightspeed";
-  } | {
-    /**
-     * Twitch stream or clip
-     *
-     * @generated from field: service.v1.EmbedTwitch twitch = 5;
-     */
-    value: EmbedTwitch;
-    case: "twitch";
-  } | {
-    /**
-     * Spotify track
-     *
-     * @generated from field: service.v1.EmbedSpotify spotify = 6;
-     */
-    value: EmbedSpotify;
-    case: "spotify";
-  } | {
-    /**
-     * Soundcloud track
-     *
-     * @generated from field: shared.v1.Empty soundcloud = 7;
-     */
-    value: Empty;
-    case: "soundcloud";
-  } | {
-    /**
-     * Bandcamp track
-     *
-     * @generated from field: service.v1.EmbedBandcamp bandcamp = 8;
-     */
-    value: EmbedBandcamp;
-    case: "bandcamp";
-  } | {
-    /**
-     * Apple Music
-     *
-     * @generated from field: service.v1.EmbedAppleMusic apple_music = 9;
-     */
-    value: EmbedAppleMusic;
-    case: "appleMusic";
-  } | {
-    /**
-     * Streamable Video
-     *
-     * @generated from field: service.v1.EmbedStreamable streamable = 10;
-     */
-    value: EmbedStreamable;
-    case: "streamable";
-  } | { case: undefined; value?: undefined };
+  none?: Empty;
+
+  /**
+   * Content hint that this contains a GIF (use metadata to find video or image to play)
+   *
+   * @generated from field: shared.v1.Empty gif = 2;
+   */
+  gif?: Empty;
+
+  /**
+   * YouTube video
+   *
+   * @generated from field: service.v1.EmbedYouTube youtube = 3;
+   */
+  youtube?: EmbedYouTube;
+
+  /**
+   * Lightspeed.tv stream
+   *
+   * @generated from field: service.v1.EmbedLightspeed lightspeed = 4;
+   */
+  lightspeed?: EmbedLightspeed;
+
+  /**
+   * Twitch stream or clip
+   *
+   * @generated from field: service.v1.EmbedTwitch twitch = 5;
+   */
+  twitch?: EmbedTwitch;
+
+  /**
+   * Spotify track
+   *
+   * @generated from field: service.v1.EmbedSpotify spotify = 6;
+   */
+  spotify?: EmbedSpotify;
+
+  /**
+   * Soundcloud track
+   *
+   * @generated from field: shared.v1.Empty soundcloud = 7;
+   */
+  soundcloud?: Empty;
+
+  /**
+   * Bandcamp track
+   *
+   * @generated from field: service.v1.EmbedBandcamp bandcamp = 8;
+   */
+  bandcamp?: EmbedBandcamp;
+
+  /**
+   * Apple Music
+   *
+   * @generated from field: service.v1.EmbedAppleMusic apple_music = 9;
+   */
+  appleMusic?: EmbedAppleMusic;
+
+  /**
+   * Streamable Video
+   *
+   * @generated from field: service.v1.EmbedStreamable streamable = 10;
+   */
+  streamable?: EmbedStreamable;
 };
 
 /**
@@ -910,45 +876,35 @@ export const EmbedTextSchema: GenMessage<EmbedText> = /*@__PURE__*/
   messageDesc(file_service_v1_messages_db, 27);
 
 /**
- * Embed (oneof for different embed types)
+ * Embed (for different embed types)
  *
  * @generated from message service.v1.Embed
  */
 export type Embed = Message$1<"service.v1.Embed"> & {
   /**
-   * @generated from oneof service.v1.Embed.type
+   * @generated from field: service.v1.EmbedWebsiteMetadata website = 1;
    */
-  type: {
-    /**
-     * @generated from field: service.v1.EmbedWebsiteMetadata website = 1;
-     */
-    value: EmbedWebsiteMetadata;
-    case: "website";
-  } | {
-    /**
-     * @generated from field: service.v1.EmbedImage image = 2;
-     */
-    value: EmbedImage;
-    case: "image";
-  } | {
-    /**
-     * @generated from field: service.v1.EmbedVideo video = 3;
-     */
-    value: EmbedVideo;
-    case: "video";
-  } | {
-    /**
-     * @generated from field: service.v1.EmbedText text = 4;
-     */
-    value: EmbedText;
-    case: "text";
-  } | {
-    /**
-     * @generated from field: shared.v1.Empty none = 5;
-     */
-    value: Empty;
-    case: "none";
-  } | { case: undefined; value?: undefined };
+  website?: EmbedWebsiteMetadata;
+
+  /**
+   * @generated from field: service.v1.EmbedImage image = 2;
+   */
+  image?: EmbedImage;
+
+  /**
+   * @generated from field: service.v1.EmbedVideo video = 3;
+   */
+  video?: EmbedVideo;
+
+  /**
+   * @generated from field: service.v1.EmbedText text = 4;
+   */
+  text?: EmbedText;
+
+  /**
+   * @generated from field: shared.v1.Empty none = 5;
+   */
+  none?: Empty;
 };
 
 /**

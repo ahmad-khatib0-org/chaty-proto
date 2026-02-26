@@ -365,6 +365,7 @@ pub struct Timestamp {
 /// StringArray repeated string of items
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StringArray {
     #[prost(string, repeated, tag = "1")]

@@ -141,6 +141,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "shared.v1.StringArray",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "shared.v1.File",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )

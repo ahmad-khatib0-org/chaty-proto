@@ -1334,51 +1334,43 @@ pub struct MessageWebhook {
     pub avatar: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ===========================================
-/// SYSTEM MESSAGE (oneof for enum variants)
+/// SYSTEM MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageSystem {
-    #[prost(
-        oneof = "message_system::Type",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
-    )]
-    pub r#type: ::core::option::Option<message_system::Type>,
-}
-/// Nested message and enum types in `MessageSystem`.
-pub mod message_system {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Type {
-        #[prost(message, tag = "1")]
-        Text(super::MessageSystemText),
-        #[prost(message, tag = "2")]
-        UserAdded(super::MessageSystemUserAdded),
-        #[prost(message, tag = "3")]
-        UserRemove(super::MessageSystemUserRemove),
-        #[prost(message, tag = "4")]
-        UserJoined(super::MessageSystemUserJoined),
-        #[prost(message, tag = "5")]
-        UserLeft(super::MessageSystemUserLeft),
-        #[prost(message, tag = "6")]
-        UserKicked(super::MessageSystemUserKicked),
-        #[prost(message, tag = "7")]
-        UserBanned(super::MessageSystemUserBanned),
-        #[prost(message, tag = "8")]
-        ChannelRenamed(super::MessageSystemChannelRenamed),
-        #[prost(message, tag = "9")]
-        ChannelDescriptionChanged(super::MessageSystemChannelDescriptionChanged),
-        #[prost(message, tag = "10")]
-        ChannelIconChanged(super::MessageSystemChannelIconChanged),
-        #[prost(message, tag = "11")]
-        ChannelOwnershipChanged(super::MessageSystemChannelOwnershipChanged),
-        #[prost(message, tag = "12")]
-        MessagePinned(super::MessageSystemMessagePinned),
-        #[prost(message, tag = "13")]
-        MessageUnpinned(super::MessageSystemMessageUnpinned),
-        #[prost(message, tag = "14")]
-        CallStarted(super::MessageSystemCallStarted),
-    }
+    #[prost(message, optional, tag = "1")]
+    pub text: ::core::option::Option<MessageSystemText>,
+    #[prost(message, optional, tag = "2")]
+    pub user_added: ::core::option::Option<MessageSystemUserAdded>,
+    #[prost(message, optional, tag = "3")]
+    pub user_remove: ::core::option::Option<MessageSystemUserRemove>,
+    #[prost(message, optional, tag = "4")]
+    pub user_joined: ::core::option::Option<MessageSystemUserJoined>,
+    #[prost(message, optional, tag = "5")]
+    pub user_left: ::core::option::Option<MessageSystemUserLeft>,
+    #[prost(message, optional, tag = "6")]
+    pub user_kicked: ::core::option::Option<MessageSystemUserKicked>,
+    #[prost(message, optional, tag = "7")]
+    pub user_banned: ::core::option::Option<MessageSystemUserBanned>,
+    #[prost(message, optional, tag = "8")]
+    pub channel_renamed: ::core::option::Option<MessageSystemChannelRenamed>,
+    #[prost(message, optional, tag = "9")]
+    pub channel_description_changed: ::core::option::Option<
+        MessageSystemChannelDescriptionChanged,
+    >,
+    #[prost(message, optional, tag = "10")]
+    pub channel_icon_changed: ::core::option::Option<MessageSystemChannelIconChanged>,
+    #[prost(message, optional, tag = "11")]
+    pub channel_ownership_changed: ::core::option::Option<
+        MessageSystemChannelOwnershipChanged,
+    >,
+    #[prost(message, optional, tag = "12")]
+    pub message_pinned: ::core::option::Option<MessageSystemMessagePinned>,
+    #[prost(message, optional, tag = "13")]
+    pub message_unpinned: ::core::option::Option<MessageSystemMessageUnpinned>,
+    #[prost(message, optional, tag = "14")]
+    pub call_started: ::core::option::Option<MessageSystemCallStarted>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
@@ -1529,48 +1521,36 @@ pub struct EmbedVideo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedWebsiteMetadataSpecial {
-    #[prost(
-        oneof = "embed_website_metadata_special::Type",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
-    )]
-    pub r#type: ::core::option::Option<embed_website_metadata_special::Type>,
-}
-/// Nested message and enum types in `EmbedWebsiteMetadataSpecial`.
-pub mod embed_website_metadata_special {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Type {
-        /// No remote content
-        #[prost(message, tag = "1")]
-        None(super::super::super::shared::v1::Empty),
-        /// Content hint that this contains a GIF (use metadata to find video or image to play)
-        #[prost(message, tag = "2")]
-        Gif(super::super::super::shared::v1::Empty),
-        /// YouTube video
-        #[prost(message, tag = "3")]
-        Youtube(super::EmbedYouTube),
-        /// Lightspeed.tv stream
-        #[prost(message, tag = "4")]
-        Lightspeed(super::EmbedLightspeed),
-        /// Twitch stream or clip
-        #[prost(message, tag = "5")]
-        Twitch(super::EmbedTwitch),
-        /// Spotify track
-        #[prost(message, tag = "6")]
-        Spotify(super::EmbedSpotify),
-        /// Soundcloud track
-        #[prost(message, tag = "7")]
-        Soundcloud(super::super::super::shared::v1::Empty),
-        /// Bandcamp track
-        #[prost(message, tag = "8")]
-        Bandcamp(super::EmbedBandcamp),
-        /// Apple Music
-        #[prost(message, tag = "9")]
-        AppleMusic(super::EmbedAppleMusic),
-        /// Streamable Video
-        #[prost(message, tag = "10")]
-        Streamable(super::EmbedStreamable),
-    }
+    /// No remote content
+    #[prost(message, optional, tag = "1")]
+    pub none: ::core::option::Option<super::super::shared::v1::Empty>,
+    /// Content hint that this contains a GIF (use metadata to find video or image to play)
+    #[prost(message, optional, tag = "2")]
+    pub gif: ::core::option::Option<super::super::shared::v1::Empty>,
+    /// YouTube video
+    #[prost(message, optional, tag = "3")]
+    pub youtube: ::core::option::Option<EmbedYouTube>,
+    /// Lightspeed.tv stream
+    #[prost(message, optional, tag = "4")]
+    pub lightspeed: ::core::option::Option<EmbedLightspeed>,
+    /// Twitch stream or clip
+    #[prost(message, optional, tag = "5")]
+    pub twitch: ::core::option::Option<EmbedTwitch>,
+    /// Spotify track
+    #[prost(message, optional, tag = "6")]
+    pub spotify: ::core::option::Option<EmbedSpotify>,
+    /// Soundcloud track
+    #[prost(message, optional, tag = "7")]
+    pub soundcloud: ::core::option::Option<super::super::shared::v1::Empty>,
+    /// Bandcamp track
+    #[prost(message, optional, tag = "8")]
+    pub bandcamp: ::core::option::Option<EmbedBandcamp>,
+    /// Apple Music
+    #[prost(message, optional, tag = "9")]
+    pub apple_music: ::core::option::Option<EmbedAppleMusic>,
+    /// Streamable Video
+    #[prost(message, optional, tag = "10")]
+    pub streamable: ::core::option::Option<EmbedStreamable>,
 }
 /// YouTube video
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1701,29 +1681,20 @@ pub struct EmbedText {
     #[prost(string, optional, tag = "6")]
     pub colour: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// Embed (oneof for different embed types)
+/// Embed (for different embed types)
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Embed {
-    #[prost(oneof = "embed::Type", tags = "1, 2, 3, 4, 5")]
-    pub r#type: ::core::option::Option<embed::Type>,
-}
-/// Nested message and enum types in `Embed`.
-pub mod embed {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Type {
-        #[prost(message, tag = "1")]
-        Website(super::EmbedWebsiteMetadata),
-        #[prost(message, tag = "2")]
-        Image(super::EmbedImage),
-        #[prost(message, tag = "3")]
-        Video(super::EmbedVideo),
-        #[prost(message, tag = "4")]
-        Text(super::EmbedText),
-        #[prost(message, tag = "5")]
-        None(super::super::super::shared::v1::Empty),
-    }
+    #[prost(message, optional, tag = "1")]
+    pub website: ::core::option::Option<EmbedWebsiteMetadata>,
+    #[prost(message, optional, tag = "2")]
+    pub image: ::core::option::Option<EmbedImage>,
+    #[prost(message, optional, tag = "3")]
+    pub video: ::core::option::Option<EmbedVideo>,
+    #[prost(message, optional, tag = "4")]
+    pub text: ::core::option::Option<EmbedText>,
+    #[prost(message, optional, tag = "5")]
+    pub none: ::core::option::Option<super::super::shared::v1::Empty>,
 }
 /// ===========================================
 /// INTERACTIONS

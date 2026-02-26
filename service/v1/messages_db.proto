@@ -18,25 +18,23 @@ message MessageWebhook {
 }
 
 // ===========================================
-// SYSTEM MESSAGE (oneof for enum variants)
+// SYSTEM MESSAGE
 // ===========================================
 message MessageSystem {
-  oneof type {
-    MessageSystemText text = 1;
-    MessageSystemUserAdded user_added = 2;
-    MessageSystemUserRemove user_remove = 3;
-    MessageSystemUserJoined user_joined = 4;
-    MessageSystemUserLeft user_left = 5;
-    MessageSystemUserKicked user_kicked = 6;
-    MessageSystemUserBanned user_banned = 7;
-    MessageSystemChannelRenamed channel_renamed = 8;
-    MessageSystemChannelDescriptionChanged channel_description_changed = 9;
-    MessageSystemChannelIconChanged channel_icon_changed = 10;
-    MessageSystemChannelOwnershipChanged channel_ownership_changed = 11;
-    MessageSystemMessagePinned message_pinned = 12;
-    MessageSystemMessageUnpinned message_unpinned = 13;
-    MessageSystemCallStarted call_started = 14;
-  }
+  MessageSystemText text = 1;
+  MessageSystemUserAdded user_added = 2;
+  MessageSystemUserRemove user_remove = 3;
+  MessageSystemUserJoined user_joined = 4;
+  MessageSystemUserLeft user_left = 5;
+  MessageSystemUserKicked user_kicked = 6;
+  MessageSystemUserBanned user_banned = 7;
+  MessageSystemChannelRenamed channel_renamed = 8;
+  MessageSystemChannelDescriptionChanged channel_description_changed = 9;
+  MessageSystemChannelIconChanged channel_icon_changed = 10;
+  MessageSystemChannelOwnershipChanged channel_ownership_changed = 11;
+  MessageSystemMessagePinned message_pinned = 12;
+  MessageSystemMessageUnpinned message_unpinned = 13;
+  MessageSystemCallStarted call_started = 14;
 }
 
 // System message variants
@@ -164,28 +162,26 @@ enum BandcampType {
 
 // Information about special remote content
 message EmbedWebsiteMetadataSpecial {
-  oneof type {
-    // No remote content
-    shared.v1.Empty none = 1;
-    // Content hint that this contains a GIF (use metadata to find video or image to play)
-    shared.v1.Empty gif = 2;
-    // YouTube video
-    EmbedYouTube youtube = 3;
-    // Lightspeed.tv stream
-    EmbedLightspeed lightspeed = 4;
-    // Twitch stream or clip
-    EmbedTwitch twitch = 5;
-    // Spotify track
-    EmbedSpotify spotify = 6;
-    // Soundcloud track
-    shared.v1.Empty soundcloud = 7;
-    // Bandcamp track
-    EmbedBandcamp bandcamp = 8;
-    // Apple Music
-    EmbedAppleMusic apple_music = 9;
-    // Streamable Video
-    EmbedStreamable streamable = 10;
-  }
+  // No remote content
+  shared.v1.Empty none = 1;
+  // Content hint that this contains a GIF (use metadata to find video or image to play)
+  shared.v1.Empty gif = 2;
+  // YouTube video
+  EmbedYouTube youtube = 3;
+  // Lightspeed.tv stream
+  EmbedLightspeed lightspeed = 4;
+  // Twitch stream or clip
+  EmbedTwitch twitch = 5;
+  // Spotify track
+  EmbedSpotify spotify = 6;
+  // Soundcloud track
+  shared.v1.Empty soundcloud = 7;
+  // Bandcamp track
+  EmbedBandcamp bandcamp = 8;
+  // Apple Music
+  EmbedAppleMusic apple_music = 9;
+  // Streamable Video
+  EmbedStreamable streamable = 10;
 }
 
 // YouTube video
@@ -283,15 +279,13 @@ message EmbedText {
   optional string colour = 6;
 }
 
-// Embed (oneof for different embed types)
+// Embed (for different embed types)
 message Embed {
-  oneof type {
-    EmbedWebsiteMetadata website = 1;
-    EmbedImage image = 2;
-    EmbedVideo video = 3;
-    EmbedText text = 4;
-    shared.v1.Empty none = 5;
-  }
+  EmbedWebsiteMetadata website = 1;
+  EmbedImage image = 2;
+  EmbedVideo video = 3;
+  EmbedText text = 4;
+  shared.v1.Empty none = 5;
 }
 
 // ===========================================
@@ -374,6 +368,6 @@ message Message {
 
   // Time at which this message was last edited (optional)
   optional int64 edited_at = 18;
-  
+
   int64 created_at = 19;
 }
