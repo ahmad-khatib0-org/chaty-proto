@@ -134,6 +134,7 @@ pub struct ChannelDirectMessage {
 /// MAIN CHANNELS TABLE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Channel {
     /// ULID
