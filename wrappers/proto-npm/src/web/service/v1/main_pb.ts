@@ -4,18 +4,20 @@
 
 import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { ChannelsGetRequestSchema, ChannelsGetResponseSchema } from "./channels_pb.js";
+import { file_service_v1_channels } from "./channels_pb.js";
 import type { GroupsCreateRequestSchema, GroupsCreateResponseSchema, GroupsListRequestSchema, GroupsListResponseSchema } from "./groups_pb.js";
 import { file_service_v1_groups } from "./groups_pb.js";
-import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersEmailConfirmationRequestSchema, UsersEmailConfirmationResponseSchema, UsersForgotPasswordRequestSchema, UsersForgotPasswordResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema, UsersResetPasswordRequestSchema, UsersResetPasswordResponseSchema } from "./users_pb.js";
-import { file_service_v1_users } from "./users_pb.js";
 import type { SearchUsernamesRequestSchema, SearchUsernamesResponseSchema } from "./search_pb.js";
 import { file_service_v1_search } from "./search_pb.js";
+import type { UsersCreateRequestSchema, UsersCreateResponseSchema, UsersEmailConfirmationRequestSchema, UsersEmailConfirmationResponseSchema, UsersForgotPasswordRequestSchema, UsersForgotPasswordResponseSchema, UsersLoginRequestSchema, UsersLoginResponseSchema, UsersResetPasswordRequestSchema, UsersResetPasswordResponseSchema } from "./users_pb.js";
+import { file_service_v1_users } from "./users_pb.js";
 
 /**
  * Describes the file service/v1/main.proto.
  */
 export const file_service_v1_main: GenFile = /*@__PURE__*/
-  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEy5QUKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRJmChNVc2Vyc0ZvcmdvdFBhc3N3b3JkEiYuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVxdWVzdBonLnNlcnZpY2UudjEuVXNlcnNGb3Jnb3RQYXNzd29yZFJlc3BvbnNlEmMKElVzZXJzUmVzZXRQYXNzd29yZBIlLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBomLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2USUQoMR3JvdXBzQ3JlYXRlEh8uc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXF1ZXN0GiAuc2VydmljZS52MS5Hcm91cHNDcmVhdGVSZXNwb25zZRJLCgpHcm91cHNMaXN0Eh0uc2VydmljZS52MS5Hcm91cHNMaXN0UmVxdWVzdBoeLnNlcnZpY2UudjEuR3JvdXBzTGlzdFJlc3BvbnNlEloKD1NlYXJjaFVzZXJuYW1lcxIiLnNlcnZpY2UudjEuU2VhcmNoVXNlcm5hbWVzUmVxdWVzdBojLnNlcnZpY2UudjEuU2VhcmNoVXNlcm5hbWVzUmVzcG9uc2ViBnByb3RvMw", [file_service_v1_groups, file_service_v1_users, file_service_v1_search]);
+  fileDesc("ChVzZXJ2aWNlL3YxL21haW4ucHJvdG8SCnNlcnZpY2UudjEytQYKDENoYXR5U2VydmljZRJOCgtVc2Vyc0NyZWF0ZRIeLnNlcnZpY2UudjEuVXNlcnNDcmVhdGVSZXF1ZXN0Gh8uc2VydmljZS52MS5Vc2Vyc0NyZWF0ZVJlc3BvbnNlEksKClVzZXJzTG9naW4SHS5zZXJ2aWNlLnYxLlVzZXJzTG9naW5SZXF1ZXN0Gh4uc2VydmljZS52MS5Vc2Vyc0xvZ2luUmVzcG9uc2USbwoWVXNlcnNFbWFpbENvbmZpcm1hdGlvbhIpLnNlcnZpY2UudjEuVXNlcnNFbWFpbENvbmZpcm1hdGlvblJlcXVlc3QaKi5zZXJ2aWNlLnYxLlVzZXJzRW1haWxDb25maXJtYXRpb25SZXNwb25zZRJmChNVc2Vyc0ZvcmdvdFBhc3N3b3JkEiYuc2VydmljZS52MS5Vc2Vyc0ZvcmdvdFBhc3N3b3JkUmVxdWVzdBonLnNlcnZpY2UudjEuVXNlcnNGb3Jnb3RQYXNzd29yZFJlc3BvbnNlEmMKElVzZXJzUmVzZXRQYXNzd29yZBIlLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVxdWVzdBomLnNlcnZpY2UudjEuVXNlcnNSZXNldFBhc3N3b3JkUmVzcG9uc2USTgoLQ2hhbm5lbHNHZXQSHi5zZXJ2aWNlLnYxLkNoYW5uZWxzR2V0UmVxdWVzdBofLnNlcnZpY2UudjEuQ2hhbm5lbHNHZXRSZXNwb25zZRJRCgxHcm91cHNDcmVhdGUSHy5zZXJ2aWNlLnYxLkdyb3Vwc0NyZWF0ZVJlcXVlc3QaIC5zZXJ2aWNlLnYxLkdyb3Vwc0NyZWF0ZVJlc3BvbnNlEksKCkdyb3Vwc0xpc3QSHS5zZXJ2aWNlLnYxLkdyb3Vwc0xpc3RSZXF1ZXN0Gh4uc2VydmljZS52MS5Hcm91cHNMaXN0UmVzcG9uc2USWgoPU2VhcmNoVXNlcm5hbWVzEiIuc2VydmljZS52MS5TZWFyY2hVc2VybmFtZXNSZXF1ZXN0GiMuc2VydmljZS52MS5TZWFyY2hVc2VybmFtZXNSZXNwb25zZWIGcHJvdG8z", [file_service_v1_channels, file_service_v1_groups, file_service_v1_search, file_service_v1_users]);
 
 /**
  * @generated from service service.v1.ChatyService
@@ -60,6 +62,14 @@ export const ChatyService: GenService<{
     methodKind: "unary";
     input: typeof UsersResetPasswordRequestSchema;
     output: typeof UsersResetPasswordResponseSchema;
+  },
+  /**
+   * @generated from rpc service.v1.ChatyService.ChannelsGet
+   */
+  channelsGet: {
+    methodKind: "unary";
+    input: typeof ChannelsGetRequestSchema;
+    output: typeof ChannelsGetResponseSchema;
   },
   /**
    * @generated from rpc service.v1.ChatyService.GroupsCreate

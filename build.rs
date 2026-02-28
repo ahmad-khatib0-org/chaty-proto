@@ -212,6 +212,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "shared/v1/wrappers.proto",
         "service/v1/bots_db.proto",
         "service/v1/channels_db.proto",
+        "service/v1/channels.proto",
         "service/v1/groups.proto",
         "service/v1/main.proto",
         "service/v1/messages.proto",

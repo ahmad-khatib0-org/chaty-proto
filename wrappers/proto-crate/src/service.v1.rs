@@ -165,6 +165,30 @@ pub struct Channel {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelsGetRequest {
+    /// channel id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelsGetResponse {
+    #[prost(oneof = "channels_get_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<channels_get_response::Response>,
+}
+/// Nested message and enum types in `ChannelsGetResponse`.
+pub mod channels_get_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::Channel),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupsCreateRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
@@ -239,6 +263,49 @@ pub struct GroupsListItem {
     pub group: ::core::option::Option<ChannelGroup>,
     #[prost(int64, tag = "3")]
     pub created_at: i64,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesRequest {
+    #[prost(string, tag = "1")]
+    pub query: ::prost::alloc::string::String,
+    #[prost(int32, tag = "2")]
+    pub limit: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesResponse {
+    #[prost(oneof = "search_usernames_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<search_usernames_response::Response>,
+}
+/// Nested message and enum types in `SearchUsernamesResponse`.
+pub mod search_usernames_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::SearchUsernamesResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesResponseData {
+    #[prost(message, repeated, tag = "1")]
+    pub users: ::prost::alloc::vec::Vec<SearchUser>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUser {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub display_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub avatar: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -434,49 +501,6 @@ impl UserFlag {
             _ => None,
         }
     }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesRequest {
-    #[prost(string, tag = "1")]
-    pub query: ::prost::alloc::string::String,
-    #[prost(int32, tag = "2")]
-    pub limit: i32,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesResponse {
-    #[prost(oneof = "search_usernames_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<search_usernames_response::Response>,
-}
-/// Nested message and enum types in `SearchUsernamesResponse`.
-pub mod search_usernames_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::SearchUsernamesResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesResponseData {
-    #[prost(message, repeated, tag = "1")]
-    pub users: ::prost::alloc::vec::Vec<SearchUser>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUser {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub username: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub display_name: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub avatar: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
 pub mod chaty_service_client {
@@ -695,6 +719,30 @@ pub mod chaty_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn channels_get(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ChannelsGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChannelsGetResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/ChannelsGet",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "ChannelsGet"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn groups_create(
             &mut self,
             request: impl tonic::IntoRequest<super::GroupsCreateRequest>,
@@ -815,6 +863,13 @@ pub mod chaty_service_server {
             request: tonic::Request<super::UsersResetPasswordRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UsersResetPasswordResponse>,
+            tonic::Status,
+        >;
+        async fn channels_get(
+            &self,
+            request: tonic::Request<super::ChannelsGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChannelsGetResponse>,
             tonic::Status,
         >;
         async fn groups_create(
@@ -1131,6 +1186,51 @@ pub mod chaty_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = UsersResetPasswordSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/ChannelsGet" => {
+                    #[allow(non_camel_case_types)]
+                    struct ChannelsGetSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::ChannelsGetRequest>
+                    for ChannelsGetSvc<T> {
+                        type Response = super::ChannelsGetResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ChannelsGetRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::channels_get(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ChannelsGetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

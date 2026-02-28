@@ -17,6 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
+import { ChannelsGetRequest, ChannelsGetResponse } from "./channels.js";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
 import {
@@ -88,6 +89,15 @@ export const ChatyServiceService = {
       Buffer.from(UsersResetPasswordResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): UsersResetPasswordResponse => UsersResetPasswordResponse.decode(value),
   },
+  channelsGet: {
+    path: "/service.v1.ChatyService/ChannelsGet",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: ChannelsGetRequest): Buffer => Buffer.from(ChannelsGetRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): ChannelsGetRequest => ChannelsGetRequest.decode(value),
+    responseSerialize: (value: ChannelsGetResponse): Buffer => Buffer.from(ChannelsGetResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): ChannelsGetResponse => ChannelsGetResponse.decode(value),
+  },
   groupsCreate: {
     path: "/service.v1.ChatyService/GroupsCreate",
     requestStream: false,
@@ -126,6 +136,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   usersEmailConfirmation: handleUnaryCall<UsersEmailConfirmationRequest, UsersEmailConfirmationResponse>;
   usersForgotPassword: handleUnaryCall<UsersForgotPasswordRequest, UsersForgotPasswordResponse>;
   usersResetPassword: handleUnaryCall<UsersResetPasswordRequest, UsersResetPasswordResponse>;
+  channelsGet: handleUnaryCall<ChannelsGetRequest, ChannelsGetResponse>;
   groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
   groupsList: handleUnaryCall<GroupsListRequest, GroupsListResponse>;
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
@@ -206,6 +217,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UsersResetPasswordResponse) => void,
+  ): ClientUnaryCall;
+  channelsGet(
+    request: ChannelsGetRequest,
+    callback: (error: ServiceError | null, response: ChannelsGetResponse) => void,
+  ): ClientUnaryCall;
+  channelsGet(
+    request: ChannelsGetRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: ChannelsGetResponse) => void,
+  ): ClientUnaryCall;
+  channelsGet(
+    request: ChannelsGetRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: ChannelsGetResponse) => void,
   ): ClientUnaryCall;
   groupsCreate(
     request: GroupsCreateRequest,

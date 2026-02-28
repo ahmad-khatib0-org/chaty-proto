@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "service/v1/channels_db.proto";
+import "shared/v1/error.proto";
+
+message ChannelsGetRequest {
+  string id = 1; // channel id
+}
+
+message ChannelsGetResponse {
+  oneof response {
+    service.v1.Channel data = 1;
+    shared.v1.AppError error = 2;
+  }
+}

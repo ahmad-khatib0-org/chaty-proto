@@ -2,9 +2,10 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/channels.proto";
 import "service/v1/groups.proto";
-import "service/v1/users.proto";
 import "service/v1/search.proto";
+import "service/v1/users.proto";
 
 service ChatyService {
   rpc UsersCreate(UsersCreateRequest) returns (UsersCreateResponse);
@@ -12,6 +13,7 @@ service ChatyService {
   rpc UsersEmailConfirmation(UsersEmailConfirmationRequest) returns (UsersEmailConfirmationResponse);
   rpc UsersForgotPassword(UsersForgotPasswordRequest) returns (UsersForgotPasswordResponse);
   rpc UsersResetPassword(UsersResetPasswordRequest) returns (UsersResetPasswordResponse);
+  rpc ChannelsGet(ChannelsGetRequest) returns (ChannelsGetResponse);
   rpc GroupsCreate(GroupsCreateRequest) returns (GroupsCreateResponse);
   rpc GroupsList(GroupsListRequest) returns (GroupsListResponse);
   rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
