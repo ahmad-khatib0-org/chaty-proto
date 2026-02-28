@@ -29,6 +29,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "service.v1.ChannelText",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "service.v1.MessageWebhook",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )

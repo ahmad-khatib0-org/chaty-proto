@@ -84,6 +84,7 @@ pub struct ChannelSavedMessages {
 }
 /// Text channel type
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelText {
     /// Id of the server this channel belongs to
