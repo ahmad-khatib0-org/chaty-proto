@@ -24,6 +24,22 @@ generate:
 	@echo "Compiling TypeScript (Pure ESM)..."
 	pnpm --filter @chaty-app/proto exec tsc
 
+	@echo "Generating Python protobuf files..."
+	mkdir -p gen/python
+	find . -name "*.proto" \
+	-not -path "./**/node_modules/*" \
+	-not -path "./wrappers/proto-npm/node_modules/*" \
+	-not -path "./third_party/*" \
+	| while read -r file; do \
+		python -m grpc_tools.protoc \
+			--proto_path=. \
+			--python_out=gen/python \
+			--pyi_out=gen/python \
+			--grpc_python_out=gen/python \
+			$$file ; \
+	done
+	python scripts/add_init_files.py
+
 	@echo "✅ Generation complete"
 	
 # -----------------------------------------------------------------------------
