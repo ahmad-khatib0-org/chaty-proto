@@ -4,14 +4,13 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_shared_v1_error } from "../../shared/v1/error_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/roles_db.proto.
  */
 export const file_service_v1_roles_db: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL3JvbGVzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIiwKDU92ZXJyaWRlRmllbGQSDQoFYWxsb3cYASABKAMSDAoEZGVueRgCIAEoAyKpAQoEUm9sZRIMCgRuYW1lGAEgASgJEi4KC3Blcm1pc3Npb25zGAIgASgLMhkuc2VydmljZS52MS5PdmVycmlkZUZpZWxkEhMKBmNvbG91chgDIAEoCUgAiAEBEg0KBWhvaXN0GAQgASgIEgwKBHJhbmsYBSABKAMSEgoKY3JlYXRlZF9hdBgGIAEoAxISCgp1cGRhdGVkX2F0GAcgASgDQgkKB19jb2xvdXJiBnByb3RvMw", [file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL3JvbGVzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIiUKDU92ZXJyaWRlRmllbGQSCQoBYRgBIAEoAxIJCgFkGAIgASgDIqkBCgRSb2xlEgwKBG5hbWUYASABKAkSLgoLcGVybWlzc2lvbnMYAiABKAsyGS5zZXJ2aWNlLnYxLk92ZXJyaWRlRmllbGQSEwoGY29sb3VyGAMgASgJSACIAQESDQoFaG9pc3QYBCABKAgSDAoEcmFuaxgFIAEoAxISCgpjcmVhdGVkX2F0GAYgASgDEhIKCnVwZGF0ZWRfYXQYByABKANCCQoHX2NvbG91cmIGcHJvdG8z");
 
 /**
  * ===========================================
@@ -24,16 +23,16 @@ export type OverrideField = Message<"service.v1.OverrideField"> & {
   /**
    * Allowed permissions
    *
-   * @generated from field: int64 allow = 1;
+   * @generated from field: int64 a = 1;
    */
-  allow: bigint;
+  a: bigint;
 
   /**
    * Denied permissions
    *
-   * @generated from field: int64 deny = 2;
+   * @generated from field: int64 d = 2;
    */
-  deny: bigint;
+  d: bigint;
 };
 
 /**

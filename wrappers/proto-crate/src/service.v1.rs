@@ -14,10 +14,10 @@ pub struct Bot {
 pub struct OverrideField {
     /// Allowed permissions
     #[prost(int64, tag = "1")]
-    pub allow: i64,
+    pub a: i64,
     /// Denied permissions
     #[prost(int64, tag = "2")]
-    pub deny: i64,
+    pub d: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]

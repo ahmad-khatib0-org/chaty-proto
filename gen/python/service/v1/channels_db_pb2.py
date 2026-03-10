@@ -24,10 +24,9 @@ _sym_db = _symbol_database.Default()
 
 from service.v1 import roles_db_pb2 as service_dot_v1_dot_roles__db__pb2
 from shared.v1 import files_pb2 as shared_dot_v1_dot_files__pb2
-from shared.v1 import time_pb2 as shared_dot_v1_dot_time__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cservice/v1/channels_db.proto\x12\nservice.v1\x1a\x19service/v1/roles_db.proto\x1a\x15shared/v1/files.proto\x1a\x14shared/v1/time.proto\"\xf4\x01\n\x0c\x43hannelGroup\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x12\n\nrecipients\x18\x04 \x03(\t\x12\x1d\n\x04icon\x18\x05 \x01(\x0b\x32\x0f.shared.v1.File\x12\x1c\n\x0flast_message_id\x18\x06 \x01(\tH\x01\x88\x01\x01\x12\x18\n\x0bpermissions\x18\x07 \x01(\x03H\x02\x88\x01\x01\x12\x0c\n\x04nsfw\x18\x08 \x01(\x08\x42\x0e\n\x0c_descriptionB\x12\n\x10_last_message_idB\x0e\n\x0c_permissions\"\'\n\x14\x43hannelSavedMessages\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"\x8a\x03\n\x0b\x43hannelText\x12\x11\n\tserver_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x1d\n\x04icon\x18\x04 \x01(\x0b\x32\x0f.shared.v1.File\x12\x1c\n\x0flast_message_id\x18\x05 \x01(\tH\x01\x88\x01\x01\x12\x36\n\x13\x64\x65\x66\x61ult_permissions\x18\x06 \x01(\x0b\x32\x19.service.v1.OverrideField\x12\x46\n\x10role_permissions\x18\x07 \x03(\x0b\x32,.service.v1.ChannelText.RolePermissionsEntry\x12\x0c\n\x04nsfw\x18\x08 \x01(\x08\x1aQ\n\x14RolePermissionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12(\n\x05value\x18\x02 \x01(\x0b\x32\x19.service.v1.OverrideField:\x02\x38\x01\x42\x0e\n\x0c_descriptionB\x12\n\x10_last_message_id\"l\n\x14\x43hannelDirectMessage\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\x12\n\nrecipients\x18\x02 \x03(\t\x12\x1c\n\x0flast_message_id\x18\x03 \x01(\tH\x00\x88\x01\x01\x42\x12\n\x10_last_message_id\"\xb8\x02\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0c\x63hannel_type\x18\x02 \x01(\t\x12/\n\x05saved\x18\x03 \x01(\x0b\x32 .service.v1.ChannelSavedMessages\x12\x30\n\x06\x64irect\x18\x04 \x01(\x0b\x32 .service.v1.ChannelDirectMessage\x12\'\n\x05group\x18\x05 \x01(\x0b\x32\x18.service.v1.ChannelGroup\x12%\n\x04text\x18\x06 \x01(\x0b\x32\x17.service.v1.ChannelText\x12\x1c\n\x0fvoice_max_users\x18\x07 \x01(\x05H\x00\x88\x01\x01\x12\x12\n\ncreated_at\x18\x08 \x01(\x03\x12\x12\n\nupdated_at\x18\t \x01(\x03\x42\x12\n\x10_voice_max_usersb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cservice/v1/channels_db.proto\x12\nservice.v1\x1a\x19service/v1/roles_db.proto\x1a\x15shared/v1/files.proto\"\xf4\x01\n\x0c\x43hannelGroup\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x12\n\nrecipients\x18\x04 \x03(\t\x12\x1d\n\x04icon\x18\x05 \x01(\x0b\x32\x0f.shared.v1.File\x12\x1c\n\x0flast_message_id\x18\x06 \x01(\tH\x01\x88\x01\x01\x12\x18\n\x0bpermissions\x18\x07 \x01(\x03H\x02\x88\x01\x01\x12\x0c\n\x04nsfw\x18\x08 \x01(\x08\x42\x0e\n\x0c_descriptionB\x12\n\x10_last_message_idB\x0e\n\x0c_permissions\"\'\n\x14\x43hannelSavedMessages\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"\x8a\x03\n\x0b\x43hannelText\x12\x11\n\tserver_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x1d\n\x04icon\x18\x04 \x01(\x0b\x32\x0f.shared.v1.File\x12\x1c\n\x0flast_message_id\x18\x05 \x01(\tH\x01\x88\x01\x01\x12\x36\n\x13\x64\x65\x66\x61ult_permissions\x18\x06 \x01(\x0b\x32\x19.service.v1.OverrideField\x12\x46\n\x10role_permissions\x18\x07 \x03(\x0b\x32,.service.v1.ChannelText.RolePermissionsEntry\x12\x0c\n\x04nsfw\x18\x08 \x01(\x08\x1aQ\n\x14RolePermissionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12(\n\x05value\x18\x02 \x01(\x0b\x32\x19.service.v1.OverrideField:\x02\x38\x01\x42\x0e\n\x0c_descriptionB\x12\n\x10_last_message_id\"l\n\x14\x43hannelDirectMessage\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\x12\n\nrecipients\x18\x02 \x03(\t\x12\x1c\n\x0flast_message_id\x18\x03 \x01(\tH\x00\x88\x01\x01\x42\x12\n\x10_last_message_id\"\xb8\x02\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0c\x63hannel_type\x18\x02 \x01(\t\x12/\n\x05saved\x18\x03 \x01(\x0b\x32 .service.v1.ChannelSavedMessages\x12\x30\n\x06\x64irect\x18\x04 \x01(\x0b\x32 .service.v1.ChannelDirectMessage\x12\'\n\x05group\x18\x05 \x01(\x0b\x32\x18.service.v1.ChannelGroup\x12%\n\x04text\x18\x06 \x01(\x0b\x32\x17.service.v1.ChannelText\x12\x1c\n\x0fvoice_max_users\x18\x07 \x01(\x05H\x00\x88\x01\x01\x12\x12\n\ncreated_at\x18\x08 \x01(\x03\x12\x12\n\nupdated_at\x18\t \x01(\x03\x42\x12\n\x10_voice_max_usersb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,16 +35,16 @@ if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._loaded_options = None
   _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._serialized_options = b'8\001'
-  _globals['_CHANNELGROUP']._serialized_start=117
-  _globals['_CHANNELGROUP']._serialized_end=361
-  _globals['_CHANNELSAVEDMESSAGES']._serialized_start=363
-  _globals['_CHANNELSAVEDMESSAGES']._serialized_end=402
-  _globals['_CHANNELTEXT']._serialized_start=405
-  _globals['_CHANNELTEXT']._serialized_end=799
-  _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._serialized_start=682
-  _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._serialized_end=763
-  _globals['_CHANNELDIRECTMESSAGE']._serialized_start=801
-  _globals['_CHANNELDIRECTMESSAGE']._serialized_end=909
-  _globals['_CHANNEL']._serialized_start=912
-  _globals['_CHANNEL']._serialized_end=1224
+  _globals['_CHANNELGROUP']._serialized_start=95
+  _globals['_CHANNELGROUP']._serialized_end=339
+  _globals['_CHANNELSAVEDMESSAGES']._serialized_start=341
+  _globals['_CHANNELSAVEDMESSAGES']._serialized_end=380
+  _globals['_CHANNELTEXT']._serialized_start=383
+  _globals['_CHANNELTEXT']._serialized_end=777
+  _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._serialized_start=660
+  _globals['_CHANNELTEXT_ROLEPERMISSIONSENTRY']._serialized_end=741
+  _globals['_CHANNELDIRECTMESSAGE']._serialized_start=779
+  _globals['_CHANNELDIRECTMESSAGE']._serialized_end=887
+  _globals['_CHANNEL']._serialized_start=890
+  _globals['_CHANNEL']._serialized_end=1202
 # @@protoc_insertion_point(module_scope)

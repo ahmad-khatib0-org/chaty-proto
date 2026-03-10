@@ -1,5 +1,4 @@
 from service.v1 import roles_db_pb2 as _roles_db_pb2
-from shared.v1 import error_pb2 as _error_pb2
 from shared.v1 import files_pb2 as _files_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor

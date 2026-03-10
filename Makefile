@@ -80,4 +80,5 @@ endif
 # Clean generated artifacts
 # -----------------------------------------------------------------------------
 clean:
+	rm -rf ./gen
 	cd wrappers/proto-crate && cargo clean

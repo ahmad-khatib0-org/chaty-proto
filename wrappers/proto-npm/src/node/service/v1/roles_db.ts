@@ -16,9 +16,9 @@ export const protobufPackage = "service.v1";
  */
 export interface OverrideField {
   /** Allowed permissions */
-  allow: string;
+  a: string;
   /** Denied permissions */
-  deny: string;
+  d: string;
 }
 
 export interface Role {
@@ -41,16 +41,16 @@ export interface Role {
 }
 
 function createBaseOverrideField(): OverrideField {
-  return { allow: "0", deny: "0" };
+  return { a: "0", d: "0" };
 }
 
 export const OverrideField: MessageFns<OverrideField> = {
   encode(message: OverrideField, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.allow !== "0") {
-      writer.uint32(8).int64(message.allow);
+    if (message.a !== "0") {
+      writer.uint32(8).int64(message.a);
     }
-    if (message.deny !== "0") {
-      writer.uint32(16).int64(message.deny);
+    if (message.d !== "0") {
+      writer.uint32(16).int64(message.d);
     }
     return writer;
   },
@@ -67,7 +67,7 @@ export const OverrideField: MessageFns<OverrideField> = {
             break;
           }
 
-          message.allow = reader.int64().toString();
+          message.a = reader.int64().toString();
           continue;
         }
         case 2: {
@@ -75,7 +75,7 @@ export const OverrideField: MessageFns<OverrideField> = {
             break;
           }
 
-          message.deny = reader.int64().toString();
+          message.d = reader.int64().toString();
           continue;
         }
       }
@@ -89,18 +89,18 @@ export const OverrideField: MessageFns<OverrideField> = {
 
   fromJSON(object: any): OverrideField {
     return {
-      allow: isSet(object.allow) ? globalThis.String(object.allow) : "0",
-      deny: isSet(object.deny) ? globalThis.String(object.deny) : "0",
+      a: isSet(object.a) ? globalThis.String(object.a) : "0",
+      d: isSet(object.d) ? globalThis.String(object.d) : "0",
     };
   },
 
   toJSON(message: OverrideField): unknown {
     const obj: any = {};
-    if (message.allow !== "0") {
-      obj.allow = message.allow;
+    if (message.a !== "0") {
+      obj.a = message.a;
     }
-    if (message.deny !== "0") {
-      obj.deny = message.deny;
+    if (message.d !== "0") {
+      obj.d = message.d;
     }
     return obj;
   },
@@ -110,8 +110,8 @@ export const OverrideField: MessageFns<OverrideField> = {
   },
   fromPartial<I extends Exact<DeepPartial<OverrideField>, I>>(object: I): OverrideField {
     const message = createBaseOverrideField();
-    message.allow = object.allow ?? "0";
-    message.deny = object.deny ?? "0";
+    message.a = object.a ?? "0";
+    message.d = object.d ?? "0";
     return message;
   },
 };

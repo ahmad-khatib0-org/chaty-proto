@@ -3,7 +3,6 @@ syntax = "proto3";
 package service.v1;
 
 import "service/v1/roles_db.proto";
-import "shared/v1/error.proto";
 import "shared/v1/files.proto";
 
 message Server {
