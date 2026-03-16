@@ -11,6 +11,27 @@ import { Channel } from "./channels_db.js";
 
 export const protobufPackage = "service.v1";
 
+/** Channel Unread */
+export interface ChannelUnread {
+  id?:
+    | ChannelCompositeKey
+    | undefined;
+  /** Id of the last message read in this channel by a user */
+  lastId?:
+    | string
+    | undefined;
+  /** Array of message ids that mention the user */
+  mentions?: string | undefined;
+}
+
+/** Composite primary key consisting of channel and user id */
+export interface ChannelCompositeKey {
+  /** @description Channel Id */
+  channel: string;
+  /** @description User Id */
+  user: string;
+}
+
 export interface ChannelsGetRequest {
   /** channel id */
   id: string;
@@ -20,6 +41,176 @@ export interface ChannelsGetResponse {
   data?: Channel | undefined;
   error?: AppError | undefined;
 }
+
+function createBaseChannelUnread(): ChannelUnread {
+  return { id: undefined, lastId: undefined, mentions: undefined };
+}
+
+export const ChannelUnread: MessageFns<ChannelUnread> = {
+  encode(message: ChannelUnread, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== undefined) {
+      ChannelCompositeKey.encode(message.id, writer.uint32(10).fork()).join();
+    }
+    if (message.lastId !== undefined) {
+      writer.uint32(18).string(message.lastId);
+    }
+    if (message.mentions !== undefined) {
+      writer.uint32(26).string(message.mentions);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChannelUnread {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChannelUnread();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = ChannelCompositeKey.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.lastId = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.mentions = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChannelUnread {
+    return {
+      id: isSet(object.id) ? ChannelCompositeKey.fromJSON(object.id) : undefined,
+      lastId: isSet(object.lastId) ? globalThis.String(object.lastId) : undefined,
+      mentions: isSet(object.mentions) ? globalThis.String(object.mentions) : undefined,
+    };
+  },
+
+  toJSON(message: ChannelUnread): unknown {
+    const obj: any = {};
+    if (message.id !== undefined) {
+      obj.id = ChannelCompositeKey.toJSON(message.id);
+    }
+    if (message.lastId !== undefined) {
+      obj.lastId = message.lastId;
+    }
+    if (message.mentions !== undefined) {
+      obj.mentions = message.mentions;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChannelUnread>, I>>(base?: I): ChannelUnread {
+    return ChannelUnread.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChannelUnread>, I>>(object: I): ChannelUnread {
+    const message = createBaseChannelUnread();
+    message.id = (object.id !== undefined && object.id !== null)
+      ? ChannelCompositeKey.fromPartial(object.id)
+      : undefined;
+    message.lastId = object.lastId ?? undefined;
+    message.mentions = object.mentions ?? undefined;
+    return message;
+  },
+};
+
+function createBaseChannelCompositeKey(): ChannelCompositeKey {
+  return { channel: "", user: "" };
+}
+
+export const ChannelCompositeKey: MessageFns<ChannelCompositeKey> = {
+  encode(message: ChannelCompositeKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.channel !== "") {
+      writer.uint32(10).string(message.channel);
+    }
+    if (message.user !== "") {
+      writer.uint32(18).string(message.user);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChannelCompositeKey {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChannelCompositeKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channel = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.user = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChannelCompositeKey {
+    return {
+      channel: isSet(object.channel) ? globalThis.String(object.channel) : "",
+      user: isSet(object.user) ? globalThis.String(object.user) : "",
+    };
+  },
+
+  toJSON(message: ChannelCompositeKey): unknown {
+    const obj: any = {};
+    if (message.channel !== "") {
+      obj.channel = message.channel;
+    }
+    if (message.user !== "") {
+      obj.user = message.user;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChannelCompositeKey>, I>>(base?: I): ChannelCompositeKey {
+    return ChannelCompositeKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChannelCompositeKey>, I>>(object: I): ChannelCompositeKey {
+    const message = createBaseChannelCompositeKey();
+    message.channel = object.channel ?? "";
+    message.user = object.user ?? "";
+    return message;
+  },
+};
 
 function createBaseChannelsGetRequest(): ChannelsGetRequest {
   return { id: "" };

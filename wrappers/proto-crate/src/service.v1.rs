@@ -163,6 +163,30 @@ pub struct Channel {
     #[prost(int64, tag = "9")]
     pub updated_at: i64,
 }
+/// Channel Unread
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelUnread {
+    #[prost(message, optional, tag = "1")]
+    pub id: ::core::option::Option<ChannelCompositeKey>,
+    /// Id of the last message read in this channel by a user
+    #[prost(string, optional, tag = "2")]
+    pub last_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Array of message ids that mention the user
+    #[prost(string, optional, tag = "3")]
+    pub mentions: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Composite primary key consisting of channel and user id
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelCompositeKey {
+    /// * @description Channel Id
+    #[prost(string, tag = "1")]
+    pub channel: ::prost::alloc::string::String,
+    /// * @description User Id
+    #[prost(string, tag = "2")]
+    pub user: ::prost::alloc::string::String,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelsGetRequest {

@@ -5,6 +5,23 @@ package service.v1;
 import "service/v1/channels_db.proto";
 import "shared/v1/error.proto";
 
+// Channel Unread
+message ChannelUnread {
+  ChannelCompositeKey id = 1;
+  // Id of the last message read in this channel by a user
+  optional string last_id = 2;
+  // Array of message ids that mention the user
+  optional string mentions = 3;
+}
+
+// Composite primary key consisting of channel and user id
+message ChannelCompositeKey {
+  /** @description Channel Id */
+  string channel = 1;
+  /** @description User Id */
+  string user = 2;
+}
+
 message ChannelsGetRequest {
   string id = 1; // channel id
 }

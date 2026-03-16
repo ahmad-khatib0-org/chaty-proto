@@ -14,7 +14,68 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/channels.proto.
  */
 export const file_service_v1_channels: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxIiAKEkNoYW5uZWxzR2V0UmVxdWVzdBIKCgJpZBgBIAEoCSJsChNDaGFubmVsc0dldFJlc3BvbnNlEiMKBGRhdGEYASABKAsyEy5zZXJ2aWNlLnYxLkNoYW5uZWxIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlYgZwcm90bzM", [file_service_v1_channels_db, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxIoIBCg1DaGFubmVsVW5yZWFkEisKAmlkGAEgASgLMh8uc2VydmljZS52MS5DaGFubmVsQ29tcG9zaXRlS2V5EhQKB2xhc3RfaWQYAiABKAlIAIgBARIVCghtZW50aW9ucxgDIAEoCUgBiAEBQgoKCF9sYXN0X2lkQgsKCV9tZW50aW9ucyI0ChNDaGFubmVsQ29tcG9zaXRlS2V5Eg8KB2NoYW5uZWwYASABKAkSDAoEdXNlchgCIAEoCSIgChJDaGFubmVsc0dldFJlcXVlc3QSCgoCaWQYASABKAkibAoTQ2hhbm5lbHNHZXRSZXNwb25zZRIjCgRkYXRhGAEgASgLMhMuc2VydmljZS52MS5DaGFubmVsSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZWIGcHJvdG8z", [file_service_v1_channels_db, file_shared_v1_error]);
+
+/**
+ * Channel Unread
+ *
+ * @generated from message service.v1.ChannelUnread
+ */
+export type ChannelUnread = Message<"service.v1.ChannelUnread"> & {
+  /**
+   * @generated from field: service.v1.ChannelCompositeKey id = 1;
+   */
+  id?: ChannelCompositeKey;
+
+  /**
+   * Id of the last message read in this channel by a user
+   *
+   * @generated from field: optional string last_id = 2;
+   */
+  lastId?: string;
+
+  /**
+   * Array of message ids that mention the user
+   *
+   * @generated from field: optional string mentions = 3;
+   */
+  mentions?: string;
+};
+
+/**
+ * Describes the message service.v1.ChannelUnread.
+ * Use `create(ChannelUnreadSchema)` to create a new message.
+ */
+export const ChannelUnreadSchema: GenMessage<ChannelUnread> = /*@__PURE__*/
+  messageDesc(file_service_v1_channels, 0);
+
+/**
+ * Composite primary key consisting of channel and user id
+ *
+ * @generated from message service.v1.ChannelCompositeKey
+ */
+export type ChannelCompositeKey = Message<"service.v1.ChannelCompositeKey"> & {
+  /**
+   * * @description Channel Id 
+   *
+   * @generated from field: string channel = 1;
+   */
+  channel: string;
+
+  /**
+   * * @description User Id 
+   *
+   * @generated from field: string user = 2;
+   */
+  user: string;
+};
+
+/**
+ * Describes the message service.v1.ChannelCompositeKey.
+ * Use `create(ChannelCompositeKeySchema)` to create a new message.
+ */
+export const ChannelCompositeKeySchema: GenMessage<ChannelCompositeKey> = /*@__PURE__*/
+  messageDesc(file_service_v1_channels, 1);
 
 /**
  * @generated from message service.v1.ChannelsGetRequest
@@ -33,7 +94,7 @@ export type ChannelsGetRequest = Message<"service.v1.ChannelsGetRequest"> & {
  * Use `create(ChannelsGetRequestSchema)` to create a new message.
  */
 export const ChannelsGetRequestSchema: GenMessage<ChannelsGetRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels, 0);
+  messageDesc(file_service_v1_channels, 2);
 
 /**
  * @generated from message service.v1.ChannelsGetResponse
@@ -62,5 +123,5 @@ export type ChannelsGetResponse = Message<"service.v1.ChannelsGetResponse"> & {
  * Use `create(ChannelsGetResponseSchema)` to create a new message.
  */
 export const ChannelsGetResponseSchema: GenMessage<ChannelsGetResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_channels, 1);
+  messageDesc(file_service_v1_channels, 3);
 

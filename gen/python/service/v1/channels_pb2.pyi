@@ -6,6 +6,24 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class ChannelUnread(_message.Message):
+    __slots__ = ("id", "last_id", "mentions")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    LAST_ID_FIELD_NUMBER: _ClassVar[int]
+    MENTIONS_FIELD_NUMBER: _ClassVar[int]
+    id: ChannelCompositeKey
+    last_id: str
+    mentions: str
+    def __init__(self, id: _Optional[_Union[ChannelCompositeKey, _Mapping]] = ..., last_id: _Optional[str] = ..., mentions: _Optional[str] = ...) -> None: ...
+
+class ChannelCompositeKey(_message.Message):
+    __slots__ = ("channel", "user")
+    CHANNEL_FIELD_NUMBER: _ClassVar[int]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    channel: str
+    user: str
+    def __init__(self, channel: _Optional[str] = ..., user: _Optional[str] = ...) -> None: ...
+
 class ChannelsGetRequest(_message.Message):
     __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
