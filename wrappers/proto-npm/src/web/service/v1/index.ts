@@ -1,6 +1,7 @@
 export * as BotsDb from './bots_db_pb.js';
 export * as ChannelsDb from './channels_db_pb.js';
 export * as Channels from './channels_pb.js';
+export * as Config from './config_pb.js';
 export * as Groups from './groups_pb.js';
 export * as Main from './main_pb.js';
 export * as MessagesDb from './messages_db_pb.js';

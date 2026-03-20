@@ -211,6 +211,120 @@ pub mod channels_get_response {
         Error(super::super::super::shared::v1::AppError),
     }
 }
+/// Chaty API Configuration
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChatyConfig {
+    /// Chaty API Version
+    #[prost(string, tag = "1")]
+    pub chaty_version: ::prost::alloc::string::String,
+    /// Features enabled on this Chaty node
+    #[prost(message, optional, tag = "2")]
+    pub features: ::core::option::Option<ChatyFeatures>,
+    /// WebSocket URL
+    #[prost(string, tag = "3")]
+    pub ws: ::prost::alloc::string::String,
+    /// URL pointing to the client serving this node
+    #[prost(string, tag = "4")]
+    pub app: ::prost::alloc::string::String,
+    /// Web Push VAPID public key
+    #[prost(string, tag = "5")]
+    pub vapid: ::prost::alloc::string::String,
+    /// Build information
+    #[prost(message, optional, tag = "6")]
+    pub build: ::core::option::Option<BuildInformation>,
+}
+/// Feature Configuration
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChatyFeatures {
+    /// hCaptcha configuration
+    #[prost(message, optional, tag = "1")]
+    pub captcha: ::core::option::Option<CaptchaFeature>,
+    /// Whether email verification is enabled
+    #[prost(bool, tag = "2")]
+    pub email: bool,
+    /// Whether this server is invite only
+    #[prost(bool, tag = "3")]
+    pub invite_only: bool,
+    /// File server service configuration
+    #[prost(message, optional, tag = "4")]
+    pub files: ::core::option::Option<Feature>,
+    /// Proxy service configuration
+    #[prost(message, optional, tag = "5")]
+    pub proxy: ::core::option::Option<Feature>,
+    /// Voice server configuration
+    #[prost(message, optional, tag = "6")]
+    pub livekit: ::core::option::Option<VoiceFeature>,
+}
+/// hCaptcha Configuration
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CaptchaFeature {
+    /// Whether captcha is enabled
+    #[prost(bool, tag = "1")]
+    pub enabled: bool,
+    /// Client key used for solving captcha
+    #[prost(string, tag = "2")]
+    pub key: ::prost::alloc::string::String,
+}
+/// Generic Service Configuration
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Feature {
+    /// Whether the service is enabled
+    #[prost(bool, tag = "1")]
+    pub enabled: bool,
+    /// URL pointing to the service
+    #[prost(string, tag = "2")]
+    pub url: ::prost::alloc::string::String,
+}
+/// Voice Server Configuration
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VoiceFeature {
+    /// Whether voice is enabled
+    #[prost(bool, tag = "1")]
+    pub enabled: bool,
+    /// All livekit nodes
+    #[prost(message, repeated, tag = "2")]
+    pub nodes: ::prost::alloc::vec::Vec<VoiceNode>,
+}
+/// Information about a livekit node
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VoiceNode {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Format: double
+    #[prost(double, tag = "2")]
+    pub lat: f64,
+    /// Format: double
+    #[prost(double, tag = "3")]
+    pub lon: f64,
+    #[prost(string, tag = "4")]
+    pub public_url: ::prost::alloc::string::String,
+}
+/// Build Information
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BuildInformation {
+    /// Commit Hash
+    #[prost(string, tag = "1")]
+    pub commit_sha: ::prost::alloc::string::String,
+    /// Commit Timestamp
+    #[prost(string, tag = "2")]
+    pub commit_timestamp: ::prost::alloc::string::String,
+    /// Git Semver
+    #[prost(string, tag = "3")]
+    pub semver: ::prost::alloc::string::String,
+    /// Git Origin URL
+    #[prost(string, tag = "4")]
+    pub origin_url: ::prost::alloc::string::String,
+    /// Build Timestamp
+    #[prost(string, tag = "5")]
+    pub timestamp: ::prost::alloc::string::String,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupsCreateRequest {

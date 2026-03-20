@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package service.v1;
+
+// Chaty API Configuration
+message ChatyConfig {
+  // Chaty API Version
+  string chaty_version = 1;
+
+  // Features enabled on this Chaty node
+  ChatyFeatures features = 2;
+
+  // WebSocket URL
+  string ws = 3;
+
+  // URL pointing to the client serving this node
+  string app = 4;
+
+  // Web Push VAPID public key
+  string vapid = 5;
+
+  // Build information
+  BuildInformation build = 6;
+}
+
+// Feature Configuration
+message ChatyFeatures {
+  // hCaptcha configuration
+  CaptchaFeature captcha = 1;
+
+  // Whether email verification is enabled
+  bool email = 2;
+
+  // Whether this server is invite only
+  bool invite_only = 3;
+
+  // File server service configuration
+  Feature files = 4;
+
+  // Proxy service configuration
+  Feature proxy = 5;
+
+  // Voice server configuration
+  VoiceFeature livekit = 6;
+}
+
+// hCaptcha Configuration
+message CaptchaFeature {
+  // Whether captcha is enabled
+  bool enabled = 1;
+
+  // Client key used for solving captcha
+  string key = 2;
+}
+
+// Generic Service Configuration
+message Feature {
+  // Whether the service is enabled
+  bool enabled = 1;
+
+  // URL pointing to the service
+  string url = 2;
+}
+
+// Voice Server Configuration
+message VoiceFeature {
+  // Whether voice is enabled
+  bool enabled = 1;
+
+  // All livekit nodes
+  repeated VoiceNode nodes = 2;
+}
+
+// Information about a livekit node
+message VoiceNode {
+  string name = 1;
+
+  // Format: double
+  double lat = 2;
+
+  // Format: double
+  double lon = 3;
+
+  string public_url = 4;
+}
+
+// Build Information
+message BuildInformation {
+  // Commit Hash
+  string commit_sha = 1;
+
+  // Commit Timestamp
+  string commit_timestamp = 2;
+
+  // Git Semver
+  string semver = 3;
+
+  // Git Origin URL
+  string origin_url = 4;
+
+  // Build Timestamp
+  string timestamp = 5;
+}
