@@ -8,7 +8,7 @@ MSG ?=
 # -----------------------------------------------------------------------------
 generate:
 	@echo "Cleaning previous generated code..."
-	rm -rf wrappers/proto-npm/dist wrappers/proto-npm/src/node wrappers/proto-npm/src/web
+	rm -rf wrappers/proto-npm/dist wrappers/proto-npm/src/node wrappers/proto-npm/src/web wrappers/proto-npm/src/node-plain wrappers/proto-npm/src/web-plain
 	find wrappers/proto-crate/src -name "*.rs" -not -name "lib.rs" -o -name "descriptor.bin" -o -name "envoy_descriptor.bin" -delete
 	
 	@echo "Generating protobuf files..."

@@ -24,7 +24,9 @@
   "exports": {
     ".": "./dist/index.js",
     "./web/*": "./dist/web/*.js",
-    "./node/*": "./dist/node/*.js"
+    "./node/*": "./dist/node/*.js",
+    "./web-plain/*": "./dist/web-plain/*.js",
+    "./node-plain/*": "./dist/node-plain/*.js"
   },
   "typesVersions": {
     "*": {
@@ -40,6 +42,18 @@
       "web/shared/v1/*": [
         "dist/web/shared/v1/*.d.ts"
       ],
+      "web-plain/service/v1": [
+        "dist/web-plain/service/v1/index.d.ts"
+      ],
+      "web-plain/service/v1/*": [
+        "dist/web-plain/service/v1/*.d.ts"
+      ],
+      "web-plain/shared/v1": [
+        "dist/web-plain/shared/v1/index.d.ts"
+      ],
+      "web-plain/shared/v1/*": [
+        "dist/web-plain/shared/v1/*.d.ts"
+      ],
       "node/service/v1": [
         "dist/node/service/v1/index.d.ts"
       ],
@@ -51,6 +65,18 @@
       ],
       "node/shared/v1/*": [
         "dist/node/shared/v1/*.d.ts"
+      ],
+      "node-plain/service/v1": [
+        "dist/node-plain/service/v1/index.d.ts"
+      ],
+      "node-plain/service/v1/*": [
+        "dist/node-plain/service/v1/*.d.ts"
+      ],
+      "node-plain/shared/v1": [
+        "dist/node-plain/shared/v1/index.d.ts"
+      ],
+      "node-plain/shared/v1/*": [
+        "dist/node-plain/shared/v1/*.d.ts"
       ]
     }
   }

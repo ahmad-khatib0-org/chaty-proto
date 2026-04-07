@@ -38,5 +38,8 @@ function generateBarrels(rootDir: string) {
 generateBarrels('wrappers/proto-npm/src/node')
 generateBarrels('wrappers/proto-npm/src/web')
 
+generateBarrels('wrappers/proto-npm/src/node-plain')
+generateBarrels('wrappers/proto-npm/src/web-plain')
+
 // Root index remains empty
 fs.writeFileSync('wrappers/proto-npm/src/index.ts', '// Root index\n')
