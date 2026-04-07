@@ -9,6 +9,7 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "service.v1";
 
+/** Bot message */
 export interface Bot {
   owner: string;
 }

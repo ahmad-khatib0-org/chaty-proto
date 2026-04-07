@@ -13,6 +13,8 @@ export const file_service_v1_bots_db: GenFile = /*@__PURE__*/
   fileDesc("ChhzZXJ2aWNlL3YxL2JvdHNfZGIucHJvdG8SCnNlcnZpY2UudjEiFAoDQm90Eg0KBW93bmVyGAEgASgJYgZwcm90bzM");
 
 /**
+ * Bot message
+ *
  * @generated from message service.v1.Bot
  */
 export type Bot = Message<"service.v1.Bot"> & {
