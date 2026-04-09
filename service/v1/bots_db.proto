@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package service.v1;
 
-// Bot message
+// Bot message representation
 message Bot {
   string owner = 1;
 }
