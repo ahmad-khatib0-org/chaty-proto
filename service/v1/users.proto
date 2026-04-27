@@ -11,8 +11,9 @@ message APIUser {
   string id = 1; // ulid
   string username = 2; // 64 char
   string email = 3; // 255 char
-  // User's relationship with another user (or themselves
-  service.v1.UserRelationship relationship = 4;
+  // User's relationship with another user (or themselves)
+  // options: "None" | "User" | "Friend" | "Outgoing" | "Incoming" | "Blocked" | "BlockedOther";
+  string relationship = 4;
   optional string display_name = 5; // 64 char
   optional int32 badges = 6;
   optional string status_text = 7; // 510 char

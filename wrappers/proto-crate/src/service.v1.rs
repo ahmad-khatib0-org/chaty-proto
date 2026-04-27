@@ -599,9 +599,10 @@ pub struct ApiUser {
     /// 255 char
     #[prost(string, tag = "3")]
     pub email: ::prost::alloc::string::String,
-    /// User's relationship with another user (or themselves
-    #[prost(message, optional, tag = "4")]
-    pub relationship: ::core::option::Option<UserRelationship>,
+    /// User's relationship with another user (or themselves)
+    /// options: "None" | "User" | "Friend" | "Outgoing" | "Incoming" | "Blocked" | "BlockedOther";
+    #[prost(string, tag = "4")]
+    pub relationship: ::prost::alloc::string::String,
     /// 64 char
     #[prost(string, optional, tag = "5")]
     pub display_name: ::core::option::Option<::prost::alloc::string::String>,

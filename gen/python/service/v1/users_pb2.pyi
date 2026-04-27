@@ -46,7 +46,7 @@ class APIUser(_message.Message):
     id: str
     username: str
     email: str
-    relationship: _users_db_pb2.UserRelationship
+    relationship: str
     display_name: str
     badges: int
     status_text: str
@@ -61,7 +61,7 @@ class APIUser(_message.Message):
     avatar: _files_pb2.File
     relations: _containers.RepeatedCompositeFieldContainer[_users_db_pb2.UserRelationship]
     bot: _bots_db_pb2.Bot
-    def __init__(self, id: _Optional[str] = ..., username: _Optional[str] = ..., email: _Optional[str] = ..., relationship: _Optional[_Union[_users_db_pb2.UserRelationship, _Mapping]] = ..., display_name: _Optional[str] = ..., badges: _Optional[int] = ..., status_text: _Optional[str] = ..., status_presence: _Optional[_Union[_users_db_pb2.UserStatus, str]] = ..., profile_content: _Optional[str] = ..., profile_background_id: _Optional[str] = ..., privileged: bool = ..., suspended_until: _Optional[int] = ..., created_at: _Optional[int] = ..., updated_at: _Optional[int] = ..., verified: bool = ..., avatar: _Optional[_Union[_files_pb2.File, _Mapping]] = ..., relations: _Optional[_Iterable[_Union[_users_db_pb2.UserRelationship, _Mapping]]] = ..., bot: _Optional[_Union[_bots_db_pb2.Bot, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., username: _Optional[str] = ..., email: _Optional[str] = ..., relationship: _Optional[str] = ..., display_name: _Optional[str] = ..., badges: _Optional[int] = ..., status_text: _Optional[str] = ..., status_presence: _Optional[_Union[_users_db_pb2.UserStatus, str]] = ..., profile_content: _Optional[str] = ..., profile_background_id: _Optional[str] = ..., privileged: bool = ..., suspended_until: _Optional[int] = ..., created_at: _Optional[int] = ..., updated_at: _Optional[int] = ..., verified: bool = ..., avatar: _Optional[_Union[_files_pb2.File, _Mapping]] = ..., relations: _Optional[_Iterable[_Union[_users_db_pb2.UserRelationship, _Mapping]]] = ..., bot: _Optional[_Union[_bots_db_pb2.Bot, _Mapping]] = ...) -> None: ...
 
 class UsersCreateRequest(_message.Message):
     __slots__ = ("email", "password", "username")

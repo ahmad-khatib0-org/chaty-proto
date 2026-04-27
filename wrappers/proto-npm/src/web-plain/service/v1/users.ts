@@ -71,10 +71,11 @@ export interface APIUser {
   username: string;
   /** 255 char */
   email: string;
-  /** User's relationship with another user (or themselves */
-  relationship?:
-    | UserRelationship
-    | undefined;
+  /**
+   * User's relationship with another user (or themselves)
+   * options: "None" | "User" | "Friend" | "Outgoing" | "Incoming" | "Blocked" | "BlockedOther";
+   */
+  relationship: string;
   /** 64 char */
   displayName?: string | undefined;
   badges?:
@@ -185,7 +186,7 @@ function createBaseAPIUser(): APIUser {
     id: "",
     username: "",
     email: "",
-    relationship: undefined,
+    relationship: "",
     displayName: undefined,
     badges: undefined,
     statusText: undefined,
@@ -214,8 +215,8 @@ export const APIUser: MessageFns<APIUser> = {
     if (message.email !== "") {
       writer.uint32(26).string(message.email);
     }
-    if (message.relationship !== undefined) {
-      UserRelationship.encode(message.relationship, writer.uint32(34).fork()).join();
+    if (message.relationship !== "") {
+      writer.uint32(34).string(message.relationship);
     }
     if (message.displayName !== undefined) {
       writer.uint32(42).string(message.displayName);
@@ -298,7 +299,7 @@ export const APIUser: MessageFns<APIUser> = {
             break;
           }
 
-          message.relationship = UserRelationship.decode(reader, reader.uint32());
+          message.relationship = reader.string();
           continue;
         }
         case 5: {
@@ -427,7 +428,7 @@ export const APIUser: MessageFns<APIUser> = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       username: isSet(object.username) ? globalThis.String(object.username) : "",
       email: isSet(object.email) ? globalThis.String(object.email) : "",
-      relationship: isSet(object.relationship) ? UserRelationship.fromJSON(object.relationship) : undefined,
+      relationship: isSet(object.relationship) ? globalThis.String(object.relationship) : "",
       displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : undefined,
       badges: isSet(object.badges) ? globalThis.Number(object.badges) : undefined,
       statusText: isSet(object.statusText) ? globalThis.String(object.statusText) : undefined,
@@ -460,8 +461,8 @@ export const APIUser: MessageFns<APIUser> = {
     if (message.email !== "") {
       obj.email = message.email;
     }
-    if (message.relationship !== undefined) {
-      obj.relationship = UserRelationship.toJSON(message.relationship);
+    if (message.relationship !== "") {
+      obj.relationship = message.relationship;
     }
     if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
@@ -516,9 +517,7 @@ export const APIUser: MessageFns<APIUser> = {
     message.id = object.id ?? "";
     message.username = object.username ?? "";
     message.email = object.email ?? "";
-    message.relationship = (object.relationship !== undefined && object.relationship !== null)
-      ? UserRelationship.fromPartial(object.relationship)
-      : undefined;
+    message.relationship = object.relationship ?? "";
     message.displayName = object.displayName ?? undefined;
     message.badges = object.badges ?? undefined;
     message.statusText = object.statusText ?? undefined;
