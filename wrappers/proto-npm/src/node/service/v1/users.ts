@@ -7,6 +7,9 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error.js";
+import { File } from "../../shared/v1/files.js";
+import { Bot } from "./bots_db.js";
+import { UserRelationship, UserStatus, userStatusFromJSON, userStatusToJSON } from "./users_db.js";
 
 export const protobufPackage = "service.v1";
 
@@ -59,6 +62,50 @@ export function userFlagToJSON(object: UserFlag): string {
     default:
       return "UNRECOGNIZED";
   }
+}
+
+export interface APIUser {
+  /** ulid */
+  id: string;
+  /** 64 char */
+  username: string;
+  /** 255 char */
+  email: string;
+  /** User's relationship with another user (or themselves */
+  relationship?:
+    | UserRelationship
+    | undefined;
+  /** 64 char */
+  displayName?: string | undefined;
+  badges?:
+    | number
+    | undefined;
+  /** 510 char */
+  statusText?:
+    | string
+    | undefined;
+  /** 32 char */
+  statusPresence?:
+    | UserStatus
+    | undefined;
+  /** text */
+  profileContent?:
+    | string
+    | undefined;
+  /** ulid (26 chars) Reference to files collection */
+  profileBackgroundId?: string | undefined;
+  privileged: boolean;
+  suspendedUntil?:
+    | string
+    | undefined;
+  /** unix timestamp miliseconds */
+  createdAt: string;
+  /** unix timestamp miliseconds */
+  updatedAt: string;
+  verified: boolean;
+  avatar?: File | undefined;
+  relations: UserRelationship[];
+  bot?: Bot | undefined;
 }
 
 export interface UsersCreateRequest {
@@ -132,6 +179,365 @@ export interface UsersResetPasswordResponse {
 export interface UsersResetPasswordResponseData {
   message: string;
 }
+
+function createBaseAPIUser(): APIUser {
+  return {
+    id: "",
+    username: "",
+    email: "",
+    relationship: undefined,
+    displayName: undefined,
+    badges: undefined,
+    statusText: undefined,
+    statusPresence: undefined,
+    profileContent: undefined,
+    profileBackgroundId: undefined,
+    privileged: false,
+    suspendedUntil: undefined,
+    createdAt: "0",
+    updatedAt: "0",
+    verified: false,
+    avatar: undefined,
+    relations: [],
+    bot: undefined,
+  };
+}
+
+export const APIUser: MessageFns<APIUser> = {
+  encode(message: APIUser, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    if (message.username !== "") {
+      writer.uint32(18).string(message.username);
+    }
+    if (message.email !== "") {
+      writer.uint32(26).string(message.email);
+    }
+    if (message.relationship !== undefined) {
+      UserRelationship.encode(message.relationship, writer.uint32(34).fork()).join();
+    }
+    if (message.displayName !== undefined) {
+      writer.uint32(42).string(message.displayName);
+    }
+    if (message.badges !== undefined) {
+      writer.uint32(48).int32(message.badges);
+    }
+    if (message.statusText !== undefined) {
+      writer.uint32(58).string(message.statusText);
+    }
+    if (message.statusPresence !== undefined) {
+      writer.uint32(64).int32(message.statusPresence);
+    }
+    if (message.profileContent !== undefined) {
+      writer.uint32(74).string(message.profileContent);
+    }
+    if (message.profileBackgroundId !== undefined) {
+      writer.uint32(82).string(message.profileBackgroundId);
+    }
+    if (message.privileged !== false) {
+      writer.uint32(88).bool(message.privileged);
+    }
+    if (message.suspendedUntil !== undefined) {
+      writer.uint32(96).int64(message.suspendedUntil);
+    }
+    if (message.createdAt !== "0") {
+      writer.uint32(104).int64(message.createdAt);
+    }
+    if (message.updatedAt !== "0") {
+      writer.uint32(112).int64(message.updatedAt);
+    }
+    if (message.verified !== false) {
+      writer.uint32(120).bool(message.verified);
+    }
+    if (message.avatar !== undefined) {
+      File.encode(message.avatar, writer.uint32(130).fork()).join();
+    }
+    for (const v of message.relations) {
+      UserRelationship.encode(v!, writer.uint32(138).fork()).join();
+    }
+    if (message.bot !== undefined) {
+      Bot.encode(message.bot, writer.uint32(146).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): APIUser {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAPIUser();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.username = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.relationship = UserRelationship.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.displayName = reader.string();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.badges = reader.int32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.statusText = reader.string();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.statusPresence = reader.int32() as any;
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.profileContent = reader.string();
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.profileBackgroundId = reader.string();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.privileged = reader.bool();
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.suspendedUntil = reader.int64().toString();
+          continue;
+        }
+        case 13: {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.createdAt = reader.int64().toString();
+          continue;
+        }
+        case 14: {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.updatedAt = reader.int64().toString();
+          continue;
+        }
+        case 15: {
+          if (tag !== 120) {
+            break;
+          }
+
+          message.verified = reader.bool();
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.avatar = File.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.relations.push(UserRelationship.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.bot = Bot.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): APIUser {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      username: isSet(object.username) ? globalThis.String(object.username) : "",
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
+      relationship: isSet(object.relationship) ? UserRelationship.fromJSON(object.relationship) : undefined,
+      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : undefined,
+      badges: isSet(object.badges) ? globalThis.Number(object.badges) : undefined,
+      statusText: isSet(object.statusText) ? globalThis.String(object.statusText) : undefined,
+      statusPresence: isSet(object.statusPresence) ? userStatusFromJSON(object.statusPresence) : undefined,
+      profileContent: isSet(object.profileContent) ? globalThis.String(object.profileContent) : undefined,
+      profileBackgroundId: isSet(object.profileBackgroundId)
+        ? globalThis.String(object.profileBackgroundId)
+        : undefined,
+      privileged: isSet(object.privileged) ? globalThis.Boolean(object.privileged) : false,
+      suspendedUntil: isSet(object.suspendedUntil) ? globalThis.String(object.suspendedUntil) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+      verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
+      avatar: isSet(object.avatar) ? File.fromJSON(object.avatar) : undefined,
+      relations: globalThis.Array.isArray(object?.relations)
+        ? object.relations.map((e: any) => UserRelationship.fromJSON(e))
+        : [],
+      bot: isSet(object.bot) ? Bot.fromJSON(object.bot) : undefined,
+    };
+  },
+
+  toJSON(message: APIUser): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.username !== "") {
+      obj.username = message.username;
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    if (message.relationship !== undefined) {
+      obj.relationship = UserRelationship.toJSON(message.relationship);
+    }
+    if (message.displayName !== undefined) {
+      obj.displayName = message.displayName;
+    }
+    if (message.badges !== undefined) {
+      obj.badges = Math.round(message.badges);
+    }
+    if (message.statusText !== undefined) {
+      obj.statusText = message.statusText;
+    }
+    if (message.statusPresence !== undefined) {
+      obj.statusPresence = userStatusToJSON(message.statusPresence);
+    }
+    if (message.profileContent !== undefined) {
+      obj.profileContent = message.profileContent;
+    }
+    if (message.profileBackgroundId !== undefined) {
+      obj.profileBackgroundId = message.profileBackgroundId;
+    }
+    if (message.privileged !== false) {
+      obj.privileged = message.privileged;
+    }
+    if (message.suspendedUntil !== undefined) {
+      obj.suspendedUntil = message.suspendedUntil;
+    }
+    if (message.createdAt !== "0") {
+      obj.createdAt = message.createdAt;
+    }
+    if (message.updatedAt !== "0") {
+      obj.updatedAt = message.updatedAt;
+    }
+    if (message.verified !== false) {
+      obj.verified = message.verified;
+    }
+    if (message.avatar !== undefined) {
+      obj.avatar = File.toJSON(message.avatar);
+    }
+    if (message.relations?.length) {
+      obj.relations = message.relations.map((e) => UserRelationship.toJSON(e));
+    }
+    if (message.bot !== undefined) {
+      obj.bot = Bot.toJSON(message.bot);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<APIUser>, I>>(base?: I): APIUser {
+    return APIUser.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<APIUser>, I>>(object: I): APIUser {
+    const message = createBaseAPIUser();
+    message.id = object.id ?? "";
+    message.username = object.username ?? "";
+    message.email = object.email ?? "";
+    message.relationship = (object.relationship !== undefined && object.relationship !== null)
+      ? UserRelationship.fromPartial(object.relationship)
+      : undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.badges = object.badges ?? undefined;
+    message.statusText = object.statusText ?? undefined;
+    message.statusPresence = object.statusPresence ?? undefined;
+    message.profileContent = object.profileContent ?? undefined;
+    message.profileBackgroundId = object.profileBackgroundId ?? undefined;
+    message.privileged = object.privileged ?? false;
+    message.suspendedUntil = object.suspendedUntil ?? undefined;
+    message.createdAt = object.createdAt ?? "0";
+    message.updatedAt = object.updatedAt ?? "0";
+    message.verified = object.verified ?? false;
+    message.avatar = (object.avatar !== undefined && object.avatar !== null)
+      ? File.fromPartial(object.avatar)
+      : undefined;
+    message.relations = object.relations?.map((e) => UserRelationship.fromPartial(e)) || [];
+    message.bot = (object.bot !== undefined && object.bot !== null) ? Bot.fromPartial(object.bot) : undefined;
+    return message;
+  },
+};
 
 function createBaseUsersCreateRequest(): UsersCreateRequest {
   return { email: "", password: "", username: "" };

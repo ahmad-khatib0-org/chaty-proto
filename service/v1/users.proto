@@ -2,7 +2,33 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/bots_db.proto";
+import "service/v1/users_db.proto";
 import "shared/v1/error.proto";
+import "shared/v1/files.proto";
+
+message APIUser {
+  string id = 1; // ulid
+  string username = 2; // 64 char
+  string email = 3; // 255 char
+  // User's relationship with another user (or themselves
+  service.v1.UserRelationship relationship = 4;
+  optional string display_name = 5; // 64 char
+  optional int32 badges = 6;
+  optional string status_text = 7; // 510 char
+  optional UserStatus status_presence = 8; // 32 char
+  optional string profile_content = 9; // text
+  // ulid (26 chars) Reference to files collection
+  optional string profile_background_id = 10;
+  bool privileged = 11;
+  optional int64 suspended_until = 12;
+  int64 created_at = 13; // unix timestamp miliseconds
+  int64 updated_at = 14; // unix timestamp miliseconds
+  bool verified = 15;
+  optional shared.v1.File avatar = 16;
+  repeated service.v1.UserRelationship relations = 17;
+  optional service.v1.Bot bot = 18;
+}
 
 enum UserFlag {
   USER_FLAG_UNSPECIFIED = 0;
