@@ -5,5 +5,136 @@
 // source: service/v1/messages.proto
 
 /* eslint-disable */
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "service.v1";
+
+/** What this message should reply to and how */
+export interface ReplyIntent {
+  /** Message Id */
+  id: string;
+  /** Whether this reply should mention the message's author */
+  mention: boolean;
+  /**
+   * Whether to error if the referenced message doesn't exist.
+   * Otherwise, send a message without this reply. Default is true.
+   */
+  failIfNotExists: boolean;
+}
+
+function createBaseReplyIntent(): ReplyIntent {
+  return { id: "", mention: false, failIfNotExists: false };
+}
+
+export const ReplyIntent: MessageFns<ReplyIntent> = {
+  encode(message: ReplyIntent, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    if (message.mention !== false) {
+      writer.uint32(16).bool(message.mention);
+    }
+    if (message.failIfNotExists !== false) {
+      writer.uint32(24).bool(message.failIfNotExists);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ReplyIntent {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseReplyIntent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.mention = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.failIfNotExists = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ReplyIntent {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      mention: isSet(object.mention) ? globalThis.Boolean(object.mention) : false,
+      failIfNotExists: isSet(object.failIfNotExists) ? globalThis.Boolean(object.failIfNotExists) : false,
+    };
+  },
+
+  toJSON(message: ReplyIntent): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.mention !== false) {
+      obj.mention = message.mention;
+    }
+    if (message.failIfNotExists !== false) {
+      obj.failIfNotExists = message.failIfNotExists;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ReplyIntent>, I>>(base?: I): ReplyIntent {
+    return ReplyIntent.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ReplyIntent>, I>>(object: I): ReplyIntent {
+    const message = createBaseReplyIntent();
+    message.id = object.id ?? "";
+    message.mention = object.mention ?? false;
+    message.failIfNotExists = object.failIfNotExists ?? false;
+    return message;
+  },
+};
+
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+}

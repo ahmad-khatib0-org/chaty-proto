@@ -2,12 +2,49 @@
 // @generated from file service/v1/messages.proto (package service.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxYgZwcm90bzM");
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIYgZwcm90bzM");
+
+/**
+ * *  What this message should reply to and how 
+ *
+ * @generated from message service.v1.ReplyIntent
+ */
+export type ReplyIntent = Message<"service.v1.ReplyIntent"> & {
+  /**
+   * * Message Id 
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * * Whether this reply should mention the message's author 
+   *
+   * @generated from field: bool mention = 2;
+   */
+  mention: boolean;
+
+  /**
+   * * Whether to error if the referenced message doesn't exist.
+   * Otherwise, send a message without this reply. Default is true.
+   *
+   * @generated from field: bool fail_if_not_exists = 3;
+   */
+  failIfNotExists: boolean;
+};
+
+/**
+ * Describes the message service.v1.ReplyIntent.
+ * Use `create(ReplyIntentSchema)` to create a new message.
+ */
+export const ReplyIntentSchema: GenMessage<ReplyIntent> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 0);
 

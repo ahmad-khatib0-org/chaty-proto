@@ -1753,6 +1753,21 @@ pub mod chaty_service_server {
         const NAME: &'static str = SERVICE_NAME;
     }
 }
+/// *  What this message should reply to and how
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReplyIntent {
+    /// * Message Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// * Whether this reply should mention the message's author
+    #[prost(bool, tag = "2")]
+    pub mention: bool,
+    /// * Whether to error if the referenced message doesn't exist.
+    /// Otherwise, send a message without this reply. Default is true.
+    #[prost(bool, tag = "3")]
+    pub fail_if_not_exists: bool,
+}
 /// ===========================================
 /// MESSAGE WEBHOOK
 /// ===========================================

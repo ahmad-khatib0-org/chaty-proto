@@ -24,11 +24,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1\"F\n\x0bReplyIntent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07mention\x18\x02 \x01(\x08\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x03 \x01(\x08\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.messages_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
+  _globals['_REPLYINTENT']._serialized_start=41
+  _globals['_REPLYINTENT']._serialized_end=111
 # @@protoc_insertion_point(module_scope)

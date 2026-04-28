@@ -1,3 +1,15 @@
 syntax = "proto3";
 
 package service.v1;
+
+/**  What this message should reply to and how */
+message ReplyIntent {
+  /** Message Id */
+  string id = 1;
+  /** Whether this reply should mention the message's author */
+  bool mention = 2;
+  /** Whether to error if the referenced message doesn't exist.
+     Otherwise, send a message without this reply. Default is true.
+  */
+  bool fail_if_not_exists = 3;
+}
