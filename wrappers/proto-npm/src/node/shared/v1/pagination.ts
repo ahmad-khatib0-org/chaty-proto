@@ -89,19 +89,19 @@ export interface PaginationRequest {
     | undefined;
   /** Date range filters (common for time-series data) */
   createdAfter?:
-    | string
+    | number
     | undefined;
   /** Unix timestamp */
   createdBefore?:
-    | string
+    | number
     | undefined;
   /** Unix timestamp */
   updatedAfter?:
-    | string
+    | number
     | undefined;
   /** Unix timestamp */
   updatedBefore?:
-    | string
+    | number
     | undefined;
   /** Sorting */
   sortBy: PaginationSort[];
@@ -328,7 +328,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdAfter = reader.int64().toString();
+          message.createdAfter = longToNumber(reader.int64());
           continue;
         }
         case 10: {
@@ -336,7 +336,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdBefore = reader.int64().toString();
+          message.createdBefore = longToNumber(reader.int64());
           continue;
         }
         case 11: {
@@ -344,7 +344,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedAfter = reader.int64().toString();
+          message.updatedAfter = longToNumber(reader.int64());
           continue;
         }
         case 12: {
@@ -352,7 +352,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedBefore = reader.int64().toString();
+          message.updatedBefore = longToNumber(reader.int64());
           continue;
         }
         case 13: {
@@ -382,10 +382,10 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       afterIncluding: isSet(object.afterIncluding) ? globalThis.String(object.afterIncluding) : undefined,
       before: isSet(object.before) ? globalThis.String(object.before) : undefined,
       beforeIncluding: isSet(object.beforeIncluding) ? globalThis.String(object.beforeIncluding) : undefined,
-      createdAfter: isSet(object.createdAfter) ? globalThis.String(object.createdAfter) : undefined,
-      createdBefore: isSet(object.createdBefore) ? globalThis.String(object.createdBefore) : undefined,
-      updatedAfter: isSet(object.updatedAfter) ? globalThis.String(object.updatedAfter) : undefined,
-      updatedBefore: isSet(object.updatedBefore) ? globalThis.String(object.updatedBefore) : undefined,
+      createdAfter: isSet(object.createdAfter) ? globalThis.Number(object.createdAfter) : undefined,
+      createdBefore: isSet(object.createdBefore) ? globalThis.Number(object.createdBefore) : undefined,
+      updatedAfter: isSet(object.updatedAfter) ? globalThis.Number(object.updatedAfter) : undefined,
+      updatedBefore: isSet(object.updatedBefore) ? globalThis.Number(object.updatedBefore) : undefined,
       sortBy: globalThis.Array.isArray(object?.sortBy) ? object.sortBy.map((e: any) => PaginationSort.fromJSON(e)) : [],
     };
   },
@@ -417,16 +417,16 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       obj.beforeIncluding = message.beforeIncluding;
     }
     if (message.createdAfter !== undefined) {
-      obj.createdAfter = message.createdAfter;
+      obj.createdAfter = Math.round(message.createdAfter);
     }
     if (message.createdBefore !== undefined) {
-      obj.createdBefore = message.createdBefore;
+      obj.createdBefore = Math.round(message.createdBefore);
     }
     if (message.updatedAfter !== undefined) {
-      obj.updatedAfter = message.updatedAfter;
+      obj.updatedAfter = Math.round(message.updatedAfter);
     }
     if (message.updatedBefore !== undefined) {
-      obj.updatedBefore = message.updatedBefore;
+      obj.updatedBefore = Math.round(message.updatedBefore);
     }
     if (message.sortBy?.length) {
       obj.sortBy = message.sortBy.map((e) => PaginationSort.toJSON(e));
@@ -575,6 +575,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

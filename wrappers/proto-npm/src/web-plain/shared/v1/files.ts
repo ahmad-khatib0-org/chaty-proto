@@ -26,11 +26,11 @@ export interface File {
   /** Raw content type of this file */
   contentType: string;
   /** Size of this file (in bytes) */
-  size: string;
+  size: number;
   /** Hash of this file */
   hash: string;
   /** When this file was uploaded */
-  uploadedAt: string;
+  uploadedAt: number;
   /** Whether this file was deleted */
   deleted?:
     | boolean
@@ -46,9 +46,9 @@ function createBaseFile(): File {
     bucket: "",
     filename: "",
     contentType: "",
-    size: "0",
+    size: 0,
     hash: "",
-    uploadedAt: "0",
+    uploadedAt: 0,
     deleted: undefined,
     reported: undefined,
   };
@@ -71,13 +71,13 @@ export const File: MessageFns<File> = {
     if (message.contentType !== "") {
       writer.uint32(42).string(message.contentType);
     }
-    if (message.size !== "0") {
+    if (message.size !== 0) {
       writer.uint32(48).int64(message.size);
     }
     if (message.hash !== "") {
       writer.uint32(58).string(message.hash);
     }
-    if (message.uploadedAt !== "0") {
+    if (message.uploadedAt !== 0) {
       writer.uint32(64).int64(message.uploadedAt);
     }
     if (message.deleted !== undefined) {
@@ -141,7 +141,7 @@ export const File: MessageFns<File> = {
             break;
           }
 
-          message.size = reader.int64().toString();
+          message.size = longToNumber(reader.int64());
           continue;
         }
         case 7: {
@@ -157,7 +157,7 @@ export const File: MessageFns<File> = {
             break;
           }
 
-          message.uploadedAt = reader.int64().toString();
+          message.uploadedAt = longToNumber(reader.int64());
           continue;
         }
         case 9: {
@@ -192,9 +192,9 @@ export const File: MessageFns<File> = {
       bucket: isSet(object.bucket) ? globalThis.String(object.bucket) : "",
       filename: isSet(object.filename) ? globalThis.String(object.filename) : "",
       contentType: isSet(object.contentType) ? globalThis.String(object.contentType) : "",
-      size: isSet(object.size) ? globalThis.String(object.size) : "0",
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
       hash: isSet(object.hash) ? globalThis.String(object.hash) : "",
-      uploadedAt: isSet(object.uploadedAt) ? globalThis.String(object.uploadedAt) : "0",
+      uploadedAt: isSet(object.uploadedAt) ? globalThis.Number(object.uploadedAt) : 0,
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
     };
@@ -217,14 +217,14 @@ export const File: MessageFns<File> = {
     if (message.contentType !== "") {
       obj.contentType = message.contentType;
     }
-    if (message.size !== "0") {
-      obj.size = message.size;
+    if (message.size !== 0) {
+      obj.size = Math.round(message.size);
     }
     if (message.hash !== "") {
       obj.hash = message.hash;
     }
-    if (message.uploadedAt !== "0") {
-      obj.uploadedAt = message.uploadedAt;
+    if (message.uploadedAt !== 0) {
+      obj.uploadedAt = Math.round(message.uploadedAt);
     }
     if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
@@ -245,9 +245,9 @@ export const File: MessageFns<File> = {
     message.bucket = object.bucket ?? "";
     message.filename = object.filename ?? "";
     message.contentType = object.contentType ?? "";
-    message.size = object.size ?? "0";
+    message.size = object.size ?? 0;
     message.hash = object.hash ?? "";
-    message.uploadedAt = object.uploadedAt ?? "0";
+    message.uploadedAt = object.uploadedAt ?? 0;
     message.deleted = object.deleted ?? undefined;
     message.reported = object.reported ?? undefined;
     return message;
@@ -265,6 +265,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

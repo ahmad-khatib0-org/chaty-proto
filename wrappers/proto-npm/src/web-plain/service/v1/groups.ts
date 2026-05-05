@@ -46,7 +46,7 @@ export interface GroupsListItem {
   /** channel id */
   id: string;
   group?: ChannelGroup | undefined;
-  createdAt: string;
+  createdAt: number;
 }
 
 function createBaseGroupsCreateRequest(): GroupsCreateRequest {
@@ -516,7 +516,7 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
 };
 
 function createBaseGroupsListItem(): GroupsListItem {
-  return { id: "", group: undefined, createdAt: "0" };
+  return { id: "", group: undefined, createdAt: 0 };
 }
 
 export const GroupsListItem: MessageFns<GroupsListItem> = {
@@ -527,7 +527,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     if (message.group !== undefined) {
       ChannelGroup.encode(message.group, writer.uint32(18).fork()).join();
     }
-    if (message.createdAt !== "0") {
+    if (message.createdAt !== 0) {
       writer.uint32(24).int64(message.createdAt);
     }
     return writer;
@@ -561,7 +561,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
             break;
           }
 
-          message.createdAt = reader.int64().toString();
+          message.createdAt = longToNumber(reader.int64());
           continue;
         }
       }
@@ -577,7 +577,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       group: isSet(object.group) ? ChannelGroup.fromJSON(object.group) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
     };
   },
 
@@ -589,8 +589,8 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     if (message.group !== undefined) {
       obj.group = ChannelGroup.toJSON(message.group);
     }
-    if (message.createdAt !== "0") {
-      obj.createdAt = message.createdAt;
+    if (message.createdAt !== 0) {
+      obj.createdAt = Math.round(message.createdAt);
     }
     return obj;
   },
@@ -604,7 +604,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     message.group = (object.group !== undefined && object.group !== null)
       ? ChannelGroup.fromPartial(object.group)
       : undefined;
-    message.createdAt = object.createdAt ?? "0";
+    message.createdAt = object.createdAt ?? 0;
     return message;
   },
 };
@@ -620,6 +620,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

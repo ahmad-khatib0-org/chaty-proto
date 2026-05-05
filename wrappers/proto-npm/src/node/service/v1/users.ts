@@ -97,12 +97,12 @@ export interface APIUser {
   profileBackgroundId?: string | undefined;
   privileged: boolean;
   suspendedUntil?:
-    | string
+    | number
     | undefined;
   /** unix timestamp miliseconds */
-  createdAt: string;
+  createdAt: number;
   /** unix timestamp miliseconds */
-  updatedAt: string;
+  updatedAt: number;
   verified: boolean;
   avatar?: File | undefined;
   relations: UserRelationship[];
@@ -195,8 +195,8 @@ function createBaseAPIUser(): APIUser {
     profileBackgroundId: undefined,
     privileged: false,
     suspendedUntil: undefined,
-    createdAt: "0",
-    updatedAt: "0",
+    createdAt: 0,
+    updatedAt: 0,
     verified: false,
     avatar: undefined,
     relations: [],
@@ -242,10 +242,10 @@ export const APIUser: MessageFns<APIUser> = {
     if (message.suspendedUntil !== undefined) {
       writer.uint32(96).int64(message.suspendedUntil);
     }
-    if (message.createdAt !== "0") {
+    if (message.createdAt !== 0) {
       writer.uint32(104).int64(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
+    if (message.updatedAt !== 0) {
       writer.uint32(112).int64(message.updatedAt);
     }
     if (message.verified !== false) {
@@ -363,7 +363,7 @@ export const APIUser: MessageFns<APIUser> = {
             break;
           }
 
-          message.suspendedUntil = reader.int64().toString();
+          message.suspendedUntil = longToNumber(reader.int64());
           continue;
         }
         case 13: {
@@ -371,7 +371,7 @@ export const APIUser: MessageFns<APIUser> = {
             break;
           }
 
-          message.createdAt = reader.int64().toString();
+          message.createdAt = longToNumber(reader.int64());
           continue;
         }
         case 14: {
@@ -379,7 +379,7 @@ export const APIUser: MessageFns<APIUser> = {
             break;
           }
 
-          message.updatedAt = reader.int64().toString();
+          message.updatedAt = longToNumber(reader.int64());
           continue;
         }
         case 15: {
@@ -438,9 +438,9 @@ export const APIUser: MessageFns<APIUser> = {
         ? globalThis.String(object.profileBackgroundId)
         : undefined,
       privileged: isSet(object.privileged) ? globalThis.Boolean(object.privileged) : false,
-      suspendedUntil: isSet(object.suspendedUntil) ? globalThis.String(object.suspendedUntil) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
-      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+      suspendedUntil: isSet(object.suspendedUntil) ? globalThis.Number(object.suspendedUntil) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
+      updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
       verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
       avatar: isSet(object.avatar) ? File.fromJSON(object.avatar) : undefined,
       relations: globalThis.Array.isArray(object?.relations)
@@ -486,13 +486,13 @@ export const APIUser: MessageFns<APIUser> = {
       obj.privileged = message.privileged;
     }
     if (message.suspendedUntil !== undefined) {
-      obj.suspendedUntil = message.suspendedUntil;
+      obj.suspendedUntil = Math.round(message.suspendedUntil);
     }
-    if (message.createdAt !== "0") {
-      obj.createdAt = message.createdAt;
+    if (message.createdAt !== 0) {
+      obj.createdAt = Math.round(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
-      obj.updatedAt = message.updatedAt;
+    if (message.updatedAt !== 0) {
+      obj.updatedAt = Math.round(message.updatedAt);
     }
     if (message.verified !== false) {
       obj.verified = message.verified;
@@ -526,8 +526,8 @@ export const APIUser: MessageFns<APIUser> = {
     message.profileBackgroundId = object.profileBackgroundId ?? undefined;
     message.privileged = object.privileged ?? false;
     message.suspendedUntil = object.suspendedUntil ?? undefined;
-    message.createdAt = object.createdAt ?? "0";
-    message.updatedAt = object.updatedAt ?? "0";
+    message.createdAt = object.createdAt ?? 0;
+    message.updatedAt = object.updatedAt ?? 0;
     message.verified = object.verified ?? false;
     message.avatar = (object.avatar !== undefined && object.avatar !== null)
       ? File.fromPartial(object.avatar)
@@ -1659,6 +1659,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

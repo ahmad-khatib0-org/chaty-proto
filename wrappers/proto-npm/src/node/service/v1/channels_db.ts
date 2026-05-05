@@ -33,7 +33,7 @@ export interface ChannelGroup {
     | undefined;
   /** Permissions assigned to members of this group (does not apply to owner) */
   permissions?:
-    | string
+    | number
     | undefined;
   /** Whether this group is marked as not safe for work */
   nsfw: boolean;
@@ -116,8 +116,8 @@ export interface Channel {
     | undefined;
   /** Maximum users allowed in voice channel */
   voiceMaxUsers?: number | undefined;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: number;
+  updatedAt: number;
 }
 
 function createBaseChannelGroup(): ChannelGroup {
@@ -222,7 +222,7 @@ export const ChannelGroup: MessageFns<ChannelGroup> = {
             break;
           }
 
-          message.permissions = reader.int64().toString();
+          message.permissions = longToNumber(reader.int64());
           continue;
         }
         case 8: {
@@ -252,7 +252,7 @@ export const ChannelGroup: MessageFns<ChannelGroup> = {
         : [],
       icon: isSet(object.icon) ? File.fromJSON(object.icon) : undefined,
       lastMessageId: isSet(object.lastMessageId) ? globalThis.String(object.lastMessageId) : undefined,
-      permissions: isSet(object.permissions) ? globalThis.String(object.permissions) : undefined,
+      permissions: isSet(object.permissions) ? globalThis.Number(object.permissions) : undefined,
       nsfw: isSet(object.nsfw) ? globalThis.Boolean(object.nsfw) : false,
     };
   },
@@ -278,7 +278,7 @@ export const ChannelGroup: MessageFns<ChannelGroup> = {
       obj.lastMessageId = message.lastMessageId;
     }
     if (message.permissions !== undefined) {
-      obj.permissions = message.permissions;
+      obj.permissions = Math.round(message.permissions);
     }
     if (message.nsfw !== false) {
       obj.nsfw = message.nsfw;
@@ -753,8 +753,8 @@ function createBaseChannel(): Channel {
     group: undefined,
     text: undefined,
     voiceMaxUsers: undefined,
-    createdAt: "0",
-    updatedAt: "0",
+    createdAt: 0,
+    updatedAt: 0,
   };
 }
 
@@ -781,10 +781,10 @@ export const Channel: MessageFns<Channel> = {
     if (message.voiceMaxUsers !== undefined) {
       writer.uint32(56).int32(message.voiceMaxUsers);
     }
-    if (message.createdAt !== "0") {
+    if (message.createdAt !== 0) {
       writer.uint32(64).int64(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
+    if (message.updatedAt !== 0) {
       writer.uint32(72).int64(message.updatedAt);
     }
     return writer;
@@ -858,7 +858,7 @@ export const Channel: MessageFns<Channel> = {
             break;
           }
 
-          message.createdAt = reader.int64().toString();
+          message.createdAt = longToNumber(reader.int64());
           continue;
         }
         case 9: {
@@ -866,7 +866,7 @@ export const Channel: MessageFns<Channel> = {
             break;
           }
 
-          message.updatedAt = reader.int64().toString();
+          message.updatedAt = longToNumber(reader.int64());
           continue;
         }
       }
@@ -887,8 +887,8 @@ export const Channel: MessageFns<Channel> = {
       group: isSet(object.group) ? ChannelGroup.fromJSON(object.group) : undefined,
       text: isSet(object.text) ? ChannelText.fromJSON(object.text) : undefined,
       voiceMaxUsers: isSet(object.voiceMaxUsers) ? globalThis.Number(object.voiceMaxUsers) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
-      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
+      updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
     };
   },
 
@@ -915,11 +915,11 @@ export const Channel: MessageFns<Channel> = {
     if (message.voiceMaxUsers !== undefined) {
       obj.voiceMaxUsers = Math.round(message.voiceMaxUsers);
     }
-    if (message.createdAt !== "0") {
-      obj.createdAt = message.createdAt;
+    if (message.createdAt !== 0) {
+      obj.createdAt = Math.round(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
-      obj.updatedAt = message.updatedAt;
+    if (message.updatedAt !== 0) {
+      obj.updatedAt = Math.round(message.updatedAt);
     }
     return obj;
   },
@@ -944,8 +944,8 @@ export const Channel: MessageFns<Channel> = {
       ? ChannelText.fromPartial(object.text)
       : undefined;
     message.voiceMaxUsers = object.voiceMaxUsers ?? undefined;
-    message.createdAt = object.createdAt ?? "0";
-    message.updatedAt = object.updatedAt ?? "0";
+    message.createdAt = object.createdAt ?? 0;
+    message.updatedAt = object.updatedAt ?? 0;
     return message;
   },
 };
@@ -961,6 +961,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

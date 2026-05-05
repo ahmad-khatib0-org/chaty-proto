@@ -16,9 +16,9 @@ export const protobufPackage = "service.v1";
  */
 export interface OverrideField {
   /** Allowed permissions */
-  a: string;
+  a: number;
   /** Denied permissions */
-  d: string;
+  d: number;
 }
 
 export interface Role {
@@ -35,21 +35,21 @@ export interface Role {
   /** Whether this role should be shown separately on the member sidebar */
   hoist: boolean;
   /** Ranking of this role */
-  rank: string;
-  createdAt: string;
-  updatedAt: string;
+  rank: number;
+  createdAt: number;
+  updatedAt: number;
 }
 
 function createBaseOverrideField(): OverrideField {
-  return { a: "0", d: "0" };
+  return { a: 0, d: 0 };
 }
 
 export const OverrideField: MessageFns<OverrideField> = {
   encode(message: OverrideField, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.a !== "0") {
+    if (message.a !== 0) {
       writer.uint32(8).int64(message.a);
     }
-    if (message.d !== "0") {
+    if (message.d !== 0) {
       writer.uint32(16).int64(message.d);
     }
     return writer;
@@ -67,7 +67,7 @@ export const OverrideField: MessageFns<OverrideField> = {
             break;
           }
 
-          message.a = reader.int64().toString();
+          message.a = longToNumber(reader.int64());
           continue;
         }
         case 2: {
@@ -75,7 +75,7 @@ export const OverrideField: MessageFns<OverrideField> = {
             break;
           }
 
-          message.d = reader.int64().toString();
+          message.d = longToNumber(reader.int64());
           continue;
         }
       }
@@ -89,18 +89,18 @@ export const OverrideField: MessageFns<OverrideField> = {
 
   fromJSON(object: any): OverrideField {
     return {
-      a: isSet(object.a) ? globalThis.String(object.a) : "0",
-      d: isSet(object.d) ? globalThis.String(object.d) : "0",
+      a: isSet(object.a) ? globalThis.Number(object.a) : 0,
+      d: isSet(object.d) ? globalThis.Number(object.d) : 0,
     };
   },
 
   toJSON(message: OverrideField): unknown {
     const obj: any = {};
-    if (message.a !== "0") {
-      obj.a = message.a;
+    if (message.a !== 0) {
+      obj.a = Math.round(message.a);
     }
-    if (message.d !== "0") {
-      obj.d = message.d;
+    if (message.d !== 0) {
+      obj.d = Math.round(message.d);
     }
     return obj;
   },
@@ -110,22 +110,14 @@ export const OverrideField: MessageFns<OverrideField> = {
   },
   fromPartial<I extends Exact<DeepPartial<OverrideField>, I>>(object: I): OverrideField {
     const message = createBaseOverrideField();
-    message.a = object.a ?? "0";
-    message.d = object.d ?? "0";
+    message.a = object.a ?? 0;
+    message.d = object.d ?? 0;
     return message;
   },
 };
 
 function createBaseRole(): Role {
-  return {
-    name: "",
-    permissions: undefined,
-    colour: undefined,
-    hoist: false,
-    rank: "0",
-    createdAt: "0",
-    updatedAt: "0",
-  };
+  return { name: "", permissions: undefined, colour: undefined, hoist: false, rank: 0, createdAt: 0, updatedAt: 0 };
 }
 
 export const Role: MessageFns<Role> = {
@@ -142,13 +134,13 @@ export const Role: MessageFns<Role> = {
     if (message.hoist !== false) {
       writer.uint32(32).bool(message.hoist);
     }
-    if (message.rank !== "0") {
+    if (message.rank !== 0) {
       writer.uint32(40).int64(message.rank);
     }
-    if (message.createdAt !== "0") {
+    if (message.createdAt !== 0) {
       writer.uint32(48).int64(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
+    if (message.updatedAt !== 0) {
       writer.uint32(56).int64(message.updatedAt);
     }
     return writer;
@@ -198,7 +190,7 @@ export const Role: MessageFns<Role> = {
             break;
           }
 
-          message.rank = reader.int64().toString();
+          message.rank = longToNumber(reader.int64());
           continue;
         }
         case 6: {
@@ -206,7 +198,7 @@ export const Role: MessageFns<Role> = {
             break;
           }
 
-          message.createdAt = reader.int64().toString();
+          message.createdAt = longToNumber(reader.int64());
           continue;
         }
         case 7: {
@@ -214,7 +206,7 @@ export const Role: MessageFns<Role> = {
             break;
           }
 
-          message.updatedAt = reader.int64().toString();
+          message.updatedAt = longToNumber(reader.int64());
           continue;
         }
       }
@@ -232,9 +224,9 @@ export const Role: MessageFns<Role> = {
       permissions: isSet(object.permissions) ? OverrideField.fromJSON(object.permissions) : undefined,
       colour: isSet(object.colour) ? globalThis.String(object.colour) : undefined,
       hoist: isSet(object.hoist) ? globalThis.Boolean(object.hoist) : false,
-      rank: isSet(object.rank) ? globalThis.String(object.rank) : "0",
-      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
-      updatedAt: isSet(object.updatedAt) ? globalThis.String(object.updatedAt) : "0",
+      rank: isSet(object.rank) ? globalThis.Number(object.rank) : 0,
+      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
+      updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
     };
   },
 
@@ -252,14 +244,14 @@ export const Role: MessageFns<Role> = {
     if (message.hoist !== false) {
       obj.hoist = message.hoist;
     }
-    if (message.rank !== "0") {
-      obj.rank = message.rank;
+    if (message.rank !== 0) {
+      obj.rank = Math.round(message.rank);
     }
-    if (message.createdAt !== "0") {
-      obj.createdAt = message.createdAt;
+    if (message.createdAt !== 0) {
+      obj.createdAt = Math.round(message.createdAt);
     }
-    if (message.updatedAt !== "0") {
-      obj.updatedAt = message.updatedAt;
+    if (message.updatedAt !== 0) {
+      obj.updatedAt = Math.round(message.updatedAt);
     }
     return obj;
   },
@@ -275,9 +267,9 @@ export const Role: MessageFns<Role> = {
       : undefined;
     message.colour = object.colour ?? undefined;
     message.hoist = object.hoist ?? false;
-    message.rank = object.rank ?? "0";
-    message.createdAt = object.createdAt ?? "0";
-    message.updatedAt = object.updatedAt ?? "0";
+    message.rank = object.rank ?? 0;
+    message.createdAt = object.createdAt ?? 0;
+    message.updatedAt = object.updatedAt ?? 0;
     return message;
   },
 };
@@ -293,6 +285,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

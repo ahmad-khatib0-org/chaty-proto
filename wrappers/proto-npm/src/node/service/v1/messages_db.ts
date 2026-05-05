@@ -244,7 +244,7 @@ export interface MessageSystemMessageUnpinned {
 
 export interface MessageSystemCallStarted {
   by: string;
-  finishedAt: string;
+  finishedAt: number;
 }
 
 /** Image */
@@ -518,8 +518,8 @@ export interface Message {
     | boolean
     | undefined;
   /** Time at which this message was last edited (optional) */
-  editedAt?: string | undefined;
-  createdAt: string;
+  editedAt?: number | undefined;
+  createdAt: number;
 }
 
 export interface Message_ReactionsEntry {
@@ -1801,7 +1801,7 @@ export const MessageSystemMessageUnpinned: MessageFns<MessageSystemMessageUnpinn
 };
 
 function createBaseMessageSystemCallStarted(): MessageSystemCallStarted {
-  return { by: "", finishedAt: "0" };
+  return { by: "", finishedAt: 0 };
 }
 
 export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
@@ -1809,7 +1809,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
     if (message.by !== "") {
       writer.uint32(10).string(message.by);
     }
-    if (message.finishedAt !== "0") {
+    if (message.finishedAt !== 0) {
       writer.uint32(16).int64(message.finishedAt);
     }
     return writer;
@@ -1835,7 +1835,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
             break;
           }
 
-          message.finishedAt = reader.int64().toString();
+          message.finishedAt = longToNumber(reader.int64());
           continue;
         }
       }
@@ -1850,7 +1850,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
   fromJSON(object: any): MessageSystemCallStarted {
     return {
       by: isSet(object.by) ? globalThis.String(object.by) : "",
-      finishedAt: isSet(object.finishedAt) ? globalThis.String(object.finishedAt) : "0",
+      finishedAt: isSet(object.finishedAt) ? globalThis.Number(object.finishedAt) : 0,
     };
   },
 
@@ -1859,8 +1859,8 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
     if (message.by !== "") {
       obj.by = message.by;
     }
-    if (message.finishedAt !== "0") {
-      obj.finishedAt = message.finishedAt;
+    if (message.finishedAt !== 0) {
+      obj.finishedAt = Math.round(message.finishedAt);
     }
     return obj;
   },
@@ -1871,7 +1871,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
   fromPartial<I extends Exact<DeepPartial<MessageSystemCallStarted>, I>>(object: I): MessageSystemCallStarted {
     const message = createBaseMessageSystemCallStarted();
     message.by = object.by ?? "";
-    message.finishedAt = object.finishedAt ?? "0";
+    message.finishedAt = object.finishedAt ?? 0;
     return message;
   },
 };
@@ -3509,7 +3509,7 @@ function createBaseMessage(): Message {
     masquerade: undefined,
     pinned: undefined,
     editedAt: undefined,
-    createdAt: "0",
+    createdAt: 0,
   };
 }
 
@@ -3569,7 +3569,7 @@ export const Message: MessageFns<Message> = {
     if (message.editedAt !== undefined) {
       writer.uint32(144).int64(message.editedAt);
     }
-    if (message.createdAt !== "0") {
+    if (message.createdAt !== 0) {
       writer.uint32(152).int64(message.createdAt);
     }
     return writer;
@@ -3726,7 +3726,7 @@ export const Message: MessageFns<Message> = {
             break;
           }
 
-          message.editedAt = reader.int64().toString();
+          message.editedAt = longToNumber(reader.int64());
           continue;
         }
         case 19: {
@@ -3734,7 +3734,7 @@ export const Message: MessageFns<Message> = {
             break;
           }
 
-          message.createdAt = reader.int64().toString();
+          message.createdAt = longToNumber(reader.int64());
           continue;
         }
       }
@@ -3774,8 +3774,8 @@ export const Message: MessageFns<Message> = {
       interactions: isSet(object.interactions) ? Interactions.fromJSON(object.interactions) : undefined,
       masquerade: isSet(object.masquerade) ? Masquerade.fromJSON(object.masquerade) : undefined,
       pinned: isSet(object.pinned) ? globalThis.Boolean(object.pinned) : undefined,
-      editedAt: isSet(object.editedAt) ? globalThis.String(object.editedAt) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.String(object.createdAt) : "0",
+      editedAt: isSet(object.editedAt) ? globalThis.Number(object.editedAt) : undefined,
+      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
     };
   },
 
@@ -3839,10 +3839,10 @@ export const Message: MessageFns<Message> = {
       obj.pinned = message.pinned;
     }
     if (message.editedAt !== undefined) {
-      obj.editedAt = message.editedAt;
+      obj.editedAt = Math.round(message.editedAt);
     }
-    if (message.createdAt !== "0") {
-      obj.createdAt = message.createdAt;
+    if (message.createdAt !== 0) {
+      obj.createdAt = Math.round(message.createdAt);
     }
     return obj;
   },
@@ -3886,7 +3886,7 @@ export const Message: MessageFns<Message> = {
       : undefined;
     message.pinned = object.pinned ?? undefined;
     message.editedAt = object.editedAt ?? undefined;
-    message.createdAt = object.createdAt ?? "0";
+    message.createdAt = object.createdAt ?? 0;
     return message;
   },
 };
@@ -3980,6 +3980,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;
