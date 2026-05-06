@@ -1781,6 +1781,8 @@ pub struct MessageWebhook {
     /// The id of the avatar of the webhook, if it has one (optional)
     #[prost(string, optional, tag = "2")]
     pub avatar: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "3")]
+    pub none: ::core::option::Option<super::super::shared::v1::File>,
 }
 /// ===========================================
 /// SYSTEM MESSAGE

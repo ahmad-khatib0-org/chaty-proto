@@ -160,6 +160,7 @@ export interface MessageWebhook {
   name: string;
   /** The id of the avatar of the webhook, if it has one (optional) */
   avatar?: string | undefined;
+  none?: File | undefined;
 }
 
 /**
@@ -528,7 +529,7 @@ export interface Message_ReactionsEntry {
 }
 
 function createBaseMessageWebhook(): MessageWebhook {
-  return { name: "", avatar: undefined };
+  return { name: "", avatar: undefined, none: undefined };
 }
 
 export const MessageWebhook: MessageFns<MessageWebhook> = {
@@ -538,6 +539,9 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     }
     if (message.avatar !== undefined) {
       writer.uint32(18).string(message.avatar);
+    }
+    if (message.none !== undefined) {
+      File.encode(message.none, writer.uint32(26).fork()).join();
     }
     return writer;
   },
@@ -565,6 +569,14 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
           message.avatar = reader.string();
           continue;
         }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.none = File.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -578,6 +590,7 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       avatar: isSet(object.avatar) ? globalThis.String(object.avatar) : undefined,
+      none: isSet(object.none) ? File.fromJSON(object.none) : undefined,
     };
   },
 
@@ -589,6 +602,9 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     if (message.avatar !== undefined) {
       obj.avatar = message.avatar;
     }
+    if (message.none !== undefined) {
+      obj.none = File.toJSON(message.none);
+    }
     return obj;
   },
 
@@ -599,6 +615,7 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     const message = createBaseMessageWebhook();
     message.name = object.name ?? "";
     message.avatar = object.avatar ?? undefined;
+    message.none = (object.none !== undefined && object.none !== null) ? File.fromPartial(object.none) : undefined;
     return message;
   },
 };

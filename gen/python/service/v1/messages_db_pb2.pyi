@@ -38,12 +38,14 @@ BANDCAMP_ALBUM: BandcampType
 BANDCAMP_TRACK: BandcampType
 
 class MessageWebhook(_message.Message):
-    __slots__ = ("name", "avatar")
+    __slots__ = ("name", "avatar", "none")
     NAME_FIELD_NUMBER: _ClassVar[int]
     AVATAR_FIELD_NUMBER: _ClassVar[int]
+    NONE_FIELD_NUMBER: _ClassVar[int]
     name: str
     avatar: str
-    def __init__(self, name: _Optional[str] = ..., avatar: _Optional[str] = ...) -> None: ...
+    none: _files_pb2.File
+    def __init__(self, name: _Optional[str] = ..., avatar: _Optional[str] = ..., none: _Optional[_Union[_files_pb2.File, _Mapping]] = ...) -> None: ...
 
 class MessageSystem(_message.Message):
     __slots__ = ("text", "user_added", "user_remove", "user_joined", "user_left", "user_kicked", "user_banned", "channel_renamed", "channel_description_changed", "channel_icon_changed", "channel_ownership_changed", "message_pinned", "message_unpinned", "call_started")
