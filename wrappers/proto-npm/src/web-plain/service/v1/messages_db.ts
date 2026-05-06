@@ -160,7 +160,7 @@ export interface MessageWebhook {
   name: string;
   /** The id of the avatar of the webhook, if it has one (optional) */
   avatar?: string | undefined;
-  none?: File | undefined;
+  icon?: File | undefined;
 }
 
 /**
@@ -529,7 +529,7 @@ export interface Message_ReactionsEntry {
 }
 
 function createBaseMessageWebhook(): MessageWebhook {
-  return { name: "", avatar: undefined, none: undefined };
+  return { name: "", avatar: undefined, icon: undefined };
 }
 
 export const MessageWebhook: MessageFns<MessageWebhook> = {
@@ -540,8 +540,8 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     if (message.avatar !== undefined) {
       writer.uint32(18).string(message.avatar);
     }
-    if (message.none !== undefined) {
-      File.encode(message.none, writer.uint32(26).fork()).join();
+    if (message.icon !== undefined) {
+      File.encode(message.icon, writer.uint32(26).fork()).join();
     }
     return writer;
   },
@@ -574,7 +574,7 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
             break;
           }
 
-          message.none = File.decode(reader, reader.uint32());
+          message.icon = File.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -590,7 +590,7 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       avatar: isSet(object.avatar) ? globalThis.String(object.avatar) : undefined,
-      none: isSet(object.none) ? File.fromJSON(object.none) : undefined,
+      icon: isSet(object.icon) ? File.fromJSON(object.icon) : undefined,
     };
   },
 
@@ -602,8 +602,8 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     if (message.avatar !== undefined) {
       obj.avatar = message.avatar;
     }
-    if (message.none !== undefined) {
-      obj.none = File.toJSON(message.none);
+    if (message.icon !== undefined) {
+      obj.icon = File.toJSON(message.icon);
     }
     return obj;
   },
@@ -615,7 +615,7 @@ export const MessageWebhook: MessageFns<MessageWebhook> = {
     const message = createBaseMessageWebhook();
     message.name = object.name ?? "";
     message.avatar = object.avatar ?? undefined;
-    message.none = (object.none !== undefined && object.none !== null) ? File.fromPartial(object.none) : undefined;
+    message.icon = (object.icon !== undefined && object.icon !== null) ? File.fromPartial(object.icon) : undefined;
     return message;
   },
 };
