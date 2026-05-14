@@ -37,6 +37,9 @@ message File {
   optional bool reported = 10;
 
   FileMetadata metadata = 11;
+
+  // Whether this file should have a spoiler
+  bool is_spoiler = 12;
 }
 
 message FileMetadata {

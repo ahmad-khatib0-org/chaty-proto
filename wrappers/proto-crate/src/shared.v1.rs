@@ -64,6 +64,9 @@ pub struct File {
     pub reported: ::core::option::Option<bool>,
     #[prost(message, optional, tag = "11")]
     pub metadata: ::core::option::Option<FileMetadata>,
+    /// Whether this file should have a spoiler
+    #[prost(bool, tag = "12")]
+    pub is_spoiler: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

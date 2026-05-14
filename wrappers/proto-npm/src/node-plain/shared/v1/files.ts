@@ -37,7 +37,11 @@ export interface File {
     | undefined;
   /** Whether this file was reported */
   reported?: boolean | undefined;
-  metadata?: FileMetadata | undefined;
+  metadata?:
+    | FileMetadata
+    | undefined;
+  /** Whether this file should have a spoiler */
+  isSpoiler: boolean;
 }
 
 export interface FileMetadata {
@@ -80,6 +84,7 @@ function createBaseFile(): File {
     deleted: undefined,
     reported: undefined,
     metadata: undefined,
+    isSpoiler: false,
   };
 }
 
@@ -117,6 +122,9 @@ export const File: MessageFns<File> = {
     }
     if (message.metadata !== undefined) {
       FileMetadata.encode(message.metadata, writer.uint32(90).fork()).join();
+    }
+    if (message.isSpoiler !== false) {
+      writer.uint32(96).bool(message.isSpoiler);
     }
     return writer;
   },
@@ -216,6 +224,14 @@ export const File: MessageFns<File> = {
           message.metadata = FileMetadata.decode(reader, reader.uint32());
           continue;
         }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.isSpoiler = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -238,6 +254,7 @@ export const File: MessageFns<File> = {
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
       metadata: isSet(object.metadata) ? FileMetadata.fromJSON(object.metadata) : undefined,
+      isSpoiler: isSet(object.isSpoiler) ? globalThis.Boolean(object.isSpoiler) : false,
     };
   },
 
@@ -276,6 +293,9 @@ export const File: MessageFns<File> = {
     if (message.metadata !== undefined) {
       obj.metadata = FileMetadata.toJSON(message.metadata);
     }
+    if (message.isSpoiler !== false) {
+      obj.isSpoiler = message.isSpoiler;
+    }
     return obj;
   },
 
@@ -297,6 +317,7 @@ export const File: MessageFns<File> = {
     message.metadata = (object.metadata !== undefined && object.metadata !== null)
       ? FileMetadata.fromPartial(object.metadata)
       : undefined;
+    message.isSpoiler = object.isSpoiler ?? false;
     return message;
   },
 };
