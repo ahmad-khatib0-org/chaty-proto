@@ -62,6 +62,8 @@ pub struct File {
     /// Whether this file was reported
     #[prost(bool, optional, tag = "10")]
     pub reported: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "11")]
+    pub metadata: ::core::option::Option<FileMetadata>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

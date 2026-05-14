@@ -37,6 +37,7 @@ export interface File {
     | undefined;
   /** Whether this file was reported */
   reported?: boolean | undefined;
+  metadata?: FileMetadata | undefined;
 }
 
 export interface FileMetadata {
@@ -78,6 +79,7 @@ function createBaseFile(): File {
     uploadedAt: 0,
     deleted: undefined,
     reported: undefined,
+    metadata: undefined,
   };
 }
 
@@ -112,6 +114,9 @@ export const File: MessageFns<File> = {
     }
     if (message.reported !== undefined) {
       writer.uint32(80).bool(message.reported);
+    }
+    if (message.metadata !== undefined) {
+      FileMetadata.encode(message.metadata, writer.uint32(90).fork()).join();
     }
     return writer;
   },
@@ -203,6 +208,14 @@ export const File: MessageFns<File> = {
           message.reported = reader.bool();
           continue;
         }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.metadata = FileMetadata.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -224,6 +237,7 @@ export const File: MessageFns<File> = {
       uploadedAt: isSet(object.uploadedAt) ? globalThis.Number(object.uploadedAt) : 0,
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
+      metadata: isSet(object.metadata) ? FileMetadata.fromJSON(object.metadata) : undefined,
     };
   },
 
@@ -259,6 +273,9 @@ export const File: MessageFns<File> = {
     if (message.reported !== undefined) {
       obj.reported = message.reported;
     }
+    if (message.metadata !== undefined) {
+      obj.metadata = FileMetadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
@@ -277,6 +294,9 @@ export const File: MessageFns<File> = {
     message.uploadedAt = object.uploadedAt ?? 0;
     message.deleted = object.deleted ?? undefined;
     message.reported = object.reported ?? undefined;
+    message.metadata = (object.metadata !== undefined && object.metadata !== null)
+      ? FileMetadata.fromPartial(object.metadata)
+      : undefined;
     return message;
   },
 };

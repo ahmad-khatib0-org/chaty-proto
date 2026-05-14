@@ -5,7 +5,7 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class File(_message.Message):
-    __slots__ = ("id", "uploader_id", "bucket", "filename", "content_type", "size", "hash", "uploaded_at", "deleted", "reported")
+    __slots__ = ("id", "uploader_id", "bucket", "filename", "content_type", "size", "hash", "uploaded_at", "deleted", "reported", "metadata")
     ID_FIELD_NUMBER: _ClassVar[int]
     UPLOADER_ID_FIELD_NUMBER: _ClassVar[int]
     BUCKET_FIELD_NUMBER: _ClassVar[int]
@@ -16,6 +16,7 @@ class File(_message.Message):
     UPLOADED_AT_FIELD_NUMBER: _ClassVar[int]
     DELETED_FIELD_NUMBER: _ClassVar[int]
     REPORTED_FIELD_NUMBER: _ClassVar[int]
+    METADATA_FIELD_NUMBER: _ClassVar[int]
     id: str
     uploader_id: str
     bucket: str
@@ -26,7 +27,8 @@ class File(_message.Message):
     uploaded_at: int
     deleted: bool
     reported: bool
-    def __init__(self, id: _Optional[str] = ..., uploader_id: _Optional[str] = ..., bucket: _Optional[str] = ..., filename: _Optional[str] = ..., content_type: _Optional[str] = ..., size: _Optional[int] = ..., hash: _Optional[str] = ..., uploaded_at: _Optional[int] = ..., deleted: bool = ..., reported: bool = ...) -> None: ...
+    metadata: FileMetadata
+    def __init__(self, id: _Optional[str] = ..., uploader_id: _Optional[str] = ..., bucket: _Optional[str] = ..., filename: _Optional[str] = ..., content_type: _Optional[str] = ..., size: _Optional[int] = ..., hash: _Optional[str] = ..., uploaded_at: _Optional[int] = ..., deleted: bool = ..., reported: bool = ..., metadata: _Optional[_Union[FileMetadata, _Mapping]] = ...) -> None: ...
 
 class FileMetadata(_message.Message):
     __slots__ = ("file", "text", "image", "video", "audio")
