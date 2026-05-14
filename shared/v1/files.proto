@@ -36,3 +36,29 @@ message File {
   // Whether this file was reported
   optional bool reported = 10;
 }
+
+message FileMetadata {
+  oneof type {
+    FileMetadataFile file = 1;
+    FileMetadataText text = 2;
+    FileImage image = 3;
+    FileVideo video = 4;
+    FileAudio audio = 5;
+  }
+}
+
+message FileMetadataFile {}
+
+message FileMetadataText {}
+
+message FileImage {
+  uint32 width = 1;
+  uint32 height = 2;
+}
+
+message FileVideo {
+  uint32 width = 1;
+  uint32 height = 2;
+}
+
+message FileAudio {}

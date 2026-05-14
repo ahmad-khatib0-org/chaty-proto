@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/files.proto.
  */
 export const file_shared_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSLWAQoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBAUIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWRiBnByb3RvMw");
+  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSLWAQoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBAUIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWQi5QEKDEZpbGVNZXRhZGF0YRIrCgRmaWxlGAEgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUZpbGVIABIrCgR0ZXh0GAIgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVRleHRIABIlCgVpbWFnZRgDIAEoCzIULnNoYXJlZC52MS5GaWxlSW1hZ2VIABIlCgV2aWRlbxgEIAEoCzIULnNoYXJlZC52MS5GaWxlVmlkZW9IABIlCgVhdWRpbxgFIAEoCzIULnNoYXJlZC52MS5GaWxlQXVkaW9IAEIGCgR0eXBlIhIKEEZpbGVNZXRhZGF0YUZpbGUiEgoQRmlsZU1ldGFkYXRhVGV4dCIqCglGaWxlSW1hZ2USDQoFd2lkdGgYASABKA0SDgoGaGVpZ2h0GAIgASgNIioKCUZpbGVWaWRlbxINCgV3aWR0aBgBIAEoDRIOCgZoZWlnaHQYAiABKA0iCwoJRmlsZUF1ZGlvYgZwcm90bzM");
 
 /**
  * ===========================================
@@ -97,4 +97,134 @@ export type File = Message<"shared.v1.File"> & {
  */
 export const FileSchema: GenMessage<File> = /*@__PURE__*/
   messageDesc(file_shared_v1_files, 0);
+
+/**
+ * @generated from message shared.v1.FileMetadata
+ */
+export type FileMetadata = Message<"shared.v1.FileMetadata"> & {
+  /**
+   * @generated from oneof shared.v1.FileMetadata.type
+   */
+  type: {
+    /**
+     * @generated from field: shared.v1.FileMetadataFile file = 1;
+     */
+    value: FileMetadataFile;
+    case: "file";
+  } | {
+    /**
+     * @generated from field: shared.v1.FileMetadataText text = 2;
+     */
+    value: FileMetadataText;
+    case: "text";
+  } | {
+    /**
+     * @generated from field: shared.v1.FileImage image = 3;
+     */
+    value: FileImage;
+    case: "image";
+  } | {
+    /**
+     * @generated from field: shared.v1.FileVideo video = 4;
+     */
+    value: FileVideo;
+    case: "video";
+  } | {
+    /**
+     * @generated from field: shared.v1.FileAudio audio = 5;
+     */
+    value: FileAudio;
+    case: "audio";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message shared.v1.FileMetadata.
+ * Use `create(FileMetadataSchema)` to create a new message.
+ */
+export const FileMetadataSchema: GenMessage<FileMetadata> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 1);
+
+/**
+ * @generated from message shared.v1.FileMetadataFile
+ */
+export type FileMetadataFile = Message<"shared.v1.FileMetadataFile"> & {
+};
+
+/**
+ * Describes the message shared.v1.FileMetadataFile.
+ * Use `create(FileMetadataFileSchema)` to create a new message.
+ */
+export const FileMetadataFileSchema: GenMessage<FileMetadataFile> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 2);
+
+/**
+ * @generated from message shared.v1.FileMetadataText
+ */
+export type FileMetadataText = Message<"shared.v1.FileMetadataText"> & {
+};
+
+/**
+ * Describes the message shared.v1.FileMetadataText.
+ * Use `create(FileMetadataTextSchema)` to create a new message.
+ */
+export const FileMetadataTextSchema: GenMessage<FileMetadataText> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 3);
+
+/**
+ * @generated from message shared.v1.FileImage
+ */
+export type FileImage = Message<"shared.v1.FileImage"> & {
+  /**
+   * @generated from field: uint32 width = 1;
+   */
+  width: number;
+
+  /**
+   * @generated from field: uint32 height = 2;
+   */
+  height: number;
+};
+
+/**
+ * Describes the message shared.v1.FileImage.
+ * Use `create(FileImageSchema)` to create a new message.
+ */
+export const FileImageSchema: GenMessage<FileImage> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 4);
+
+/**
+ * @generated from message shared.v1.FileVideo
+ */
+export type FileVideo = Message<"shared.v1.FileVideo"> & {
+  /**
+   * @generated from field: uint32 width = 1;
+   */
+  width: number;
+
+  /**
+   * @generated from field: uint32 height = 2;
+   */
+  height: number;
+};
+
+/**
+ * Describes the message shared.v1.FileVideo.
+ * Use `create(FileVideoSchema)` to create a new message.
+ */
+export const FileVideoSchema: GenMessage<FileVideo> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 5);
+
+/**
+ * @generated from message shared.v1.FileAudio
+ */
+export type FileAudio = Message<"shared.v1.FileAudio"> & {
+};
+
+/**
+ * Describes the message shared.v1.FileAudio.
+ * Use `create(FileAudioSchema)` to create a new message.
+ */
+export const FileAudioSchema: GenMessage<FileAudio> = /*@__PURE__*/
+  messageDesc(file_shared_v1_files, 6);
 

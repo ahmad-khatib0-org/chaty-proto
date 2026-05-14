@@ -64,6 +64,54 @@ pub struct File {
     pub reported: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileMetadata {
+    #[prost(oneof = "file_metadata::Type", tags = "1, 2, 3, 4, 5")]
+    pub r#type: ::core::option::Option<file_metadata::Type>,
+}
+/// Nested message and enum types in `FileMetadata`.
+pub mod file_metadata {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "1")]
+        File(super::FileMetadataFile),
+        #[prost(message, tag = "2")]
+        Text(super::FileMetadataText),
+        #[prost(message, tag = "3")]
+        Image(super::FileImage),
+        #[prost(message, tag = "4")]
+        Video(super::FileVideo),
+        #[prost(message, tag = "5")]
+        Audio(super::FileAudio),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileMetadataFile {}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileMetadataText {}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileImage {
+    #[prost(uint32, tag = "1")]
+    pub width: u32,
+    #[prost(uint32, tag = "2")]
+    pub height: u32,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileVideo {
+    #[prost(uint32, tag = "1")]
+    pub width: u32,
+    #[prost(uint32, tag = "2")]
+    pub height: u32,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FileAudio {}
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PaginationSort {
     /// data field name (E,g created at)

@@ -39,6 +39,33 @@ export interface File {
   reported?: boolean | undefined;
 }
 
+export interface FileMetadata {
+  file?: FileMetadataFile | undefined;
+  text?: FileMetadataText | undefined;
+  image?: FileImage | undefined;
+  video?: FileVideo | undefined;
+  audio?: FileAudio | undefined;
+}
+
+export interface FileMetadataFile {
+}
+
+export interface FileMetadataText {
+}
+
+export interface FileImage {
+  width: number;
+  height: number;
+}
+
+export interface FileVideo {
+  width: number;
+  height: number;
+}
+
+export interface FileAudio {
+}
+
 function createBaseFile(): File {
   return {
     id: "",
@@ -250,6 +277,421 @@ export const File: MessageFns<File> = {
     message.uploadedAt = object.uploadedAt ?? 0;
     message.deleted = object.deleted ?? undefined;
     message.reported = object.reported ?? undefined;
+    return message;
+  },
+};
+
+function createBaseFileMetadata(): FileMetadata {
+  return { file: undefined, text: undefined, image: undefined, video: undefined, audio: undefined };
+}
+
+export const FileMetadata: MessageFns<FileMetadata> = {
+  encode(message: FileMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.file !== undefined) {
+      FileMetadataFile.encode(message.file, writer.uint32(10).fork()).join();
+    }
+    if (message.text !== undefined) {
+      FileMetadataText.encode(message.text, writer.uint32(18).fork()).join();
+    }
+    if (message.image !== undefined) {
+      FileImage.encode(message.image, writer.uint32(26).fork()).join();
+    }
+    if (message.video !== undefined) {
+      FileVideo.encode(message.video, writer.uint32(34).fork()).join();
+    }
+    if (message.audio !== undefined) {
+      FileAudio.encode(message.audio, writer.uint32(42).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.file = FileMetadataFile.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.text = FileMetadataText.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.image = FileImage.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.video = FileVideo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.audio = FileAudio.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FileMetadata {
+    return {
+      file: isSet(object.file) ? FileMetadataFile.fromJSON(object.file) : undefined,
+      text: isSet(object.text) ? FileMetadataText.fromJSON(object.text) : undefined,
+      image: isSet(object.image) ? FileImage.fromJSON(object.image) : undefined,
+      video: isSet(object.video) ? FileVideo.fromJSON(object.video) : undefined,
+      audio: isSet(object.audio) ? FileAudio.fromJSON(object.audio) : undefined,
+    };
+  },
+
+  toJSON(message: FileMetadata): unknown {
+    const obj: any = {};
+    if (message.file !== undefined) {
+      obj.file = FileMetadataFile.toJSON(message.file);
+    }
+    if (message.text !== undefined) {
+      obj.text = FileMetadataText.toJSON(message.text);
+    }
+    if (message.image !== undefined) {
+      obj.image = FileImage.toJSON(message.image);
+    }
+    if (message.video !== undefined) {
+      obj.video = FileVideo.toJSON(message.video);
+    }
+    if (message.audio !== undefined) {
+      obj.audio = FileAudio.toJSON(message.audio);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileMetadata>, I>>(base?: I): FileMetadata {
+    return FileMetadata.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileMetadata>, I>>(object: I): FileMetadata {
+    const message = createBaseFileMetadata();
+    message.file = (object.file !== undefined && object.file !== null)
+      ? FileMetadataFile.fromPartial(object.file)
+      : undefined;
+    message.text = (object.text !== undefined && object.text !== null)
+      ? FileMetadataText.fromPartial(object.text)
+      : undefined;
+    message.image = (object.image !== undefined && object.image !== null)
+      ? FileImage.fromPartial(object.image)
+      : undefined;
+    message.video = (object.video !== undefined && object.video !== null)
+      ? FileVideo.fromPartial(object.video)
+      : undefined;
+    message.audio = (object.audio !== undefined && object.audio !== null)
+      ? FileAudio.fromPartial(object.audio)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseFileMetadataFile(): FileMetadataFile {
+  return {};
+}
+
+export const FileMetadataFile: MessageFns<FileMetadataFile> = {
+  encode(_: FileMetadataFile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileMetadataFile {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileMetadataFile();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): FileMetadataFile {
+    return {};
+  },
+
+  toJSON(_: FileMetadataFile): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileMetadataFile>, I>>(base?: I): FileMetadataFile {
+    return FileMetadataFile.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileMetadataFile>, I>>(_: I): FileMetadataFile {
+    const message = createBaseFileMetadataFile();
+    return message;
+  },
+};
+
+function createBaseFileMetadataText(): FileMetadataText {
+  return {};
+}
+
+export const FileMetadataText: MessageFns<FileMetadataText> = {
+  encode(_: FileMetadataText, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileMetadataText {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileMetadataText();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): FileMetadataText {
+    return {};
+  },
+
+  toJSON(_: FileMetadataText): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileMetadataText>, I>>(base?: I): FileMetadataText {
+    return FileMetadataText.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileMetadataText>, I>>(_: I): FileMetadataText {
+    const message = createBaseFileMetadataText();
+    return message;
+  },
+};
+
+function createBaseFileImage(): FileImage {
+  return { width: 0, height: 0 };
+}
+
+export const FileImage: MessageFns<FileImage> = {
+  encode(message: FileImage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.width !== 0) {
+      writer.uint32(8).uint32(message.width);
+    }
+    if (message.height !== 0) {
+      writer.uint32(16).uint32(message.height);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileImage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileImage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.width = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.height = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FileImage {
+    return {
+      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
+      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+    };
+  },
+
+  toJSON(message: FileImage): unknown {
+    const obj: any = {};
+    if (message.width !== 0) {
+      obj.width = Math.round(message.width);
+    }
+    if (message.height !== 0) {
+      obj.height = Math.round(message.height);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileImage>, I>>(base?: I): FileImage {
+    return FileImage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileImage>, I>>(object: I): FileImage {
+    const message = createBaseFileImage();
+    message.width = object.width ?? 0;
+    message.height = object.height ?? 0;
+    return message;
+  },
+};
+
+function createBaseFileVideo(): FileVideo {
+  return { width: 0, height: 0 };
+}
+
+export const FileVideo: MessageFns<FileVideo> = {
+  encode(message: FileVideo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.width !== 0) {
+      writer.uint32(8).uint32(message.width);
+    }
+    if (message.height !== 0) {
+      writer.uint32(16).uint32(message.height);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileVideo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileVideo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.width = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.height = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FileVideo {
+    return {
+      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
+      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+    };
+  },
+
+  toJSON(message: FileVideo): unknown {
+    const obj: any = {};
+    if (message.width !== 0) {
+      obj.width = Math.round(message.width);
+    }
+    if (message.height !== 0) {
+      obj.height = Math.round(message.height);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileVideo>, I>>(base?: I): FileVideo {
+    return FileVideo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileVideo>, I>>(object: I): FileVideo {
+    const message = createBaseFileVideo();
+    message.width = object.width ?? 0;
+    message.height = object.height ?? 0;
+    return message;
+  },
+};
+
+function createBaseFileAudio(): FileAudio {
+  return {};
+}
+
+export const FileAudio: MessageFns<FileAudio> = {
+  encode(_: FileAudio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FileAudio {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileAudio();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): FileAudio {
+    return {};
+  },
+
+  toJSON(_: FileAudio): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileAudio>, I>>(base?: I): FileAudio {
+    return FileAudio.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileAudio>, I>>(_: I): FileAudio {
+    const message = createBaseFileAudio();
     return message;
   },
 };

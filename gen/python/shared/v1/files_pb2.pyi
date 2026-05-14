@@ -1,6 +1,6 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Optional as _Optional
+from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -27,3 +27,45 @@ class File(_message.Message):
     deleted: bool
     reported: bool
     def __init__(self, id: _Optional[str] = ..., uploader_id: _Optional[str] = ..., bucket: _Optional[str] = ..., filename: _Optional[str] = ..., content_type: _Optional[str] = ..., size: _Optional[int] = ..., hash: _Optional[str] = ..., uploaded_at: _Optional[int] = ..., deleted: bool = ..., reported: bool = ...) -> None: ...
+
+class FileMetadata(_message.Message):
+    __slots__ = ("file", "text", "image", "video", "audio")
+    FILE_FIELD_NUMBER: _ClassVar[int]
+    TEXT_FIELD_NUMBER: _ClassVar[int]
+    IMAGE_FIELD_NUMBER: _ClassVar[int]
+    VIDEO_FIELD_NUMBER: _ClassVar[int]
+    AUDIO_FIELD_NUMBER: _ClassVar[int]
+    file: FileMetadataFile
+    text: FileMetadataText
+    image: FileImage
+    video: FileVideo
+    audio: FileAudio
+    def __init__(self, file: _Optional[_Union[FileMetadataFile, _Mapping]] = ..., text: _Optional[_Union[FileMetadataText, _Mapping]] = ..., image: _Optional[_Union[FileImage, _Mapping]] = ..., video: _Optional[_Union[FileVideo, _Mapping]] = ..., audio: _Optional[_Union[FileAudio, _Mapping]] = ...) -> None: ...
+
+class FileMetadataFile(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class FileMetadataText(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class FileImage(_message.Message):
+    __slots__ = ("width", "height")
+    WIDTH_FIELD_NUMBER: _ClassVar[int]
+    HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    width: int
+    height: int
+    def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
+
+class FileVideo(_message.Message):
+    __slots__ = ("width", "height")
+    WIDTH_FIELD_NUMBER: _ClassVar[int]
+    HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    width: int
+    height: int
+    def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
+
+class FileAudio(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...

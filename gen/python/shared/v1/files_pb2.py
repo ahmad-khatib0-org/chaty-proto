@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15shared/v1/files.proto\x12\tshared.v1\"\xd6\x01\n\x04\x46ile\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0buploader_id\x18\x02 \x01(\t\x12\x0e\n\x06\x62ucket\x18\x03 \x01(\t\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x14\n\x0c\x63ontent_type\x18\x05 \x01(\t\x12\x0c\n\x04size\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12\x13\n\x0buploaded_at\x18\x08 \x01(\x03\x12\x14\n\x07\x64\x65leted\x18\t \x01(\x08H\x00\x88\x01\x01\x12\x15\n\x08reported\x18\n \x01(\x08H\x01\x88\x01\x01\x42\n\n\x08_deletedB\x0b\n\t_reportedb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15shared/v1/files.proto\x12\tshared.v1\"\xd6\x01\n\x04\x46ile\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0buploader_id\x18\x02 \x01(\t\x12\x0e\n\x06\x62ucket\x18\x03 \x01(\t\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x14\n\x0c\x63ontent_type\x18\x05 \x01(\t\x12\x0c\n\x04size\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12\x13\n\x0buploaded_at\x18\x08 \x01(\x03\x12\x14\n\x07\x64\x65leted\x18\t \x01(\x08H\x00\x88\x01\x01\x12\x15\n\x08reported\x18\n \x01(\x08H\x01\x88\x01\x01\x42\n\n\x08_deletedB\x0b\n\t_reported\"\xe5\x01\n\x0c\x46ileMetadata\x12+\n\x04\x66ile\x18\x01 \x01(\x0b\x32\x1b.shared.v1.FileMetadataFileH\x00\x12+\n\x04text\x18\x02 \x01(\x0b\x32\x1b.shared.v1.FileMetadataTextH\x00\x12%\n\x05image\x18\x03 \x01(\x0b\x32\x14.shared.v1.FileImageH\x00\x12%\n\x05video\x18\x04 \x01(\x0b\x32\x14.shared.v1.FileVideoH\x00\x12%\n\x05\x61udio\x18\x05 \x01(\x0b\x32\x14.shared.v1.FileAudioH\x00\x42\x06\n\x04type\"\x12\n\x10\x46ileMetadataFile\"\x12\n\x10\x46ileMetadataText\"*\n\tFileImage\x12\r\n\x05width\x18\x01 \x01(\r\x12\x0e\n\x06height\x18\x02 \x01(\r\"*\n\tFileVideo\x12\r\n\x05width\x18\x01 \x01(\r\x12\x0e\n\x06height\x18\x02 \x01(\r\"\x0b\n\tFileAudiob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,4 +33,16 @@ if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_FILE']._serialized_start=37
   _globals['_FILE']._serialized_end=251
+  _globals['_FILEMETADATA']._serialized_start=254
+  _globals['_FILEMETADATA']._serialized_end=483
+  _globals['_FILEMETADATAFILE']._serialized_start=485
+  _globals['_FILEMETADATAFILE']._serialized_end=503
+  _globals['_FILEMETADATATEXT']._serialized_start=505
+  _globals['_FILEMETADATATEXT']._serialized_end=523
+  _globals['_FILEIMAGE']._serialized_start=525
+  _globals['_FILEIMAGE']._serialized_end=567
+  _globals['_FILEVIDEO']._serialized_start=569
+  _globals['_FILEVIDEO']._serialized_end=611
+  _globals['_FILEAUDIO']._serialized_start=613
+  _globals['_FILEAUDIO']._serialized_end=624
 # @@protoc_insertion_point(module_scope)
