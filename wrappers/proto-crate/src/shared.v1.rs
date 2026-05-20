@@ -69,53 +69,50 @@ pub struct File {
     pub is_spoiler: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadata {
-    #[prost(oneof = "file_metadata::Type", tags = "1, 2, 3, 4, 5")]
-    pub r#type: ::core::option::Option<file_metadata::Type>,
-}
-/// Nested message and enum types in `FileMetadata`.
-pub mod file_metadata {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum Type {
-        #[prost(message, tag = "1")]
-        File(super::FileMetadataFile),
-        #[prost(message, tag = "2")]
-        Text(super::FileMetadataText),
-        #[prost(message, tag = "3")]
-        Image(super::FileImage),
-        #[prost(message, tag = "4")]
-        Video(super::FileVideo),
-        #[prost(message, tag = "5")]
-        Audio(super::FileAudio),
-    }
+    #[prost(message, optional, tag = "1")]
+    pub file: ::core::option::Option<FileMetadataFile>,
+    #[prost(message, optional, tag = "2")]
+    pub text: ::core::option::Option<FileMetadataText>,
+    #[prost(message, optional, tag = "3")]
+    pub image: ::core::option::Option<FileMetadataImage>,
+    #[prost(message, optional, tag = "4")]
+    pub video: ::core::option::Option<FileMetadataVideo>,
+    #[prost(message, optional, tag = "5")]
+    pub audio: ::core::option::Option<FileMetadataAudio>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadataFile {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadataText {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileImage {
-    #[prost(uint32, tag = "1")]
-    pub width: u32,
-    #[prost(uint32, tag = "2")]
-    pub height: u32,
+pub struct FileMetadataImage {
+    #[prost(int32, tag = "1")]
+    pub width: i32,
+    #[prost(int32, tag = "2")]
+    pub height: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileVideo {
-    #[prost(uint32, tag = "1")]
-    pub width: u32,
-    #[prost(uint32, tag = "2")]
-    pub height: u32,
+pub struct FileMetadataVideo {
+    #[prost(int32, tag = "1")]
+    pub width: i32,
+    #[prost(int32, tag = "2")]
+    pub height: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileAudio {}
+pub struct FileMetadataAudio {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PaginationSort {

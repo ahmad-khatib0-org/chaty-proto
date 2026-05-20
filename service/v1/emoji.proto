@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package service.v1;
+
+message Emoji {
+  /// Unique Id
+  string id = 1;
+  /// What owns this emoji
+  EmojiParent parent = 2;
+  /// Uploader user id
+  string creator_id = 3;
+  /// Emoji name
+  string name = 4;
+  /// Whether the emoji is animated
+  bool animated = 5;
+  /// Whether the emoji is marked as nsfw
+  bool nsfw = 6;
+}
+
+/// Parent Id of the emoji
+message EmojiParent {
+  oneof type {
+    EmojiParentServer server = 1;
+    EmojiParentDetached detached = 2;
+  }
+}
+
+message EmojiParentServer {
+  string id = 1;
+}
+
+message EmojiParentDetached {
+  // No fields
+}

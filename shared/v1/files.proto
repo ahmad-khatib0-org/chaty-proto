@@ -43,27 +43,25 @@ message File {
 }
 
 message FileMetadata {
-  oneof type {
-    FileMetadataFile file = 1;
-    FileMetadataText text = 2;
-    FileImage image = 3;
-    FileVideo video = 4;
-    FileAudio audio = 5;
-  }
+  FileMetadataFile file = 1;
+  FileMetadataText text = 2;
+  FileMetadataImage image = 3;
+  FileMetadataVideo video = 4;
+  FileMetadataAudio audio = 5;
 }
 
 message FileMetadataFile {}
 
 message FileMetadataText {}
 
-message FileImage {
-  uint32 width = 1;
-  uint32 height = 2;
+message FileMetadataImage {
+  int32 width = 1;
+  int32 height = 2;
 }
 
-message FileVideo {
-  uint32 width = 1;
-  uint32 height = 2;
+message FileMetadataVideo {
+  int32 width = 1;
+  int32 height = 2;
 }
 
-message FileAudio {}
+message FileMetadataAudio {}

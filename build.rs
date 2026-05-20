@@ -181,6 +181,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "shared.v1.FileMetadata",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.FileMetadataFile",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.FileMetadataText",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.FileMetadataImage",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.FileMetadataVideo",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "shared.v1.FileMetadataAudio",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "service.v1.ServerMember",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
@@ -214,6 +238,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "service/v1/channels_db.proto",
         "service/v1/channels.proto",
         "service/v1/config.proto",
+        "service/v1/emoji.proto",
         "service/v1/groups.proto",
         "service/v1/main.proto",
         "service/v1/messages.proto",

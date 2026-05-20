@@ -328,6 +328,56 @@ pub struct BuildInformation {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Emoji {
+    /// / Unique Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// / What owns this emoji
+    #[prost(message, optional, tag = "2")]
+    pub parent: ::core::option::Option<EmojiParent>,
+    /// / Uploader user id
+    #[prost(string, tag = "3")]
+    pub creator_id: ::prost::alloc::string::String,
+    /// / Emoji name
+    #[prost(string, tag = "4")]
+    pub name: ::prost::alloc::string::String,
+    /// / Whether the emoji is animated
+    #[prost(bool, tag = "5")]
+    pub animated: bool,
+    /// / Whether the emoji is marked as nsfw
+    #[prost(bool, tag = "6")]
+    pub nsfw: bool,
+}
+/// / Parent Id of the emoji
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmojiParent {
+    #[prost(oneof = "emoji_parent::Type", tags = "1, 2")]
+    pub r#type: ::core::option::Option<emoji_parent::Type>,
+}
+/// Nested message and enum types in `EmojiParent`.
+pub mod emoji_parent {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "1")]
+        Server(super::EmojiParentServer),
+        #[prost(message, tag = "2")]
+        Detached(super::EmojiParentDetached),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmojiParentServer {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// No fields
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct EmojiParentDetached {}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupsCreateRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,

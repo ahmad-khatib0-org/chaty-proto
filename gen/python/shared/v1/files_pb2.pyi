@@ -41,10 +41,10 @@ class FileMetadata(_message.Message):
     AUDIO_FIELD_NUMBER: _ClassVar[int]
     file: FileMetadataFile
     text: FileMetadataText
-    image: FileImage
-    video: FileVideo
-    audio: FileAudio
-    def __init__(self, file: _Optional[_Union[FileMetadataFile, _Mapping]] = ..., text: _Optional[_Union[FileMetadataText, _Mapping]] = ..., image: _Optional[_Union[FileImage, _Mapping]] = ..., video: _Optional[_Union[FileVideo, _Mapping]] = ..., audio: _Optional[_Union[FileAudio, _Mapping]] = ...) -> None: ...
+    image: FileMetadataImage
+    video: FileMetadataVideo
+    audio: FileMetadataAudio
+    def __init__(self, file: _Optional[_Union[FileMetadataFile, _Mapping]] = ..., text: _Optional[_Union[FileMetadataText, _Mapping]] = ..., image: _Optional[_Union[FileMetadataImage, _Mapping]] = ..., video: _Optional[_Union[FileMetadataVideo, _Mapping]] = ..., audio: _Optional[_Union[FileMetadataAudio, _Mapping]] = ...) -> None: ...
 
 class FileMetadataFile(_message.Message):
     __slots__ = ()
@@ -54,7 +54,7 @@ class FileMetadataText(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class FileImage(_message.Message):
+class FileMetadataImage(_message.Message):
     __slots__ = ("width", "height")
     WIDTH_FIELD_NUMBER: _ClassVar[int]
     HEIGHT_FIELD_NUMBER: _ClassVar[int]
@@ -62,7 +62,7 @@ class FileImage(_message.Message):
     height: int
     def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
 
-class FileVideo(_message.Message):
+class FileMetadataVideo(_message.Message):
     __slots__ = ("width", "height")
     WIDTH_FIELD_NUMBER: _ClassVar[int]
     HEIGHT_FIELD_NUMBER: _ClassVar[int]
@@ -70,6 +70,6 @@ class FileVideo(_message.Message):
     height: int
     def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
 
-class FileAudio(_message.Message):
+class FileMetadataAudio(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...

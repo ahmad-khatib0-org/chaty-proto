@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/files.proto.
  */
 export const file_shared_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSKVAgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIpCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGESEgoKaXNfc3BvaWxlchgMIAEoCEIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWQi5QEKDEZpbGVNZXRhZGF0YRIrCgRmaWxlGAEgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUZpbGVIABIrCgR0ZXh0GAIgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVRleHRIABIlCgVpbWFnZRgDIAEoCzIULnNoYXJlZC52MS5GaWxlSW1hZ2VIABIlCgV2aWRlbxgEIAEoCzIULnNoYXJlZC52MS5GaWxlVmlkZW9IABIlCgVhdWRpbxgFIAEoCzIULnNoYXJlZC52MS5GaWxlQXVkaW9IAEIGCgR0eXBlIhIKEEZpbGVNZXRhZGF0YUZpbGUiEgoQRmlsZU1ldGFkYXRhVGV4dCIqCglGaWxlSW1hZ2USDQoFd2lkdGgYASABKA0SDgoGaGVpZ2h0GAIgASgNIioKCUZpbGVWaWRlbxINCgV3aWR0aBgBIAEoDRIOCgZoZWlnaHQYAiABKA0iCwoJRmlsZUF1ZGlvYgZwcm90bzM");
+  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSKVAgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIpCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGESEgoKaXNfc3BvaWxlchgMIAEoCEIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWQi6wEKDEZpbGVNZXRhZGF0YRIpCgRmaWxlGAEgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUZpbGUSKQoEdGV4dBgCIAEoCzIbLnNoYXJlZC52MS5GaWxlTWV0YWRhdGFUZXh0EisKBWltYWdlGAMgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUltYWdlEisKBXZpZGVvGAQgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVZpZGVvEisKBWF1ZGlvGAUgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUF1ZGlvIhIKEEZpbGVNZXRhZGF0YUZpbGUiEgoQRmlsZU1ldGFkYXRhVGV4dCIyChFGaWxlTWV0YWRhdGFJbWFnZRINCgV3aWR0aBgBIAEoBRIOCgZoZWlnaHQYAiABKAUiMgoRRmlsZU1ldGFkYXRhVmlkZW8SDQoFd2lkdGgYASABKAUSDgoGaGVpZ2h0GAIgASgFIhMKEUZpbGVNZXRhZGF0YUF1ZGlvYgZwcm90bzM");
 
 /**
  * ===========================================
@@ -115,39 +115,29 @@ export const FileSchema: GenMessage<File> = /*@__PURE__*/
  */
 export type FileMetadata = Message<"shared.v1.FileMetadata"> & {
   /**
-   * @generated from oneof shared.v1.FileMetadata.type
+   * @generated from field: shared.v1.FileMetadataFile file = 1;
    */
-  type: {
-    /**
-     * @generated from field: shared.v1.FileMetadataFile file = 1;
-     */
-    value: FileMetadataFile;
-    case: "file";
-  } | {
-    /**
-     * @generated from field: shared.v1.FileMetadataText text = 2;
-     */
-    value: FileMetadataText;
-    case: "text";
-  } | {
-    /**
-     * @generated from field: shared.v1.FileImage image = 3;
-     */
-    value: FileImage;
-    case: "image";
-  } | {
-    /**
-     * @generated from field: shared.v1.FileVideo video = 4;
-     */
-    value: FileVideo;
-    case: "video";
-  } | {
-    /**
-     * @generated from field: shared.v1.FileAudio audio = 5;
-     */
-    value: FileAudio;
-    case: "audio";
-  } | { case: undefined; value?: undefined };
+  file?: FileMetadataFile;
+
+  /**
+   * @generated from field: shared.v1.FileMetadataText text = 2;
+   */
+  text?: FileMetadataText;
+
+  /**
+   * @generated from field: shared.v1.FileMetadataImage image = 3;
+   */
+  image?: FileMetadataImage;
+
+  /**
+   * @generated from field: shared.v1.FileMetadataVideo video = 4;
+   */
+  video?: FileMetadataVideo;
+
+  /**
+   * @generated from field: shared.v1.FileMetadataAudio audio = 5;
+   */
+  audio?: FileMetadataAudio;
 };
 
 /**
@@ -184,59 +174,59 @@ export const FileMetadataTextSchema: GenMessage<FileMetadataText> = /*@__PURE__*
   messageDesc(file_shared_v1_files, 3);
 
 /**
- * @generated from message shared.v1.FileImage
+ * @generated from message shared.v1.FileMetadataImage
  */
-export type FileImage = Message<"shared.v1.FileImage"> & {
+export type FileMetadataImage = Message<"shared.v1.FileMetadataImage"> & {
   /**
-   * @generated from field: uint32 width = 1;
+   * @generated from field: int32 width = 1;
    */
   width: number;
 
   /**
-   * @generated from field: uint32 height = 2;
+   * @generated from field: int32 height = 2;
    */
   height: number;
 };
 
 /**
- * Describes the message shared.v1.FileImage.
- * Use `create(FileImageSchema)` to create a new message.
+ * Describes the message shared.v1.FileMetadataImage.
+ * Use `create(FileMetadataImageSchema)` to create a new message.
  */
-export const FileImageSchema: GenMessage<FileImage> = /*@__PURE__*/
+export const FileMetadataImageSchema: GenMessage<FileMetadataImage> = /*@__PURE__*/
   messageDesc(file_shared_v1_files, 4);
 
 /**
- * @generated from message shared.v1.FileVideo
+ * @generated from message shared.v1.FileMetadataVideo
  */
-export type FileVideo = Message<"shared.v1.FileVideo"> & {
+export type FileMetadataVideo = Message<"shared.v1.FileMetadataVideo"> & {
   /**
-   * @generated from field: uint32 width = 1;
+   * @generated from field: int32 width = 1;
    */
   width: number;
 
   /**
-   * @generated from field: uint32 height = 2;
+   * @generated from field: int32 height = 2;
    */
   height: number;
 };
 
 /**
- * Describes the message shared.v1.FileVideo.
- * Use `create(FileVideoSchema)` to create a new message.
+ * Describes the message shared.v1.FileMetadataVideo.
+ * Use `create(FileMetadataVideoSchema)` to create a new message.
  */
-export const FileVideoSchema: GenMessage<FileVideo> = /*@__PURE__*/
+export const FileMetadataVideoSchema: GenMessage<FileMetadataVideo> = /*@__PURE__*/
   messageDesc(file_shared_v1_files, 5);
 
 /**
- * @generated from message shared.v1.FileAudio
+ * @generated from message shared.v1.FileMetadataAudio
  */
-export type FileAudio = Message<"shared.v1.FileAudio"> & {
+export type FileMetadataAudio = Message<"shared.v1.FileMetadataAudio"> & {
 };
 
 /**
- * Describes the message shared.v1.FileAudio.
- * Use `create(FileAudioSchema)` to create a new message.
+ * Describes the message shared.v1.FileMetadataAudio.
+ * Use `create(FileMetadataAudioSchema)` to create a new message.
  */
-export const FileAudioSchema: GenMessage<FileAudio> = /*@__PURE__*/
+export const FileMetadataAudioSchema: GenMessage<FileMetadataAudio> = /*@__PURE__*/
   messageDesc(file_shared_v1_files, 6);
 
