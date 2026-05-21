@@ -19,6 +19,7 @@ import {
 } from "@grpc/grpc-js";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels.js";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
+import { MessagesGetRequest, MessagesGetResponse } from "./messages.js";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
 import {
   UsersCreateRequest,
@@ -128,6 +129,15 @@ export const ChatyServiceService = {
       Buffer.from(SearchUsernamesResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): SearchUsernamesResponse => SearchUsernamesResponse.decode(value),
   },
+  messagesGet: {
+    path: "/service.v1.ChatyService/MessagesGet",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: MessagesGetRequest): Buffer => Buffer.from(MessagesGetRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MessagesGetRequest => MessagesGetRequest.decode(value),
+    responseSerialize: (value: MessagesGetResponse): Buffer => Buffer.from(MessagesGetResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MessagesGetResponse => MessagesGetResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -140,6 +150,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
   groupsList: handleUnaryCall<GroupsListRequest, GroupsListResponse>;
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
+  messagesGet: handleUnaryCall<MessagesGetRequest, MessagesGetResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -277,6 +288,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: SearchUsernamesResponse) => void,
+  ): ClientUnaryCall;
+  messagesGet(
+    request: MessagesGetRequest,
+    callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
+  ): ClientUnaryCall;
+  messagesGet(
+    request: MessagesGetRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
+  ): ClientUnaryCall;
+  messagesGet(
+    request: MessagesGetRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
   ): ClientUnaryCall;
 }
 

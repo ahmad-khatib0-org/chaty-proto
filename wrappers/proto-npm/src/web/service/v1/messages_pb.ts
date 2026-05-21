@@ -2,15 +2,21 @@
 // @generated from file service/v1/messages.proto (package service.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message as Message$1 } from "./messages_db_pb.js";
+import { file_service_v1_messages_db } from "./messages_db_pb.js";
+import type { ServerMember } from "./server_members_db_pb.js";
+import { file_service_v1_server_members_db } from "./server_members_db_pb.js";
+import type { APIUser } from "./users_pb.js";
+import { file_service_v1_users } from "./users_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIYgZwcm90bzM");
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIsUBChJNZXNzYWdlc0dldFJlcXVlc3QSEgoFbGltaXQYASABKANIAIgBARITCgZiZWZvcmUYAiABKAlIAYgBARISCgVhZnRlchgDIAEoCUgCiAEBEioKBHNvcnQYBCABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAOIAQESEwoGbmVhcmJ5GAUgASgJSASIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnkiiwEKE01lc3NhZ2VzR2V0UmVzcG9uc2USJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users]);
 
 /**
  * *  What this message should reply to and how 
@@ -47,4 +53,117 @@ export type ReplyIntent = Message<"service.v1.ReplyIntent"> & {
  */
 export const ReplyIntentSchema: GenMessage<ReplyIntent> = /*@__PURE__*/
   messageDesc(file_service_v1_messages, 0);
+
+/**
+ * Options for querying messages
+ *
+ * @generated from message service.v1.MessagesGetRequest
+ */
+export type MessagesGetRequest = Message<"service.v1.MessagesGetRequest"> & {
+  /**
+   * Maximum number of messages to fetch
+   * For fetching nearby messages, this is `(limit + 2)`
+   *
+   * @generated from field: optional int64 limit = 1;
+   */
+  limit?: bigint;
+
+  /**
+   * Message id before which messages should be fetched
+   *
+   * @generated from field: optional string before = 2;
+   */
+  before?: string;
+
+  /**
+   * Message id after which messages should be fetched
+   *
+   * @generated from field: optional string after = 3;
+   */
+  after?: string;
+
+  /**
+   * Message sort direction
+   *
+   * @generated from field: optional service.v1.MessageSort sort = 4;
+   */
+  sort?: MessageSort;
+
+  /**
+   * Message id to search around
+   * Specifying 'nearby' ignores 'before', 'after' and 'sort'.
+   * It will also take half of limit rounded as the limits to each side.
+   * It also fetches the message ID specified.
+   *
+   * @generated from field: optional string nearby = 5;
+   */
+  nearby?: string;
+};
+
+/**
+ * Describes the message service.v1.MessagesGetRequest.
+ * Use `create(MessagesGetRequestSchema)` to create a new message.
+ */
+export const MessagesGetRequestSchema: GenMessage<MessagesGetRequest> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 1);
+
+/**
+ * @generated from message service.v1.MessagesGetResponse
+ */
+export type MessagesGetResponse = Message<"service.v1.MessagesGetResponse"> & {
+  /**
+   * @generated from field: repeated service.v1.Message messages = 1;
+   */
+  messages: Message$1[];
+
+  /**
+   * @generated from field: repeated service.v1.APIUser users = 2;
+   */
+  users: APIUser[];
+
+  /**
+   * @generated from field: repeated service.v1.ServerMember members = 3;
+   */
+  members: ServerMember[];
+};
+
+/**
+ * Describes the message service.v1.MessagesGetResponse.
+ * Use `create(MessagesGetResponseSchema)` to create a new message.
+ */
+export const MessagesGetResponseSchema: GenMessage<MessagesGetResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 2);
+
+/**
+ * Message sort direction
+ *
+ * @generated from enum service.v1.MessageSort
+ */
+export enum MessageSort {
+  /**
+   * @generated from enum value: MESSAGE_SORT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: MESSAGE_SORT_LATEST = 1;
+   */
+  LATEST = 1,
+
+  /**
+   * @generated from enum value: MESSAGE_SORT_OLDEST = 2;
+   */
+  OLDEST = 2,
+
+  /**
+   * @generated from enum value: MESSAGE_SORT_RELEVANCE = 3;
+   */
+  RELEVANCE = 3,
+}
+
+/**
+ * Describes the enum service.v1.MessageSort.
+ */
+export const MessageSortSchema: GenEnum<MessageSort> = /*@__PURE__*/
+  enumDesc(file_service_v1_messages, 0);
 

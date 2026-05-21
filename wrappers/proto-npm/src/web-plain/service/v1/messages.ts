@@ -6,8 +6,57 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { Message } from "./messages_db";
+import { ServerMember } from "./server_members_db";
+import { APIUser } from "./users";
 
 export const protobufPackage = "service.v1";
+
+/** Message sort direction */
+export enum MessageSort {
+  MESSAGE_SORT_UNSPECIFIED = 0,
+  MESSAGE_SORT_LATEST = 1,
+  MESSAGE_SORT_OLDEST = 2,
+  MESSAGE_SORT_RELEVANCE = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function messageSortFromJSON(object: any): MessageSort {
+  switch (object) {
+    case 0:
+    case "MESSAGE_SORT_UNSPECIFIED":
+      return MessageSort.MESSAGE_SORT_UNSPECIFIED;
+    case 1:
+    case "MESSAGE_SORT_LATEST":
+      return MessageSort.MESSAGE_SORT_LATEST;
+    case 2:
+    case "MESSAGE_SORT_OLDEST":
+      return MessageSort.MESSAGE_SORT_OLDEST;
+    case 3:
+    case "MESSAGE_SORT_RELEVANCE":
+      return MessageSort.MESSAGE_SORT_RELEVANCE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MessageSort.UNRECOGNIZED;
+  }
+}
+
+export function messageSortToJSON(object: MessageSort): string {
+  switch (object) {
+    case MessageSort.MESSAGE_SORT_UNSPECIFIED:
+      return "MESSAGE_SORT_UNSPECIFIED";
+    case MessageSort.MESSAGE_SORT_LATEST:
+      return "MESSAGE_SORT_LATEST";
+    case MessageSort.MESSAGE_SORT_OLDEST:
+      return "MESSAGE_SORT_OLDEST";
+    case MessageSort.MESSAGE_SORT_RELEVANCE:
+      return "MESSAGE_SORT_RELEVANCE";
+    case MessageSort.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
 
 /** What this message should reply to and how */
 export interface ReplyIntent {
@@ -20,6 +69,42 @@ export interface ReplyIntent {
    * Otherwise, send a message without this reply. Default is true.
    */
   failIfNotExists: boolean;
+}
+
+/** Options for querying messages */
+export interface MessagesGetRequest {
+  /**
+   * Maximum number of messages to fetch
+   * For fetching nearby messages, this is `(limit + 2)`
+   */
+  limit?:
+    | number
+    | undefined;
+  /** Message id before which messages should be fetched */
+  before?:
+    | string
+    | undefined;
+  /** Message id after which messages should be fetched */
+  after?:
+    | string
+    | undefined;
+  /** Message sort direction */
+  sort?:
+    | MessageSort
+    | undefined;
+  /**
+   * Message id to search around
+   * Specifying 'nearby' ignores 'before', 'after' and 'sort'.
+   * It will also take half of limit rounded as the limits to each side.
+   * It also fetches the message ID specified.
+   */
+  nearby?: string | undefined;
+}
+
+export interface MessagesGetResponse {
+  messages: Message[];
+  users: APIUser[];
+  members: ServerMember[];
 }
 
 function createBaseReplyIntent(): ReplyIntent {
@@ -114,6 +199,224 @@ export const ReplyIntent: MessageFns<ReplyIntent> = {
   },
 };
 
+function createBaseMessagesGetRequest(): MessagesGetRequest {
+  return { limit: undefined, before: undefined, after: undefined, sort: undefined, nearby: undefined };
+}
+
+export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
+  encode(message: MessagesGetRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.limit !== undefined) {
+      writer.uint32(8).int64(message.limit);
+    }
+    if (message.before !== undefined) {
+      writer.uint32(18).string(message.before);
+    }
+    if (message.after !== undefined) {
+      writer.uint32(26).string(message.after);
+    }
+    if (message.sort !== undefined) {
+      writer.uint32(32).int32(message.sort);
+    }
+    if (message.nearby !== undefined) {
+      writer.uint32(42).string(message.nearby);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessagesGetRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessagesGetRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.limit = longToNumber(reader.int64());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.before = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.after = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.sort = reader.int32() as any;
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.nearby = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessagesGetRequest {
+    return {
+      limit: isSet(object.limit) ? globalThis.Number(object.limit) : undefined,
+      before: isSet(object.before) ? globalThis.String(object.before) : undefined,
+      after: isSet(object.after) ? globalThis.String(object.after) : undefined,
+      sort: isSet(object.sort) ? messageSortFromJSON(object.sort) : undefined,
+      nearby: isSet(object.nearby) ? globalThis.String(object.nearby) : undefined,
+    };
+  },
+
+  toJSON(message: MessagesGetRequest): unknown {
+    const obj: any = {};
+    if (message.limit !== undefined) {
+      obj.limit = Math.round(message.limit);
+    }
+    if (message.before !== undefined) {
+      obj.before = message.before;
+    }
+    if (message.after !== undefined) {
+      obj.after = message.after;
+    }
+    if (message.sort !== undefined) {
+      obj.sort = messageSortToJSON(message.sort);
+    }
+    if (message.nearby !== undefined) {
+      obj.nearby = message.nearby;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MessagesGetRequest>, I>>(base?: I): MessagesGetRequest {
+    return MessagesGetRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MessagesGetRequest>, I>>(object: I): MessagesGetRequest {
+    const message = createBaseMessagesGetRequest();
+    message.limit = object.limit ?? undefined;
+    message.before = object.before ?? undefined;
+    message.after = object.after ?? undefined;
+    message.sort = object.sort ?? undefined;
+    message.nearby = object.nearby ?? undefined;
+    return message;
+  },
+};
+
+function createBaseMessagesGetResponse(): MessagesGetResponse {
+  return { messages: [], users: [], members: [] };
+}
+
+export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
+  encode(message: MessagesGetResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.messages) {
+      Message.encode(v!, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.users) {
+      APIUser.encode(v!, writer.uint32(18).fork()).join();
+    }
+    for (const v of message.members) {
+      ServerMember.encode(v!, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessagesGetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessagesGetResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.messages.push(Message.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.users.push(APIUser.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.members.push(ServerMember.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessagesGetResponse {
+    return {
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Message.fromJSON(e)) : [],
+      users: globalThis.Array.isArray(object?.users) ? object.users.map((e: any) => APIUser.fromJSON(e)) : [],
+      members: globalThis.Array.isArray(object?.members)
+        ? object.members.map((e: any) => ServerMember.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: MessagesGetResponse): unknown {
+    const obj: any = {};
+    if (message.messages?.length) {
+      obj.messages = message.messages.map((e) => Message.toJSON(e));
+    }
+    if (message.users?.length) {
+      obj.users = message.users.map((e) => APIUser.toJSON(e));
+    }
+    if (message.members?.length) {
+      obj.members = message.members.map((e) => ServerMember.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(base?: I): MessagesGetResponse {
+    return MessagesGetResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(object: I): MessagesGetResponse {
+    const message = createBaseMessagesGetResponse();
+    message.messages = object.messages?.map((e) => Message.fromPartial(e)) || [];
+    message.users = object.users?.map((e) => APIUser.fromPartial(e)) || [];
+    message.members = object.members?.map((e) => ServerMember.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
@@ -125,6 +428,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

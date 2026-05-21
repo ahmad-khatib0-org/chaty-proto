@@ -22,15 +22,24 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from service.v1 import messages_db_pb2 as service_dot_v1_dot_messages__db__pb2
+from service.v1 import server_members_db_pb2 as service_dot_v1_dot_server__members__db__pb2
+from service.v1 import users_pb2 as service_dot_v1_dot_users__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1\"F\n\x0bReplyIntent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07mention\x18\x02 \x01(\x08\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x03 \x01(\x08\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1\x1a\x1cservice/v1/messages_db.proto\x1a\"service/v1/server_members_db.proto\x1a\x16service/v1/users.proto\"F\n\x0bReplyIntent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07mention\x18\x02 \x01(\x08\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x03 \x01(\x08\"\xc5\x01\n\x12MessagesGetRequest\x12\x12\n\x05limit\x18\x01 \x01(\x03H\x00\x88\x01\x01\x12\x13\n\x06\x62\x65\x66ore\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x12\n\x05\x61\x66ter\x18\x03 \x01(\tH\x02\x88\x01\x01\x12*\n\x04sort\x18\x04 \x01(\x0e\x32\x17.service.v1.MessageSortH\x03\x88\x01\x01\x12\x13\n\x06nearby\x18\x05 \x01(\tH\x04\x88\x01\x01\x42\x08\n\x06_limitB\t\n\x07_beforeB\x08\n\x06_afterB\x07\n\x05_sortB\t\n\x07_nearby\"\x8b\x01\n\x13MessagesGetResponse\x12%\n\x08messages\x18\x01 \x03(\x0b\x32\x13.service.v1.Message\x12\"\n\x05users\x18\x02 \x03(\x0b\x32\x13.service.v1.APIUser\x12)\n\x07members\x18\x03 \x03(\x0b\x32\x18.service.v1.ServerMember*y\n\x0bMessageSort\x12\x1c\n\x18MESSAGE_SORT_UNSPECIFIED\x10\x00\x12\x17\n\x13MESSAGE_SORT_LATEST\x10\x01\x12\x17\n\x13MESSAGE_SORT_OLDEST\x10\x02\x12\x1a\n\x16MESSAGE_SORT_RELEVANCE\x10\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.messages_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_REPLYINTENT']._serialized_start=41
-  _globals['_REPLYINTENT']._serialized_end=111
+  _globals['_MESSAGESORT']._serialized_start=545
+  _globals['_MESSAGESORT']._serialized_end=666
+  _globals['_REPLYINTENT']._serialized_start=131
+  _globals['_REPLYINTENT']._serialized_end=201
+  _globals['_MESSAGESGETREQUEST']._serialized_start=204
+  _globals['_MESSAGESGETREQUEST']._serialized_end=401
+  _globals['_MESSAGESGETRESPONSE']._serialized_start=404
+  _globals['_MESSAGESGETRESPONSE']._serialized_end=543
 # @@protoc_insertion_point(module_scope)

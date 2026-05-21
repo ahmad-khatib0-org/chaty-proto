@@ -453,1371 +453,6 @@ pub struct GroupsListItem {
     #[prost(int64, tag = "3")]
     pub created_at: i64,
 }
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesRequest {
-    #[prost(string, tag = "1")]
-    pub query: ::prost::alloc::string::String,
-    #[prost(int32, tag = "2")]
-    pub limit: i32,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesResponse {
-    #[prost(oneof = "search_usernames_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<search_usernames_response::Response>,
-}
-/// Nested message and enum types in `SearchUsernamesResponse`.
-pub mod search_usernames_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::SearchUsernamesResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUsernamesResponseData {
-    #[prost(message, repeated, tag = "1")]
-    pub users: ::prost::alloc::vec::Vec<SearchUser>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SearchUser {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub username: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub display_name: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub avatar: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct User {
-    /// ulid
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, tag = "2")]
-    pub username: ::prost::alloc::string::String,
-    /// 255 char
-    #[prost(string, tag = "3")]
-    pub email: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub password: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, optional, tag = "5")]
-    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "6")]
-    pub badges: ::core::option::Option<i32>,
-    /// 510 char
-    #[prost(string, optional, tag = "7")]
-    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
-    /// 32 char
-    #[prost(enumeration = "UserStatus", optional, tag = "8")]
-    pub status_presence: ::core::option::Option<i32>,
-    /// text
-    #[prost(string, optional, tag = "9")]
-    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
-    /// ulid (26 chars) Reference to files collection
-    #[prost(string, optional, tag = "10")]
-    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(bool, tag = "11")]
-    pub privileged: bool,
-    #[prost(int64, optional, tag = "12")]
-    pub suspended_until: ::core::option::Option<i64>,
-    /// unix timestamp miliseconds
-    #[prost(int64, tag = "13")]
-    pub created_at: i64,
-    /// unix timestamp miliseconds
-    #[prost(int64, tag = "14")]
-    pub updated_at: i64,
-    #[prost(bool, tag = "15")]
-    pub verified: bool,
-    #[prost(message, optional, tag = "16")]
-    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
-    #[prost(message, repeated, tag = "17")]
-    pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
-    #[prost(message, optional, tag = "18")]
-    pub bot: ::core::option::Option<Bot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UserRelationship {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    #[prost(enumeration = "UserRelationshipStatus", tag = "2")]
-    pub status: i32,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum UserStatus {
-    Online = 0,
-    Idle = 1,
-    Focus = 2,
-    Busy = 3,
-    Invisible = 4,
-}
-impl UserStatus {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Online => "USER_STATUS_ONLINE",
-            Self::Idle => "USER_STATUS_IDLE",
-            Self::Focus => "USER_STATUS_FOCUS",
-            Self::Busy => "USER_STATUS_BUSY",
-            Self::Invisible => "USER_STATUS_INVISIBLE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "USER_STATUS_ONLINE" => Some(Self::Online),
-            "USER_STATUS_IDLE" => Some(Self::Idle),
-            "USER_STATUS_FOCUS" => Some(Self::Focus),
-            "USER_STATUS_BUSY" => Some(Self::Busy),
-            "USER_STATUS_INVISIBLE" => Some(Self::Invisible),
-            _ => None,
-        }
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum UserRelationshipStatus {
-    None = 0,
-    /// Self
-    User = 1,
-    Friend = 2,
-    /// Friend request sent
-    Outgoing = 3,
-    /// Friend request received
-    Incoming = 4,
-    /// You blocked them
-    Blocked = 5,
-    /// They blocked you
-    BlockedOther = 6,
-}
-impl UserRelationshipStatus {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::None => "USER_RELATIONSHIP_STATUS_NONE",
-            Self::User => "USER_RELATIONSHIP_STATUS_USER",
-            Self::Friend => "USER_RELATIONSHIP_STATUS_FRIEND",
-            Self::Outgoing => "USER_RELATIONSHIP_STATUS_OUTGOING",
-            Self::Incoming => "USER_RELATIONSHIP_STATUS_INCOMING",
-            Self::Blocked => "USER_RELATIONSHIP_STATUS_BLOCKED",
-            Self::BlockedOther => "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "USER_RELATIONSHIP_STATUS_NONE" => Some(Self::None),
-            "USER_RELATIONSHIP_STATUS_USER" => Some(Self::User),
-            "USER_RELATIONSHIP_STATUS_FRIEND" => Some(Self::Friend),
-            "USER_RELATIONSHIP_STATUS_OUTGOING" => Some(Self::Outgoing),
-            "USER_RELATIONSHIP_STATUS_INCOMING" => Some(Self::Incoming),
-            "USER_RELATIONSHIP_STATUS_BLOCKED" => Some(Self::Blocked),
-            "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER" => Some(Self::BlockedOther),
-            _ => None,
-        }
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiUser {
-    /// ulid
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, tag = "2")]
-    pub username: ::prost::alloc::string::String,
-    /// 255 char
-    #[prost(string, tag = "3")]
-    pub email: ::prost::alloc::string::String,
-    /// User's relationship with another user (or themselves)
-    /// options: "None" | "User" | "Friend" | "Outgoing" | "Incoming" | "Blocked" | "BlockedOther";
-    #[prost(string, tag = "4")]
-    pub relationship: ::prost::alloc::string::String,
-    /// 64 char
-    #[prost(string, optional, tag = "5")]
-    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "6")]
-    pub badges: ::core::option::Option<i32>,
-    /// 510 char
-    #[prost(string, optional, tag = "7")]
-    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
-    /// 32 char
-    #[prost(enumeration = "UserStatus", optional, tag = "8")]
-    pub status_presence: ::core::option::Option<i32>,
-    /// text
-    #[prost(string, optional, tag = "9")]
-    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
-    /// ulid (26 chars) Reference to files collection
-    #[prost(string, optional, tag = "10")]
-    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(bool, tag = "11")]
-    pub privileged: bool,
-    #[prost(int64, optional, tag = "12")]
-    pub suspended_until: ::core::option::Option<i64>,
-    /// unix timestamp miliseconds
-    #[prost(int64, tag = "13")]
-    pub created_at: i64,
-    /// unix timestamp miliseconds
-    #[prost(int64, tag = "14")]
-    pub updated_at: i64,
-    #[prost(bool, tag = "15")]
-    pub verified: bool,
-    #[prost(message, optional, tag = "16")]
-    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
-    #[prost(message, repeated, tag = "17")]
-    pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
-    #[prost(message, optional, tag = "18")]
-    pub bot: ::core::option::Option<Bot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersCreateRequest {
-    #[prost(string, tag = "1")]
-    pub email: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub password: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub username: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersCreateResponse {
-    #[prost(oneof = "users_create_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<users_create_response::Response>,
-}
-/// Nested message and enum types in `UsersCreateResponse`.
-pub mod users_create_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::UsersCreateResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersCreateResponseData {
-    #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersLoginRequest {
-    #[prost(string, tag = "1")]
-    pub email: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub password: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub mfa: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub login_challenge: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersLoginResponse {
-    #[prost(oneof = "users_login_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<users_login_response::Response>,
-}
-/// Nested message and enum types in `UsersLoginResponse`.
-pub mod users_login_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::UsersLoginResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersLoginResponseData {
-    #[prost(string, tag = "1")]
-    pub redirect_to: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersEmailConfirmationRequest {
-    #[prost(string, tag = "1")]
-    pub token: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersEmailConfirmationResponse {
-    #[prost(oneof = "users_email_confirmation_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<users_email_confirmation_response::Response>,
-}
-/// Nested message and enum types in `UsersEmailConfirmationResponse`.
-pub mod users_email_confirmation_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::UsersEmailConfirmationResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersEmailConfirmationResponseData {
-    #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersForgotPasswordRequest {
-    #[prost(string, tag = "1")]
-    pub email: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersForgotPasswordResponse {
-    #[prost(oneof = "users_forgot_password_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<users_forgot_password_response::Response>,
-}
-/// Nested message and enum types in `UsersForgotPasswordResponse`.
-pub mod users_forgot_password_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::UsersForgotPasswordResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersForgotPasswordResponseData {
-    #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersResetPasswordRequest {
-    #[prost(string, tag = "1")]
-    pub token: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub password: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub password_confirmation: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersResetPasswordResponse {
-    #[prost(oneof = "users_reset_password_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<users_reset_password_response::Response>,
-}
-/// Nested message and enum types in `UsersResetPasswordResponse`.
-pub mod users_reset_password_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::UsersResetPasswordResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UsersResetPasswordResponseData {
-    #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum UserFlag {
-    Unspecified = 0,
-    SuspendedUntil = 1,
-    Deleted = 2,
-    Banned = 4,
-    Spam = 8,
-}
-impl UserFlag {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Unspecified => "USER_FLAG_UNSPECIFIED",
-            Self::SuspendedUntil => "USER_FLAG_SUSPENDED_UNTIL",
-            Self::Deleted => "USER_FLAG_DELETED",
-            Self::Banned => "USER_FLAG_BANNED",
-            Self::Spam => "USER_FLAG_SPAM",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "USER_FLAG_UNSPECIFIED" => Some(Self::Unspecified),
-            "USER_FLAG_SUSPENDED_UNTIL" => Some(Self::SuspendedUntil),
-            "USER_FLAG_DELETED" => Some(Self::Deleted),
-            "USER_FLAG_BANNED" => Some(Self::Banned),
-            "USER_FLAG_SPAM" => Some(Self::Spam),
-            _ => None,
-        }
-    }
-}
-/// Generated client implementations.
-pub mod chaty_service_client {
-    #![allow(
-        unused_variables,
-        dead_code,
-        missing_docs,
-        clippy::wildcard_imports,
-        clippy::let_unit_value,
-    )]
-    use tonic::codegen::*;
-    use tonic::codegen::http::Uri;
-    #[derive(Debug, Clone)]
-    pub struct ChatyServiceClient<T> {
-        inner: tonic::client::Grpc<T>,
-    }
-    impl ChatyServiceClient<tonic::transport::Channel> {
-        /// Attempt to create a new client by connecting to a given endpoint.
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
-        where
-            D: TryInto<tonic::transport::Endpoint>,
-            D::Error: Into<StdError>,
-        {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
-            Ok(Self::new(conn))
-        }
-    }
-    impl<T> ChatyServiceClient<T>
-    where
-        T: tonic::client::GrpcService<tonic::body::Body>,
-        T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
-    {
-        pub fn new(inner: T) -> Self {
-            let inner = tonic::client::Grpc::new(inner);
-            Self { inner }
-        }
-        pub fn with_origin(inner: T, origin: Uri) -> Self {
-            let inner = tonic::client::Grpc::with_origin(inner, origin);
-            Self { inner }
-        }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> ChatyServiceClient<InterceptedService<T, F>>
-        where
-            F: tonic::service::Interceptor,
-            T::ResponseBody: Default,
-            T: tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
-                >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
-        {
-            ChatyServiceClient::new(InterceptedService::new(inner, interceptor))
-        }
-        /// Compress requests with the given encoding.
-        ///
-        /// This requires the server to support it otherwise it might respond with an
-        /// error.
-        #[must_use]
-        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.send_compressed(encoding);
-            self
-        }
-        /// Enable decompressing responses.
-        #[must_use]
-        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.accept_compressed(encoding);
-            self
-        }
-        /// Limits the maximum size of a decoded message.
-        ///
-        /// Default: `4MB`
-        #[must_use]
-        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
-            self.inner = self.inner.max_decoding_message_size(limit);
-            self
-        }
-        /// Limits the maximum size of an encoded message.
-        ///
-        /// Default: `usize::MAX`
-        #[must_use]
-        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
-            self.inner = self.inner.max_encoding_message_size(limit);
-            self
-        }
-        pub async fn users_create(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UsersCreateRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersCreateResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/UsersCreate",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "UsersCreate"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn users_login(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UsersLoginRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersLoginResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/UsersLogin",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "UsersLogin"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn users_email_confirmation(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UsersEmailConfirmationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersEmailConfirmationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/UsersEmailConfirmation",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("service.v1.ChatyService", "UsersEmailConfirmation"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn users_forgot_password(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UsersForgotPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersForgotPasswordResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/UsersForgotPassword",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("service.v1.ChatyService", "UsersForgotPassword"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn users_reset_password(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UsersResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersResetPasswordResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/UsersResetPassword",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("service.v1.ChatyService", "UsersResetPassword"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn channels_get(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ChannelsGetRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ChannelsGetResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/ChannelsGet",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "ChannelsGet"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn groups_create(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GroupsCreateRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GroupsCreateResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/GroupsCreate",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "GroupsCreate"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn groups_list(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GroupsListRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GroupsListResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/GroupsList",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "GroupsList"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn search_usernames(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SearchUsernamesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::SearchUsernamesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/SearchUsernames",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "SearchUsernames"));
-            self.inner.unary(req, path, codec).await
-        }
-    }
-}
-/// Generated server implementations.
-pub mod chaty_service_server {
-    #![allow(
-        unused_variables,
-        dead_code,
-        missing_docs,
-        clippy::wildcard_imports,
-        clippy::let_unit_value,
-    )]
-    use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with ChatyServiceServer.
-    #[async_trait]
-    pub trait ChatyService: std::marker::Send + std::marker::Sync + 'static {
-        async fn users_create(
-            &self,
-            request: tonic::Request<super::UsersCreateRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersCreateResponse>,
-            tonic::Status,
-        >;
-        async fn users_login(
-            &self,
-            request: tonic::Request<super::UsersLoginRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersLoginResponse>,
-            tonic::Status,
-        >;
-        async fn users_email_confirmation(
-            &self,
-            request: tonic::Request<super::UsersEmailConfirmationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersEmailConfirmationResponse>,
-            tonic::Status,
-        >;
-        async fn users_forgot_password(
-            &self,
-            request: tonic::Request<super::UsersForgotPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersForgotPasswordResponse>,
-            tonic::Status,
-        >;
-        async fn users_reset_password(
-            &self,
-            request: tonic::Request<super::UsersResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UsersResetPasswordResponse>,
-            tonic::Status,
-        >;
-        async fn channels_get(
-            &self,
-            request: tonic::Request<super::ChannelsGetRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ChannelsGetResponse>,
-            tonic::Status,
-        >;
-        async fn groups_create(
-            &self,
-            request: tonic::Request<super::GroupsCreateRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GroupsCreateResponse>,
-            tonic::Status,
-        >;
-        async fn groups_list(
-            &self,
-            request: tonic::Request<super::GroupsListRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GroupsListResponse>,
-            tonic::Status,
-        >;
-        async fn search_usernames(
-            &self,
-            request: tonic::Request<super::SearchUsernamesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::SearchUsernamesResponse>,
-            tonic::Status,
-        >;
-    }
-    #[derive(Debug)]
-    pub struct ChatyServiceServer<T> {
-        inner: Arc<T>,
-        accept_compression_encodings: EnabledCompressionEncodings,
-        send_compression_encodings: EnabledCompressionEncodings,
-        max_decoding_message_size: Option<usize>,
-        max_encoding_message_size: Option<usize>,
-    }
-    impl<T> ChatyServiceServer<T> {
-        pub fn new(inner: T) -> Self {
-            Self::from_arc(Arc::new(inner))
-        }
-        pub fn from_arc(inner: Arc<T>) -> Self {
-            Self {
-                inner,
-                accept_compression_encodings: Default::default(),
-                send_compression_encodings: Default::default(),
-                max_decoding_message_size: None,
-                max_encoding_message_size: None,
-            }
-        }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> InterceptedService<Self, F>
-        where
-            F: tonic::service::Interceptor,
-        {
-            InterceptedService::new(Self::new(inner), interceptor)
-        }
-        /// Enable decompressing requests with the given encoding.
-        #[must_use]
-        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.accept_compression_encodings.enable(encoding);
-            self
-        }
-        /// Compress responses with the given encoding, if the client supports it.
-        #[must_use]
-        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.send_compression_encodings.enable(encoding);
-            self
-        }
-        /// Limits the maximum size of a decoded message.
-        ///
-        /// Default: `4MB`
-        #[must_use]
-        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
-            self.max_decoding_message_size = Some(limit);
-            self
-        }
-        /// Limits the maximum size of an encoded message.
-        ///
-        /// Default: `usize::MAX`
-        #[must_use]
-        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
-            self.max_encoding_message_size = Some(limit);
-            self
-        }
-    }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChatyServiceServer<T>
-    where
-        T: ChatyService,
-        B: Body + std::marker::Send + 'static,
-        B::Error: Into<StdError> + std::marker::Send + 'static,
-    {
-        type Response = http::Response<tonic::body::Body>;
-        type Error = std::convert::Infallible;
-        type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(
-            &mut self,
-            _cx: &mut Context<'_>,
-        ) -> Poll<std::result::Result<(), Self::Error>> {
-            Poll::Ready(Ok(()))
-        }
-        fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            match req.uri().path() {
-                "/service.v1.ChatyService/UsersCreate" => {
-                    #[allow(non_camel_case_types)]
-                    struct UsersCreateSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::UsersCreateRequest>
-                    for UsersCreateSvc<T> {
-                        type Response = super::UsersCreateResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UsersCreateRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::users_create(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UsersCreateSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/UsersLogin" => {
-                    #[allow(non_camel_case_types)]
-                    struct UsersLoginSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::UsersLoginRequest>
-                    for UsersLoginSvc<T> {
-                        type Response = super::UsersLoginResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UsersLoginRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::users_login(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UsersLoginSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/UsersEmailConfirmation" => {
-                    #[allow(non_camel_case_types)]
-                    struct UsersEmailConfirmationSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::UsersEmailConfirmationRequest>
-                    for UsersEmailConfirmationSvc<T> {
-                        type Response = super::UsersEmailConfirmationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UsersEmailConfirmationRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::users_email_confirmation(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UsersEmailConfirmationSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/UsersForgotPassword" => {
-                    #[allow(non_camel_case_types)]
-                    struct UsersForgotPasswordSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::UsersForgotPasswordRequest>
-                    for UsersForgotPasswordSvc<T> {
-                        type Response = super::UsersForgotPasswordResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UsersForgotPasswordRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::users_forgot_password(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UsersForgotPasswordSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/UsersResetPassword" => {
-                    #[allow(non_camel_case_types)]
-                    struct UsersResetPasswordSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::UsersResetPasswordRequest>
-                    for UsersResetPasswordSvc<T> {
-                        type Response = super::UsersResetPasswordResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UsersResetPasswordRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::users_reset_password(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UsersResetPasswordSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/ChannelsGet" => {
-                    #[allow(non_camel_case_types)]
-                    struct ChannelsGetSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::ChannelsGetRequest>
-                    for ChannelsGetSvc<T> {
-                        type Response = super::ChannelsGetResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ChannelsGetRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::channels_get(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ChannelsGetSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/GroupsCreate" => {
-                    #[allow(non_camel_case_types)]
-                    struct GroupsCreateSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::GroupsCreateRequest>
-                    for GroupsCreateSvc<T> {
-                        type Response = super::GroupsCreateResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GroupsCreateRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::groups_create(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = GroupsCreateSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/GroupsList" => {
-                    #[allow(non_camel_case_types)]
-                    struct GroupsListSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::GroupsListRequest>
-                    for GroupsListSvc<T> {
-                        type Response = super::GroupsListResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GroupsListRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::groups_list(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = GroupsListSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/SearchUsernames" => {
-                    #[allow(non_camel_case_types)]
-                    struct SearchUsernamesSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::SearchUsernamesRequest>
-                    for SearchUsernamesSvc<T> {
-                        type Response = super::SearchUsernamesResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::SearchUsernamesRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::search_usernames(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = SearchUsernamesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                _ => {
-                    Box::pin(async move {
-                        let mut response = http::Response::new(
-                            tonic::body::Body::default(),
-                        );
-                        let headers = response.headers_mut();
-                        headers
-                            .insert(
-                                tonic::Status::GRPC_STATUS,
-                                (tonic::Code::Unimplemented as i32).into(),
-                            );
-                        headers
-                            .insert(
-                                http::header::CONTENT_TYPE,
-                                tonic::metadata::GRPC_CONTENT_TYPE,
-                            );
-                        Ok(response)
-                    })
-                }
-            }
-        }
-    }
-    impl<T> Clone for ChatyServiceServer<T> {
-        fn clone(&self) -> Self {
-            let inner = self.inner.clone();
-            Self {
-                inner,
-                accept_compression_encodings: self.accept_compression_encodings,
-                send_compression_encodings: self.send_compression_encodings,
-                max_decoding_message_size: self.max_decoding_message_size,
-                max_encoding_message_size: self.max_encoding_message_size,
-            }
-        }
-    }
-    /// Generated gRPC service name
-    pub const SERVICE_NAME: &str = "service.v1.ChatyService";
-    impl<T> tonic::server::NamedService for ChatyServiceServer<T> {
-        const NAME: &'static str = SERVICE_NAME;
-    }
-}
-/// *  What this message should reply to and how
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ReplyIntent {
-    /// * Message Id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// * Whether this reply should mention the message's author
-    #[prost(bool, tag = "2")]
-    pub mention: bool,
-    /// * Whether to error if the referenced message doesn't exist.
-    /// Otherwise, send a message without this reply. Default is true.
-    #[prost(bool, tag = "3")]
-    pub fail_if_not_exists: bool,
-}
 /// ===========================================
 /// MESSAGE WEBHOOK
 /// ===========================================
@@ -2445,6 +1080,1515 @@ pub struct ServerMember {
     pub can_publish: bool,
     #[prost(bool, tag = "10")]
     pub can_receive: bool,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct User {
+    /// ulid
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    /// 255 char
+    #[prost(string, tag = "3")]
+    pub email: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub password: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, optional, tag = "5")]
+    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(int32, optional, tag = "6")]
+    pub badges: ::core::option::Option<i32>,
+    /// 510 char
+    #[prost(string, optional, tag = "7")]
+    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
+    /// 32 char
+    #[prost(enumeration = "UserStatus", optional, tag = "8")]
+    pub status_presence: ::core::option::Option<i32>,
+    /// text
+    #[prost(string, optional, tag = "9")]
+    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
+    /// ulid (26 chars) Reference to files collection
+    #[prost(string, optional, tag = "10")]
+    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(bool, tag = "11")]
+    pub privileged: bool,
+    #[prost(int64, optional, tag = "12")]
+    pub suspended_until: ::core::option::Option<i64>,
+    /// unix timestamp miliseconds
+    #[prost(int64, tag = "13")]
+    pub created_at: i64,
+    /// unix timestamp miliseconds
+    #[prost(int64, tag = "14")]
+    pub updated_at: i64,
+    #[prost(bool, tag = "15")]
+    pub verified: bool,
+    #[prost(message, optional, tag = "16")]
+    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
+    #[prost(message, repeated, tag = "17")]
+    pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
+    #[prost(message, optional, tag = "18")]
+    pub bot: ::core::option::Option<Bot>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserRelationship {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(enumeration = "UserRelationshipStatus", tag = "2")]
+    pub status: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserStatus {
+    Online = 0,
+    Idle = 1,
+    Focus = 2,
+    Busy = 3,
+    Invisible = 4,
+}
+impl UserStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Online => "USER_STATUS_ONLINE",
+            Self::Idle => "USER_STATUS_IDLE",
+            Self::Focus => "USER_STATUS_FOCUS",
+            Self::Busy => "USER_STATUS_BUSY",
+            Self::Invisible => "USER_STATUS_INVISIBLE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "USER_STATUS_ONLINE" => Some(Self::Online),
+            "USER_STATUS_IDLE" => Some(Self::Idle),
+            "USER_STATUS_FOCUS" => Some(Self::Focus),
+            "USER_STATUS_BUSY" => Some(Self::Busy),
+            "USER_STATUS_INVISIBLE" => Some(Self::Invisible),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserRelationshipStatus {
+    None = 0,
+    /// Self
+    User = 1,
+    Friend = 2,
+    /// Friend request sent
+    Outgoing = 3,
+    /// Friend request received
+    Incoming = 4,
+    /// You blocked them
+    Blocked = 5,
+    /// They blocked you
+    BlockedOther = 6,
+}
+impl UserRelationshipStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::None => "USER_RELATIONSHIP_STATUS_NONE",
+            Self::User => "USER_RELATIONSHIP_STATUS_USER",
+            Self::Friend => "USER_RELATIONSHIP_STATUS_FRIEND",
+            Self::Outgoing => "USER_RELATIONSHIP_STATUS_OUTGOING",
+            Self::Incoming => "USER_RELATIONSHIP_STATUS_INCOMING",
+            Self::Blocked => "USER_RELATIONSHIP_STATUS_BLOCKED",
+            Self::BlockedOther => "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "USER_RELATIONSHIP_STATUS_NONE" => Some(Self::None),
+            "USER_RELATIONSHIP_STATUS_USER" => Some(Self::User),
+            "USER_RELATIONSHIP_STATUS_FRIEND" => Some(Self::Friend),
+            "USER_RELATIONSHIP_STATUS_OUTGOING" => Some(Self::Outgoing),
+            "USER_RELATIONSHIP_STATUS_INCOMING" => Some(Self::Incoming),
+            "USER_RELATIONSHIP_STATUS_BLOCKED" => Some(Self::Blocked),
+            "USER_RELATIONSHIP_STATUS_BLOCKED_OTHER" => Some(Self::BlockedOther),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ApiUser {
+    /// ulid
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    /// 255 char
+    #[prost(string, tag = "3")]
+    pub email: ::prost::alloc::string::String,
+    /// User's relationship with another user (or themselves)
+    /// options: "None" | "User" | "Friend" | "Outgoing" | "Incoming" | "Blocked" | "BlockedOther";
+    #[prost(string, tag = "4")]
+    pub relationship: ::prost::alloc::string::String,
+    /// 64 char
+    #[prost(string, optional, tag = "5")]
+    pub display_name: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(int32, optional, tag = "6")]
+    pub badges: ::core::option::Option<i32>,
+    /// 510 char
+    #[prost(string, optional, tag = "7")]
+    pub status_text: ::core::option::Option<::prost::alloc::string::String>,
+    /// 32 char
+    #[prost(enumeration = "UserStatus", optional, tag = "8")]
+    pub status_presence: ::core::option::Option<i32>,
+    /// text
+    #[prost(string, optional, tag = "9")]
+    pub profile_content: ::core::option::Option<::prost::alloc::string::String>,
+    /// ulid (26 chars) Reference to files collection
+    #[prost(string, optional, tag = "10")]
+    pub profile_background_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(bool, tag = "11")]
+    pub privileged: bool,
+    #[prost(int64, optional, tag = "12")]
+    pub suspended_until: ::core::option::Option<i64>,
+    /// unix timestamp miliseconds
+    #[prost(int64, tag = "13")]
+    pub created_at: i64,
+    /// unix timestamp miliseconds
+    #[prost(int64, tag = "14")]
+    pub updated_at: i64,
+    #[prost(bool, tag = "15")]
+    pub verified: bool,
+    #[prost(message, optional, tag = "16")]
+    pub avatar: ::core::option::Option<super::super::shared::v1::File>,
+    #[prost(message, repeated, tag = "17")]
+    pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
+    #[prost(message, optional, tag = "18")]
+    pub bot: ::core::option::Option<Bot>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersCreateRequest {
+    #[prost(string, tag = "1")]
+    pub email: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub username: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersCreateResponse {
+    #[prost(oneof = "users_create_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_create_response::Response>,
+}
+/// Nested message and enum types in `UsersCreateResponse`.
+pub mod users_create_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersCreateResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersCreateResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersLoginRequest {
+    #[prost(string, tag = "1")]
+    pub email: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub mfa: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub login_challenge: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersLoginResponse {
+    #[prost(oneof = "users_login_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_login_response::Response>,
+}
+/// Nested message and enum types in `UsersLoginResponse`.
+pub mod users_login_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersLoginResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersLoginResponseData {
+    #[prost(string, tag = "1")]
+    pub redirect_to: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersEmailConfirmationRequest {
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersEmailConfirmationResponse {
+    #[prost(oneof = "users_email_confirmation_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_email_confirmation_response::Response>,
+}
+/// Nested message and enum types in `UsersEmailConfirmationResponse`.
+pub mod users_email_confirmation_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersEmailConfirmationResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersEmailConfirmationResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordRequest {
+    #[prost(string, tag = "1")]
+    pub email: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordResponse {
+    #[prost(oneof = "users_forgot_password_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_forgot_password_response::Response>,
+}
+/// Nested message and enum types in `UsersForgotPasswordResponse`.
+pub mod users_forgot_password_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersForgotPasswordResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersForgotPasswordResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersResetPasswordRequest {
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub password_confirmation: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersResetPasswordResponse {
+    #[prost(oneof = "users_reset_password_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<users_reset_password_response::Response>,
+}
+/// Nested message and enum types in `UsersResetPasswordResponse`.
+pub mod users_reset_password_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::UsersResetPasswordResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UsersResetPasswordResponseData {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserFlag {
+    Unspecified = 0,
+    SuspendedUntil = 1,
+    Deleted = 2,
+    Banned = 4,
+    Spam = 8,
+}
+impl UserFlag {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "USER_FLAG_UNSPECIFIED",
+            Self::SuspendedUntil => "USER_FLAG_SUSPENDED_UNTIL",
+            Self::Deleted => "USER_FLAG_DELETED",
+            Self::Banned => "USER_FLAG_BANNED",
+            Self::Spam => "USER_FLAG_SPAM",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "USER_FLAG_UNSPECIFIED" => Some(Self::Unspecified),
+            "USER_FLAG_SUSPENDED_UNTIL" => Some(Self::SuspendedUntil),
+            "USER_FLAG_DELETED" => Some(Self::Deleted),
+            "USER_FLAG_BANNED" => Some(Self::Banned),
+            "USER_FLAG_SPAM" => Some(Self::Spam),
+            _ => None,
+        }
+    }
+}
+/// *  What this message should reply to and how
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReplyIntent {
+    /// * Message Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// * Whether this reply should mention the message's author
+    #[prost(bool, tag = "2")]
+    pub mention: bool,
+    /// * Whether to error if the referenced message doesn't exist.
+    /// Otherwise, send a message without this reply. Default is true.
+    #[prost(bool, tag = "3")]
+    pub fail_if_not_exists: bool,
+}
+/// Options for querying messages
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessagesGetRequest {
+    /// Maximum number of messages to fetch
+    /// For fetching nearby messages, this is `(limit + 2)`
+    #[prost(int64, optional, tag = "1")]
+    pub limit: ::core::option::Option<i64>,
+    /// Message id before which messages should be fetched
+    #[prost(string, optional, tag = "2")]
+    pub before: ::core::option::Option<::prost::alloc::string::String>,
+    /// Message id after which messages should be fetched
+    #[prost(string, optional, tag = "3")]
+    pub after: ::core::option::Option<::prost::alloc::string::String>,
+    /// Message sort direction
+    #[prost(enumeration = "MessageSort", optional, tag = "4")]
+    pub sort: ::core::option::Option<i32>,
+    /// Message id to search around
+    /// Specifying 'nearby' ignores 'before', 'after' and 'sort'.
+    /// It will also take half of limit rounded as the limits to each side.
+    /// It also fetches the message ID specified.
+    #[prost(string, optional, tag = "5")]
+    pub nearby: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessagesGetResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub messages: ::prost::alloc::vec::Vec<Message>,
+    #[prost(message, repeated, tag = "2")]
+    pub users: ::prost::alloc::vec::Vec<ApiUser>,
+    #[prost(message, repeated, tag = "3")]
+    pub members: ::prost::alloc::vec::Vec<ServerMember>,
+}
+/// Message sort direction
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MessageSort {
+    Unspecified = 0,
+    Latest = 1,
+    Oldest = 2,
+    Relevance = 3,
+}
+impl MessageSort {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "MESSAGE_SORT_UNSPECIFIED",
+            Self::Latest => "MESSAGE_SORT_LATEST",
+            Self::Oldest => "MESSAGE_SORT_OLDEST",
+            Self::Relevance => "MESSAGE_SORT_RELEVANCE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MESSAGE_SORT_UNSPECIFIED" => Some(Self::Unspecified),
+            "MESSAGE_SORT_LATEST" => Some(Self::Latest),
+            "MESSAGE_SORT_OLDEST" => Some(Self::Oldest),
+            "MESSAGE_SORT_RELEVANCE" => Some(Self::Relevance),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesRequest {
+    #[prost(string, tag = "1")]
+    pub query: ::prost::alloc::string::String,
+    #[prost(int32, tag = "2")]
+    pub limit: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesResponse {
+    #[prost(oneof = "search_usernames_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<search_usernames_response::Response>,
+}
+/// Nested message and enum types in `SearchUsernamesResponse`.
+pub mod search_usernames_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::SearchUsernamesResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUsernamesResponseData {
+    #[prost(message, repeated, tag = "1")]
+    pub users: ::prost::alloc::vec::Vec<SearchUser>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchUser {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub display_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub avatar: ::prost::alloc::string::String,
+}
+/// Generated client implementations.
+pub mod chaty_service_client {
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    #[derive(Debug, Clone)]
+    pub struct ChatyServiceClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl ChatyServiceClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> ChatyServiceClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::Body>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> ChatyServiceClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::Body>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::Body>,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+        {
+            ChatyServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        pub async fn users_create(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersCreateResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersCreate",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "UsersCreate"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn users_login(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersLoginRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersLoginResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersLogin",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "UsersLogin"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn users_email_confirmation(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersEmailConfirmationRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersEmailConfirmationResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersEmailConfirmation",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("service.v1.ChatyService", "UsersEmailConfirmation"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn users_forgot_password(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersForgotPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersForgotPasswordResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersForgotPassword",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("service.v1.ChatyService", "UsersForgotPassword"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn users_reset_password(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UsersResetPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersResetPasswordResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/UsersResetPassword",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("service.v1.ChatyService", "UsersResetPassword"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn channels_get(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ChannelsGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChannelsGetResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/ChannelsGet",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "ChannelsGet"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn groups_create(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GroupsCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GroupsCreateResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/GroupsCreate",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "GroupsCreate"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn groups_list(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GroupsListRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GroupsListResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/GroupsList",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "GroupsList"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn search_usernames(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchUsernamesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchUsernamesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/SearchUsernames",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "SearchUsernames"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn messages_get(
+            &mut self,
+            request: impl tonic::IntoRequest<super::MessagesGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MessagesGetResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/MessagesGet",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "MessagesGet"));
+            self.inner.unary(req, path, codec).await
+        }
+    }
+}
+/// Generated server implementations.
+pub mod chaty_service_server {
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
+    use tonic::codegen::*;
+    /// Generated trait containing gRPC methods that should be implemented for use with ChatyServiceServer.
+    #[async_trait]
+    pub trait ChatyService: std::marker::Send + std::marker::Sync + 'static {
+        async fn users_create(
+            &self,
+            request: tonic::Request<super::UsersCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersCreateResponse>,
+            tonic::Status,
+        >;
+        async fn users_login(
+            &self,
+            request: tonic::Request<super::UsersLoginRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersLoginResponse>,
+            tonic::Status,
+        >;
+        async fn users_email_confirmation(
+            &self,
+            request: tonic::Request<super::UsersEmailConfirmationRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersEmailConfirmationResponse>,
+            tonic::Status,
+        >;
+        async fn users_forgot_password(
+            &self,
+            request: tonic::Request<super::UsersForgotPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersForgotPasswordResponse>,
+            tonic::Status,
+        >;
+        async fn users_reset_password(
+            &self,
+            request: tonic::Request<super::UsersResetPasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UsersResetPasswordResponse>,
+            tonic::Status,
+        >;
+        async fn channels_get(
+            &self,
+            request: tonic::Request<super::ChannelsGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChannelsGetResponse>,
+            tonic::Status,
+        >;
+        async fn groups_create(
+            &self,
+            request: tonic::Request<super::GroupsCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GroupsCreateResponse>,
+            tonic::Status,
+        >;
+        async fn groups_list(
+            &self,
+            request: tonic::Request<super::GroupsListRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GroupsListResponse>,
+            tonic::Status,
+        >;
+        async fn search_usernames(
+            &self,
+            request: tonic::Request<super::SearchUsernamesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchUsernamesResponse>,
+            tonic::Status,
+        >;
+        async fn messages_get(
+            &self,
+            request: tonic::Request<super::MessagesGetRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::MessagesGetResponse>,
+            tonic::Status,
+        >;
+    }
+    #[derive(Debug)]
+    pub struct ChatyServiceServer<T> {
+        inner: Arc<T>,
+        accept_compression_encodings: EnabledCompressionEncodings,
+        send_compression_encodings: EnabledCompressionEncodings,
+        max_decoding_message_size: Option<usize>,
+        max_encoding_message_size: Option<usize>,
+    }
+    impl<T> ChatyServiceServer<T> {
+        pub fn new(inner: T) -> Self {
+            Self::from_arc(Arc::new(inner))
+        }
+        pub fn from_arc(inner: Arc<T>) -> Self {
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+                max_decoding_message_size: None,
+                max_encoding_message_size: None,
+            }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
+        where
+            F: tonic::service::Interceptor,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
+        }
+        /// Enable decompressing requests with the given encoding.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.accept_compression_encodings.enable(encoding);
+            self
+        }
+        /// Compress responses with the given encoding, if the client supports it.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.send_compression_encodings.enable(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.max_decoding_message_size = Some(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.max_encoding_message_size = Some(limit);
+            self
+        }
+    }
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChatyServiceServer<T>
+    where
+        T: ChatyService,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
+    {
+        type Response = http::Response<tonic::body::Body>;
+        type Error = std::convert::Infallible;
+        type Future = BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<std::result::Result<(), Self::Error>> {
+            Poll::Ready(Ok(()))
+        }
+        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+            match req.uri().path() {
+                "/service.v1.ChatyService/UsersCreate" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersCreateSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersCreateRequest>
+                    for UsersCreateSvc<T> {
+                        type Response = super::UsersCreateResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersCreateRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_create(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersCreateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/UsersLogin" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersLoginSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersLoginRequest>
+                    for UsersLoginSvc<T> {
+                        type Response = super::UsersLoginResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersLoginRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_login(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersLoginSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/UsersEmailConfirmation" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersEmailConfirmationSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersEmailConfirmationRequest>
+                    for UsersEmailConfirmationSvc<T> {
+                        type Response = super::UsersEmailConfirmationResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersEmailConfirmationRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_email_confirmation(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersEmailConfirmationSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/UsersForgotPassword" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersForgotPasswordSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersForgotPasswordRequest>
+                    for UsersForgotPasswordSvc<T> {
+                        type Response = super::UsersForgotPasswordResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersForgotPasswordRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_forgot_password(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersForgotPasswordSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/UsersResetPassword" => {
+                    #[allow(non_camel_case_types)]
+                    struct UsersResetPasswordSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::UsersResetPasswordRequest>
+                    for UsersResetPasswordSvc<T> {
+                        type Response = super::UsersResetPasswordResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UsersResetPasswordRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::users_reset_password(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UsersResetPasswordSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/ChannelsGet" => {
+                    #[allow(non_camel_case_types)]
+                    struct ChannelsGetSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::ChannelsGetRequest>
+                    for ChannelsGetSvc<T> {
+                        type Response = super::ChannelsGetResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ChannelsGetRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::channels_get(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ChannelsGetSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/GroupsCreate" => {
+                    #[allow(non_camel_case_types)]
+                    struct GroupsCreateSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::GroupsCreateRequest>
+                    for GroupsCreateSvc<T> {
+                        type Response = super::GroupsCreateResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GroupsCreateRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::groups_create(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GroupsCreateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/GroupsList" => {
+                    #[allow(non_camel_case_types)]
+                    struct GroupsListSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::GroupsListRequest>
+                    for GroupsListSvc<T> {
+                        type Response = super::GroupsListResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GroupsListRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::groups_list(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GroupsListSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/SearchUsernames" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchUsernamesSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::SearchUsernamesRequest>
+                    for SearchUsernamesSvc<T> {
+                        type Response = super::SearchUsernamesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchUsernamesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::search_usernames(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SearchUsernamesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/MessagesGet" => {
+                    #[allow(non_camel_case_types)]
+                    struct MessagesGetSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::MessagesGetRequest>
+                    for MessagesGetSvc<T> {
+                        type Response = super::MessagesGetResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::MessagesGetRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::messages_get(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = MessagesGetSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                _ => {
+                    Box::pin(async move {
+                        let mut response = http::Response::new(
+                            tonic::body::Body::default(),
+                        );
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
+                    })
+                }
+            }
+        }
+    }
+    impl<T> Clone for ChatyServiceServer<T> {
+        fn clone(&self) -> Self {
+            let inner = self.inner.clone();
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+                max_decoding_message_size: self.max_decoding_message_size,
+                max_encoding_message_size: self.max_encoding_message_size,
+            }
+        }
+    }
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "service.v1.ChatyService";
+    impl<T> tonic::server::NamedService for ChatyServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
+    }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]

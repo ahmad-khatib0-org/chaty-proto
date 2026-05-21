@@ -8,6 +8,7 @@
 import { BinaryReader } from "@bufbuild/protobuf/wire";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups";
+import { MessagesGetRequest, MessagesGetResponse } from "./messages";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search";
 import {
   UsersCreateRequest,
@@ -34,6 +35,7 @@ export interface ChatyService {
   GroupsCreate(request: GroupsCreateRequest): Promise<GroupsCreateResponse>;
   GroupsList(request: GroupsListRequest): Promise<GroupsListResponse>;
   SearchUsernames(request: SearchUsernamesRequest): Promise<SearchUsernamesResponse>;
+  MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse>;
 }
 
 export const ChatyServiceServiceName = "service.v1.ChatyService";
@@ -52,6 +54,7 @@ export class ChatyServiceClientImpl implements ChatyService {
     this.GroupsCreate = this.GroupsCreate.bind(this);
     this.GroupsList = this.GroupsList.bind(this);
     this.SearchUsernames = this.SearchUsernames.bind(this);
+    this.MessagesGet = this.MessagesGet.bind(this);
   }
   UsersCreate(request: UsersCreateRequest): Promise<UsersCreateResponse> {
     const data = UsersCreateRequest.encode(request).finish();
@@ -105,6 +108,12 @@ export class ChatyServiceClientImpl implements ChatyService {
     const data = SearchUsernamesRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "SearchUsernames", data);
     return promise.then((data) => SearchUsernamesResponse.decode(new BinaryReader(data)));
+  }
+
+  MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse> {
+    const data = MessagesGetRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "MessagesGet", data);
+    return promise.then((data) => MessagesGetResponse.decode(new BinaryReader(data)));
   }
 }
 

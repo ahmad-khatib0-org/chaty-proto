@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package service.v1;
 
+import "service/v1/messages_db.proto";
+import "service/v1/server_members_db.proto";
+import "service/v1/users.proto";
+
 /**  What this message should reply to and how */
 message ReplyIntent {
   /** Message Id */
@@ -12,4 +16,40 @@ message ReplyIntent {
      Otherwise, send a message without this reply. Default is true.
   */
   bool fail_if_not_exists = 3;
+}
+
+// Message sort direction
+enum MessageSort {
+  MESSAGE_SORT_UNSPECIFIED = 0;
+  MESSAGE_SORT_LATEST = 1;
+  MESSAGE_SORT_OLDEST = 2;
+  MESSAGE_SORT_RELEVANCE = 3;
+}
+
+// Options for querying messages
+message MessagesGetRequest {
+  // Maximum number of messages to fetch
+  // For fetching nearby messages, this is `(limit + 2)`
+  optional int64 limit = 1;
+
+  // Message id before which messages should be fetched
+  optional string before = 2;
+
+  // Message id after which messages should be fetched
+  optional string after = 3;
+
+  // Message sort direction
+  optional MessageSort sort = 4;
+
+  // Message id to search around
+  // Specifying 'nearby' ignores 'before', 'after' and 'sort'.
+  // It will also take half of limit rounded as the limits to each side.
+  // It also fetches the message ID specified.
+  optional string nearby = 5;
+}
+
+message MessagesGetResponse {
+  repeated service.v1.Message messages = 1;
+  repeated service.v1.APIUser users = 2;
+  repeated service.v1.ServerMember members = 3;
 }
