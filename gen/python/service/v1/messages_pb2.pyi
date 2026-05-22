@@ -1,6 +1,7 @@
 from service.v1 import messages_db_pb2 as _messages_db_pb2
 from service.v1 import server_members_db_pb2 as _server_members_db_pb2
 from service.v1 import users_pb2 as _users_pb2
+from shared.v1 import error_pb2 as _error_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -45,6 +46,14 @@ class MessagesGetRequest(_message.Message):
     def __init__(self, limit: _Optional[int] = ..., before: _Optional[str] = ..., after: _Optional[str] = ..., sort: _Optional[_Union[MessageSort, str]] = ..., nearby: _Optional[str] = ...) -> None: ...
 
 class MessagesGetResponse(_message.Message):
+    __slots__ = ("data", "error")
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    data: MessagesGetResponseData
+    error: _error_pb2.AppError
+    def __init__(self, data: _Optional[_Union[MessagesGetResponseData, _Mapping]] = ..., error: _Optional[_Union[_error_pb2.AppError, _Mapping]] = ...) -> None: ...
+
+class MessagesGetResponseData(_message.Message):
     __slots__ = ("messages", "users", "members")
     MESSAGES_FIELD_NUMBER: _ClassVar[int]
     USERS_FIELD_NUMBER: _ClassVar[int]

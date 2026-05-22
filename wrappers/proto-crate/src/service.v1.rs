@@ -1511,6 +1511,23 @@ pub struct MessagesGetRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessagesGetResponse {
+    #[prost(oneof = "messages_get_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<messages_get_response::Response>,
+}
+/// Nested message and enum types in `MessagesGetResponse`.
+pub mod messages_get_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::MessagesGetResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessagesGetResponseData {
     #[prost(message, repeated, tag = "1")]
     pub messages: ::prost::alloc::vec::Vec<Message>,
     #[prost(message, repeated, tag = "2")]

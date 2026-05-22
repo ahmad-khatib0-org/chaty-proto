@@ -6,6 +6,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { AppError } from "../../shared/v1/error";
 import { Message } from "./messages_db";
 import { ServerMember } from "./server_members_db";
 import { APIUser } from "./users";
@@ -102,6 +103,11 @@ export interface MessagesGetRequest {
 }
 
 export interface MessagesGetResponse {
+  data?: MessagesGetResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface MessagesGetResponseData {
   messages: Message[];
   users: APIUser[];
   members: ServerMember[];
@@ -324,11 +330,91 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
 };
 
 function createBaseMessagesGetResponse(): MessagesGetResponse {
-  return { messages: [], users: [], members: [] };
+  return { data: undefined, error: undefined };
 }
 
 export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
   encode(message: MessagesGetResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      MessagesGetResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessagesGetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessagesGetResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = MessagesGetResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessagesGetResponse {
+    return {
+      data: isSet(object.data) ? MessagesGetResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: MessagesGetResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = MessagesGetResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(base?: I): MessagesGetResponse {
+    return MessagesGetResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(object: I): MessagesGetResponse {
+    const message = createBaseMessagesGetResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? MessagesGetResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseMessagesGetResponseData(): MessagesGetResponseData {
+  return { messages: [], users: [], members: [] };
+}
+
+export const MessagesGetResponseData: MessageFns<MessagesGetResponseData> = {
+  encode(message: MessagesGetResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     for (const v of message.messages) {
       Message.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -341,10 +427,10 @@ export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MessagesGetResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MessagesGetResponseData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMessagesGetResponse();
+    const message = createBaseMessagesGetResponseData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -381,7 +467,7 @@ export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
     return message;
   },
 
-  fromJSON(object: any): MessagesGetResponse {
+  fromJSON(object: any): MessagesGetResponseData {
     return {
       messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Message.fromJSON(e)) : [],
       users: globalThis.Array.isArray(object?.users) ? object.users.map((e: any) => APIUser.fromJSON(e)) : [],
@@ -391,7 +477,7 @@ export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
     };
   },
 
-  toJSON(message: MessagesGetResponse): unknown {
+  toJSON(message: MessagesGetResponseData): unknown {
     const obj: any = {};
     if (message.messages?.length) {
       obj.messages = message.messages.map((e) => Message.toJSON(e));
@@ -405,11 +491,11 @@ export const MessagesGetResponse: MessageFns<MessagesGetResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(base?: I): MessagesGetResponse {
-    return MessagesGetResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<MessagesGetResponseData>, I>>(base?: I): MessagesGetResponseData {
+    return MessagesGetResponseData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MessagesGetResponse>, I>>(object: I): MessagesGetResponse {
-    const message = createBaseMessagesGetResponse();
+  fromPartial<I extends Exact<DeepPartial<MessagesGetResponseData>, I>>(object: I): MessagesGetResponseData {
+    const message = createBaseMessagesGetResponseData();
     message.messages = object.messages?.map((e) => Message.fromPartial(e)) || [];
     message.users = object.users?.map((e) => APIUser.fromPartial(e)) || [];
     message.members = object.members?.map((e) => ServerMember.fromPartial(e)) || [];

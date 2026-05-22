@@ -5,6 +5,7 @@ package service.v1;
 import "service/v1/messages_db.proto";
 import "service/v1/server_members_db.proto";
 import "service/v1/users.proto";
+import "shared/v1/error.proto";
 
 /**  What this message should reply to and how */
 message ReplyIntent {
@@ -49,6 +50,13 @@ message MessagesGetRequest {
 }
 
 message MessagesGetResponse {
+  oneof response {
+    MessagesGetResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message MessagesGetResponseData {
   repeated service.v1.Message messages = 1;
   repeated service.v1.APIUser users = 2;
   repeated service.v1.ServerMember members = 3;

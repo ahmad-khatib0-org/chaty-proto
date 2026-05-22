@@ -10,13 +10,15 @@ import type { ServerMember } from "./server_members_db_pb.js";
 import { file_service_v1_server_members_db } from "./server_members_db_pb.js";
 import type { APIUser } from "./users_pb.js";
 import { file_service_v1_users } from "./users_pb.js";
+import type { AppError } from "../../shared/v1/error_pb.js";
+import { file_shared_v1_error } from "../../shared/v1/error_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIsUBChJNZXNzYWdlc0dldFJlcXVlc3QSEgoFbGltaXQYASABKANIAIgBARITCgZiZWZvcmUYAiABKAlIAYgBARISCgVhZnRlchgDIAEoCUgCiAEBEioKBHNvcnQYBCABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAOIAQESEwoGbmVhcmJ5GAUgASgJSASIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnkiiwEKE01lc3NhZ2VzR2V0UmVzcG9uc2USJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users]);
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIsUBChJNZXNzYWdlc0dldFJlcXVlc3QSEgoFbGltaXQYASABKANIAIgBARITCgZiZWZvcmUYAiABKAlIAYgBARISCgVhZnRlchgDIAEoCUgCiAEBEioKBHNvcnQYBCABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAOIAQESEwoGbmVhcmJ5GAUgASgJSASIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnkifAoTTWVzc2FnZXNHZXRSZXNwb25zZRIzCgRkYXRhGAEgASgLMiMuc2VydmljZS52MS5NZXNzYWdlc0dldFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UijwEKF01lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlcip5CgtNZXNzYWdlU29ydBIcChhNRVNTQUdFX1NPUlRfVU5TUEVDSUZJRUQQABIXChNNRVNTQUdFX1NPUlRfTEFURVNUEAESFwoTTUVTU0FHRV9TT1JUX09MREVTVBACEhoKFk1FU1NBR0VfU09SVF9SRUxFVkFOQ0UQA2IGcHJvdG8z", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
 
 /**
  * *  What this message should reply to and how 
@@ -112,6 +114,35 @@ export const MessagesGetRequestSchema: GenMessage<MessagesGetRequest> = /*@__PUR
  */
 export type MessagesGetResponse = Message<"service.v1.MessagesGetResponse"> & {
   /**
+   * @generated from oneof service.v1.MessagesGetResponse.response
+   */
+  response: {
+    /**
+     * @generated from field: service.v1.MessagesGetResponseData data = 1;
+     */
+    value: MessagesGetResponseData;
+    case: "data";
+  } | {
+    /**
+     * @generated from field: shared.v1.AppError error = 2;
+     */
+    value: AppError;
+    case: "error";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message service.v1.MessagesGetResponse.
+ * Use `create(MessagesGetResponseSchema)` to create a new message.
+ */
+export const MessagesGetResponseSchema: GenMessage<MessagesGetResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 2);
+
+/**
+ * @generated from message service.v1.MessagesGetResponseData
+ */
+export type MessagesGetResponseData = Message<"service.v1.MessagesGetResponseData"> & {
+  /**
    * @generated from field: repeated service.v1.Message messages = 1;
    */
   messages: Message$1[];
@@ -128,11 +159,11 @@ export type MessagesGetResponse = Message<"service.v1.MessagesGetResponse"> & {
 };
 
 /**
- * Describes the message service.v1.MessagesGetResponse.
- * Use `create(MessagesGetResponseSchema)` to create a new message.
+ * Describes the message service.v1.MessagesGetResponseData.
+ * Use `create(MessagesGetResponseDataSchema)` to create a new message.
  */
-export const MessagesGetResponseSchema: GenMessage<MessagesGetResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 2);
+export const MessagesGetResponseDataSchema: GenMessage<MessagesGetResponseData> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 3);
 
 /**
  * Message sort direction
