@@ -1488,24 +1488,26 @@ pub struct ReplyIntent {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessagesGetRequest {
+    #[prost(string, tag = "1")]
+    pub channel_id: ::prost::alloc::string::String,
     /// Maximum number of messages to fetch
     /// For fetching nearby messages, this is `(limit + 2)`
-    #[prost(int64, optional, tag = "1")]
+    #[prost(int64, optional, tag = "2")]
     pub limit: ::core::option::Option<i64>,
     /// Message id before which messages should be fetched
-    #[prost(string, optional, tag = "2")]
+    #[prost(string, optional, tag = "3")]
     pub before: ::core::option::Option<::prost::alloc::string::String>,
     /// Message id after which messages should be fetched
-    #[prost(string, optional, tag = "3")]
+    #[prost(string, optional, tag = "4")]
     pub after: ::core::option::Option<::prost::alloc::string::String>,
     /// Message sort direction
-    #[prost(enumeration = "MessageSort", optional, tag = "4")]
+    #[prost(enumeration = "MessageSort", optional, tag = "5")]
     pub sort: ::core::option::Option<i32>,
     /// Message id to search around
     /// Specifying 'nearby' ignores 'before', 'after' and 'sort'.
     /// It will also take half of limit rounded as the limits to each side.
     /// It also fetches the message ID specified.
-    #[prost(string, optional, tag = "5")]
+    #[prost(string, optional, tag = "6")]
     pub nearby: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]

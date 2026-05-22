@@ -29,24 +29,25 @@ enum MessageSort {
 
 // Options for querying messages
 message MessagesGetRequest {
+  string channel_id = 1;
   // Maximum number of messages to fetch
   // For fetching nearby messages, this is `(limit + 2)`
-  optional int64 limit = 1;
+  optional int64 limit = 2;
 
   // Message id before which messages should be fetched
-  optional string before = 2;
+  optional string before = 3;
 
   // Message id after which messages should be fetched
-  optional string after = 3;
+  optional string after = 4;
 
   // Message sort direction
-  optional MessageSort sort = 4;
+  optional MessageSort sort = 5;
 
   // Message id to search around
   // Specifying 'nearby' ignores 'before', 'after' and 'sort'.
   // It will also take half of limit rounded as the limits to each side.
   // It also fetches the message ID specified.
-  optional string nearby = 5;
+  optional string nearby = 6;
 }
 
 message MessagesGetResponse {

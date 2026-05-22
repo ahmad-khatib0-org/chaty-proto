@@ -18,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIsUBChJNZXNzYWdlc0dldFJlcXVlc3QSEgoFbGltaXQYASABKANIAIgBARITCgZiZWZvcmUYAiABKAlIAYgBARISCgVhZnRlchgDIAEoCUgCiAEBEioKBHNvcnQYBCABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAOIAQESEwoGbmVhcmJ5GAUgASgJSASIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnkifAoTTWVzc2FnZXNHZXRSZXNwb25zZRIzCgRkYXRhGAEgASgLMiMuc2VydmljZS52MS5NZXNzYWdlc0dldFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UijwEKF01lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlcip5CgtNZXNzYWdlU29ydBIcChhNRVNTQUdFX1NPUlRfVU5TUEVDSUZJRUQQABIXChNNRVNTQUdFX1NPUlRfTEFURVNUEAESFwoTTUVTU0FHRV9TT1JUX09MREVTVBACEhoKFk1FU1NBR0VfU09SVF9SRUxFVkFOQ0UQA2IGcHJvdG8z", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIItkBChJNZXNzYWdlc0dldFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRISCgVsaW1pdBgCIAEoA0gAiAEBEhMKBmJlZm9yZRgDIAEoCUgBiAEBEhIKBWFmdGVyGAQgASgJSAKIAQESKgoEc29ydBgFIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIA4gBARITCgZuZWFyYnkYBiABKAlIBIgBAUIICgZfbGltaXRCCQoHX2JlZm9yZUIICgZfYWZ0ZXJCBwoFX3NvcnRCCQoHX25lYXJieSJ8ChNNZXNzYWdlc0dldFJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKPAQoXTWVzc2FnZXNHZXRSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
 
 /**
  * *  What this message should reply to and how 
@@ -63,31 +63,36 @@ export const ReplyIntentSchema: GenMessage<ReplyIntent> = /*@__PURE__*/
  */
 export type MessagesGetRequest = Message<"service.v1.MessagesGetRequest"> & {
   /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
    * Maximum number of messages to fetch
    * For fetching nearby messages, this is `(limit + 2)`
    *
-   * @generated from field: optional int64 limit = 1;
+   * @generated from field: optional int64 limit = 2;
    */
   limit?: bigint;
 
   /**
    * Message id before which messages should be fetched
    *
-   * @generated from field: optional string before = 2;
+   * @generated from field: optional string before = 3;
    */
   before?: string;
 
   /**
    * Message id after which messages should be fetched
    *
-   * @generated from field: optional string after = 3;
+   * @generated from field: optional string after = 4;
    */
   after?: string;
 
   /**
    * Message sort direction
    *
-   * @generated from field: optional service.v1.MessageSort sort = 4;
+   * @generated from field: optional service.v1.MessageSort sort = 5;
    */
   sort?: MessageSort;
 
@@ -97,7 +102,7 @@ export type MessagesGetRequest = Message<"service.v1.MessagesGetRequest"> & {
    * It will also take half of limit rounded as the limits to each side.
    * It also fetches the message ID specified.
    *
-   * @generated from field: optional string nearby = 5;
+   * @generated from field: optional string nearby = 6;
    */
   nearby?: string;
 };

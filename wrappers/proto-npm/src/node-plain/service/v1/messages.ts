@@ -74,6 +74,7 @@ export interface ReplyIntent {
 
 /** Options for querying messages */
 export interface MessagesGetRequest {
+  channelId: string;
   /**
    * Maximum number of messages to fetch
    * For fetching nearby messages, this is `(limit + 2)`
@@ -206,25 +207,28 @@ export const ReplyIntent: MessageFns<ReplyIntent> = {
 };
 
 function createBaseMessagesGetRequest(): MessagesGetRequest {
-  return { limit: undefined, before: undefined, after: undefined, sort: undefined, nearby: undefined };
+  return { channelId: "", limit: undefined, before: undefined, after: undefined, sort: undefined, nearby: undefined };
 }
 
 export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
   encode(message: MessagesGetRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.channelId !== "") {
+      writer.uint32(10).string(message.channelId);
+    }
     if (message.limit !== undefined) {
-      writer.uint32(8).int64(message.limit);
+      writer.uint32(16).int64(message.limit);
     }
     if (message.before !== undefined) {
-      writer.uint32(18).string(message.before);
+      writer.uint32(26).string(message.before);
     }
     if (message.after !== undefined) {
-      writer.uint32(26).string(message.after);
+      writer.uint32(34).string(message.after);
     }
     if (message.sort !== undefined) {
-      writer.uint32(32).int32(message.sort);
+      writer.uint32(40).int32(message.sort);
     }
     if (message.nearby !== undefined) {
-      writer.uint32(42).string(message.nearby);
+      writer.uint32(50).string(message.nearby);
     }
     return writer;
   },
@@ -237,19 +241,19 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channelId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
             break;
           }
 
           message.limit = longToNumber(reader.int64());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.before = reader.string();
           continue;
         }
         case 3: {
@@ -257,19 +261,27 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
             break;
           }
 
-          message.after = reader.string();
+          message.before = reader.string();
           continue;
         }
         case 4: {
-          if (tag !== 32) {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.after = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
             break;
           }
 
           message.sort = reader.int32() as any;
           continue;
         }
-        case 5: {
-          if (tag !== 42) {
+        case 6: {
+          if (tag !== 50) {
             break;
           }
 
@@ -287,6 +299,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
 
   fromJSON(object: any): MessagesGetRequest {
     return {
+      channelId: isSet(object.channelId) ? globalThis.String(object.channelId) : "",
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : undefined,
       before: isSet(object.before) ? globalThis.String(object.before) : undefined,
       after: isSet(object.after) ? globalThis.String(object.after) : undefined,
@@ -297,6 +310,9 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
 
   toJSON(message: MessagesGetRequest): unknown {
     const obj: any = {};
+    if (message.channelId !== "") {
+      obj.channelId = message.channelId;
+    }
     if (message.limit !== undefined) {
       obj.limit = Math.round(message.limit);
     }
@@ -320,6 +336,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
   },
   fromPartial<I extends Exact<DeepPartial<MessagesGetRequest>, I>>(object: I): MessagesGetRequest {
     const message = createBaseMessagesGetRequest();
+    message.channelId = object.channelId ?? "";
     message.limit = object.limit ?? undefined;
     message.before = object.before ?? undefined;
     message.after = object.after ?? undefined;
