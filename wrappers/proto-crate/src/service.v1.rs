@@ -635,9 +635,9 @@ pub struct EmbedImage {
     /// Height of the image
     #[prost(int32, tag = "3")]
     pub height: i32,
-    /// Positioning and size
-    #[prost(enumeration = "ImageSize", tag = "4")]
-    pub size: i32,
+    /// Positioning and size (large or preview)
+    #[prost(string, tag = "4")]
+    pub size: ::prost::alloc::string::String,
 }
 /// Video
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -653,6 +653,36 @@ pub struct EmbedVideo {
     /// Height of the video
     #[prost(int32, tag = "3")]
     pub height: i32,
+}
+/// Type of remote Twitch content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TwitchType {
+    #[prost(string, optional, tag = "1")]
+    pub channel: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "2")]
+    pub video: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "3")]
+    pub clip: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Type of remote Lightspeed.tv content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LightspeedType {
+    #[prost(string, optional, tag = "1")]
+    pub channel: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Type of remote Bandcamp content
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BandcampType {
+    #[prost(string, optional, tag = "1")]
+    pub album: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "2")]
+    pub track: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Information about special remote content
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -705,8 +735,8 @@ pub struct EmbedYouTube {
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedLightspeed {
-    #[prost(enumeration = "LightspeedType", tag = "1")]
-    pub content_type: i32,
+    #[prost(message, optional, tag = "1")]
+    pub content_type: ::core::option::Option<LightspeedType>,
     #[prost(string, tag = "2")]
     pub id: ::prost::alloc::string::String,
 }
@@ -715,8 +745,8 @@ pub struct EmbedLightspeed {
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTwitch {
-    #[prost(enumeration = "TwitchType", tag = "1")]
-    pub content_type: i32,
+    #[prost(message, optional, tag = "1")]
+    pub content_type: ::core::option::Option<TwitchType>,
     #[prost(string, tag = "2")]
     pub id: ::prost::alloc::string::String,
 }
@@ -736,8 +766,8 @@ pub struct EmbedSpotify {
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedBandcamp {
-    #[prost(enumeration = "BandcampType", tag = "1")]
-    pub content_type: i32,
+    #[prost(message, optional, tag = "1")]
+    pub content_type: ::core::option::Option<BandcampType>,
     #[prost(string, tag = "2")]
     pub id: ::prost::alloc::string::String,
 }
@@ -871,12 +901,7 @@ pub struct Masquerade {
 /// MAIN MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(
-    scylla::SerializeValue,
-    scylla::DeserializeValue,
-    scylla::DeserializeValue,
-    scylla::DeserializeRow
-)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
     /// Unique Id
@@ -938,120 +963,6 @@ pub struct Message {
     pub edited_at: ::core::option::Option<i64>,
     #[prost(int64, tag = "19")]
     pub created_at: i64,
-}
-/// Image positioning and size
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum ImageSize {
-    /// Show large preview at the bottom of the embed
-    Large = 0,
-    /// Show small preview to the side of the embed
-    Preview = 1,
-}
-impl ImageSize {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Large => "LARGE",
-            Self::Preview => "PREVIEW",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "LARGE" => Some(Self::Large),
-            "PREVIEW" => Some(Self::Preview),
-            _ => None,
-        }
-    }
-}
-/// Type of remote Twitch content
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum TwitchType {
-    TwitchChannel = 0,
-    TwitchVideo = 1,
-    TwitchClip = 2,
-}
-impl TwitchType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::TwitchChannel => "TWITCH_CHANNEL",
-            Self::TwitchVideo => "TWITCH_VIDEO",
-            Self::TwitchClip => "TWITCH_CLIP",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "TWITCH_CHANNEL" => Some(Self::TwitchChannel),
-            "TWITCH_VIDEO" => Some(Self::TwitchVideo),
-            "TWITCH_CLIP" => Some(Self::TwitchClip),
-            _ => None,
-        }
-    }
-}
-/// Type of remote Lightspeed.tv content
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum LightspeedType {
-    LightspeedChannel = 0,
-}
-impl LightspeedType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::LightspeedChannel => "LIGHTSPEED_CHANNEL",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "LIGHTSPEED_CHANNEL" => Some(Self::LightspeedChannel),
-            _ => None,
-        }
-    }
-}
-/// Type of remote Bandcamp content
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum BandcampType {
-    BandcampAlbum = 0,
-    BandcampTrack = 1,
-}
-impl BandcampType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::BandcampAlbum => "BANDCAMP_ALBUM",
-            Self::BandcampTrack => "BANDCAMP_TRACK",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "BANDCAMP_ALBUM" => Some(Self::BandcampAlbum),
-            "BANDCAMP_TRACK" => Some(Self::BandcampTrack),
-            _ => None,
-        }
-    }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]

@@ -2,40 +2,11 @@ from shared.v1 import files_pb2 as _files_pb2
 from shared.v1 import types_pb2 as _types_pb2
 from shared.v1 import wrappers_pb2 as _wrappers_pb2
 from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
-
-class ImageSize(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    LARGE: _ClassVar[ImageSize]
-    PREVIEW: _ClassVar[ImageSize]
-
-class TwitchType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    TWITCH_CHANNEL: _ClassVar[TwitchType]
-    TWITCH_VIDEO: _ClassVar[TwitchType]
-    TWITCH_CLIP: _ClassVar[TwitchType]
-
-class LightspeedType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    LIGHTSPEED_CHANNEL: _ClassVar[LightspeedType]
-
-class BandcampType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    BANDCAMP_ALBUM: _ClassVar[BandcampType]
-    BANDCAMP_TRACK: _ClassVar[BandcampType]
-LARGE: ImageSize
-PREVIEW: ImageSize
-TWITCH_CHANNEL: TwitchType
-TWITCH_VIDEO: TwitchType
-TWITCH_CLIP: TwitchType
-LIGHTSPEED_CHANNEL: LightspeedType
-BANDCAMP_ALBUM: BandcampType
-BANDCAMP_TRACK: BandcampType
 
 class MessageWebhook(_message.Message):
     __slots__ = ("name", "avatar", "icon")
@@ -185,8 +156,8 @@ class EmbedImage(_message.Message):
     url: str
     width: int
     height: int
-    size: ImageSize
-    def __init__(self, url: _Optional[str] = ..., width: _Optional[int] = ..., height: _Optional[int] = ..., size: _Optional[_Union[ImageSize, str]] = ...) -> None: ...
+    size: str
+    def __init__(self, url: _Optional[str] = ..., width: _Optional[int] = ..., height: _Optional[int] = ..., size: _Optional[str] = ...) -> None: ...
 
 class EmbedVideo(_message.Message):
     __slots__ = ("url", "width", "height")
@@ -197,6 +168,30 @@ class EmbedVideo(_message.Message):
     width: int
     height: int
     def __init__(self, url: _Optional[str] = ..., width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
+
+class TwitchType(_message.Message):
+    __slots__ = ("channel", "video", "clip")
+    CHANNEL_FIELD_NUMBER: _ClassVar[int]
+    VIDEO_FIELD_NUMBER: _ClassVar[int]
+    CLIP_FIELD_NUMBER: _ClassVar[int]
+    channel: str
+    video: str
+    clip: str
+    def __init__(self, channel: _Optional[str] = ..., video: _Optional[str] = ..., clip: _Optional[str] = ...) -> None: ...
+
+class LightspeedType(_message.Message):
+    __slots__ = ("channel",)
+    CHANNEL_FIELD_NUMBER: _ClassVar[int]
+    channel: str
+    def __init__(self, channel: _Optional[str] = ...) -> None: ...
+
+class BandcampType(_message.Message):
+    __slots__ = ("album", "track")
+    ALBUM_FIELD_NUMBER: _ClassVar[int]
+    TRACK_FIELD_NUMBER: _ClassVar[int]
+    album: str
+    track: str
+    def __init__(self, album: _Optional[str] = ..., track: _Optional[str] = ...) -> None: ...
 
 class EmbedWebsiteMetadataSpecial(_message.Message):
     __slots__ = ("none", "gif", "youtube", "lightspeed", "twitch", "spotify", "soundcloud", "bandcamp", "apple_music", "streamable")
@@ -236,7 +231,7 @@ class EmbedLightspeed(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     content_type: LightspeedType
     id: str
-    def __init__(self, content_type: _Optional[_Union[LightspeedType, str]] = ..., id: _Optional[str] = ...) -> None: ...
+    def __init__(self, content_type: _Optional[_Union[LightspeedType, _Mapping]] = ..., id: _Optional[str] = ...) -> None: ...
 
 class EmbedTwitch(_message.Message):
     __slots__ = ("content_type", "id")
@@ -244,7 +239,7 @@ class EmbedTwitch(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     content_type: TwitchType
     id: str
-    def __init__(self, content_type: _Optional[_Union[TwitchType, str]] = ..., id: _Optional[str] = ...) -> None: ...
+    def __init__(self, content_type: _Optional[_Union[TwitchType, _Mapping]] = ..., id: _Optional[str] = ...) -> None: ...
 
 class EmbedSpotify(_message.Message):
     __slots__ = ("content_type", "id")
@@ -260,7 +255,7 @@ class EmbedBandcamp(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     content_type: BandcampType
     id: str
-    def __init__(self, content_type: _Optional[_Union[BandcampType, str]] = ..., id: _Optional[str] = ...) -> None: ...
+    def __init__(self, content_type: _Optional[_Union[BandcampType, _Mapping]] = ..., id: _Optional[str] = ...) -> None: ...
 
 class EmbedAppleMusic(_message.Message):
     __slots__ = ("album_id", "track_id")

@@ -108,15 +108,6 @@ message MessageSystemCallStarted {
 // EMBED SUPPORT TYPES
 // ===========================================
 
-// Image positioning and size
-enum ImageSize {
-  // Show large preview at the bottom of the embed
-  LARGE = 0;
-
-  // Show small preview to the side of the embed
-  PREVIEW = 1;
-}
-
 // Image
 message EmbedImage {
   // URL to the original image
@@ -128,8 +119,8 @@ message EmbedImage {
   // Height of the image
   int32 height = 3;
 
-  // Positioning and size
-  ImageSize size = 4;
+  // Positioning and size (large or preview)
+  string size = 4;
 }
 
 // Video
@@ -145,21 +136,21 @@ message EmbedVideo {
 }
 
 // Type of remote Twitch content
-enum TwitchType {
-  TWITCH_CHANNEL = 0;
-  TWITCH_VIDEO = 1;
-  TWITCH_CLIP = 2;
+message TwitchType {
+  optional string channel = 1;
+  optional string video = 2;
+  optional string clip = 3;
 }
 
 // Type of remote Lightspeed.tv content
-enum LightspeedType {
-  LIGHTSPEED_CHANNEL = 0;
+message LightspeedType {
+  optional string channel = 1;
 }
 
 // Type of remote Bandcamp content
-enum BandcampType {
-  BANDCAMP_ALBUM = 0;
-  BANDCAMP_TRACK = 1;
+message BandcampType {
+  optional string album = 1;
+  optional string track = 2;
 }
 
 // Information about special remote content

@@ -12,144 +12,6 @@ import { Empty } from "../../shared/v1/wrappers";
 
 export const protobufPackage = "service.v1";
 
-/** Image positioning and size */
-export enum ImageSize {
-  /** LARGE - Show large preview at the bottom of the embed */
-  LARGE = 0,
-  /** PREVIEW - Show small preview to the side of the embed */
-  PREVIEW = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function imageSizeFromJSON(object: any): ImageSize {
-  switch (object) {
-    case 0:
-    case "LARGE":
-      return ImageSize.LARGE;
-    case 1:
-    case "PREVIEW":
-      return ImageSize.PREVIEW;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ImageSize.UNRECOGNIZED;
-  }
-}
-
-export function imageSizeToJSON(object: ImageSize): string {
-  switch (object) {
-    case ImageSize.LARGE:
-      return "LARGE";
-    case ImageSize.PREVIEW:
-      return "PREVIEW";
-    case ImageSize.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-/** Type of remote Twitch content */
-export enum TwitchType {
-  TWITCH_CHANNEL = 0,
-  TWITCH_VIDEO = 1,
-  TWITCH_CLIP = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function twitchTypeFromJSON(object: any): TwitchType {
-  switch (object) {
-    case 0:
-    case "TWITCH_CHANNEL":
-      return TwitchType.TWITCH_CHANNEL;
-    case 1:
-    case "TWITCH_VIDEO":
-      return TwitchType.TWITCH_VIDEO;
-    case 2:
-    case "TWITCH_CLIP":
-      return TwitchType.TWITCH_CLIP;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return TwitchType.UNRECOGNIZED;
-  }
-}
-
-export function twitchTypeToJSON(object: TwitchType): string {
-  switch (object) {
-    case TwitchType.TWITCH_CHANNEL:
-      return "TWITCH_CHANNEL";
-    case TwitchType.TWITCH_VIDEO:
-      return "TWITCH_VIDEO";
-    case TwitchType.TWITCH_CLIP:
-      return "TWITCH_CLIP";
-    case TwitchType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-/** Type of remote Lightspeed.tv content */
-export enum LightspeedType {
-  LIGHTSPEED_CHANNEL = 0,
-  UNRECOGNIZED = -1,
-}
-
-export function lightspeedTypeFromJSON(object: any): LightspeedType {
-  switch (object) {
-    case 0:
-    case "LIGHTSPEED_CHANNEL":
-      return LightspeedType.LIGHTSPEED_CHANNEL;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LightspeedType.UNRECOGNIZED;
-  }
-}
-
-export function lightspeedTypeToJSON(object: LightspeedType): string {
-  switch (object) {
-    case LightspeedType.LIGHTSPEED_CHANNEL:
-      return "LIGHTSPEED_CHANNEL";
-    case LightspeedType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-/** Type of remote Bandcamp content */
-export enum BandcampType {
-  BANDCAMP_ALBUM = 0,
-  BANDCAMP_TRACK = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function bandcampTypeFromJSON(object: any): BandcampType {
-  switch (object) {
-    case 0:
-    case "BANDCAMP_ALBUM":
-      return BandcampType.BANDCAMP_ALBUM;
-    case 1:
-    case "BANDCAMP_TRACK":
-      return BandcampType.BANDCAMP_TRACK;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return BandcampType.UNRECOGNIZED;
-  }
-}
-
-export function bandcampTypeToJSON(object: BandcampType): string {
-  switch (object) {
-    case BandcampType.BANDCAMP_ALBUM:
-      return "BANDCAMP_ALBUM";
-    case BandcampType.BANDCAMP_TRACK:
-      return "BANDCAMP_TRACK";
-    case BandcampType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
 /**
  * ===========================================
  * MESSAGE WEBHOOK
@@ -256,8 +118,8 @@ export interface EmbedImage {
   width: number;
   /** Height of the image */
   height: number;
-  /** Positioning and size */
-  size: ImageSize;
+  /** Positioning and size (large or preview) */
+  size: string;
 }
 
 /** Video */
@@ -268,6 +130,24 @@ export interface EmbedVideo {
   width: number;
   /** Height of the video */
   height: number;
+}
+
+/** Type of remote Twitch content */
+export interface TwitchType {
+  channel?: string | undefined;
+  video?: string | undefined;
+  clip?: string | undefined;
+}
+
+/** Type of remote Lightspeed.tv content */
+export interface LightspeedType {
+  channel?: string | undefined;
+}
+
+/** Type of remote Bandcamp content */
+export interface BandcampType {
+  album?: string | undefined;
+  track?: string | undefined;
 }
 
 /** Information about special remote content */
@@ -320,13 +200,13 @@ export interface EmbedYouTube {
 
 /** Lightspeed.tv stream */
 export interface EmbedLightspeed {
-  contentType: LightspeedType;
+  contentType?: LightspeedType | undefined;
   id: string;
 }
 
 /** Twitch stream or clip */
 export interface EmbedTwitch {
-  contentType: TwitchType;
+  contentType?: TwitchType | undefined;
   id: string;
 }
 
@@ -339,7 +219,7 @@ export interface EmbedSpotify {
 
 /** Bandcamp track */
 export interface EmbedBandcamp {
-  contentType: BandcampType;
+  contentType?: BandcampType | undefined;
   id: string;
 }
 
@@ -1894,7 +1774,7 @@ export const MessageSystemCallStarted: MessageFns<MessageSystemCallStarted> = {
 };
 
 function createBaseEmbedImage(): EmbedImage {
-  return { url: "", width: 0, height: 0, size: 0 };
+  return { url: "", width: 0, height: 0, size: "" };
 }
 
 export const EmbedImage: MessageFns<EmbedImage> = {
@@ -1908,8 +1788,8 @@ export const EmbedImage: MessageFns<EmbedImage> = {
     if (message.height !== 0) {
       writer.uint32(24).int32(message.height);
     }
-    if (message.size !== 0) {
-      writer.uint32(32).int32(message.size);
+    if (message.size !== "") {
+      writer.uint32(34).string(message.size);
     }
     return writer;
   },
@@ -1946,11 +1826,11 @@ export const EmbedImage: MessageFns<EmbedImage> = {
           continue;
         }
         case 4: {
-          if (tag !== 32) {
+          if (tag !== 34) {
             break;
           }
 
-          message.size = reader.int32() as any;
+          message.size = reader.string();
           continue;
         }
       }
@@ -1967,7 +1847,7 @@ export const EmbedImage: MessageFns<EmbedImage> = {
       url: isSet(object.url) ? globalThis.String(object.url) : "",
       width: isSet(object.width) ? globalThis.Number(object.width) : 0,
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
-      size: isSet(object.size) ? imageSizeFromJSON(object.size) : 0,
+      size: isSet(object.size) ? globalThis.String(object.size) : "",
     };
   },
 
@@ -1982,8 +1862,8 @@ export const EmbedImage: MessageFns<EmbedImage> = {
     if (message.height !== 0) {
       obj.height = Math.round(message.height);
     }
-    if (message.size !== 0) {
-      obj.size = imageSizeToJSON(message.size);
+    if (message.size !== "") {
+      obj.size = message.size;
     }
     return obj;
   },
@@ -1996,7 +1876,7 @@ export const EmbedImage: MessageFns<EmbedImage> = {
     message.url = object.url ?? "";
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
-    message.size = object.size ?? 0;
+    message.size = object.size ?? "";
     return message;
   },
 };
@@ -2089,6 +1969,232 @@ export const EmbedVideo: MessageFns<EmbedVideo> = {
     message.url = object.url ?? "";
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
+    return message;
+  },
+};
+
+function createBaseTwitchType(): TwitchType {
+  return { channel: undefined, video: undefined, clip: undefined };
+}
+
+export const TwitchType: MessageFns<TwitchType> = {
+  encode(message: TwitchType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.channel !== undefined) {
+      writer.uint32(10).string(message.channel);
+    }
+    if (message.video !== undefined) {
+      writer.uint32(18).string(message.video);
+    }
+    if (message.clip !== undefined) {
+      writer.uint32(26).string(message.clip);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TwitchType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTwitchType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channel = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.video = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.clip = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TwitchType {
+    return {
+      channel: isSet(object.channel) ? globalThis.String(object.channel) : undefined,
+      video: isSet(object.video) ? globalThis.String(object.video) : undefined,
+      clip: isSet(object.clip) ? globalThis.String(object.clip) : undefined,
+    };
+  },
+
+  toJSON(message: TwitchType): unknown {
+    const obj: any = {};
+    if (message.channel !== undefined) {
+      obj.channel = message.channel;
+    }
+    if (message.video !== undefined) {
+      obj.video = message.video;
+    }
+    if (message.clip !== undefined) {
+      obj.clip = message.clip;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TwitchType>, I>>(base?: I): TwitchType {
+    return TwitchType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TwitchType>, I>>(object: I): TwitchType {
+    const message = createBaseTwitchType();
+    message.channel = object.channel ?? undefined;
+    message.video = object.video ?? undefined;
+    message.clip = object.clip ?? undefined;
+    return message;
+  },
+};
+
+function createBaseLightspeedType(): LightspeedType {
+  return { channel: undefined };
+}
+
+export const LightspeedType: MessageFns<LightspeedType> = {
+  encode(message: LightspeedType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.channel !== undefined) {
+      writer.uint32(10).string(message.channel);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): LightspeedType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLightspeedType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channel = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): LightspeedType {
+    return { channel: isSet(object.channel) ? globalThis.String(object.channel) : undefined };
+  },
+
+  toJSON(message: LightspeedType): unknown {
+    const obj: any = {};
+    if (message.channel !== undefined) {
+      obj.channel = message.channel;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<LightspeedType>, I>>(base?: I): LightspeedType {
+    return LightspeedType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<LightspeedType>, I>>(object: I): LightspeedType {
+    const message = createBaseLightspeedType();
+    message.channel = object.channel ?? undefined;
+    return message;
+  },
+};
+
+function createBaseBandcampType(): BandcampType {
+  return { album: undefined, track: undefined };
+}
+
+export const BandcampType: MessageFns<BandcampType> = {
+  encode(message: BandcampType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.album !== undefined) {
+      writer.uint32(10).string(message.album);
+    }
+    if (message.track !== undefined) {
+      writer.uint32(18).string(message.track);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): BandcampType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBandcampType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.album = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.track = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BandcampType {
+    return {
+      album: isSet(object.album) ? globalThis.String(object.album) : undefined,
+      track: isSet(object.track) ? globalThis.String(object.track) : undefined,
+    };
+  },
+
+  toJSON(message: BandcampType): unknown {
+    const obj: any = {};
+    if (message.album !== undefined) {
+      obj.album = message.album;
+    }
+    if (message.track !== undefined) {
+      obj.track = message.track;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BandcampType>, I>>(base?: I): BandcampType {
+    return BandcampType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BandcampType>, I>>(object: I): BandcampType {
+    const message = createBaseBandcampType();
+    message.album = object.album ?? undefined;
+    message.track = object.track ?? undefined;
     return message;
   },
 };
@@ -2401,13 +2507,13 @@ export const EmbedYouTube: MessageFns<EmbedYouTube> = {
 };
 
 function createBaseEmbedLightspeed(): EmbedLightspeed {
-  return { contentType: 0, id: "" };
+  return { contentType: undefined, id: "" };
 }
 
 export const EmbedLightspeed: MessageFns<EmbedLightspeed> = {
   encode(message: EmbedLightspeed, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.contentType !== 0) {
-      writer.uint32(8).int32(message.contentType);
+    if (message.contentType !== undefined) {
+      LightspeedType.encode(message.contentType, writer.uint32(10).fork()).join();
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -2423,11 +2529,11 @@ export const EmbedLightspeed: MessageFns<EmbedLightspeed> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.contentType = reader.int32() as any;
+          message.contentType = LightspeedType.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -2449,15 +2555,15 @@ export const EmbedLightspeed: MessageFns<EmbedLightspeed> = {
 
   fromJSON(object: any): EmbedLightspeed {
     return {
-      contentType: isSet(object.contentType) ? lightspeedTypeFromJSON(object.contentType) : 0,
+      contentType: isSet(object.contentType) ? LightspeedType.fromJSON(object.contentType) : undefined,
       id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: EmbedLightspeed): unknown {
     const obj: any = {};
-    if (message.contentType !== 0) {
-      obj.contentType = lightspeedTypeToJSON(message.contentType);
+    if (message.contentType !== undefined) {
+      obj.contentType = LightspeedType.toJSON(message.contentType);
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -2470,20 +2576,22 @@ export const EmbedLightspeed: MessageFns<EmbedLightspeed> = {
   },
   fromPartial<I extends Exact<DeepPartial<EmbedLightspeed>, I>>(object: I): EmbedLightspeed {
     const message = createBaseEmbedLightspeed();
-    message.contentType = object.contentType ?? 0;
+    message.contentType = (object.contentType !== undefined && object.contentType !== null)
+      ? LightspeedType.fromPartial(object.contentType)
+      : undefined;
     message.id = object.id ?? "";
     return message;
   },
 };
 
 function createBaseEmbedTwitch(): EmbedTwitch {
-  return { contentType: 0, id: "" };
+  return { contentType: undefined, id: "" };
 }
 
 export const EmbedTwitch: MessageFns<EmbedTwitch> = {
   encode(message: EmbedTwitch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.contentType !== 0) {
-      writer.uint32(8).int32(message.contentType);
+    if (message.contentType !== undefined) {
+      TwitchType.encode(message.contentType, writer.uint32(10).fork()).join();
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -2499,11 +2607,11 @@ export const EmbedTwitch: MessageFns<EmbedTwitch> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.contentType = reader.int32() as any;
+          message.contentType = TwitchType.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -2525,15 +2633,15 @@ export const EmbedTwitch: MessageFns<EmbedTwitch> = {
 
   fromJSON(object: any): EmbedTwitch {
     return {
-      contentType: isSet(object.contentType) ? twitchTypeFromJSON(object.contentType) : 0,
+      contentType: isSet(object.contentType) ? TwitchType.fromJSON(object.contentType) : undefined,
       id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: EmbedTwitch): unknown {
     const obj: any = {};
-    if (message.contentType !== 0) {
-      obj.contentType = twitchTypeToJSON(message.contentType);
+    if (message.contentType !== undefined) {
+      obj.contentType = TwitchType.toJSON(message.contentType);
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -2546,7 +2654,9 @@ export const EmbedTwitch: MessageFns<EmbedTwitch> = {
   },
   fromPartial<I extends Exact<DeepPartial<EmbedTwitch>, I>>(object: I): EmbedTwitch {
     const message = createBaseEmbedTwitch();
-    message.contentType = object.contentType ?? 0;
+    message.contentType = (object.contentType !== undefined && object.contentType !== null)
+      ? TwitchType.fromPartial(object.contentType)
+      : undefined;
     message.id = object.id ?? "";
     return message;
   },
@@ -2629,13 +2739,13 @@ export const EmbedSpotify: MessageFns<EmbedSpotify> = {
 };
 
 function createBaseEmbedBandcamp(): EmbedBandcamp {
-  return { contentType: 0, id: "" };
+  return { contentType: undefined, id: "" };
 }
 
 export const EmbedBandcamp: MessageFns<EmbedBandcamp> = {
   encode(message: EmbedBandcamp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.contentType !== 0) {
-      writer.uint32(8).int32(message.contentType);
+    if (message.contentType !== undefined) {
+      BandcampType.encode(message.contentType, writer.uint32(10).fork()).join();
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -2651,11 +2761,11 @@ export const EmbedBandcamp: MessageFns<EmbedBandcamp> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.contentType = reader.int32() as any;
+          message.contentType = BandcampType.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -2677,15 +2787,15 @@ export const EmbedBandcamp: MessageFns<EmbedBandcamp> = {
 
   fromJSON(object: any): EmbedBandcamp {
     return {
-      contentType: isSet(object.contentType) ? bandcampTypeFromJSON(object.contentType) : 0,
+      contentType: isSet(object.contentType) ? BandcampType.fromJSON(object.contentType) : undefined,
       id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: EmbedBandcamp): unknown {
     const obj: any = {};
-    if (message.contentType !== 0) {
-      obj.contentType = bandcampTypeToJSON(message.contentType);
+    if (message.contentType !== undefined) {
+      obj.contentType = BandcampType.toJSON(message.contentType);
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -2698,7 +2808,9 @@ export const EmbedBandcamp: MessageFns<EmbedBandcamp> = {
   },
   fromPartial<I extends Exact<DeepPartial<EmbedBandcamp>, I>>(object: I): EmbedBandcamp {
     const message = createBaseEmbedBandcamp();
-    message.contentType = object.contentType ?? 0;
+    message.contentType = (object.contentType !== undefined && object.contentType !== null)
+      ? BandcampType.fromPartial(object.contentType)
+      : undefined;
     message.id = object.id ?? "";
     return message;
   },

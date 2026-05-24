@@ -101,6 +101,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "service.v1.TwitchType",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.LightspeedType",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
+      "service.v1.BandcampType",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+    )
+    .type_attribute(
       "service.v1.EmbedImage",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
@@ -162,7 +174,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.Message",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "shared.v1.Timestamp",

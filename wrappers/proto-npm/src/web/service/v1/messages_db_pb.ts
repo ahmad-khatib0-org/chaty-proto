@@ -2,8 +2,8 @@
 // @generated from file service/v1/messages_db.proto (package service.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { File } from "../../shared/v1/files_pb.js";
 import { file_shared_v1_files } from "../../shared/v1/files_pb.js";
 import type { StringArray } from "../../shared/v1/types_pb.js";
@@ -16,7 +16,7 @@ import type { Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages_db.proto.
  */
 export const file_service_v1_messages_db: GenFile = /*@__PURE__*/
-  fileDesc("ChxzZXJ2aWNlL3YxL21lc3NhZ2VzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIl0KDk1lc3NhZ2VXZWJob29rEgwKBG5hbWUYASABKAkSEwoGYXZhdGFyGAIgASgJSACIAQESHQoEaWNvbhgDIAEoCzIPLnNoYXJlZC52MS5GaWxlQgkKB19hdmF0YXIijQcKDU1lc3NhZ2VTeXN0ZW0SKwoEdGV4dBgBIAEoCzIdLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVRleHQSNgoKdXNlcl9hZGRlZBgCIAEoCzIiLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJBZGRlZBI4Cgt1c2VyX3JlbW92ZRgDIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJSZW1vdmUSOAoLdXNlcl9qb2luZWQYBCABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1Vc2VySm9pbmVkEjQKCXVzZXJfbGVmdBgFIAEoCzIhLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJMZWZ0EjgKC3VzZXJfa2lja2VkGAYgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlcktpY2tlZBI4Cgt1c2VyX2Jhbm5lZBgHIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJCYW5uZWQSQAoPY2hhbm5lbF9yZW5hbWVkGAggASgLMicuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbFJlbmFtZWQSVwobY2hhbm5lbF9kZXNjcmlwdGlvbl9jaGFuZ2VkGAkgASgLMjIuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbERlc2NyaXB0aW9uQ2hhbmdlZBJJChRjaGFubmVsX2ljb25fY2hhbmdlZBgKIAEoCzIrLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbUNoYW5uZWxJY29uQ2hhbmdlZBJTChljaGFubmVsX293bmVyc2hpcF9jaGFuZ2VkGAsgASgLMjAuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbE93bmVyc2hpcENoYW5nZWQSPgoObWVzc2FnZV9waW5uZWQYDCABKAsyJi5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1NZXNzYWdlUGlubmVkEkIKEG1lc3NhZ2VfdW5waW5uZWQYDSABKAsyKC5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1NZXNzYWdlVW5waW5uZWQSOgoMY2FsbF9zdGFydGVkGA4gASgLMiQuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2FsbFN0YXJ0ZWQiJAoRTWVzc2FnZVN5c3RlbVRleHQSDwoHY29udGVudBgBIAEoCSIwChZNZXNzYWdlU3lzdGVtVXNlckFkZGVkEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIjEKF01lc3NhZ2VTeXN0ZW1Vc2VyUmVtb3ZlEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VySm9pbmVkEgoKAmlkGAEgASgJIiMKFU1lc3NhZ2VTeXN0ZW1Vc2VyTGVmdBIKCgJpZBgBIAEoCSIlChdNZXNzYWdlU3lzdGVtVXNlcktpY2tlZBIKCgJpZBgBIAEoCSIlChdNZXNzYWdlU3lzdGVtVXNlckJhbm5lZBIKCgJpZBgBIAEoCSI3ChtNZXNzYWdlU3lzdGVtQ2hhbm5lbFJlbmFtZWQSDAoEbmFtZRgBIAEoCRIKCgJieRgCIAEoCSI0CiZNZXNzYWdlU3lzdGVtQ2hhbm5lbERlc2NyaXB0aW9uQ2hhbmdlZBIKCgJieRgBIAEoCSItCh9NZXNzYWdlU3lzdGVtQ2hhbm5lbEljb25DaGFuZ2VkEgoKAmJ5GAEgASgJIkAKJE1lc3NhZ2VTeXN0ZW1DaGFubmVsT3duZXJzaGlwQ2hhbmdlZBIMCgRmcm9tGAEgASgJEgoKAnRvGAIgASgJIjQKGk1lc3NhZ2VTeXN0ZW1NZXNzYWdlUGlubmVkEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIjYKHE1lc3NhZ2VTeXN0ZW1NZXNzYWdlVW5waW5uZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiOwoYTWVzc2FnZVN5c3RlbUNhbGxTdGFydGVkEgoKAmJ5GAEgASgJEhMKC2ZpbmlzaGVkX2F0GAIgASgDIl0KCkVtYmVkSW1hZ2USCwoDdXJsGAEgASgJEg0KBXdpZHRoGAIgASgFEg4KBmhlaWdodBgDIAEoBRIjCgRzaXplGAQgASgOMhUuc2VydmljZS52MS5JbWFnZVNpemUiOAoKRW1iZWRWaWRlbxILCgN1cmwYASABKAkSDQoFd2lkdGgYAiABKAUSDgoGaGVpZ2h0GAMgASgFIsIDChtFbWJlZFdlYnNpdGVNZXRhZGF0YVNwZWNpYWwSHgoEbm9uZRgBIAEoCzIQLnNoYXJlZC52MS5FbXB0eRIdCgNnaWYYAiABKAsyEC5zaGFyZWQudjEuRW1wdHkSKQoHeW91dHViZRgDIAEoCzIYLnNlcnZpY2UudjEuRW1iZWRZb3VUdWJlEi8KCmxpZ2h0c3BlZWQYBCABKAsyGy5zZXJ2aWNlLnYxLkVtYmVkTGlnaHRzcGVlZBInCgZ0d2l0Y2gYBSABKAsyFy5zZXJ2aWNlLnYxLkVtYmVkVHdpdGNoEikKB3Nwb3RpZnkYBiABKAsyGC5zZXJ2aWNlLnYxLkVtYmVkU3BvdGlmeRIkCgpzb3VuZGNsb3VkGAcgASgLMhAuc2hhcmVkLnYxLkVtcHR5EisKCGJhbmRjYW1wGAggASgLMhkuc2VydmljZS52MS5FbWJlZEJhbmRjYW1wEjAKC2FwcGxlX211c2ljGAkgASgLMhsuc2VydmljZS52MS5FbWJlZEFwcGxlTXVzaWMSLwoKc3RyZWFtYWJsZRgKIAEoCzIbLnNlcnZpY2UudjEuRW1iZWRTdHJlYW1hYmxlIkAKDEVtYmVkWW91VHViZRIKCgJpZBgBIAEoCRIWCgl0aW1lc3RhbXAYAiABKAlIAIgBAUIMCgpfdGltZXN0YW1wIk8KD0VtYmVkTGlnaHRzcGVlZBIwCgxjb250ZW50X3R5cGUYASABKA4yGi5zZXJ2aWNlLnYxLkxpZ2h0c3BlZWRUeXBlEgoKAmlkGAIgASgJIkcKC0VtYmVkVHdpdGNoEiwKDGNvbnRlbnRfdHlwZRgBIAEoDjIWLnNlcnZpY2UudjEuVHdpdGNoVHlwZRIKCgJpZBgCIAEoCSIwCgxFbWJlZFNwb3RpZnkSFAoMY29udGVudF90eXBlGAEgASgJEgoKAmlkGAIgASgJIksKDUVtYmVkQmFuZGNhbXASLgoMY29udGVudF90eXBlGAEgASgOMhguc2VydmljZS52MS5CYW5kY2FtcFR5cGUSCgoCaWQYAiABKAkiNQoPRW1iZWRBcHBsZU11c2ljEhAKCGFsYnVtX2lkGAEgASgJEhAKCHRyYWNrX2lkGAIgASgJIh0KD0VtYmVkU3RyZWFtYWJsZRIKCgJpZBgBIAEoCSKWAwoURW1iZWRXZWJzaXRlTWV0YWRhdGESEAoDdXJsGAEgASgJSACIAQESGQoMb3JpZ2luYWxfdXJsGAIgASgJSAGIAQESOAoHc3BlY2lhbBgDIAEoCzInLnNlcnZpY2UudjEuRW1iZWRXZWJzaXRlTWV0YWRhdGFTcGVjaWFsEhIKBXRpdGxlGAQgASgJSAKIAQESGAoLZGVzY3JpcHRpb24YBSABKAlIA4gBARIlCgVpbWFnZRgGIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRJbWFnZRIlCgV2aWRlbxgHIAEoCzIWLnNlcnZpY2UudjEuRW1iZWRWaWRlbxIWCglzaXRlX25hbWUYCCABKAlIBIgBARIVCghpY29uX3VybBgJIAEoCUgFiAEBEhMKBmNvbG91chgKIAEoCUgGiAEBQgYKBF91cmxCDwoNX29yaWdpbmFsX3VybEIICgZfdGl0bGVCDgoMX2Rlc2NyaXB0aW9uQgwKCl9zaXRlX25hbWVCCwoJX2ljb25fdXJsQgkKB19jb2xvdXIi4AEKCUVtYmVkVGV4dBIVCghpY29uX3VybBgBIAEoCUgAiAEBEhAKA3VybBgCIAEoCUgBiAEBEhIKBXRpdGxlGAMgASgJSAKIAQESGAoLZGVzY3JpcHRpb24YBCABKAlIA4gBARIjCgVtZWRpYRgFIAEoCzIPLnNoYXJlZC52MS5GaWxlSASIAQESEwoGY29sb3VyGAYgASgJSAWIAQFCCwoJX2ljb25fdXJsQgYKBF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIICgZfbWVkaWFCCQoHX2NvbG91ciLNAQoFRW1iZWQSMQoHd2Vic2l0ZRgBIAEoCzIgLnNlcnZpY2UudjEuRW1iZWRXZWJzaXRlTWV0YWRhdGESJQoFaW1hZ2UYAiABKAsyFi5zZXJ2aWNlLnYxLkVtYmVkSW1hZ2USJQoFdmlkZW8YAyABKAsyFi5zZXJ2aWNlLnYxLkVtYmVkVmlkZW8SIwoEdGV4dBgEIAEoCzIVLnNlcnZpY2UudjEuRW1iZWRUZXh0Eh4KBG5vbmUYBSABKAsyEC5zaGFyZWQudjEuRW1wdHkiPQoMSW50ZXJhY3Rpb25zEhEKCXJlYWN0aW9ucxgBIAMoCRIaChJyZXN0cmljdF9yZWFjdGlvbnMYAiABKAgiaAoKTWFzcXVlcmFkZRIRCgRuYW1lGAEgASgJSACIAQESEwoGYXZhdGFyGAIgASgJSAGIAQESEwoGY29sb3VyGAMgASgJSAKIAQFCBwoFX25hbWVCCQoHX2F2YXRhckIJCgdfY29sb3VyIqwFCgdNZXNzYWdlEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoFbm9uY2UYAyABKAlIAIgBARIRCglhdXRob3JfaWQYBCABKAkSKwoHd2ViaG9vaxgFIAEoCzIaLnNlcnZpY2UudjEuTWVzc2FnZVdlYmhvb2sSFAoHY29udGVudBgGIAEoCUgBiAEBEikKBnN5c3RlbRgHIAEoCzIZLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbRIkCgthdHRhY2htZW50cxgIIAMoCzIPLnNoYXJlZC52MS5GaWxlEhIKBWZsYWdzGAkgASgFSAKIAQESIQoGZW1iZWRzGAogAygLMhEuc2VydmljZS52MS5FbWJlZBIQCghtZW50aW9ucxgLIAMoCRIVCg1yb2xlX21lbnRpb25zGAwgAygJEg8KB3JlcGxpZXMYDSADKAkSNQoJcmVhY3Rpb25zGA4gAygLMiIuc2VydmljZS52MS5NZXNzYWdlLlJlYWN0aW9uc0VudHJ5Ei4KDGludGVyYWN0aW9ucxgPIAEoCzIYLnNlcnZpY2UudjEuSW50ZXJhY3Rpb25zEioKCm1hc3F1ZXJhZGUYECABKAsyFi5zZXJ2aWNlLnYxLk1hc3F1ZXJhZGUSEwoGcGlubmVkGBEgASgISAOIAQESFgoJZWRpdGVkX2F0GBIgASgDSASIAQESEgoKY3JlYXRlZF9hdBgTIAEoAxpICg5SZWFjdGlvbnNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5zaGFyZWQudjEuU3RyaW5nQXJyYXk6AjgBQggKBl9ub25jZUIKCghfY29udGVudEIICgZfZmxhZ3NCCQoHX3Bpbm5lZEIMCgpfZWRpdGVkX2F0KiMKCUltYWdlU2l6ZRIJCgVMQVJHRRAAEgsKB1BSRVZJRVcQASpDCgpUd2l0Y2hUeXBlEhIKDlRXSVRDSF9DSEFOTkVMEAASEAoMVFdJVENIX1ZJREVPEAESDwoLVFdJVENIX0NMSVAQAiooCg5MaWdodHNwZWVkVHlwZRIWChJMSUdIVFNQRUVEX0NIQU5ORUwQACo2CgxCYW5kY2FtcFR5cGUSEgoOQkFORENBTVBfQUxCVU0QABISCg5CQU5EQ0FNUF9UUkFDSxABYgZwcm90bzM", [file_shared_v1_files, file_shared_v1_types, file_shared_v1_wrappers]);
+  fileDesc("ChxzZXJ2aWNlL3YxL21lc3NhZ2VzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIl0KDk1lc3NhZ2VXZWJob29rEgwKBG5hbWUYASABKAkSEwoGYXZhdGFyGAIgASgJSACIAQESHQoEaWNvbhgDIAEoCzIPLnNoYXJlZC52MS5GaWxlQgkKB19hdmF0YXIijQcKDU1lc3NhZ2VTeXN0ZW0SKwoEdGV4dBgBIAEoCzIdLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVRleHQSNgoKdXNlcl9hZGRlZBgCIAEoCzIiLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJBZGRlZBI4Cgt1c2VyX3JlbW92ZRgDIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJSZW1vdmUSOAoLdXNlcl9qb2luZWQYBCABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1Vc2VySm9pbmVkEjQKCXVzZXJfbGVmdBgFIAEoCzIhLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJMZWZ0EjgKC3VzZXJfa2lja2VkGAYgASgLMiMuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtVXNlcktpY2tlZBI4Cgt1c2VyX2Jhbm5lZBgHIAEoCzIjLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbVVzZXJCYW5uZWQSQAoPY2hhbm5lbF9yZW5hbWVkGAggASgLMicuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbFJlbmFtZWQSVwobY2hhbm5lbF9kZXNjcmlwdGlvbl9jaGFuZ2VkGAkgASgLMjIuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbERlc2NyaXB0aW9uQ2hhbmdlZBJJChRjaGFubmVsX2ljb25fY2hhbmdlZBgKIAEoCzIrLnNlcnZpY2UudjEuTWVzc2FnZVN5c3RlbUNoYW5uZWxJY29uQ2hhbmdlZBJTChljaGFubmVsX293bmVyc2hpcF9jaGFuZ2VkGAsgASgLMjAuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2hhbm5lbE93bmVyc2hpcENoYW5nZWQSPgoObWVzc2FnZV9waW5uZWQYDCABKAsyJi5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1NZXNzYWdlUGlubmVkEkIKEG1lc3NhZ2VfdW5waW5uZWQYDSABKAsyKC5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW1NZXNzYWdlVW5waW5uZWQSOgoMY2FsbF9zdGFydGVkGA4gASgLMiQuc2VydmljZS52MS5NZXNzYWdlU3lzdGVtQ2FsbFN0YXJ0ZWQiJAoRTWVzc2FnZVN5c3RlbVRleHQSDwoHY29udGVudBgBIAEoCSIwChZNZXNzYWdlU3lzdGVtVXNlckFkZGVkEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIjEKF01lc3NhZ2VTeXN0ZW1Vc2VyUmVtb3ZlEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIiUKF01lc3NhZ2VTeXN0ZW1Vc2VySm9pbmVkEgoKAmlkGAEgASgJIiMKFU1lc3NhZ2VTeXN0ZW1Vc2VyTGVmdBIKCgJpZBgBIAEoCSIlChdNZXNzYWdlU3lzdGVtVXNlcktpY2tlZBIKCgJpZBgBIAEoCSIlChdNZXNzYWdlU3lzdGVtVXNlckJhbm5lZBIKCgJpZBgBIAEoCSI3ChtNZXNzYWdlU3lzdGVtQ2hhbm5lbFJlbmFtZWQSDAoEbmFtZRgBIAEoCRIKCgJieRgCIAEoCSI0CiZNZXNzYWdlU3lzdGVtQ2hhbm5lbERlc2NyaXB0aW9uQ2hhbmdlZBIKCgJieRgBIAEoCSItCh9NZXNzYWdlU3lzdGVtQ2hhbm5lbEljb25DaGFuZ2VkEgoKAmJ5GAEgASgJIkAKJE1lc3NhZ2VTeXN0ZW1DaGFubmVsT3duZXJzaGlwQ2hhbmdlZBIMCgRmcm9tGAEgASgJEgoKAnRvGAIgASgJIjQKGk1lc3NhZ2VTeXN0ZW1NZXNzYWdlUGlubmVkEgoKAmlkGAEgASgJEgoKAmJ5GAIgASgJIjYKHE1lc3NhZ2VTeXN0ZW1NZXNzYWdlVW5waW5uZWQSCgoCaWQYASABKAkSCgoCYnkYAiABKAkiOwoYTWVzc2FnZVN5c3RlbUNhbGxTdGFydGVkEgoKAmJ5GAEgASgJEhMKC2ZpbmlzaGVkX2F0GAIgASgDIkYKCkVtYmVkSW1hZ2USCwoDdXJsGAEgASgJEg0KBXdpZHRoGAIgASgFEg4KBmhlaWdodBgDIAEoBRIMCgRzaXplGAQgASgJIjgKCkVtYmVkVmlkZW8SCwoDdXJsGAEgASgJEg0KBXdpZHRoGAIgASgFEg4KBmhlaWdodBgDIAEoBSJoCgpUd2l0Y2hUeXBlEhQKB2NoYW5uZWwYASABKAlIAIgBARISCgV2aWRlbxgCIAEoCUgBiAEBEhEKBGNsaXAYAyABKAlIAogBAUIKCghfY2hhbm5lbEIICgZfdmlkZW9CBwoFX2NsaXAiMgoOTGlnaHRzcGVlZFR5cGUSFAoHY2hhbm5lbBgBIAEoCUgAiAEBQgoKCF9jaGFubmVsIkoKDEJhbmRjYW1wVHlwZRISCgVhbGJ1bRgBIAEoCUgAiAEBEhIKBXRyYWNrGAIgASgJSAGIAQFCCAoGX2FsYnVtQggKBl90cmFjayLCAwobRW1iZWRXZWJzaXRlTWV0YWRhdGFTcGVjaWFsEh4KBG5vbmUYASABKAsyEC5zaGFyZWQudjEuRW1wdHkSHQoDZ2lmGAIgASgLMhAuc2hhcmVkLnYxLkVtcHR5EikKB3lvdXR1YmUYAyABKAsyGC5zZXJ2aWNlLnYxLkVtYmVkWW91VHViZRIvCgpsaWdodHNwZWVkGAQgASgLMhsuc2VydmljZS52MS5FbWJlZExpZ2h0c3BlZWQSJwoGdHdpdGNoGAUgASgLMhcuc2VydmljZS52MS5FbWJlZFR3aXRjaBIpCgdzcG90aWZ5GAYgASgLMhguc2VydmljZS52MS5FbWJlZFNwb3RpZnkSJAoKc291bmRjbG91ZBgHIAEoCzIQLnNoYXJlZC52MS5FbXB0eRIrCghiYW5kY2FtcBgIIAEoCzIZLnNlcnZpY2UudjEuRW1iZWRCYW5kY2FtcBIwCgthcHBsZV9tdXNpYxgJIAEoCzIbLnNlcnZpY2UudjEuRW1iZWRBcHBsZU11c2ljEi8KCnN0cmVhbWFibGUYCiABKAsyGy5zZXJ2aWNlLnYxLkVtYmVkU3RyZWFtYWJsZSJACgxFbWJlZFlvdVR1YmUSCgoCaWQYASABKAkSFgoJdGltZXN0YW1wGAIgASgJSACIAQFCDAoKX3RpbWVzdGFtcCJPCg9FbWJlZExpZ2h0c3BlZWQSMAoMY29udGVudF90eXBlGAEgASgLMhouc2VydmljZS52MS5MaWdodHNwZWVkVHlwZRIKCgJpZBgCIAEoCSJHCgtFbWJlZFR3aXRjaBIsCgxjb250ZW50X3R5cGUYASABKAsyFi5zZXJ2aWNlLnYxLlR3aXRjaFR5cGUSCgoCaWQYAiABKAkiMAoMRW1iZWRTcG90aWZ5EhQKDGNvbnRlbnRfdHlwZRgBIAEoCRIKCgJpZBgCIAEoCSJLCg1FbWJlZEJhbmRjYW1wEi4KDGNvbnRlbnRfdHlwZRgBIAEoCzIYLnNlcnZpY2UudjEuQmFuZGNhbXBUeXBlEgoKAmlkGAIgASgJIjUKD0VtYmVkQXBwbGVNdXNpYxIQCghhbGJ1bV9pZBgBIAEoCRIQCgh0cmFja19pZBgCIAEoCSIdCg9FbWJlZFN0cmVhbWFibGUSCgoCaWQYASABKAkilgMKFEVtYmVkV2Vic2l0ZU1ldGFkYXRhEhAKA3VybBgBIAEoCUgAiAEBEhkKDG9yaWdpbmFsX3VybBgCIAEoCUgBiAEBEjgKB3NwZWNpYWwYAyABKAsyJy5zZXJ2aWNlLnYxLkVtYmVkV2Vic2l0ZU1ldGFkYXRhU3BlY2lhbBISCgV0aXRsZRgEIAEoCUgCiAEBEhgKC2Rlc2NyaXB0aW9uGAUgASgJSAOIAQESJQoFaW1hZ2UYBiABKAsyFi5zZXJ2aWNlLnYxLkVtYmVkSW1hZ2USJQoFdmlkZW8YByABKAsyFi5zZXJ2aWNlLnYxLkVtYmVkVmlkZW8SFgoJc2l0ZV9uYW1lGAggASgJSASIAQESFQoIaWNvbl91cmwYCSABKAlIBYgBARITCgZjb2xvdXIYCiABKAlIBogBAUIGCgRfdXJsQg8KDV9vcmlnaW5hbF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIMCgpfc2l0ZV9uYW1lQgsKCV9pY29uX3VybEIJCgdfY29sb3VyIuABCglFbWJlZFRleHQSFQoIaWNvbl91cmwYASABKAlIAIgBARIQCgN1cmwYAiABKAlIAYgBARISCgV0aXRsZRgDIAEoCUgCiAEBEhgKC2Rlc2NyaXB0aW9uGAQgASgJSAOIAQESIwoFbWVkaWEYBSABKAsyDy5zaGFyZWQudjEuRmlsZUgEiAEBEhMKBmNvbG91chgGIAEoCUgFiAEBQgsKCV9pY29uX3VybEIGCgRfdXJsQggKBl90aXRsZUIOCgxfZGVzY3JpcHRpb25CCAoGX21lZGlhQgkKB19jb2xvdXIizQEKBUVtYmVkEjEKB3dlYnNpdGUYASABKAsyIC5zZXJ2aWNlLnYxLkVtYmVkV2Vic2l0ZU1ldGFkYXRhEiUKBWltYWdlGAIgASgLMhYuc2VydmljZS52MS5FbWJlZEltYWdlEiUKBXZpZGVvGAMgASgLMhYuc2VydmljZS52MS5FbWJlZFZpZGVvEiMKBHRleHQYBCABKAsyFS5zZXJ2aWNlLnYxLkVtYmVkVGV4dBIeCgRub25lGAUgASgLMhAuc2hhcmVkLnYxLkVtcHR5Ij0KDEludGVyYWN0aW9ucxIRCglyZWFjdGlvbnMYASADKAkSGgoScmVzdHJpY3RfcmVhY3Rpb25zGAIgASgIImgKCk1hc3F1ZXJhZGUSEQoEbmFtZRgBIAEoCUgAiAEBEhMKBmF2YXRhchgCIAEoCUgBiAEBEhMKBmNvbG91chgDIAEoCUgCiAEBQgcKBV9uYW1lQgkKB19hdmF0YXJCCQoHX2NvbG91ciKsBQoHTWVzc2FnZRIKCgJpZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEhIKBW5vbmNlGAMgASgJSACIAQESEQoJYXV0aG9yX2lkGAQgASgJEisKB3dlYmhvb2sYBSABKAsyGi5zZXJ2aWNlLnYxLk1lc3NhZ2VXZWJob29rEhQKB2NvbnRlbnQYBiABKAlIAYgBARIpCgZzeXN0ZW0YByABKAsyGS5zZXJ2aWNlLnYxLk1lc3NhZ2VTeXN0ZW0SJAoLYXR0YWNobWVudHMYCCADKAsyDy5zaGFyZWQudjEuRmlsZRISCgVmbGFncxgJIAEoBUgCiAEBEiEKBmVtYmVkcxgKIAMoCzIRLnNlcnZpY2UudjEuRW1iZWQSEAoIbWVudGlvbnMYCyADKAkSFQoNcm9sZV9tZW50aW9ucxgMIAMoCRIPCgdyZXBsaWVzGA0gAygJEjUKCXJlYWN0aW9ucxgOIAMoCzIiLnNlcnZpY2UudjEuTWVzc2FnZS5SZWFjdGlvbnNFbnRyeRIuCgxpbnRlcmFjdGlvbnMYDyABKAsyGC5zZXJ2aWNlLnYxLkludGVyYWN0aW9ucxIqCgptYXNxdWVyYWRlGBAgASgLMhYuc2VydmljZS52MS5NYXNxdWVyYWRlEhMKBnBpbm5lZBgRIAEoCEgDiAEBEhYKCWVkaXRlZF9hdBgSIAEoA0gEiAEBEhIKCmNyZWF0ZWRfYXQYEyABKAMaSAoOUmVhY3Rpb25zRW50cnkSCwoDa2V5GAEgASgJEiUKBXZhbHVlGAIgASgLMhYuc2hhcmVkLnYxLlN0cmluZ0FycmF5OgI4AUIICgZfbm9uY2VCCgoIX2NvbnRlbnRCCAoGX2ZsYWdzQgkKB19waW5uZWRCDAoKX2VkaXRlZF9hdGIGcHJvdG8z", [file_shared_v1_files, file_shared_v1_types, file_shared_v1_wrappers]);
 
 /**
  * ===========================================
@@ -440,11 +440,11 @@ export type EmbedImage = Message$1<"service.v1.EmbedImage"> & {
   height: number;
 
   /**
-   * Positioning and size
+   * Positioning and size (large or preview)
    *
-   * @generated from field: service.v1.ImageSize size = 4;
+   * @generated from field: string size = 4;
    */
-  size: ImageSize;
+  size: string;
 };
 
 /**
@@ -488,6 +488,78 @@ export type EmbedVideo = Message$1<"service.v1.EmbedVideo"> & {
  */
 export const EmbedVideoSchema: GenMessage<EmbedVideo> = /*@__PURE__*/
   messageDesc(file_service_v1_messages_db, 17);
+
+/**
+ * Type of remote Twitch content
+ *
+ * @generated from message service.v1.TwitchType
+ */
+export type TwitchType = Message$1<"service.v1.TwitchType"> & {
+  /**
+   * @generated from field: optional string channel = 1;
+   */
+  channel?: string;
+
+  /**
+   * @generated from field: optional string video = 2;
+   */
+  video?: string;
+
+  /**
+   * @generated from field: optional string clip = 3;
+   */
+  clip?: string;
+};
+
+/**
+ * Describes the message service.v1.TwitchType.
+ * Use `create(TwitchTypeSchema)` to create a new message.
+ */
+export const TwitchTypeSchema: GenMessage<TwitchType> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages_db, 18);
+
+/**
+ * Type of remote Lightspeed.tv content
+ *
+ * @generated from message service.v1.LightspeedType
+ */
+export type LightspeedType = Message$1<"service.v1.LightspeedType"> & {
+  /**
+   * @generated from field: optional string channel = 1;
+   */
+  channel?: string;
+};
+
+/**
+ * Describes the message service.v1.LightspeedType.
+ * Use `create(LightspeedTypeSchema)` to create a new message.
+ */
+export const LightspeedTypeSchema: GenMessage<LightspeedType> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages_db, 19);
+
+/**
+ * Type of remote Bandcamp content
+ *
+ * @generated from message service.v1.BandcampType
+ */
+export type BandcampType = Message$1<"service.v1.BandcampType"> & {
+  /**
+   * @generated from field: optional string album = 1;
+   */
+  album?: string;
+
+  /**
+   * @generated from field: optional string track = 2;
+   */
+  track?: string;
+};
+
+/**
+ * Describes the message service.v1.BandcampType.
+ * Use `create(BandcampTypeSchema)` to create a new message.
+ */
+export const BandcampTypeSchema: GenMessage<BandcampType> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages_db, 20);
 
 /**
  * Information about special remote content
@@ -571,7 +643,7 @@ export type EmbedWebsiteMetadataSpecial = Message$1<"service.v1.EmbedWebsiteMeta
  * Use `create(EmbedWebsiteMetadataSpecialSchema)` to create a new message.
  */
 export const EmbedWebsiteMetadataSpecialSchema: GenMessage<EmbedWebsiteMetadataSpecial> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 18);
+  messageDesc(file_service_v1_messages_db, 21);
 
 /**
  * YouTube video
@@ -595,7 +667,7 @@ export type EmbedYouTube = Message$1<"service.v1.EmbedYouTube"> & {
  * Use `create(EmbedYouTubeSchema)` to create a new message.
  */
 export const EmbedYouTubeSchema: GenMessage<EmbedYouTube> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 19);
+  messageDesc(file_service_v1_messages_db, 22);
 
 /**
  * Lightspeed.tv stream
@@ -606,7 +678,7 @@ export type EmbedLightspeed = Message$1<"service.v1.EmbedLightspeed"> & {
   /**
    * @generated from field: service.v1.LightspeedType content_type = 1;
    */
-  contentType: LightspeedType;
+  contentType?: LightspeedType;
 
   /**
    * @generated from field: string id = 2;
@@ -619,7 +691,7 @@ export type EmbedLightspeed = Message$1<"service.v1.EmbedLightspeed"> & {
  * Use `create(EmbedLightspeedSchema)` to create a new message.
  */
 export const EmbedLightspeedSchema: GenMessage<EmbedLightspeed> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 20);
+  messageDesc(file_service_v1_messages_db, 23);
 
 /**
  * Twitch stream or clip
@@ -630,7 +702,7 @@ export type EmbedTwitch = Message$1<"service.v1.EmbedTwitch"> & {
   /**
    * @generated from field: service.v1.TwitchType content_type = 1;
    */
-  contentType: TwitchType;
+  contentType?: TwitchType;
 
   /**
    * @generated from field: string id = 2;
@@ -643,7 +715,7 @@ export type EmbedTwitch = Message$1<"service.v1.EmbedTwitch"> & {
  * Use `create(EmbedTwitchSchema)` to create a new message.
  */
 export const EmbedTwitchSchema: GenMessage<EmbedTwitch> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 21);
+  messageDesc(file_service_v1_messages_db, 24);
 
 /**
  * Spotify track
@@ -669,7 +741,7 @@ export type EmbedSpotify = Message$1<"service.v1.EmbedSpotify"> & {
  * Use `create(EmbedSpotifySchema)` to create a new message.
  */
 export const EmbedSpotifySchema: GenMessage<EmbedSpotify> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 22);
+  messageDesc(file_service_v1_messages_db, 25);
 
 /**
  * Bandcamp track
@@ -680,7 +752,7 @@ export type EmbedBandcamp = Message$1<"service.v1.EmbedBandcamp"> & {
   /**
    * @generated from field: service.v1.BandcampType content_type = 1;
    */
-  contentType: BandcampType;
+  contentType?: BandcampType;
 
   /**
    * @generated from field: string id = 2;
@@ -693,7 +765,7 @@ export type EmbedBandcamp = Message$1<"service.v1.EmbedBandcamp"> & {
  * Use `create(EmbedBandcampSchema)` to create a new message.
  */
 export const EmbedBandcampSchema: GenMessage<EmbedBandcamp> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 23);
+  messageDesc(file_service_v1_messages_db, 26);
 
 /**
  * Apple Music
@@ -719,7 +791,7 @@ export type EmbedAppleMusic = Message$1<"service.v1.EmbedAppleMusic"> & {
  * Use `create(EmbedAppleMusicSchema)` to create a new message.
  */
 export const EmbedAppleMusicSchema: GenMessage<EmbedAppleMusic> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 24);
+  messageDesc(file_service_v1_messages_db, 27);
 
 /**
  * Streamable Video
@@ -738,7 +810,7 @@ export type EmbedStreamable = Message$1<"service.v1.EmbedStreamable"> & {
  * Use `create(EmbedStreamableSchema)` to create a new message.
  */
 export const EmbedStreamableSchema: GenMessage<EmbedStreamable> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 25);
+  messageDesc(file_service_v1_messages_db, 28);
 
 /**
  * Website metadata
@@ -822,7 +894,7 @@ export type EmbedWebsiteMetadata = Message$1<"service.v1.EmbedWebsiteMetadata"> 
  * Use `create(EmbedWebsiteMetadataSchema)` to create a new message.
  */
 export const EmbedWebsiteMetadataSchema: GenMessage<EmbedWebsiteMetadata> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 26);
+  messageDesc(file_service_v1_messages_db, 29);
 
 /**
  * Text Embed
@@ -878,7 +950,7 @@ export type EmbedText = Message$1<"service.v1.EmbedText"> & {
  * Use `create(EmbedTextSchema)` to create a new message.
  */
 export const EmbedTextSchema: GenMessage<EmbedText> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 27);
+  messageDesc(file_service_v1_messages_db, 30);
 
 /**
  * Embed (for different embed types)
@@ -917,7 +989,7 @@ export type Embed = Message$1<"service.v1.Embed"> & {
  * Use `create(EmbedSchema)` to create a new message.
  */
 export const EmbedSchema: GenMessage<Embed> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 28);
+  messageDesc(file_service_v1_messages_db, 31);
 
 /**
  * ===========================================
@@ -947,7 +1019,7 @@ export type Interactions = Message$1<"service.v1.Interactions"> & {
  * Use `create(InteractionsSchema)` to create a new message.
  */
 export const InteractionsSchema: GenMessage<Interactions> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 29);
+  messageDesc(file_service_v1_messages_db, 32);
 
 /**
  * ===========================================
@@ -984,7 +1056,7 @@ export type Masquerade = Message$1<"service.v1.Masquerade"> & {
  * Use `create(MasqueradeSchema)` to create a new message.
  */
 export const MasqueradeSchema: GenMessage<Masquerade> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 30);
+  messageDesc(file_service_v1_messages_db, 33);
 
 /**
  * ===========================================
@@ -1131,101 +1203,5 @@ export type Message = Message$1<"service.v1.Message"> & {
  * Use `create(MessageSchema)` to create a new message.
  */
 export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages_db, 31);
-
-/**
- * Image positioning and size
- *
- * @generated from enum service.v1.ImageSize
- */
-export enum ImageSize {
-  /**
-   * Show large preview at the bottom of the embed
-   *
-   * @generated from enum value: LARGE = 0;
-   */
-  LARGE = 0,
-
-  /**
-   * Show small preview to the side of the embed
-   *
-   * @generated from enum value: PREVIEW = 1;
-   */
-  PREVIEW = 1,
-}
-
-/**
- * Describes the enum service.v1.ImageSize.
- */
-export const ImageSizeSchema: GenEnum<ImageSize> = /*@__PURE__*/
-  enumDesc(file_service_v1_messages_db, 0);
-
-/**
- * Type of remote Twitch content
- *
- * @generated from enum service.v1.TwitchType
- */
-export enum TwitchType {
-  /**
-   * @generated from enum value: TWITCH_CHANNEL = 0;
-   */
-  TWITCH_CHANNEL = 0,
-
-  /**
-   * @generated from enum value: TWITCH_VIDEO = 1;
-   */
-  TWITCH_VIDEO = 1,
-
-  /**
-   * @generated from enum value: TWITCH_CLIP = 2;
-   */
-  TWITCH_CLIP = 2,
-}
-
-/**
- * Describes the enum service.v1.TwitchType.
- */
-export const TwitchTypeSchema: GenEnum<TwitchType> = /*@__PURE__*/
-  enumDesc(file_service_v1_messages_db, 1);
-
-/**
- * Type of remote Lightspeed.tv content
- *
- * @generated from enum service.v1.LightspeedType
- */
-export enum LightspeedType {
-  /**
-   * @generated from enum value: LIGHTSPEED_CHANNEL = 0;
-   */
-  LIGHTSPEED_CHANNEL = 0,
-}
-
-/**
- * Describes the enum service.v1.LightspeedType.
- */
-export const LightspeedTypeSchema: GenEnum<LightspeedType> = /*@__PURE__*/
-  enumDesc(file_service_v1_messages_db, 2);
-
-/**
- * Type of remote Bandcamp content
- *
- * @generated from enum service.v1.BandcampType
- */
-export enum BandcampType {
-  /**
-   * @generated from enum value: BANDCAMP_ALBUM = 0;
-   */
-  BANDCAMP_ALBUM = 0,
-
-  /**
-   * @generated from enum value: BANDCAMP_TRACK = 1;
-   */
-  BANDCAMP_TRACK = 1,
-}
-
-/**
- * Describes the enum service.v1.BandcampType.
- */
-export const BandcampTypeSchema: GenEnum<BandcampType> = /*@__PURE__*/
-  enumDesc(file_service_v1_messages_db, 3);
+  messageDesc(file_service_v1_messages_db, 34);
 
