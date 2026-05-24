@@ -871,7 +871,12 @@ pub struct Masquerade {
 /// MAIN MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow
+)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
     /// Unique Id

@@ -162,7 +162,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.Message",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "shared.v1.Timestamp",
