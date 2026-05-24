@@ -1425,6 +1425,8 @@ pub struct MessagesGetRequest {
     /// It also fetches the message ID specified.
     #[prost(string, optional, tag = "6")]
     pub nearby: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(bool, optional, tag = "7")]
+    pub include_users: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -48,6 +48,8 @@ message MessagesGetRequest {
   // It will also take half of limit rounded as the limits to each side.
   // It also fetches the message ID specified.
   optional string nearby = 6;
+
+  optional bool include_users = 7;
 }
 
 message MessagesGetResponse {

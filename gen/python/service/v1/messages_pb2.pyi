@@ -32,20 +32,22 @@ class ReplyIntent(_message.Message):
     def __init__(self, id: _Optional[str] = ..., mention: bool = ..., fail_if_not_exists: bool = ...) -> None: ...
 
 class MessagesGetRequest(_message.Message):
-    __slots__ = ("channel_id", "limit", "before", "after", "sort", "nearby")
+    __slots__ = ("channel_id", "limit", "before", "after", "sort", "nearby", "include_users")
     CHANNEL_ID_FIELD_NUMBER: _ClassVar[int]
     LIMIT_FIELD_NUMBER: _ClassVar[int]
     BEFORE_FIELD_NUMBER: _ClassVar[int]
     AFTER_FIELD_NUMBER: _ClassVar[int]
     SORT_FIELD_NUMBER: _ClassVar[int]
     NEARBY_FIELD_NUMBER: _ClassVar[int]
+    INCLUDE_USERS_FIELD_NUMBER: _ClassVar[int]
     channel_id: str
     limit: int
     before: str
     after: str
     sort: MessageSort
     nearby: str
-    def __init__(self, channel_id: _Optional[str] = ..., limit: _Optional[int] = ..., before: _Optional[str] = ..., after: _Optional[str] = ..., sort: _Optional[_Union[MessageSort, str]] = ..., nearby: _Optional[str] = ...) -> None: ...
+    include_users: bool
+    def __init__(self, channel_id: _Optional[str] = ..., limit: _Optional[int] = ..., before: _Optional[str] = ..., after: _Optional[str] = ..., sort: _Optional[_Union[MessageSort, str]] = ..., nearby: _Optional[str] = ..., include_users: bool = ...) -> None: ...
 
 class MessagesGetResponse(_message.Message):
     __slots__ = ("data", "error")

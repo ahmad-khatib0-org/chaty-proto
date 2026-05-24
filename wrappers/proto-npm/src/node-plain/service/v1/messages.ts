@@ -101,6 +101,7 @@ export interface MessagesGetRequest {
    * It also fetches the message ID specified.
    */
   nearby?: string | undefined;
+  includeUsers?: boolean | undefined;
 }
 
 export interface MessagesGetResponse {
@@ -207,7 +208,15 @@ export const ReplyIntent: MessageFns<ReplyIntent> = {
 };
 
 function createBaseMessagesGetRequest(): MessagesGetRequest {
-  return { channelId: "", limit: undefined, before: undefined, after: undefined, sort: undefined, nearby: undefined };
+  return {
+    channelId: "",
+    limit: undefined,
+    before: undefined,
+    after: undefined,
+    sort: undefined,
+    nearby: undefined,
+    includeUsers: undefined,
+  };
 }
 
 export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
@@ -229,6 +238,9 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
     }
     if (message.nearby !== undefined) {
       writer.uint32(50).string(message.nearby);
+    }
+    if (message.includeUsers !== undefined) {
+      writer.uint32(56).bool(message.includeUsers);
     }
     return writer;
   },
@@ -288,6 +300,14 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
           message.nearby = reader.string();
           continue;
         }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.includeUsers = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -305,6 +325,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
       after: isSet(object.after) ? globalThis.String(object.after) : undefined,
       sort: isSet(object.sort) ? messageSortFromJSON(object.sort) : undefined,
       nearby: isSet(object.nearby) ? globalThis.String(object.nearby) : undefined,
+      includeUsers: isSet(object.includeUsers) ? globalThis.Boolean(object.includeUsers) : undefined,
     };
   },
 
@@ -328,6 +349,9 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
     if (message.nearby !== undefined) {
       obj.nearby = message.nearby;
     }
+    if (message.includeUsers !== undefined) {
+      obj.includeUsers = message.includeUsers;
+    }
     return obj;
   },
 
@@ -342,6 +366,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
     message.after = object.after ?? undefined;
     message.sort = object.sort ?? undefined;
     message.nearby = object.nearby ?? undefined;
+    message.includeUsers = object.includeUsers ?? undefined;
     return message;
   },
 };
