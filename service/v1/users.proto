@@ -29,6 +29,7 @@ message APIUser {
   optional shared.v1.File avatar = 16;
   repeated service.v1.UserRelationship relations = 17;
   optional service.v1.Bot bot = 18;
+  optional bool online = 19;
 }
 
 enum UserFlag {

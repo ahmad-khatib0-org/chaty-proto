@@ -1189,6 +1189,8 @@ pub struct ApiUser {
     pub relations: ::prost::alloc::vec::Vec<UserRelationship>,
     #[prost(message, optional, tag = "18")]
     pub bot: ::core::option::Option<Bot>,
+    #[prost(bool, optional, tag = "19")]
+    pub online: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -107,6 +107,7 @@ export interface APIUser {
   avatar?: File | undefined;
   relations: UserRelationship[];
   bot?: Bot | undefined;
+  online?: boolean | undefined;
 }
 
 export interface UsersCreateRequest {
@@ -201,6 +202,7 @@ function createBaseAPIUser(): APIUser {
     avatar: undefined,
     relations: [],
     bot: undefined,
+    online: undefined,
   };
 }
 
@@ -259,6 +261,9 @@ export const APIUser: MessageFns<APIUser> = {
     }
     if (message.bot !== undefined) {
       Bot.encode(message.bot, writer.uint32(146).fork()).join();
+    }
+    if (message.online !== undefined) {
+      writer.uint32(152).bool(message.online);
     }
     return writer;
   },
@@ -414,6 +419,14 @@ export const APIUser: MessageFns<APIUser> = {
           message.bot = Bot.decode(reader, reader.uint32());
           continue;
         }
+        case 19: {
+          if (tag !== 152) {
+            break;
+          }
+
+          message.online = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -447,6 +460,7 @@ export const APIUser: MessageFns<APIUser> = {
         ? object.relations.map((e: any) => UserRelationship.fromJSON(e))
         : [],
       bot: isSet(object.bot) ? Bot.fromJSON(object.bot) : undefined,
+      online: isSet(object.online) ? globalThis.Boolean(object.online) : undefined,
     };
   },
 
@@ -506,6 +520,9 @@ export const APIUser: MessageFns<APIUser> = {
     if (message.bot !== undefined) {
       obj.bot = Bot.toJSON(message.bot);
     }
+    if (message.online !== undefined) {
+      obj.online = message.online;
+    }
     return obj;
   },
 
@@ -534,6 +551,7 @@ export const APIUser: MessageFns<APIUser> = {
       : undefined;
     message.relations = object.relations?.map((e) => UserRelationship.fromPartial(e)) || [];
     message.bot = (object.bot !== undefined && object.bot !== null) ? Bot.fromPartial(object.bot) : undefined;
+    message.online = object.online ?? undefined;
     return message;
   },
 };

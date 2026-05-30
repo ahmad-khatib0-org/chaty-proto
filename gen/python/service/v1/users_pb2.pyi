@@ -24,7 +24,7 @@ USER_FLAG_BANNED: UserFlag
 USER_FLAG_SPAM: UserFlag
 
 class APIUser(_message.Message):
-    __slots__ = ("id", "username", "email", "relationship", "display_name", "badges", "status_text", "status_presence", "profile_content", "profile_background_id", "privileged", "suspended_until", "created_at", "updated_at", "verified", "avatar", "relations", "bot")
+    __slots__ = ("id", "username", "email", "relationship", "display_name", "badges", "status_text", "status_presence", "profile_content", "profile_background_id", "privileged", "suspended_until", "created_at", "updated_at", "verified", "avatar", "relations", "bot", "online")
     ID_FIELD_NUMBER: _ClassVar[int]
     USERNAME_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
@@ -43,6 +43,7 @@ class APIUser(_message.Message):
     AVATAR_FIELD_NUMBER: _ClassVar[int]
     RELATIONS_FIELD_NUMBER: _ClassVar[int]
     BOT_FIELD_NUMBER: _ClassVar[int]
+    ONLINE_FIELD_NUMBER: _ClassVar[int]
     id: str
     username: str
     email: str
@@ -61,7 +62,8 @@ class APIUser(_message.Message):
     avatar: _files_pb2.File
     relations: _containers.RepeatedCompositeFieldContainer[_users_db_pb2.UserRelationship]
     bot: _bots_db_pb2.Bot
-    def __init__(self, id: _Optional[str] = ..., username: _Optional[str] = ..., email: _Optional[str] = ..., relationship: _Optional[str] = ..., display_name: _Optional[str] = ..., badges: _Optional[int] = ..., status_text: _Optional[str] = ..., status_presence: _Optional[_Union[_users_db_pb2.UserStatus, str]] = ..., profile_content: _Optional[str] = ..., profile_background_id: _Optional[str] = ..., privileged: bool = ..., suspended_until: _Optional[int] = ..., created_at: _Optional[int] = ..., updated_at: _Optional[int] = ..., verified: bool = ..., avatar: _Optional[_Union[_files_pb2.File, _Mapping]] = ..., relations: _Optional[_Iterable[_Union[_users_db_pb2.UserRelationship, _Mapping]]] = ..., bot: _Optional[_Union[_bots_db_pb2.Bot, _Mapping]] = ...) -> None: ...
+    online: bool
+    def __init__(self, id: _Optional[str] = ..., username: _Optional[str] = ..., email: _Optional[str] = ..., relationship: _Optional[str] = ..., display_name: _Optional[str] = ..., badges: _Optional[int] = ..., status_text: _Optional[str] = ..., status_presence: _Optional[_Union[_users_db_pb2.UserStatus, str]] = ..., profile_content: _Optional[str] = ..., profile_background_id: _Optional[str] = ..., privileged: bool = ..., suspended_until: _Optional[int] = ..., created_at: _Optional[int] = ..., updated_at: _Optional[int] = ..., verified: bool = ..., avatar: _Optional[_Union[_files_pb2.File, _Mapping]] = ..., relations: _Optional[_Iterable[_Union[_users_db_pb2.UserRelationship, _Mapping]]] = ..., bot: _Optional[_Union[_bots_db_pb2.Bot, _Mapping]] = ..., online: bool = ...) -> None: ...
 
 class UsersCreateRequest(_message.Message):
     __slots__ = ("email", "password", "username")

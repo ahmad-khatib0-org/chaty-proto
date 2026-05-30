@@ -28,45 +28,45 @@ from shared.v1 import error_pb2 as shared_dot_v1_dot_error__pb2
 from shared.v1 import files_pb2 as shared_dot_v1_dot_files__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16service/v1/users.proto\x12\nservice.v1\x1a\x18service/v1/bots_db.proto\x1a\x19service/v1/users_db.proto\x1a\x15shared/v1/error.proto\x1a\x15shared/v1/files.proto\"\x89\x05\n\x07\x41PIUser\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x14\n\x0crelationship\x18\x04 \x01(\t\x12\x19\n\x0c\x64isplay_name\x18\x05 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x06\x62\x61\x64ges\x18\x06 \x01(\x05H\x01\x88\x01\x01\x12\x18\n\x0bstatus_text\x18\x07 \x01(\tH\x02\x88\x01\x01\x12\x34\n\x0fstatus_presence\x18\x08 \x01(\x0e\x32\x16.service.v1.UserStatusH\x03\x88\x01\x01\x12\x1c\n\x0fprofile_content\x18\t \x01(\tH\x04\x88\x01\x01\x12\"\n\x15profile_background_id\x18\n \x01(\tH\x05\x88\x01\x01\x12\x12\n\nprivileged\x18\x0b \x01(\x08\x12\x1c\n\x0fsuspended_until\x18\x0c \x01(\x03H\x06\x88\x01\x01\x12\x12\n\ncreated_at\x18\r \x01(\x03\x12\x12\n\nupdated_at\x18\x0e \x01(\x03\x12\x10\n\x08verified\x18\x0f \x01(\x08\x12$\n\x06\x61vatar\x18\x10 \x01(\x0b\x32\x0f.shared.v1.FileH\x07\x88\x01\x01\x12/\n\trelations\x18\x11 \x03(\x0b\x32\x1c.service.v1.UserRelationship\x12!\n\x03\x62ot\x18\x12 \x01(\x0b\x32\x0f.service.v1.BotH\x08\x88\x01\x01\x42\x0f\n\r_display_nameB\t\n\x07_badgesB\x0e\n\x0c_status_textB\x12\n\x10_status_presenceB\x12\n\x10_profile_contentB\x18\n\x16_profile_background_idB\x12\n\x10_suspended_untilB\t\n\x07_avatarB\x06\n\x04_bot\"G\n\x12UsersCreateRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08username\x18\x03 \x01(\t\"|\n\x13UsersCreateResponse\x12\x33\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32#.service.v1.UsersCreateResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"*\n\x17UsersCreateResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"Z\n\x11UsersLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0b\n\x03mfa\x18\x03 \x01(\t\x12\x17\n\x0flogin_challenge\x18\x04 \x01(\t\"z\n\x12UsersLoginResponse\x12\x32\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\".service.v1.UsersLoginResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"-\n\x16UsersLoginResponseData\x12\x13\n\x0bredirect_to\x18\x01 \x01(\t\".\n\x1dUsersEmailConfirmationRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\x92\x01\n\x1eUsersEmailConfirmationResponse\x12>\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32..service.v1.UsersEmailConfirmationResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"5\n\"UsersEmailConfirmationResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"+\n\x1aUsersForgotPasswordRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"\x8c\x01\n\x1bUsersForgotPasswordResponse\x12;\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32+.service.v1.UsersForgotPasswordResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"2\n\x1fUsersForgotPasswordResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"[\n\x19UsersResetPasswordRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x1d\n\x15password_confirmation\x18\x03 \x01(\t\"\x8a\x01\n\x1aUsersResetPasswordResponse\x12:\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32*.service.v1.UsersResetPasswordResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"1\n\x1eUsersResetPasswordResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t*\x85\x01\n\x08UserFlag\x12\x19\n\x15USER_FLAG_UNSPECIFIED\x10\x00\x12\x1d\n\x19USER_FLAG_SUSPENDED_UNTIL\x10\x01\x12\x15\n\x11USER_FLAG_DELETED\x10\x02\x12\x14\n\x10USER_FLAG_BANNED\x10\x04\x12\x12\n\x0eUSER_FLAG_SPAM\x10\x08\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16service/v1/users.proto\x12\nservice.v1\x1a\x18service/v1/bots_db.proto\x1a\x19service/v1/users_db.proto\x1a\x15shared/v1/error.proto\x1a\x15shared/v1/files.proto\"\xa9\x05\n\x07\x41PIUser\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x14\n\x0crelationship\x18\x04 \x01(\t\x12\x19\n\x0c\x64isplay_name\x18\x05 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x06\x62\x61\x64ges\x18\x06 \x01(\x05H\x01\x88\x01\x01\x12\x18\n\x0bstatus_text\x18\x07 \x01(\tH\x02\x88\x01\x01\x12\x34\n\x0fstatus_presence\x18\x08 \x01(\x0e\x32\x16.service.v1.UserStatusH\x03\x88\x01\x01\x12\x1c\n\x0fprofile_content\x18\t \x01(\tH\x04\x88\x01\x01\x12\"\n\x15profile_background_id\x18\n \x01(\tH\x05\x88\x01\x01\x12\x12\n\nprivileged\x18\x0b \x01(\x08\x12\x1c\n\x0fsuspended_until\x18\x0c \x01(\x03H\x06\x88\x01\x01\x12\x12\n\ncreated_at\x18\r \x01(\x03\x12\x12\n\nupdated_at\x18\x0e \x01(\x03\x12\x10\n\x08verified\x18\x0f \x01(\x08\x12$\n\x06\x61vatar\x18\x10 \x01(\x0b\x32\x0f.shared.v1.FileH\x07\x88\x01\x01\x12/\n\trelations\x18\x11 \x03(\x0b\x32\x1c.service.v1.UserRelationship\x12!\n\x03\x62ot\x18\x12 \x01(\x0b\x32\x0f.service.v1.BotH\x08\x88\x01\x01\x12\x13\n\x06online\x18\x13 \x01(\x08H\t\x88\x01\x01\x42\x0f\n\r_display_nameB\t\n\x07_badgesB\x0e\n\x0c_status_textB\x12\n\x10_status_presenceB\x12\n\x10_profile_contentB\x18\n\x16_profile_background_idB\x12\n\x10_suspended_untilB\t\n\x07_avatarB\x06\n\x04_botB\t\n\x07_online\"G\n\x12UsersCreateRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08username\x18\x03 \x01(\t\"|\n\x13UsersCreateResponse\x12\x33\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32#.service.v1.UsersCreateResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"*\n\x17UsersCreateResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"Z\n\x11UsersLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0b\n\x03mfa\x18\x03 \x01(\t\x12\x17\n\x0flogin_challenge\x18\x04 \x01(\t\"z\n\x12UsersLoginResponse\x12\x32\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\".service.v1.UsersLoginResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"-\n\x16UsersLoginResponseData\x12\x13\n\x0bredirect_to\x18\x01 \x01(\t\".\n\x1dUsersEmailConfirmationRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\x92\x01\n\x1eUsersEmailConfirmationResponse\x12>\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32..service.v1.UsersEmailConfirmationResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"5\n\"UsersEmailConfirmationResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"+\n\x1aUsersForgotPasswordRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"\x8c\x01\n\x1bUsersForgotPasswordResponse\x12;\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32+.service.v1.UsersForgotPasswordResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"2\n\x1fUsersForgotPasswordResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t\"[\n\x19UsersResetPasswordRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x1d\n\x15password_confirmation\x18\x03 \x01(\t\"\x8a\x01\n\x1aUsersResetPasswordResponse\x12:\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32*.service.v1.UsersResetPasswordResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"1\n\x1eUsersResetPasswordResponseData\x12\x0f\n\x07message\x18\x01 \x01(\t*\x85\x01\n\x08UserFlag\x12\x19\n\x15USER_FLAG_UNSPECIFIED\x10\x00\x12\x1d\n\x19USER_FLAG_SUSPENDED_UNTIL\x10\x01\x12\x15\n\x11USER_FLAG_DELETED\x10\x02\x12\x14\n\x10USER_FLAG_BANNED\x10\x04\x12\x12\n\x0eUSER_FLAG_SPAM\x10\x08\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.users_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_USERFLAG']._serialized_start=2073
-  _globals['_USERFLAG']._serialized_end=2206
+  _globals['_USERFLAG']._serialized_start=2105
+  _globals['_USERFLAG']._serialized_end=2238
   _globals['_APIUSER']._serialized_start=138
-  _globals['_APIUSER']._serialized_end=787
-  _globals['_USERSCREATEREQUEST']._serialized_start=789
-  _globals['_USERSCREATEREQUEST']._serialized_end=860
-  _globals['_USERSCREATERESPONSE']._serialized_start=862
-  _globals['_USERSCREATERESPONSE']._serialized_end=986
-  _globals['_USERSCREATERESPONSEDATA']._serialized_start=988
-  _globals['_USERSCREATERESPONSEDATA']._serialized_end=1030
-  _globals['_USERSLOGINREQUEST']._serialized_start=1032
-  _globals['_USERSLOGINREQUEST']._serialized_end=1122
-  _globals['_USERSLOGINRESPONSE']._serialized_start=1124
-  _globals['_USERSLOGINRESPONSE']._serialized_end=1246
-  _globals['_USERSLOGINRESPONSEDATA']._serialized_start=1248
-  _globals['_USERSLOGINRESPONSEDATA']._serialized_end=1293
-  _globals['_USERSEMAILCONFIRMATIONREQUEST']._serialized_start=1295
-  _globals['_USERSEMAILCONFIRMATIONREQUEST']._serialized_end=1341
-  _globals['_USERSEMAILCONFIRMATIONRESPONSE']._serialized_start=1344
-  _globals['_USERSEMAILCONFIRMATIONRESPONSE']._serialized_end=1490
-  _globals['_USERSEMAILCONFIRMATIONRESPONSEDATA']._serialized_start=1492
-  _globals['_USERSEMAILCONFIRMATIONRESPONSEDATA']._serialized_end=1545
-  _globals['_USERSFORGOTPASSWORDREQUEST']._serialized_start=1547
-  _globals['_USERSFORGOTPASSWORDREQUEST']._serialized_end=1590
-  _globals['_USERSFORGOTPASSWORDRESPONSE']._serialized_start=1593
-  _globals['_USERSFORGOTPASSWORDRESPONSE']._serialized_end=1733
-  _globals['_USERSFORGOTPASSWORDRESPONSEDATA']._serialized_start=1735
-  _globals['_USERSFORGOTPASSWORDRESPONSEDATA']._serialized_end=1785
-  _globals['_USERSRESETPASSWORDREQUEST']._serialized_start=1787
-  _globals['_USERSRESETPASSWORDREQUEST']._serialized_end=1878
-  _globals['_USERSRESETPASSWORDRESPONSE']._serialized_start=1881
-  _globals['_USERSRESETPASSWORDRESPONSE']._serialized_end=2019
-  _globals['_USERSRESETPASSWORDRESPONSEDATA']._serialized_start=2021
-  _globals['_USERSRESETPASSWORDRESPONSEDATA']._serialized_end=2070
+  _globals['_APIUSER']._serialized_end=819
+  _globals['_USERSCREATEREQUEST']._serialized_start=821
+  _globals['_USERSCREATEREQUEST']._serialized_end=892
+  _globals['_USERSCREATERESPONSE']._serialized_start=894
+  _globals['_USERSCREATERESPONSE']._serialized_end=1018
+  _globals['_USERSCREATERESPONSEDATA']._serialized_start=1020
+  _globals['_USERSCREATERESPONSEDATA']._serialized_end=1062
+  _globals['_USERSLOGINREQUEST']._serialized_start=1064
+  _globals['_USERSLOGINREQUEST']._serialized_end=1154
+  _globals['_USERSLOGINRESPONSE']._serialized_start=1156
+  _globals['_USERSLOGINRESPONSE']._serialized_end=1278
+  _globals['_USERSLOGINRESPONSEDATA']._serialized_start=1280
+  _globals['_USERSLOGINRESPONSEDATA']._serialized_end=1325
+  _globals['_USERSEMAILCONFIRMATIONREQUEST']._serialized_start=1327
+  _globals['_USERSEMAILCONFIRMATIONREQUEST']._serialized_end=1373
+  _globals['_USERSEMAILCONFIRMATIONRESPONSE']._serialized_start=1376
+  _globals['_USERSEMAILCONFIRMATIONRESPONSE']._serialized_end=1522
+  _globals['_USERSEMAILCONFIRMATIONRESPONSEDATA']._serialized_start=1524
+  _globals['_USERSEMAILCONFIRMATIONRESPONSEDATA']._serialized_end=1577
+  _globals['_USERSFORGOTPASSWORDREQUEST']._serialized_start=1579
+  _globals['_USERSFORGOTPASSWORDREQUEST']._serialized_end=1622
+  _globals['_USERSFORGOTPASSWORDRESPONSE']._serialized_start=1625
+  _globals['_USERSFORGOTPASSWORDRESPONSE']._serialized_end=1765
+  _globals['_USERSFORGOTPASSWORDRESPONSEDATA']._serialized_start=1767
+  _globals['_USERSFORGOTPASSWORDRESPONSEDATA']._serialized_end=1817
+  _globals['_USERSRESETPASSWORDREQUEST']._serialized_start=1819
+  _globals['_USERSRESETPASSWORDREQUEST']._serialized_end=1910
+  _globals['_USERSRESETPASSWORDRESPONSE']._serialized_start=1913
+  _globals['_USERSRESETPASSWORDRESPONSE']._serialized_end=2051
+  _globals['_USERSRESETPASSWORDRESPONSEDATA']._serialized_start=2053
+  _globals['_USERSRESETPASSWORDRESPONSEDATA']._serialized_end=2102
 # @@protoc_insertion_point(module_scope)
