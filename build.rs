@@ -218,7 +218,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.ServerMember",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
     )
     .type_attribute(
       "service.v1.Server",

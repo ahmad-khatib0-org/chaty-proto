@@ -965,7 +965,7 @@ pub struct Message {
     pub created_at: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerMember {
     /// Server ID (partition key)
