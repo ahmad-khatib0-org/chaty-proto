@@ -46,7 +46,7 @@ export interface GroupsListItem {
   /** channel id */
   id: string;
   group?: ChannelGroup | undefined;
-  createdAt: number;
+  createdAt: bigint;
 }
 
 function createBaseGroupsCreateRequest(): GroupsCreateRequest {
@@ -516,7 +516,7 @@ export const GroupsListResponseData: MessageFns<GroupsListResponseData> = {
 };
 
 function createBaseGroupsListItem(): GroupsListItem {
-  return { id: "", group: undefined, createdAt: 0 };
+  return { id: "", group: undefined, createdAt: 0n };
 }
 
 export const GroupsListItem: MessageFns<GroupsListItem> = {
@@ -527,7 +527,10 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     if (message.group !== undefined) {
       ChannelGroup.encode(message.group, writer.uint32(18).fork()).join();
     }
-    if (message.createdAt !== 0) {
+    if (message.createdAt !== 0n) {
+      if (BigInt.asIntN(64, message.createdAt) !== message.createdAt) {
+        throw new globalThis.Error("value provided for field message.createdAt of type int64 too large");
+      }
       writer.uint32(24).int64(message.createdAt);
     }
     return writer;
@@ -561,7 +564,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
             break;
           }
 
-          message.createdAt = longToNumber(reader.int64());
+          message.createdAt = reader.int64() as bigint;
           continue;
         }
       }
@@ -577,7 +580,7 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       group: isSet(object.group) ? ChannelGroup.fromJSON(object.group) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt) : 0n,
     };
   },
 
@@ -589,8 +592,8 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     if (message.group !== undefined) {
       obj.group = ChannelGroup.toJSON(message.group);
     }
-    if (message.createdAt !== 0) {
-      obj.createdAt = Math.round(message.createdAt);
+    if (message.createdAt !== 0n) {
+      obj.createdAt = message.createdAt.toString();
     }
     return obj;
   },
@@ -604,12 +607,12 @@ export const GroupsListItem: MessageFns<GroupsListItem> = {
     message.group = (object.group !== undefined && object.group !== null)
       ? ChannelGroup.fromPartial(object.group)
       : undefined;
-    message.createdAt = object.createdAt ?? 0;
+    message.createdAt = object.createdAt ?? 0n;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -620,17 +623,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

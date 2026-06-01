@@ -80,7 +80,7 @@ export interface MessagesGetRequest {
    * For fetching nearby messages, this is `(limit + 2)`
    */
   limit?:
-    | number
+    | bigint
     | undefined;
   /** Message id before which messages should be fetched */
   before?:
@@ -225,6 +225,9 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
       writer.uint32(10).string(message.channelId);
     }
     if (message.limit !== undefined) {
+      if (BigInt.asIntN(64, message.limit) !== message.limit) {
+        throw new globalThis.Error("value provided for field message.limit of type int64 too large");
+      }
       writer.uint32(16).int64(message.limit);
     }
     if (message.before !== undefined) {
@@ -265,7 +268,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
             break;
           }
 
-          message.limit = longToNumber(reader.int64());
+          message.limit = reader.int64() as bigint;
           continue;
         }
         case 3: {
@@ -320,7 +323,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
   fromJSON(object: any): MessagesGetRequest {
     return {
       channelId: isSet(object.channelId) ? globalThis.String(object.channelId) : "",
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : undefined,
+      limit: isSet(object.limit) ? BigInt(object.limit) : undefined,
       before: isSet(object.before) ? globalThis.String(object.before) : undefined,
       after: isSet(object.after) ? globalThis.String(object.after) : undefined,
       sort: isSet(object.sort) ? messageSortFromJSON(object.sort) : undefined,
@@ -335,7 +338,7 @@ export const MessagesGetRequest: MessageFns<MessagesGetRequest> = {
       obj.channelId = message.channelId;
     }
     if (message.limit !== undefined) {
-      obj.limit = Math.round(message.limit);
+      obj.limit = message.limit.toString();
     }
     if (message.before !== undefined) {
       obj.before = message.before;
@@ -545,7 +548,7 @@ export const MessagesGetResponseData: MessageFns<MessagesGetResponseData> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -556,17 +559,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

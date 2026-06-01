@@ -89,19 +89,19 @@ export interface PaginationRequest {
     | undefined;
   /** Date range filters (common for time-series data) */
   createdAfter?:
-    | number
+    | bigint
     | undefined;
   /** Unix timestamp */
   createdBefore?:
-    | number
+    | bigint
     | undefined;
   /** Unix timestamp */
   updatedAfter?:
-    | number
+    | bigint
     | undefined;
   /** Unix timestamp */
   updatedBefore?:
-    | number
+    | bigint
     | undefined;
   /** Sorting */
   sortBy: PaginationSort[];
@@ -235,15 +235,27 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       writer.uint32(66).string(message.beforeIncluding);
     }
     if (message.createdAfter !== undefined) {
+      if (BigInt.asIntN(64, message.createdAfter) !== message.createdAfter) {
+        throw new globalThis.Error("value provided for field message.createdAfter of type int64 too large");
+      }
       writer.uint32(72).int64(message.createdAfter);
     }
     if (message.createdBefore !== undefined) {
+      if (BigInt.asIntN(64, message.createdBefore) !== message.createdBefore) {
+        throw new globalThis.Error("value provided for field message.createdBefore of type int64 too large");
+      }
       writer.uint32(80).int64(message.createdBefore);
     }
     if (message.updatedAfter !== undefined) {
+      if (BigInt.asIntN(64, message.updatedAfter) !== message.updatedAfter) {
+        throw new globalThis.Error("value provided for field message.updatedAfter of type int64 too large");
+      }
       writer.uint32(88).int64(message.updatedAfter);
     }
     if (message.updatedBefore !== undefined) {
+      if (BigInt.asIntN(64, message.updatedBefore) !== message.updatedBefore) {
+        throw new globalThis.Error("value provided for field message.updatedBefore of type int64 too large");
+      }
       writer.uint32(96).int64(message.updatedBefore);
     }
     for (const v of message.sortBy) {
@@ -328,7 +340,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdAfter = longToNumber(reader.int64());
+          message.createdAfter = reader.int64() as bigint;
           continue;
         }
         case 10: {
@@ -336,7 +348,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.createdBefore = longToNumber(reader.int64());
+          message.createdBefore = reader.int64() as bigint;
           continue;
         }
         case 11: {
@@ -344,7 +356,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedAfter = longToNumber(reader.int64());
+          message.updatedAfter = reader.int64() as bigint;
           continue;
         }
         case 12: {
@@ -352,7 +364,7 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
             break;
           }
 
-          message.updatedBefore = longToNumber(reader.int64());
+          message.updatedBefore = reader.int64() as bigint;
           continue;
         }
         case 13: {
@@ -382,10 +394,10 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       afterIncluding: isSet(object.afterIncluding) ? globalThis.String(object.afterIncluding) : undefined,
       before: isSet(object.before) ? globalThis.String(object.before) : undefined,
       beforeIncluding: isSet(object.beforeIncluding) ? globalThis.String(object.beforeIncluding) : undefined,
-      createdAfter: isSet(object.createdAfter) ? globalThis.Number(object.createdAfter) : undefined,
-      createdBefore: isSet(object.createdBefore) ? globalThis.Number(object.createdBefore) : undefined,
-      updatedAfter: isSet(object.updatedAfter) ? globalThis.Number(object.updatedAfter) : undefined,
-      updatedBefore: isSet(object.updatedBefore) ? globalThis.Number(object.updatedBefore) : undefined,
+      createdAfter: isSet(object.createdAfter) ? BigInt(object.createdAfter) : undefined,
+      createdBefore: isSet(object.createdBefore) ? BigInt(object.createdBefore) : undefined,
+      updatedAfter: isSet(object.updatedAfter) ? BigInt(object.updatedAfter) : undefined,
+      updatedBefore: isSet(object.updatedBefore) ? BigInt(object.updatedBefore) : undefined,
       sortBy: globalThis.Array.isArray(object?.sortBy) ? object.sortBy.map((e: any) => PaginationSort.fromJSON(e)) : [],
     };
   },
@@ -417,16 +429,16 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
       obj.beforeIncluding = message.beforeIncluding;
     }
     if (message.createdAfter !== undefined) {
-      obj.createdAfter = Math.round(message.createdAfter);
+      obj.createdAfter = message.createdAfter.toString();
     }
     if (message.createdBefore !== undefined) {
-      obj.createdBefore = Math.round(message.createdBefore);
+      obj.createdBefore = message.createdBefore.toString();
     }
     if (message.updatedAfter !== undefined) {
-      obj.updatedAfter = Math.round(message.updatedAfter);
+      obj.updatedAfter = message.updatedAfter.toString();
     }
     if (message.updatedBefore !== undefined) {
-      obj.updatedBefore = Math.round(message.updatedBefore);
+      obj.updatedBefore = message.updatedBefore.toString();
     }
     if (message.sortBy?.length) {
       obj.sortBy = message.sortBy.map((e) => PaginationSort.toJSON(e));
@@ -564,7 +576,7 @@ export const PaginationResponse: MessageFns<PaginationResponse> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -575,17 +587,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

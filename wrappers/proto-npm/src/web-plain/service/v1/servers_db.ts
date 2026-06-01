@@ -20,7 +20,7 @@ export interface Server {
     | string
     | undefined;
   /** Default set of server and channel permissions */
-  defaultPermissions: number;
+  defaultPermissions: bigint;
   /** Icon attachment */
   icon?:
     | File
@@ -50,8 +50,8 @@ export interface Server {
     | undefined;
   /** Channels within this server */
   channels: string[];
-  createdAt: number;
-  updatedAt: number;
+  createdAt: bigint;
+  updatedAt: bigint;
 }
 
 export interface Server_RolesEntry {
@@ -96,7 +96,7 @@ function createBaseServer(): Server {
     ownerId: "",
     name: "",
     description: undefined,
-    defaultPermissions: 0,
+    defaultPermissions: 0n,
     icon: undefined,
     banner: undefined,
     flags: undefined,
@@ -108,8 +108,8 @@ function createBaseServer(): Server {
     systemMessages: undefined,
     stats: undefined,
     channels: [],
-    createdAt: 0,
-    updatedAt: 0,
+    createdAt: 0n,
+    updatedAt: 0n,
   };
 }
 
@@ -127,7 +127,10 @@ export const Server: MessageFns<Server> = {
     if (message.description !== undefined) {
       writer.uint32(34).string(message.description);
     }
-    if (message.defaultPermissions !== 0) {
+    if (message.defaultPermissions !== 0n) {
+      if (BigInt.asIntN(64, message.defaultPermissions) !== message.defaultPermissions) {
+        throw new globalThis.Error("value provided for field message.defaultPermissions of type int64 too large");
+      }
       writer.uint32(40).int64(message.defaultPermissions);
     }
     if (message.icon !== undefined) {
@@ -163,10 +166,16 @@ export const Server: MessageFns<Server> = {
     for (const v of message.channels) {
       writer.uint32(130).string(v!);
     }
-    if (message.createdAt !== 0) {
+    if (message.createdAt !== 0n) {
+      if (BigInt.asIntN(64, message.createdAt) !== message.createdAt) {
+        throw new globalThis.Error("value provided for field message.createdAt of type int64 too large");
+      }
       writer.uint32(136).int64(message.createdAt);
     }
-    if (message.updatedAt !== 0) {
+    if (message.updatedAt !== 0n) {
+      if (BigInt.asIntN(64, message.updatedAt) !== message.updatedAt) {
+        throw new globalThis.Error("value provided for field message.updatedAt of type int64 too large");
+      }
       writer.uint32(144).int64(message.updatedAt);
     }
     return writer;
@@ -216,7 +225,7 @@ export const Server: MessageFns<Server> = {
             break;
           }
 
-          message.defaultPermissions = longToNumber(reader.int64());
+          message.defaultPermissions = reader.int64() as bigint;
           continue;
         }
         case 6: {
@@ -315,7 +324,7 @@ export const Server: MessageFns<Server> = {
             break;
           }
 
-          message.createdAt = longToNumber(reader.int64());
+          message.createdAt = reader.int64() as bigint;
           continue;
         }
         case 18: {
@@ -323,7 +332,7 @@ export const Server: MessageFns<Server> = {
             break;
           }
 
-          message.updatedAt = longToNumber(reader.int64());
+          message.updatedAt = reader.int64() as bigint;
           continue;
         }
       }
@@ -341,7 +350,7 @@ export const Server: MessageFns<Server> = {
       ownerId: isSet(object.ownerId) ? globalThis.String(object.ownerId) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : undefined,
-      defaultPermissions: isSet(object.defaultPermissions) ? globalThis.Number(object.defaultPermissions) : 0,
+      defaultPermissions: isSet(object.defaultPermissions) ? BigInt(object.defaultPermissions) : 0n,
       icon: isSet(object.icon) ? File.fromJSON(object.icon) : undefined,
       banner: isSet(object.banner) ? File.fromJSON(object.banner) : undefined,
       flags: isSet(object.flags) ? globalThis.Number(object.flags) : undefined,
@@ -362,8 +371,8 @@ export const Server: MessageFns<Server> = {
         : undefined,
       stats: isSet(object.stats) ? ServerStats.fromJSON(object.stats) : undefined,
       channels: globalThis.Array.isArray(object?.channels) ? object.channels.map((e: any) => globalThis.String(e)) : [],
-      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
-      updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt) : 0n,
+      updatedAt: isSet(object.updatedAt) ? BigInt(object.updatedAt) : 0n,
     };
   },
 
@@ -381,8 +390,8 @@ export const Server: MessageFns<Server> = {
     if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.defaultPermissions !== 0) {
-      obj.defaultPermissions = Math.round(message.defaultPermissions);
+    if (message.defaultPermissions !== 0n) {
+      obj.defaultPermissions = message.defaultPermissions.toString();
     }
     if (message.icon !== undefined) {
       obj.icon = File.toJSON(message.icon);
@@ -423,11 +432,11 @@ export const Server: MessageFns<Server> = {
     if (message.channels?.length) {
       obj.channels = message.channels;
     }
-    if (message.createdAt !== 0) {
-      obj.createdAt = Math.round(message.createdAt);
+    if (message.createdAt !== 0n) {
+      obj.createdAt = message.createdAt.toString();
     }
-    if (message.updatedAt !== 0) {
-      obj.updatedAt = Math.round(message.updatedAt);
+    if (message.updatedAt !== 0n) {
+      obj.updatedAt = message.updatedAt.toString();
     }
     return obj;
   },
@@ -441,7 +450,7 @@ export const Server: MessageFns<Server> = {
     message.ownerId = object.ownerId ?? "";
     message.name = object.name ?? "";
     message.description = object.description ?? undefined;
-    message.defaultPermissions = object.defaultPermissions ?? 0;
+    message.defaultPermissions = object.defaultPermissions ?? 0n;
     message.icon = (object.icon !== undefined && object.icon !== null) ? File.fromPartial(object.icon) : undefined;
     message.banner = (object.banner !== undefined && object.banner !== null)
       ? File.fromPartial(object.banner)
@@ -464,8 +473,8 @@ export const Server: MessageFns<Server> = {
       ? ServerStats.fromPartial(object.stats)
       : undefined;
     message.channels = object.channels?.map((e) => e) || [];
-    message.createdAt = object.createdAt ?? 0;
-    message.updatedAt = object.updatedAt ?? 0;
+    message.createdAt = object.createdAt ?? 0n;
+    message.updatedAt = object.updatedAt ?? 0n;
     return message;
   },
 };
@@ -822,7 +831,7 @@ export const ServerStats: MessageFns<ServerStats> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -833,17 +842,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

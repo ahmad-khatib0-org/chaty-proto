@@ -159,12 +159,12 @@ export interface User {
   profileBackgroundId?: string | undefined;
   privileged: boolean;
   suspendedUntil?:
-    | number
+    | bigint
     | undefined;
   /** unix timestamp miliseconds */
-  createdAt: number;
+  createdAt: bigint;
   /** unix timestamp miliseconds */
-  updatedAt: number;
+  updatedAt: bigint;
   verified: boolean;
   avatar?: File | undefined;
   relations: UserRelationship[];
@@ -190,8 +190,8 @@ function createBaseUser(): User {
     profileBackgroundId: undefined,
     privileged: false,
     suspendedUntil: undefined,
-    createdAt: 0,
-    updatedAt: 0,
+    createdAt: 0n,
+    updatedAt: 0n,
     verified: false,
     avatar: undefined,
     relations: [],
@@ -235,12 +235,21 @@ export const User: MessageFns<User> = {
       writer.uint32(88).bool(message.privileged);
     }
     if (message.suspendedUntil !== undefined) {
+      if (BigInt.asIntN(64, message.suspendedUntil) !== message.suspendedUntil) {
+        throw new globalThis.Error("value provided for field message.suspendedUntil of type int64 too large");
+      }
       writer.uint32(96).int64(message.suspendedUntil);
     }
-    if (message.createdAt !== 0) {
+    if (message.createdAt !== 0n) {
+      if (BigInt.asIntN(64, message.createdAt) !== message.createdAt) {
+        throw new globalThis.Error("value provided for field message.createdAt of type int64 too large");
+      }
       writer.uint32(104).int64(message.createdAt);
     }
-    if (message.updatedAt !== 0) {
+    if (message.updatedAt !== 0n) {
+      if (BigInt.asIntN(64, message.updatedAt) !== message.updatedAt) {
+        throw new globalThis.Error("value provided for field message.updatedAt of type int64 too large");
+      }
       writer.uint32(112).int64(message.updatedAt);
     }
     if (message.verified !== false) {
@@ -358,7 +367,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.suspendedUntil = longToNumber(reader.int64());
+          message.suspendedUntil = reader.int64() as bigint;
           continue;
         }
         case 13: {
@@ -366,7 +375,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.createdAt = longToNumber(reader.int64());
+          message.createdAt = reader.int64() as bigint;
           continue;
         }
         case 14: {
@@ -374,7 +383,7 @@ export const User: MessageFns<User> = {
             break;
           }
 
-          message.updatedAt = longToNumber(reader.int64());
+          message.updatedAt = reader.int64() as bigint;
           continue;
         }
         case 15: {
@@ -433,9 +442,9 @@ export const User: MessageFns<User> = {
         ? globalThis.String(object.profileBackgroundId)
         : undefined,
       privileged: isSet(object.privileged) ? globalThis.Boolean(object.privileged) : false,
-      suspendedUntil: isSet(object.suspendedUntil) ? globalThis.Number(object.suspendedUntil) : undefined,
-      createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
-      updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
+      suspendedUntil: isSet(object.suspendedUntil) ? BigInt(object.suspendedUntil) : undefined,
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt) : 0n,
+      updatedAt: isSet(object.updatedAt) ? BigInt(object.updatedAt) : 0n,
       verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
       avatar: isSet(object.avatar) ? File.fromJSON(object.avatar) : undefined,
       relations: globalThis.Array.isArray(object?.relations)
@@ -481,13 +490,13 @@ export const User: MessageFns<User> = {
       obj.privileged = message.privileged;
     }
     if (message.suspendedUntil !== undefined) {
-      obj.suspendedUntil = Math.round(message.suspendedUntil);
+      obj.suspendedUntil = message.suspendedUntil.toString();
     }
-    if (message.createdAt !== 0) {
-      obj.createdAt = Math.round(message.createdAt);
+    if (message.createdAt !== 0n) {
+      obj.createdAt = message.createdAt.toString();
     }
-    if (message.updatedAt !== 0) {
-      obj.updatedAt = Math.round(message.updatedAt);
+    if (message.updatedAt !== 0n) {
+      obj.updatedAt = message.updatedAt.toString();
     }
     if (message.verified !== false) {
       obj.verified = message.verified;
@@ -521,8 +530,8 @@ export const User: MessageFns<User> = {
     message.profileBackgroundId = object.profileBackgroundId ?? undefined;
     message.privileged = object.privileged ?? false;
     message.suspendedUntil = object.suspendedUntil ?? undefined;
-    message.createdAt = object.createdAt ?? 0;
-    message.updatedAt = object.updatedAt ?? 0;
+    message.createdAt = object.createdAt ?? 0n;
+    message.updatedAt = object.updatedAt ?? 0n;
     message.verified = object.verified ?? false;
     message.avatar = (object.avatar !== undefined && object.avatar !== null)
       ? File.fromPartial(object.avatar)
@@ -609,7 +618,7 @@ export const UserRelationship: MessageFns<UserRelationship> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -620,17 +629,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

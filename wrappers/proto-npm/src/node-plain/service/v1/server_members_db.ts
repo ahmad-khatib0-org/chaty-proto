@@ -25,12 +25,12 @@ export interface ServerMember {
     | string
     | undefined;
   /** Time at which this user joined the server */
-  joinedAt: number;
+  joinedAt: bigint;
   /** Role IDs assigned to this member */
   roles: string[];
   /** Timestamp this member is timed out until */
   timeout?:
-    | number
+    | bigint
     | undefined;
   /** Voice settings */
   canPublish: boolean;
@@ -44,7 +44,7 @@ function createBaseServerMember(): ServerMember {
     username: "",
     avatar: undefined,
     nickname: undefined,
-    joinedAt: 0,
+    joinedAt: 0n,
     roles: [],
     timeout: undefined,
     canPublish: false,
@@ -69,13 +69,19 @@ export const ServerMember: MessageFns<ServerMember> = {
     if (message.nickname !== undefined) {
       writer.uint32(42).string(message.nickname);
     }
-    if (message.joinedAt !== 0) {
+    if (message.joinedAt !== 0n) {
+      if (BigInt.asIntN(64, message.joinedAt) !== message.joinedAt) {
+        throw new globalThis.Error("value provided for field message.joinedAt of type int64 too large");
+      }
       writer.uint32(48).int64(message.joinedAt);
     }
     for (const v of message.roles) {
       writer.uint32(58).string(v!);
     }
     if (message.timeout !== undefined) {
+      if (BigInt.asIntN(64, message.timeout) !== message.timeout) {
+        throw new globalThis.Error("value provided for field message.timeout of type int64 too large");
+      }
       writer.uint32(64).int64(message.timeout);
     }
     if (message.canPublish !== false) {
@@ -139,7 +145,7 @@ export const ServerMember: MessageFns<ServerMember> = {
             break;
           }
 
-          message.joinedAt = longToNumber(reader.int64());
+          message.joinedAt = reader.int64() as bigint;
           continue;
         }
         case 7: {
@@ -155,7 +161,7 @@ export const ServerMember: MessageFns<ServerMember> = {
             break;
           }
 
-          message.timeout = longToNumber(reader.int64());
+          message.timeout = reader.int64() as bigint;
           continue;
         }
         case 9: {
@@ -190,9 +196,9 @@ export const ServerMember: MessageFns<ServerMember> = {
       username: isSet(object.username) ? globalThis.String(object.username) : "",
       avatar: isSet(object.avatar) ? File.fromJSON(object.avatar) : undefined,
       nickname: isSet(object.nickname) ? globalThis.String(object.nickname) : undefined,
-      joinedAt: isSet(object.joinedAt) ? globalThis.Number(object.joinedAt) : 0,
+      joinedAt: isSet(object.joinedAt) ? BigInt(object.joinedAt) : 0n,
       roles: globalThis.Array.isArray(object?.roles) ? object.roles.map((e: any) => globalThis.String(e)) : [],
-      timeout: isSet(object.timeout) ? globalThis.Number(object.timeout) : undefined,
+      timeout: isSet(object.timeout) ? BigInt(object.timeout) : undefined,
       canPublish: isSet(object.canPublish) ? globalThis.Boolean(object.canPublish) : false,
       canReceive: isSet(object.canReceive) ? globalThis.Boolean(object.canReceive) : false,
     };
@@ -215,14 +221,14 @@ export const ServerMember: MessageFns<ServerMember> = {
     if (message.nickname !== undefined) {
       obj.nickname = message.nickname;
     }
-    if (message.joinedAt !== 0) {
-      obj.joinedAt = Math.round(message.joinedAt);
+    if (message.joinedAt !== 0n) {
+      obj.joinedAt = message.joinedAt.toString();
     }
     if (message.roles?.length) {
       obj.roles = message.roles;
     }
     if (message.timeout !== undefined) {
-      obj.timeout = Math.round(message.timeout);
+      obj.timeout = message.timeout.toString();
     }
     if (message.canPublish !== false) {
       obj.canPublish = message.canPublish;
@@ -245,7 +251,7 @@ export const ServerMember: MessageFns<ServerMember> = {
       ? File.fromPartial(object.avatar)
       : undefined;
     message.nickname = object.nickname ?? undefined;
-    message.joinedAt = object.joinedAt ?? 0;
+    message.joinedAt = object.joinedAt ?? 0n;
     message.roles = object.roles?.map((e) => e) || [];
     message.timeout = object.timeout ?? undefined;
     message.canPublish = object.canPublish ?? false;
@@ -254,7 +260,7 @@ export const ServerMember: MessageFns<ServerMember> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -265,17 +271,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

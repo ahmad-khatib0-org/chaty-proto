@@ -105,7 +105,7 @@ export interface Timestamp {
    * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
    * 9999-12-31T23:59:59Z inclusive.
    */
-  seconds: number;
+  seconds: bigint;
   /**
    * Non-negative fractions of a second at nanosecond resolution. Negative
    * second values with fractions must still have non-negative nanos values
@@ -115,12 +115,15 @@ export interface Timestamp {
 }
 
 function createBaseTimestamp(): Timestamp {
-  return { seconds: 0, nanos: 0 };
+  return { seconds: 0n, nanos: 0 };
 }
 
 export const Timestamp: MessageFns<Timestamp> = {
   encode(message: Timestamp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.seconds !== 0) {
+    if (message.seconds !== 0n) {
+      if (BigInt.asIntN(64, message.seconds) !== message.seconds) {
+        throw new globalThis.Error("value provided for field message.seconds of type int64 too large");
+      }
       writer.uint32(8).int64(message.seconds);
     }
     if (message.nanos !== 0) {
@@ -141,7 +144,7 @@ export const Timestamp: MessageFns<Timestamp> = {
             break;
           }
 
-          message.seconds = longToNumber(reader.int64());
+          message.seconds = reader.int64() as bigint;
           continue;
         }
         case 2: {
@@ -163,15 +166,15 @@ export const Timestamp: MessageFns<Timestamp> = {
 
   fromJSON(object: any): Timestamp {
     return {
-      seconds: isSet(object.seconds) ? globalThis.Number(object.seconds) : 0,
+      seconds: isSet(object.seconds) ? BigInt(object.seconds) : 0n,
       nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
     };
   },
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    if (message.seconds !== 0) {
-      obj.seconds = Math.round(message.seconds);
+    if (message.seconds !== 0n) {
+      obj.seconds = message.seconds.toString();
     }
     if (message.nanos !== 0) {
       obj.nanos = Math.round(message.nanos);
@@ -184,13 +187,13 @@ export const Timestamp: MessageFns<Timestamp> = {
   },
   fromPartial<I extends Exact<DeepPartial<Timestamp>, I>>(object: I): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds = object.seconds ?? 0;
+    message.seconds = object.seconds ?? 0n;
     message.nanos = object.nanos ?? 0;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -201,17 +204,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

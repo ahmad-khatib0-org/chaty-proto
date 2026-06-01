@@ -26,11 +26,11 @@ export interface File {
   /** Raw content type of this file */
   contentType: string;
   /** Size of this file (in bytes) */
-  size: number;
+  size: bigint;
   /** Hash of this file */
   hash: string;
   /** When this file was uploaded */
-  uploadedAt: number;
+  uploadedAt: bigint;
   /** Whether this file was deleted */
   deleted?:
     | boolean
@@ -78,9 +78,9 @@ function createBaseFile(): File {
     bucket: "",
     filename: "",
     contentType: "",
-    size: 0,
+    size: 0n,
     hash: "",
-    uploadedAt: 0,
+    uploadedAt: 0n,
     deleted: undefined,
     reported: undefined,
     metadata: undefined,
@@ -105,13 +105,19 @@ export const File: MessageFns<File> = {
     if (message.contentType !== "") {
       writer.uint32(42).string(message.contentType);
     }
-    if (message.size !== 0) {
+    if (message.size !== 0n) {
+      if (BigInt.asIntN(64, message.size) !== message.size) {
+        throw new globalThis.Error("value provided for field message.size of type int64 too large");
+      }
       writer.uint32(48).int64(message.size);
     }
     if (message.hash !== "") {
       writer.uint32(58).string(message.hash);
     }
-    if (message.uploadedAt !== 0) {
+    if (message.uploadedAt !== 0n) {
+      if (BigInt.asIntN(64, message.uploadedAt) !== message.uploadedAt) {
+        throw new globalThis.Error("value provided for field message.uploadedAt of type int64 too large");
+      }
       writer.uint32(64).int64(message.uploadedAt);
     }
     if (message.deleted !== undefined) {
@@ -181,7 +187,7 @@ export const File: MessageFns<File> = {
             break;
           }
 
-          message.size = longToNumber(reader.int64());
+          message.size = reader.int64() as bigint;
           continue;
         }
         case 7: {
@@ -197,7 +203,7 @@ export const File: MessageFns<File> = {
             break;
           }
 
-          message.uploadedAt = longToNumber(reader.int64());
+          message.uploadedAt = reader.int64() as bigint;
           continue;
         }
         case 9: {
@@ -248,9 +254,9 @@ export const File: MessageFns<File> = {
       bucket: isSet(object.bucket) ? globalThis.String(object.bucket) : "",
       filename: isSet(object.filename) ? globalThis.String(object.filename) : "",
       contentType: isSet(object.contentType) ? globalThis.String(object.contentType) : "",
-      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
+      size: isSet(object.size) ? BigInt(object.size) : 0n,
       hash: isSet(object.hash) ? globalThis.String(object.hash) : "",
-      uploadedAt: isSet(object.uploadedAt) ? globalThis.Number(object.uploadedAt) : 0,
+      uploadedAt: isSet(object.uploadedAt) ? BigInt(object.uploadedAt) : 0n,
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
       metadata: isSet(object.metadata) ? FileMetadata.fromJSON(object.metadata) : undefined,
@@ -275,14 +281,14 @@ export const File: MessageFns<File> = {
     if (message.contentType !== "") {
       obj.contentType = message.contentType;
     }
-    if (message.size !== 0) {
-      obj.size = Math.round(message.size);
+    if (message.size !== 0n) {
+      obj.size = message.size.toString();
     }
     if (message.hash !== "") {
       obj.hash = message.hash;
     }
-    if (message.uploadedAt !== 0) {
-      obj.uploadedAt = Math.round(message.uploadedAt);
+    if (message.uploadedAt !== 0n) {
+      obj.uploadedAt = message.uploadedAt.toString();
     }
     if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
@@ -309,9 +315,9 @@ export const File: MessageFns<File> = {
     message.bucket = object.bucket ?? "";
     message.filename = object.filename ?? "";
     message.contentType = object.contentType ?? "";
-    message.size = object.size ?? 0;
+    message.size = object.size ?? 0n;
     message.hash = object.hash ?? "";
-    message.uploadedAt = object.uploadedAt ?? 0;
+    message.uploadedAt = object.uploadedAt ?? 0n;
     message.deleted = object.deleted ?? undefined;
     message.reported = object.reported ?? undefined;
     message.metadata = (object.metadata !== undefined && object.metadata !== null)
@@ -737,7 +743,7 @@ export const FileMetadataAudio: MessageFns<FileMetadataAudio> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
@@ -748,17 +754,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
