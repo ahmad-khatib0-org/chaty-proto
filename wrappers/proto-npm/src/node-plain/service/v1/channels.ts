@@ -21,7 +21,7 @@ export interface ChannelUnread {
     | string
     | undefined;
   /** Array of message ids that mention the user */
-  mentions?: string | undefined;
+  mentions: string[];
 }
 
 /** Composite primary key consisting of channel and user id */
@@ -43,7 +43,7 @@ export interface ChannelsGetResponse {
 }
 
 function createBaseChannelUnread(): ChannelUnread {
-  return { id: undefined, lastId: undefined, mentions: undefined };
+  return { id: undefined, lastId: undefined, mentions: [] };
 }
 
 export const ChannelUnread: MessageFns<ChannelUnread> = {
@@ -54,8 +54,8 @@ export const ChannelUnread: MessageFns<ChannelUnread> = {
     if (message.lastId !== undefined) {
       writer.uint32(18).string(message.lastId);
     }
-    if (message.mentions !== undefined) {
-      writer.uint32(26).string(message.mentions);
+    for (const v of message.mentions) {
+      writer.uint32(26).string(v!);
     }
     return writer;
   },
@@ -88,7 +88,7 @@ export const ChannelUnread: MessageFns<ChannelUnread> = {
             break;
           }
 
-          message.mentions = reader.string();
+          message.mentions.push(reader.string());
           continue;
         }
       }
@@ -104,7 +104,7 @@ export const ChannelUnread: MessageFns<ChannelUnread> = {
     return {
       id: isSet(object.id) ? ChannelCompositeKey.fromJSON(object.id) : undefined,
       lastId: isSet(object.lastId) ? globalThis.String(object.lastId) : undefined,
-      mentions: isSet(object.mentions) ? globalThis.String(object.mentions) : undefined,
+      mentions: globalThis.Array.isArray(object?.mentions) ? object.mentions.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -116,7 +116,7 @@ export const ChannelUnread: MessageFns<ChannelUnread> = {
     if (message.lastId !== undefined) {
       obj.lastId = message.lastId;
     }
-    if (message.mentions !== undefined) {
+    if (message.mentions?.length) {
       obj.mentions = message.mentions;
     }
     return obj;
@@ -131,7 +131,7 @@ export const ChannelUnread: MessageFns<ChannelUnread> = {
       ? ChannelCompositeKey.fromPartial(object.id)
       : undefined;
     message.lastId = object.lastId ?? undefined;
-    message.mentions = object.mentions ?? undefined;
+    message.mentions = object.mentions?.map((e) => e) || [];
     return message;
   },
 };

@@ -1,8 +1,9 @@
 from service.v1 import channels_db_pb2 as _channels_db_pb2
 from shared.v1 import error_pb2 as _error_pb2
+from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -13,8 +14,8 @@ class ChannelUnread(_message.Message):
     MENTIONS_FIELD_NUMBER: _ClassVar[int]
     id: ChannelCompositeKey
     last_id: str
-    mentions: str
-    def __init__(self, id: _Optional[_Union[ChannelCompositeKey, _Mapping]] = ..., last_id: _Optional[str] = ..., mentions: _Optional[str] = ...) -> None: ...
+    mentions: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, id: _Optional[_Union[ChannelCompositeKey, _Mapping]] = ..., last_id: _Optional[str] = ..., mentions: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class ChannelCompositeKey(_message.Message):
     __slots__ = ("channel", "user")

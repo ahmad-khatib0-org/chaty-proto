@@ -174,8 +174,8 @@ pub struct ChannelUnread {
     #[prost(string, optional, tag = "2")]
     pub last_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Array of message ids that mention the user
-    #[prost(string, optional, tag = "3")]
-    pub mentions: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "3")]
+    pub mentions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Composite primary key consisting of channel and user id
 #[derive(serde::Serialize, serde::Deserialize)]

@@ -11,7 +11,7 @@ message ChannelUnread {
   // Id of the last message read in this channel by a user
   optional string last_id = 2;
   // Array of message ids that mention the user
-  optional string mentions = 3;
+  repeated string mentions = 3;
 }
 
 // Composite primary key consisting of channel and user id

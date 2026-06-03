@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/channels.proto.
  */
 export const file_service_v1_channels: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxIoIBCg1DaGFubmVsVW5yZWFkEisKAmlkGAEgASgLMh8uc2VydmljZS52MS5DaGFubmVsQ29tcG9zaXRlS2V5EhQKB2xhc3RfaWQYAiABKAlIAIgBARIVCghtZW50aW9ucxgDIAEoCUgBiAEBQgoKCF9sYXN0X2lkQgsKCV9tZW50aW9ucyI0ChNDaGFubmVsQ29tcG9zaXRlS2V5Eg8KB2NoYW5uZWwYASABKAkSDAoEdXNlchgCIAEoCSIgChJDaGFubmVsc0dldFJlcXVlc3QSCgoCaWQYASABKAkibAoTQ2hhbm5lbHNHZXRSZXNwb25zZRIjCgRkYXRhGAEgASgLMhMuc2VydmljZS52MS5DaGFubmVsSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZWIGcHJvdG8z", [file_service_v1_channels_db, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxInAKDUNoYW5uZWxVbnJlYWQSKwoCaWQYASABKAsyHy5zZXJ2aWNlLnYxLkNoYW5uZWxDb21wb3NpdGVLZXkSFAoHbGFzdF9pZBgCIAEoCUgAiAEBEhAKCG1lbnRpb25zGAMgAygJQgoKCF9sYXN0X2lkIjQKE0NoYW5uZWxDb21wb3NpdGVLZXkSDwoHY2hhbm5lbBgBIAEoCRIMCgR1c2VyGAIgASgJIiAKEkNoYW5uZWxzR2V0UmVxdWVzdBIKCgJpZBgBIAEoCSJsChNDaGFubmVsc0dldFJlc3BvbnNlEiMKBGRhdGEYASABKAsyEy5zZXJ2aWNlLnYxLkNoYW5uZWxIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlYgZwcm90bzM", [file_service_v1_channels_db, file_shared_v1_error]);
 
 /**
  * Channel Unread
@@ -37,9 +37,9 @@ export type ChannelUnread = Message<"service.v1.ChannelUnread"> & {
   /**
    * Array of message ids that mention the user
    *
-   * @generated from field: optional string mentions = 3;
+   * @generated from field: repeated string mentions = 3;
    */
-  mentions?: string;
+  mentions: string[];
 };
 
 /**

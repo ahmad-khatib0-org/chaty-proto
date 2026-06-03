@@ -26,19 +26,19 @@ from service.v1 import channels_db_pb2 as service_dot_v1_dot_channels__db__pb2
 from shared.v1 import error_pb2 as shared_dot_v1_dot_error__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/channels.proto\x12\nservice.v1\x1a\x1cservice/v1/channels_db.proto\x1a\x15shared/v1/error.proto\"\x82\x01\n\rChannelUnread\x12+\n\x02id\x18\x01 \x01(\x0b\x32\x1f.service.v1.ChannelCompositeKey\x12\x14\n\x07last_id\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x15\n\x08mentions\x18\x03 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_last_idB\x0b\n\t_mentions\"4\n\x13\x43hannelCompositeKey\x12\x0f\n\x07\x63hannel\x18\x01 \x01(\t\x12\x0c\n\x04user\x18\x02 \x01(\t\" \n\x12\x43hannelsGetRequest\x12\n\n\x02id\x18\x01 \x01(\t\"l\n\x13\x43hannelsGetResponse\x12#\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x13.service.v1.ChannelH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08responseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/channels.proto\x12\nservice.v1\x1a\x1cservice/v1/channels_db.proto\x1a\x15shared/v1/error.proto\"p\n\rChannelUnread\x12+\n\x02id\x18\x01 \x01(\x0b\x32\x1f.service.v1.ChannelCompositeKey\x12\x14\n\x07last_id\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x10\n\x08mentions\x18\x03 \x03(\tB\n\n\x08_last_id\"4\n\x13\x43hannelCompositeKey\x12\x0f\n\x07\x63hannel\x18\x01 \x01(\t\x12\x0c\n\x04user\x18\x02 \x01(\t\" \n\x12\x43hannelsGetRequest\x12\n\n\x02id\x18\x01 \x01(\t\"l\n\x13\x43hannelsGetResponse\x12#\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x13.service.v1.ChannelH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08responseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.channels_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_CHANNELUNREAD']._serialized_start=95
-  _globals['_CHANNELUNREAD']._serialized_end=225
-  _globals['_CHANNELCOMPOSITEKEY']._serialized_start=227
-  _globals['_CHANNELCOMPOSITEKEY']._serialized_end=279
-  _globals['_CHANNELSGETREQUEST']._serialized_start=281
-  _globals['_CHANNELSGETREQUEST']._serialized_end=313
-  _globals['_CHANNELSGETRESPONSE']._serialized_start=315
-  _globals['_CHANNELSGETRESPONSE']._serialized_end=423
+  _globals['_CHANNELUNREAD']._serialized_start=94
+  _globals['_CHANNELUNREAD']._serialized_end=206
+  _globals['_CHANNELCOMPOSITEKEY']._serialized_start=208
+  _globals['_CHANNELCOMPOSITEKEY']._serialized_end=260
+  _globals['_CHANNELSGETREQUEST']._serialized_start=262
+  _globals['_CHANNELSGETREQUEST']._serialized_end=294
+  _globals['_CHANNELSGETRESPONSE']._serialized_start=296
+  _globals['_CHANNELSGETRESPONSE']._serialized_end=404
 # @@protoc_insertion_point(module_scope)
