@@ -19,7 +19,7 @@ import {
 } from "@grpc/grpc-js";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels.js";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
-import { MessagesGetRequest, MessagesGetResponse } from "./messages.js";
+import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages.js";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
 import {
   UsersCreateRequest,
@@ -138,6 +138,17 @@ export const ChatyServiceService = {
     responseSerialize: (value: MessagesGetResponse): Buffer => Buffer.from(MessagesGetResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MessagesGetResponse => MessagesGetResponse.decode(value),
   },
+  messagesSearch: {
+    path: "/service.v1.ChatyService/MessagesSearch",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: MessagesSearchRequest): Buffer =>
+      Buffer.from(MessagesSearchRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MessagesSearchRequest => MessagesSearchRequest.decode(value),
+    responseSerialize: (value: MessagesSearchResponse): Buffer =>
+      Buffer.from(MessagesSearchResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MessagesSearchResponse => MessagesSearchResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -151,6 +162,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   groupsList: handleUnaryCall<GroupsListRequest, GroupsListResponse>;
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
   messagesGet: handleUnaryCall<MessagesGetRequest, MessagesGetResponse>;
+  messagesSearch: handleUnaryCall<MessagesSearchRequest, MessagesSearchResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -303,6 +315,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
+  ): ClientUnaryCall;
+  messagesSearch(
+    request: MessagesSearchRequest,
+    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
+  ): ClientUnaryCall;
+  messagesSearch(
+    request: MessagesSearchRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
+  ): ClientUnaryCall;
+  messagesSearch(
+    request: MessagesSearchRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
   ): ClientUnaryCall;
 }
 

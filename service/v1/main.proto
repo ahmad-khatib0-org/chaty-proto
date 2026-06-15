@@ -19,4 +19,5 @@ service ChatyService {
   rpc GroupsList(GroupsListRequest) returns (GroupsListResponse);
   rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
   rpc MessagesGet(MessagesGetRequest) returns (MessagesGetResponse);
+  rpc MessagesSearch(MessagesSearchRequest) returns (MessagesSearchResponse);
 }

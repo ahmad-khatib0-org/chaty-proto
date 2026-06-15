@@ -18,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIocCChJNZXNzYWdlc0dldFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRISCgVsaW1pdBgCIAEoA0gAiAEBEhMKBmJlZm9yZRgDIAEoCUgBiAEBEhIKBWFmdGVyGAQgASgJSAKIAQESKgoEc29ydBgFIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIA4gBARITCgZuZWFyYnkYBiABKAlIBIgBARIaCg1pbmNsdWRlX3VzZXJzGAcgASgISAWIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnlCEAoOX2luY2x1ZGVfdXNlcnMifAoTTWVzc2FnZXNHZXRSZXNwb25zZRIzCgRkYXRhGAEgASgLMiMuc2VydmljZS52MS5NZXNzYWdlc0dldFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UijwEKF01lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlcip5CgtNZXNzYWdlU29ydBIcChhNRVNTQUdFX1NPUlRfVU5TUEVDSUZJRUQQABIXChNNRVNTQUdFX1NPUlRfTEFURVNUEAESFwoTTUVTU0FHRV9TT1JUX09MREVTVBACEhoKFk1FU1NBR0VfU09SVF9SRUxFVkFOQ0UQA2IGcHJvdG8z", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIocCChJNZXNzYWdlc0dldFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRISCgVsaW1pdBgCIAEoA0gAiAEBEhMKBmJlZm9yZRgDIAEoCUgBiAEBEhIKBWFmdGVyGAQgASgJSAKIAQESKgoEc29ydBgFIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIA4gBARITCgZuZWFyYnkYBiABKAlIBIgBARIaCg1pbmNsdWRlX3VzZXJzGAcgASgISAWIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnlCEAoOX2luY2x1ZGVfdXNlcnMifAoTTWVzc2FnZXNHZXRSZXNwb25zZRIzCgRkYXRhGAEgASgLMiMuc2VydmljZS52MS5NZXNzYWdlc0dldFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UijwEKF01lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlciKUAgoVTWVzc2FnZXNTZWFyY2hSZXF1ZXN0EhIKBXF1ZXJ5GAEgASgJSACIAQESEwoGcGlubmVkGAIgASgISAGIAQESEgoFbGltaXQYAyABKANIAogBARITCgZiZWZvcmUYBCABKAlIA4gBARISCgVhZnRlchgFIAEoCUgEiAEBEioKBHNvcnQYBiABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAWIAQESGgoNaW5jbHVkZV91c2VycxgHIAEoCEgGiAEBQggKBl9xdWVyeUIJCgdfcGlubmVkQggKBl9saW1pdEIJCgdfYmVmb3JlQggKBl9hZnRlckIHCgVfc29ydEIQCg5faW5jbHVkZV91c2VycyKCAQoWTWVzc2FnZXNTZWFyY2hSZXNwb25zZRI2CgRkYXRhGAEgASgLMiYuc2VydmljZS52MS5NZXNzYWdlc1NlYXJjaFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UikgEKGk1lc3NhZ2VzU2VhcmNoUmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlcip5CgtNZXNzYWdlU29ydBIcChhNRVNTQUdFX1NPUlRfVU5TUEVDSUZJRUQQABIXChNNRVNTQUdFX1NPUlRfTEFURVNUEAESFwoTTUVTU0FHRV9TT1JUX09MREVTVBACEhoKFk1FU1NBR0VfU09SVF9SRUxFVkFOQ0UQA2IGcHJvdG8z", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
 
 /**
  * *  What this message should reply to and how 
@@ -174,6 +174,124 @@ export type MessagesGetResponseData = Message<"service.v1.MessagesGetResponseDat
  */
 export const MessagesGetResponseDataSchema: GenMessage<MessagesGetResponseData> = /*@__PURE__*/
   messageDesc(file_service_v1_messages, 3);
+
+/**
+ * @generated from message service.v1.MessagesSearchRequest
+ */
+export type MessagesSearchRequest = Message<"service.v1.MessagesSearchRequest"> & {
+  /**
+   * Full-text search query
+   *
+   * @generated from field: optional string query = 1;
+   */
+  query?: string;
+
+  /**
+   * Whether to only search for pinned messages, cannot be sent with query
+   *
+   * @generated from field: optional bool pinned = 2;
+   */
+  pinned?: boolean;
+
+  /**
+   * Maximum number of messages to fetch
+   *
+   * @generated from field: optional int64 limit = 3;
+   */
+  limit?: bigint;
+
+  /**
+   * Message id before which messages should be fetched
+   *
+   * @generated from field: optional string before = 4;
+   */
+  before?: string;
+
+  /**
+   * Message id after which messages should be fetched
+   *
+   * @generated from field: optional string after = 5;
+   */
+  after?: string;
+
+  /**
+   * Message sort direction
+   * By default, it will be sorted by latest (default: RELEVANCE)
+   *
+   * @generated from field: optional service.v1.MessageSort sort = 6;
+   */
+  sort?: MessageSort;
+
+  /**
+   * Whether to include user (and member, if server channel) objects
+   *
+   * @generated from field: optional bool include_users = 7;
+   */
+  includeUsers?: boolean;
+};
+
+/**
+ * Describes the message service.v1.MessagesSearchRequest.
+ * Use `create(MessagesSearchRequestSchema)` to create a new message.
+ */
+export const MessagesSearchRequestSchema: GenMessage<MessagesSearchRequest> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 4);
+
+/**
+ * @generated from message service.v1.MessagesSearchResponse
+ */
+export type MessagesSearchResponse = Message<"service.v1.MessagesSearchResponse"> & {
+  /**
+   * @generated from oneof service.v1.MessagesSearchResponse.response
+   */
+  response: {
+    /**
+     * @generated from field: service.v1.MessagesSearchResponseData data = 1;
+     */
+    value: MessagesSearchResponseData;
+    case: "data";
+  } | {
+    /**
+     * @generated from field: shared.v1.AppError error = 2;
+     */
+    value: AppError;
+    case: "error";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message service.v1.MessagesSearchResponse.
+ * Use `create(MessagesSearchResponseSchema)` to create a new message.
+ */
+export const MessagesSearchResponseSchema: GenMessage<MessagesSearchResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 5);
+
+/**
+ * @generated from message service.v1.MessagesSearchResponseData
+ */
+export type MessagesSearchResponseData = Message<"service.v1.MessagesSearchResponseData"> & {
+  /**
+   * @generated from field: repeated service.v1.Message messages = 1;
+   */
+  messages: Message$1[];
+
+  /**
+   * @generated from field: repeated service.v1.APIUser users = 2;
+   */
+  users: APIUser[];
+
+  /**
+   * @generated from field: repeated service.v1.ServerMember members = 3;
+   */
+  members: ServerMember[];
+};
+
+/**
+ * Describes the message service.v1.MessagesSearchResponseData.
+ * Use `create(MessagesSearchResponseDataSchema)` to create a new message.
+ */
+export const MessagesSearchResponseDataSchema: GenMessage<MessagesSearchResponseData> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 6);
 
 /**
  * Message sort direction

@@ -8,7 +8,7 @@
 import { BinaryReader } from "@bufbuild/protobuf/wire";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups";
-import { MessagesGetRequest, MessagesGetResponse } from "./messages";
+import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search";
 import {
   UsersCreateRequest,
@@ -36,6 +36,7 @@ export interface ChatyService {
   GroupsList(request: GroupsListRequest): Promise<GroupsListResponse>;
   SearchUsernames(request: SearchUsernamesRequest): Promise<SearchUsernamesResponse>;
   MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse>;
+  MessagesSearch(request: MessagesSearchRequest): Promise<MessagesSearchResponse>;
 }
 
 export const ChatyServiceServiceName = "service.v1.ChatyService";
@@ -55,6 +56,7 @@ export class ChatyServiceClientImpl implements ChatyService {
     this.GroupsList = this.GroupsList.bind(this);
     this.SearchUsernames = this.SearchUsernames.bind(this);
     this.MessagesGet = this.MessagesGet.bind(this);
+    this.MessagesSearch = this.MessagesSearch.bind(this);
   }
   UsersCreate(request: UsersCreateRequest): Promise<UsersCreateResponse> {
     const data = UsersCreateRequest.encode(request).finish();
@@ -114,6 +116,12 @@ export class ChatyServiceClientImpl implements ChatyService {
     const data = MessagesGetRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "MessagesGet", data);
     return promise.then((data) => MessagesGetResponse.decode(new BinaryReader(data)));
+  }
+
+  MessagesSearch(request: MessagesSearchRequest): Promise<MessagesSearchResponse> {
+    const data = MessagesSearchRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "MessagesSearch", data);
+    return promise.then((data) => MessagesSearchResponse.decode(new BinaryReader(data)));
   }
 }
 

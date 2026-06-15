@@ -28,15 +28,15 @@ from service.v1 import users_pb2 as service_dot_v1_dot_users__pb2
 from shared.v1 import error_pb2 as shared_dot_v1_dot_error__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1\x1a\x1cservice/v1/messages_db.proto\x1a\"service/v1/server_members_db.proto\x1a\x16service/v1/users.proto\x1a\x15shared/v1/error.proto\"F\n\x0bReplyIntent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07mention\x18\x02 \x01(\x08\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x03 \x01(\x08\"\x87\x02\n\x12MessagesGetRequest\x12\x12\n\nchannel_id\x18\x01 \x01(\t\x12\x12\n\x05limit\x18\x02 \x01(\x03H\x00\x88\x01\x01\x12\x13\n\x06\x62\x65\x66ore\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x12\n\x05\x61\x66ter\x18\x04 \x01(\tH\x02\x88\x01\x01\x12*\n\x04sort\x18\x05 \x01(\x0e\x32\x17.service.v1.MessageSortH\x03\x88\x01\x01\x12\x13\n\x06nearby\x18\x06 \x01(\tH\x04\x88\x01\x01\x12\x1a\n\rinclude_users\x18\x07 \x01(\x08H\x05\x88\x01\x01\x42\x08\n\x06_limitB\t\n\x07_beforeB\x08\n\x06_afterB\x07\n\x05_sortB\t\n\x07_nearbyB\x10\n\x0e_include_users\"|\n\x13MessagesGetResponse\x12\x33\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32#.service.v1.MessagesGetResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"\x8f\x01\n\x17MessagesGetResponseData\x12%\n\x08messages\x18\x01 \x03(\x0b\x32\x13.service.v1.Message\x12\"\n\x05users\x18\x02 \x03(\x0b\x32\x13.service.v1.APIUser\x12)\n\x07members\x18\x03 \x03(\x0b\x32\x18.service.v1.ServerMember*y\n\x0bMessageSort\x12\x1c\n\x18MESSAGE_SORT_UNSPECIFIED\x10\x00\x12\x17\n\x13MESSAGE_SORT_LATEST\x10\x01\x12\x17\n\x13MESSAGE_SORT_OLDEST\x10\x02\x12\x1a\n\x16MESSAGE_SORT_RELEVANCE\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19service/v1/messages.proto\x12\nservice.v1\x1a\x1cservice/v1/messages_db.proto\x1a\"service/v1/server_members_db.proto\x1a\x16service/v1/users.proto\x1a\x15shared/v1/error.proto\"F\n\x0bReplyIntent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07mention\x18\x02 \x01(\x08\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x03 \x01(\x08\"\x87\x02\n\x12MessagesGetRequest\x12\x12\n\nchannel_id\x18\x01 \x01(\t\x12\x12\n\x05limit\x18\x02 \x01(\x03H\x00\x88\x01\x01\x12\x13\n\x06\x62\x65\x66ore\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x12\n\x05\x61\x66ter\x18\x04 \x01(\tH\x02\x88\x01\x01\x12*\n\x04sort\x18\x05 \x01(\x0e\x32\x17.service.v1.MessageSortH\x03\x88\x01\x01\x12\x13\n\x06nearby\x18\x06 \x01(\tH\x04\x88\x01\x01\x12\x1a\n\rinclude_users\x18\x07 \x01(\x08H\x05\x88\x01\x01\x42\x08\n\x06_limitB\t\n\x07_beforeB\x08\n\x06_afterB\x07\n\x05_sortB\t\n\x07_nearbyB\x10\n\x0e_include_users\"|\n\x13MessagesGetResponse\x12\x33\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32#.service.v1.MessagesGetResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"\x8f\x01\n\x17MessagesGetResponseData\x12%\n\x08messages\x18\x01 \x03(\x0b\x32\x13.service.v1.Message\x12\"\n\x05users\x18\x02 \x03(\x0b\x32\x13.service.v1.APIUser\x12)\n\x07members\x18\x03 \x03(\x0b\x32\x18.service.v1.ServerMember\"\x94\x02\n\x15MessagesSearchRequest\x12\x12\n\x05query\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x06pinned\x18\x02 \x01(\x08H\x01\x88\x01\x01\x12\x12\n\x05limit\x18\x03 \x01(\x03H\x02\x88\x01\x01\x12\x13\n\x06\x62\x65\x66ore\x18\x04 \x01(\tH\x03\x88\x01\x01\x12\x12\n\x05\x61\x66ter\x18\x05 \x01(\tH\x04\x88\x01\x01\x12*\n\x04sort\x18\x06 \x01(\x0e\x32\x17.service.v1.MessageSortH\x05\x88\x01\x01\x12\x1a\n\rinclude_users\x18\x07 \x01(\x08H\x06\x88\x01\x01\x42\x08\n\x06_queryB\t\n\x07_pinnedB\x08\n\x06_limitB\t\n\x07_beforeB\x08\n\x06_afterB\x07\n\x05_sortB\x10\n\x0e_include_users\"\x82\x01\n\x16MessagesSearchResponse\x12\x36\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32&.service.v1.MessagesSearchResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"\x92\x01\n\x1aMessagesSearchResponseData\x12%\n\x08messages\x18\x01 \x03(\x0b\x32\x13.service.v1.Message\x12\"\n\x05users\x18\x02 \x03(\x0b\x32\x13.service.v1.APIUser\x12)\n\x07members\x18\x03 \x03(\x0b\x32\x18.service.v1.ServerMember*y\n\x0bMessageSort\x12\x1c\n\x18MESSAGE_SORT_UNSPECIFIED\x10\x00\x12\x17\n\x13MESSAGE_SORT_LATEST\x10\x01\x12\x17\n\x13MESSAGE_SORT_OLDEST\x10\x02\x12\x1a\n\x16MESSAGE_SORT_RELEVANCE\x10\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.messages_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_MESSAGESORT']._serialized_start=764
-  _globals['_MESSAGESORT']._serialized_end=885
+  _globals['_MESSAGESORT']._serialized_start=1325
+  _globals['_MESSAGESORT']._serialized_end=1446
   _globals['_REPLYINTENT']._serialized_start=154
   _globals['_REPLYINTENT']._serialized_end=224
   _globals['_MESSAGESGETREQUEST']._serialized_start=227
@@ -45,4 +45,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_MESSAGESGETRESPONSE']._serialized_end=616
   _globals['_MESSAGESGETRESPONSEDATA']._serialized_start=619
   _globals['_MESSAGESGETRESPONSEDATA']._serialized_end=762
+  _globals['_MESSAGESSEARCHREQUEST']._serialized_start=765
+  _globals['_MESSAGESSEARCHREQUEST']._serialized_end=1041
+  _globals['_MESSAGESSEARCHRESPONSE']._serialized_start=1044
+  _globals['_MESSAGESSEARCHRESPONSE']._serialized_end=1174
+  _globals['_MESSAGESSEARCHRESPONSEDATA']._serialized_start=1177
+  _globals['_MESSAGESSEARCHRESPONSEDATA']._serialized_end=1323
 # @@protoc_insertion_point(module_scope)

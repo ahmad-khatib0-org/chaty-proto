@@ -88,6 +88,11 @@ class ChatyServiceStub(object):
                 request_serializer=service_dot_v1_dot_messages__pb2.MessagesGetRequest.SerializeToString,
                 response_deserializer=service_dot_v1_dot_messages__pb2.MessagesGetResponse.FromString,
                 _registered_method=True)
+        self.MessagesSearch = channel.unary_unary(
+                '/service.v1.ChatyService/MessagesSearch',
+                request_serializer=service_dot_v1_dot_messages__pb2.MessagesSearchRequest.SerializeToString,
+                response_deserializer=service_dot_v1_dot_messages__pb2.MessagesSearchResponse.FromString,
+                _registered_method=True)
 
 
 class ChatyServiceServicer(object):
@@ -153,6 +158,12 @@ class ChatyServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MessagesSearch(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ChatyServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -205,6 +216,11 @@ def add_ChatyServiceServicer_to_server(servicer, server):
                     servicer.MessagesGet,
                     request_deserializer=service_dot_v1_dot_messages__pb2.MessagesGetRequest.FromString,
                     response_serializer=service_dot_v1_dot_messages__pb2.MessagesGetResponse.SerializeToString,
+            ),
+            'MessagesSearch': grpc.unary_unary_rpc_method_handler(
+                    servicer.MessagesSearch,
+                    request_deserializer=service_dot_v1_dot_messages__pb2.MessagesSearchRequest.FromString,
+                    response_serializer=service_dot_v1_dot_messages__pb2.MessagesSearchResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -477,6 +493,33 @@ class ChatyService(object):
             '/service.v1.ChatyService/MessagesGet',
             service_dot_v1_dot_messages__pb2.MessagesGetRequest.SerializeToString,
             service_dot_v1_dot_messages__pb2.MessagesGetResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def MessagesSearch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/service.v1.ChatyService/MessagesSearch',
+            service_dot_v1_dot_messages__pb2.MessagesSearchRequest.SerializeToString,
+            service_dot_v1_dot_messages__pb2.MessagesSearchResponse.FromString,
             options,
             channel_credentials,
             insecure,
