@@ -19,6 +19,52 @@ message ReplyIntent {
   bool fail_if_not_exists = 3;
 }
 
+// @description Representation of a text embed before it is sent.
+message EmbedSendable {
+  // icon_url field
+  optional string icon_url = 1;
+  // url field
+  optional string url = 2;
+  // title field
+  optional string title = 3;
+  // description field
+  optional string description = 4;
+  // media field
+  optional string media = 5;
+  // colour field
+  optional string colour = 6;
+}
+
+// Data message for sending
+message MessageIntent {
+  // @description Unique token to prevent duplicate message sending
+  optional string nonce = 1;
+
+  // @description Message content to send
+  optional string content = 2;
+
+  // @description Attachments to include in message
+  repeated string attachments = 3;
+
+  // @description Messages to reply to
+  repeated ReplyIntent replies = 4;
+
+  // @description Embeds to include in message
+  //
+  // Text embed content contributes to the content length cap
+  repeated EmbedSendable embeds = 5;
+
+  // @description Masquerade to apply to this message
+  optional service.v1.Masquerade masquerade = 6;
+
+  // @description Information about how this message should be interacted with
+  optional service.v1.Interactions interactions = 7;
+
+  // Format: uint32
+  // @description Bitfield of message flags
+  optional uint32 flags = 8;
+}
+
 // Message sort direction
 enum MessageSort {
   MESSAGE_SORT_UNSPECIFIED = 0;

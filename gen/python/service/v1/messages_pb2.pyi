@@ -31,6 +31,42 @@ class ReplyIntent(_message.Message):
     fail_if_not_exists: bool
     def __init__(self, id: _Optional[str] = ..., mention: bool = ..., fail_if_not_exists: bool = ...) -> None: ...
 
+class EmbedSendable(_message.Message):
+    __slots__ = ("icon_url", "url", "title", "description", "media", "colour")
+    ICON_URL_FIELD_NUMBER: _ClassVar[int]
+    URL_FIELD_NUMBER: _ClassVar[int]
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    MEDIA_FIELD_NUMBER: _ClassVar[int]
+    COLOUR_FIELD_NUMBER: _ClassVar[int]
+    icon_url: str
+    url: str
+    title: str
+    description: str
+    media: str
+    colour: str
+    def __init__(self, icon_url: _Optional[str] = ..., url: _Optional[str] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., media: _Optional[str] = ..., colour: _Optional[str] = ...) -> None: ...
+
+class MessageIntent(_message.Message):
+    __slots__ = ("nonce", "content", "attachments", "replies", "embeds", "masquerade", "interactions", "flags")
+    NONCE_FIELD_NUMBER: _ClassVar[int]
+    CONTENT_FIELD_NUMBER: _ClassVar[int]
+    ATTACHMENTS_FIELD_NUMBER: _ClassVar[int]
+    REPLIES_FIELD_NUMBER: _ClassVar[int]
+    EMBEDS_FIELD_NUMBER: _ClassVar[int]
+    MASQUERADE_FIELD_NUMBER: _ClassVar[int]
+    INTERACTIONS_FIELD_NUMBER: _ClassVar[int]
+    FLAGS_FIELD_NUMBER: _ClassVar[int]
+    nonce: str
+    content: str
+    attachments: _containers.RepeatedScalarFieldContainer[str]
+    replies: _containers.RepeatedCompositeFieldContainer[ReplyIntent]
+    embeds: _containers.RepeatedCompositeFieldContainer[EmbedSendable]
+    masquerade: _messages_db_pb2.Masquerade
+    interactions: _messages_db_pb2.Interactions
+    flags: int
+    def __init__(self, nonce: _Optional[str] = ..., content: _Optional[str] = ..., attachments: _Optional[_Iterable[str]] = ..., replies: _Optional[_Iterable[_Union[ReplyIntent, _Mapping]]] = ..., embeds: _Optional[_Iterable[_Union[EmbedSendable, _Mapping]]] = ..., masquerade: _Optional[_Union[_messages_db_pb2.Masquerade, _Mapping]] = ..., interactions: _Optional[_Union[_messages_db_pb2.Interactions, _Mapping]] = ..., flags: _Optional[int] = ...) -> None: ...
+
 class MessagesGetRequest(_message.Message):
     __slots__ = ("channel_id", "limit", "before", "after", "sort", "nearby", "include_users")
     CHANNEL_ID_FIELD_NUMBER: _ClassVar[int]

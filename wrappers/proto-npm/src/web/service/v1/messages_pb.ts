@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Message as Message$1 } from "./messages_db_pb.js";
+import type { Interactions, Masquerade, Message as Message$1 } from "./messages_db_pb.js";
 import { file_service_v1_messages_db } from "./messages_db_pb.js";
 import type { ServerMember } from "./server_members_db_pb.js";
 import { file_service_v1_server_members_db } from "./server_members_db_pb.js";
@@ -18,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIIocCChJNZXNzYWdlc0dldFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRISCgVsaW1pdBgCIAEoA0gAiAEBEhMKBmJlZm9yZRgDIAEoCUgBiAEBEhIKBWFmdGVyGAQgASgJSAKIAQESKgoEc29ydBgFIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIA4gBARITCgZuZWFyYnkYBiABKAlIBIgBARIaCg1pbmNsdWRlX3VzZXJzGAcgASgISAWIAQFCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QgkKB19uZWFyYnlCEAoOX2luY2x1ZGVfdXNlcnMifAoTTWVzc2FnZXNHZXRSZXNwb25zZRIzCgRkYXRhGAEgASgLMiMuc2VydmljZS52MS5NZXNzYWdlc0dldFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UijwEKF01lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlciKUAgoVTWVzc2FnZXNTZWFyY2hSZXF1ZXN0EhIKBXF1ZXJ5GAEgASgJSACIAQESEwoGcGlubmVkGAIgASgISAGIAQESEgoFbGltaXQYAyABKANIAogBARITCgZiZWZvcmUYBCABKAlIA4gBARISCgVhZnRlchgFIAEoCUgEiAEBEioKBHNvcnQYBiABKA4yFy5zZXJ2aWNlLnYxLk1lc3NhZ2VTb3J0SAWIAQESGgoNaW5jbHVkZV91c2VycxgHIAEoCEgGiAEBQggKBl9xdWVyeUIJCgdfcGlubmVkQggKBl9saW1pdEIJCgdfYmVmb3JlQggKBl9hZnRlckIHCgVfc29ydEIQCg5faW5jbHVkZV91c2VycyKCAQoWTWVzc2FnZXNTZWFyY2hSZXNwb25zZRI2CgRkYXRhGAEgASgLMiYuc2VydmljZS52MS5NZXNzYWdlc1NlYXJjaFJlc3BvbnNlRGF0YUgAEiQKBWVycm9yGAIgASgLMhMuc2hhcmVkLnYxLkFwcEVycm9ySABCCgoIcmVzcG9uc2UikgEKGk1lc3NhZ2VzU2VhcmNoUmVzcG9uc2VEYXRhEiUKCG1lc3NhZ2VzGAEgAygLMhMuc2VydmljZS52MS5NZXNzYWdlEiIKBXVzZXJzGAIgAygLMhMuc2VydmljZS52MS5BUElVc2VyEikKB21lbWJlcnMYAyADKAsyGC5zZXJ2aWNlLnYxLlNlcnZlck1lbWJlcip5CgtNZXNzYWdlU29ydBIcChhNRVNTQUdFX1NPUlRfVU5TUEVDSUZJRUQQABIXChNNRVNTQUdFX1NPUlRfTEFURVNUEAESFwoTTUVTU0FHRV9TT1JUX09MREVTVBACEhoKFk1FU1NBR0VfU09SVF9SRUxFVkFOQ0UQA2IGcHJvdG8z", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIItMBCg1FbWJlZFNlbmRhYmxlEhUKCGljb25fdXJsGAEgASgJSACIAQESEAoDdXJsGAIgASgJSAGIAQESEgoFdGl0bGUYAyABKAlIAogBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgDiAEBEhIKBW1lZGlhGAUgASgJSASIAQESEwoGY29sb3VyGAYgASgJSAWIAQFCCwoJX2ljb25fdXJsQgYKBF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIICgZfbWVkaWFCCQoHX2NvbG91ciLdAgoNTWVzc2FnZUludGVudBISCgVub25jZRgBIAEoCUgAiAEBEhQKB2NvbnRlbnQYAiABKAlIAYgBARITCgthdHRhY2htZW50cxgDIAMoCRIoCgdyZXBsaWVzGAQgAygLMhcuc2VydmljZS52MS5SZXBseUludGVudBIpCgZlbWJlZHMYBSADKAsyGS5zZXJ2aWNlLnYxLkVtYmVkU2VuZGFibGUSLwoKbWFzcXVlcmFkZRgGIAEoCzIWLnNlcnZpY2UudjEuTWFzcXVlcmFkZUgCiAEBEjMKDGludGVyYWN0aW9ucxgHIAEoCzIYLnNlcnZpY2UudjEuSW50ZXJhY3Rpb25zSAOIAQESEgoFZmxhZ3MYCCABKA1IBIgBAUIICgZfbm9uY2VCCgoIX2NvbnRlbnRCDQoLX21hc3F1ZXJhZGVCDwoNX2ludGVyYWN0aW9uc0IICgZfZmxhZ3MihwIKEk1lc3NhZ2VzR2V0UmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKBWxpbWl0GAIgASgDSACIAQESEwoGYmVmb3JlGAMgASgJSAGIAQESEgoFYWZ0ZXIYBCABKAlIAogBARIqCgRzb3J0GAUgASgOMhcuc2VydmljZS52MS5NZXNzYWdlU29ydEgDiAEBEhMKBm5lYXJieRgGIAEoCUgEiAEBEhoKDWluY2x1ZGVfdXNlcnMYByABKAhIBYgBAUIICgZfbGltaXRCCQoHX2JlZm9yZUIICgZfYWZ0ZXJCBwoFX3NvcnRCCQoHX25lYXJieUIQCg5faW5jbHVkZV91c2VycyJ8ChNNZXNzYWdlc0dldFJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKPAQoXTWVzc2FnZXNHZXRSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyIpQCChVNZXNzYWdlc1NlYXJjaFJlcXVlc3QSEgoFcXVlcnkYASABKAlIAIgBARITCgZwaW5uZWQYAiABKAhIAYgBARISCgVsaW1pdBgDIAEoA0gCiAEBEhMKBmJlZm9yZRgEIAEoCUgDiAEBEhIKBWFmdGVyGAUgASgJSASIAQESKgoEc29ydBgGIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIBYgBARIaCg1pbmNsdWRlX3VzZXJzGAcgASgISAaIAQFCCAoGX3F1ZXJ5QgkKB19waW5uZWRCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QhAKDl9pbmNsdWRlX3VzZXJzIoIBChZNZXNzYWdlc1NlYXJjaFJlc3BvbnNlEjYKBGRhdGEYASABKAsyJi5zZXJ2aWNlLnYxLk1lc3NhZ2VzU2VhcmNoUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKSAQoaTWVzc2FnZXNTZWFyY2hSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
 
 /**
  * *  What this message should reply to and how 
@@ -55,6 +55,135 @@ export type ReplyIntent = Message<"service.v1.ReplyIntent"> & {
  */
 export const ReplyIntentSchema: GenMessage<ReplyIntent> = /*@__PURE__*/
   messageDesc(file_service_v1_messages, 0);
+
+/**
+ * @description Representation of a text embed before it is sent.
+ *
+ * @generated from message service.v1.EmbedSendable
+ */
+export type EmbedSendable = Message<"service.v1.EmbedSendable"> & {
+  /**
+   * icon_url field
+   *
+   * @generated from field: optional string icon_url = 1;
+   */
+  iconUrl?: string;
+
+  /**
+   * url field
+   *
+   * @generated from field: optional string url = 2;
+   */
+  url?: string;
+
+  /**
+   * title field
+   *
+   * @generated from field: optional string title = 3;
+   */
+  title?: string;
+
+  /**
+   * description field
+   *
+   * @generated from field: optional string description = 4;
+   */
+  description?: string;
+
+  /**
+   * media field
+   *
+   * @generated from field: optional string media = 5;
+   */
+  media?: string;
+
+  /**
+   * colour field
+   *
+   * @generated from field: optional string colour = 6;
+   */
+  colour?: string;
+};
+
+/**
+ * Describes the message service.v1.EmbedSendable.
+ * Use `create(EmbedSendableSchema)` to create a new message.
+ */
+export const EmbedSendableSchema: GenMessage<EmbedSendable> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 1);
+
+/**
+ * Data message for sending
+ *
+ * @generated from message service.v1.MessageIntent
+ */
+export type MessageIntent = Message<"service.v1.MessageIntent"> & {
+  /**
+   * @description Unique token to prevent duplicate message sending
+   *
+   * @generated from field: optional string nonce = 1;
+   */
+  nonce?: string;
+
+  /**
+   * @description Message content to send
+   *
+   * @generated from field: optional string content = 2;
+   */
+  content?: string;
+
+  /**
+   * @description Attachments to include in message
+   *
+   * @generated from field: repeated string attachments = 3;
+   */
+  attachments: string[];
+
+  /**
+   * @description Messages to reply to
+   *
+   * @generated from field: repeated service.v1.ReplyIntent replies = 4;
+   */
+  replies: ReplyIntent[];
+
+  /**
+   * @description Embeds to include in message
+   *
+   * Text embed content contributes to the content length cap
+   *
+   * @generated from field: repeated service.v1.EmbedSendable embeds = 5;
+   */
+  embeds: EmbedSendable[];
+
+  /**
+   * @description Masquerade to apply to this message
+   *
+   * @generated from field: optional service.v1.Masquerade masquerade = 6;
+   */
+  masquerade?: Masquerade;
+
+  /**
+   * @description Information about how this message should be interacted with
+   *
+   * @generated from field: optional service.v1.Interactions interactions = 7;
+   */
+  interactions?: Interactions;
+
+  /**
+   * Format: uint32
+   * @description Bitfield of message flags
+   *
+   * @generated from field: optional uint32 flags = 8;
+   */
+  flags?: number;
+};
+
+/**
+ * Describes the message service.v1.MessageIntent.
+ * Use `create(MessageIntentSchema)` to create a new message.
+ */
+export const MessageIntentSchema: GenMessage<MessageIntent> = /*@__PURE__*/
+  messageDesc(file_service_v1_messages, 2);
 
 /**
  * Options for querying messages
@@ -117,7 +246,7 @@ export type MessagesGetRequest = Message<"service.v1.MessagesGetRequest"> & {
  * Use `create(MessagesGetRequestSchema)` to create a new message.
  */
 export const MessagesGetRequestSchema: GenMessage<MessagesGetRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 1);
+  messageDesc(file_service_v1_messages, 3);
 
 /**
  * @generated from message service.v1.MessagesGetResponse
@@ -146,7 +275,7 @@ export type MessagesGetResponse = Message<"service.v1.MessagesGetResponse"> & {
  * Use `create(MessagesGetResponseSchema)` to create a new message.
  */
 export const MessagesGetResponseSchema: GenMessage<MessagesGetResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 2);
+  messageDesc(file_service_v1_messages, 4);
 
 /**
  * @generated from message service.v1.MessagesGetResponseData
@@ -173,7 +302,7 @@ export type MessagesGetResponseData = Message<"service.v1.MessagesGetResponseDat
  * Use `create(MessagesGetResponseDataSchema)` to create a new message.
  */
 export const MessagesGetResponseDataSchema: GenMessage<MessagesGetResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 3);
+  messageDesc(file_service_v1_messages, 5);
 
 /**
  * @generated from message service.v1.MessagesSearchRequest
@@ -235,7 +364,7 @@ export type MessagesSearchRequest = Message<"service.v1.MessagesSearchRequest"> 
  * Use `create(MessagesSearchRequestSchema)` to create a new message.
  */
 export const MessagesSearchRequestSchema: GenMessage<MessagesSearchRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 4);
+  messageDesc(file_service_v1_messages, 6);
 
 /**
  * @generated from message service.v1.MessagesSearchResponse
@@ -264,7 +393,7 @@ export type MessagesSearchResponse = Message<"service.v1.MessagesSearchResponse"
  * Use `create(MessagesSearchResponseSchema)` to create a new message.
  */
 export const MessagesSearchResponseSchema: GenMessage<MessagesSearchResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 5);
+  messageDesc(file_service_v1_messages, 7);
 
 /**
  * @generated from message service.v1.MessagesSearchResponseData
@@ -291,7 +420,7 @@ export type MessagesSearchResponseData = Message<"service.v1.MessagesSearchRespo
  * Use `create(MessagesSearchResponseDataSchema)` to create a new message.
  */
 export const MessagesSearchResponseDataSchema: GenMessage<MessagesSearchResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 6);
+  messageDesc(file_service_v1_messages, 8);
 
 /**
  * Message sort direction

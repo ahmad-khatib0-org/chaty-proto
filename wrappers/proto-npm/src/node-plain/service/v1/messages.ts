@@ -7,7 +7,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error";
-import { Message } from "./messages_db";
+import { Interactions, Masquerade, Message } from "./messages_db";
 import { ServerMember } from "./server_members_db";
 import { APIUser } from "./users";
 
@@ -70,6 +70,67 @@ export interface ReplyIntent {
    * Otherwise, send a message without this reply. Default is true.
    */
   failIfNotExists: boolean;
+}
+
+/** @description Representation of a text embed before it is sent. */
+export interface EmbedSendable {
+  /** icon_url field */
+  iconUrl?:
+    | string
+    | undefined;
+  /** url field */
+  url?:
+    | string
+    | undefined;
+  /** title field */
+  title?:
+    | string
+    | undefined;
+  /** description field */
+  description?:
+    | string
+    | undefined;
+  /** media field */
+  media?:
+    | string
+    | undefined;
+  /** colour field */
+  colour?: string | undefined;
+}
+
+/** Data message for sending */
+export interface MessageIntent {
+  /** @description Unique token to prevent duplicate message sending */
+  nonce?:
+    | string
+    | undefined;
+  /** @description Message content to send */
+  content?:
+    | string
+    | undefined;
+  /** @description Attachments to include in message */
+  attachments: string[];
+  /** @description Messages to reply to */
+  replies: ReplyIntent[];
+  /**
+   * @description Embeds to include in message
+   *
+   * Text embed content contributes to the content length cap
+   */
+  embeds: EmbedSendable[];
+  /** @description Masquerade to apply to this message */
+  masquerade?:
+    | Masquerade
+    | undefined;
+  /** @description Information about how this message should be interacted with */
+  interactions?:
+    | Interactions
+    | undefined;
+  /**
+   * Format: uint32
+   * @description Bitfield of message flags
+   */
+  flags?: number | undefined;
 }
 
 /** Options for querying messages */
@@ -246,6 +307,340 @@ export const ReplyIntent: MessageFns<ReplyIntent> = {
     message.id = object.id ?? "";
     message.mention = object.mention ?? false;
     message.failIfNotExists = object.failIfNotExists ?? false;
+    return message;
+  },
+};
+
+function createBaseEmbedSendable(): EmbedSendable {
+  return {
+    iconUrl: undefined,
+    url: undefined,
+    title: undefined,
+    description: undefined,
+    media: undefined,
+    colour: undefined,
+  };
+}
+
+export const EmbedSendable: MessageFns<EmbedSendable> = {
+  encode(message: EmbedSendable, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.iconUrl !== undefined) {
+      writer.uint32(10).string(message.iconUrl);
+    }
+    if (message.url !== undefined) {
+      writer.uint32(18).string(message.url);
+    }
+    if (message.title !== undefined) {
+      writer.uint32(26).string(message.title);
+    }
+    if (message.description !== undefined) {
+      writer.uint32(34).string(message.description);
+    }
+    if (message.media !== undefined) {
+      writer.uint32(42).string(message.media);
+    }
+    if (message.colour !== undefined) {
+      writer.uint32(50).string(message.colour);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EmbedSendable {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEmbedSendable();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.iconUrl = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.url = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.title = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.media = reader.string();
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.colour = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EmbedSendable {
+    return {
+      iconUrl: isSet(object.iconUrl) ? globalThis.String(object.iconUrl) : undefined,
+      url: isSet(object.url) ? globalThis.String(object.url) : undefined,
+      title: isSet(object.title) ? globalThis.String(object.title) : undefined,
+      description: isSet(object.description) ? globalThis.String(object.description) : undefined,
+      media: isSet(object.media) ? globalThis.String(object.media) : undefined,
+      colour: isSet(object.colour) ? globalThis.String(object.colour) : undefined,
+    };
+  },
+
+  toJSON(message: EmbedSendable): unknown {
+    const obj: any = {};
+    if (message.iconUrl !== undefined) {
+      obj.iconUrl = message.iconUrl;
+    }
+    if (message.url !== undefined) {
+      obj.url = message.url;
+    }
+    if (message.title !== undefined) {
+      obj.title = message.title;
+    }
+    if (message.description !== undefined) {
+      obj.description = message.description;
+    }
+    if (message.media !== undefined) {
+      obj.media = message.media;
+    }
+    if (message.colour !== undefined) {
+      obj.colour = message.colour;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EmbedSendable>, I>>(base?: I): EmbedSendable {
+    return EmbedSendable.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EmbedSendable>, I>>(object: I): EmbedSendable {
+    const message = createBaseEmbedSendable();
+    message.iconUrl = object.iconUrl ?? undefined;
+    message.url = object.url ?? undefined;
+    message.title = object.title ?? undefined;
+    message.description = object.description ?? undefined;
+    message.media = object.media ?? undefined;
+    message.colour = object.colour ?? undefined;
+    return message;
+  },
+};
+
+function createBaseMessageIntent(): MessageIntent {
+  return {
+    nonce: undefined,
+    content: undefined,
+    attachments: [],
+    replies: [],
+    embeds: [],
+    masquerade: undefined,
+    interactions: undefined,
+    flags: undefined,
+  };
+}
+
+export const MessageIntent: MessageFns<MessageIntent> = {
+  encode(message: MessageIntent, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.nonce !== undefined) {
+      writer.uint32(10).string(message.nonce);
+    }
+    if (message.content !== undefined) {
+      writer.uint32(18).string(message.content);
+    }
+    for (const v of message.attachments) {
+      writer.uint32(26).string(v!);
+    }
+    for (const v of message.replies) {
+      ReplyIntent.encode(v!, writer.uint32(34).fork()).join();
+    }
+    for (const v of message.embeds) {
+      EmbedSendable.encode(v!, writer.uint32(42).fork()).join();
+    }
+    if (message.masquerade !== undefined) {
+      Masquerade.encode(message.masquerade, writer.uint32(50).fork()).join();
+    }
+    if (message.interactions !== undefined) {
+      Interactions.encode(message.interactions, writer.uint32(58).fork()).join();
+    }
+    if (message.flags !== undefined) {
+      writer.uint32(64).uint32(message.flags);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessageIntent {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessageIntent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.nonce = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.content = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.attachments.push(reader.string());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.replies.push(ReplyIntent.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.embeds.push(EmbedSendable.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.masquerade = Masquerade.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.interactions = Interactions.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.flags = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessageIntent {
+    return {
+      nonce: isSet(object.nonce) ? globalThis.String(object.nonce) : undefined,
+      content: isSet(object.content) ? globalThis.String(object.content) : undefined,
+      attachments: globalThis.Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => globalThis.String(e))
+        : [],
+      replies: globalThis.Array.isArray(object?.replies) ? object.replies.map((e: any) => ReplyIntent.fromJSON(e)) : [],
+      embeds: globalThis.Array.isArray(object?.embeds) ? object.embeds.map((e: any) => EmbedSendable.fromJSON(e)) : [],
+      masquerade: isSet(object.masquerade) ? Masquerade.fromJSON(object.masquerade) : undefined,
+      interactions: isSet(object.interactions) ? Interactions.fromJSON(object.interactions) : undefined,
+      flags: isSet(object.flags) ? globalThis.Number(object.flags) : undefined,
+    };
+  },
+
+  toJSON(message: MessageIntent): unknown {
+    const obj: any = {};
+    if (message.nonce !== undefined) {
+      obj.nonce = message.nonce;
+    }
+    if (message.content !== undefined) {
+      obj.content = message.content;
+    }
+    if (message.attachments?.length) {
+      obj.attachments = message.attachments;
+    }
+    if (message.replies?.length) {
+      obj.replies = message.replies.map((e) => ReplyIntent.toJSON(e));
+    }
+    if (message.embeds?.length) {
+      obj.embeds = message.embeds.map((e) => EmbedSendable.toJSON(e));
+    }
+    if (message.masquerade !== undefined) {
+      obj.masquerade = Masquerade.toJSON(message.masquerade);
+    }
+    if (message.interactions !== undefined) {
+      obj.interactions = Interactions.toJSON(message.interactions);
+    }
+    if (message.flags !== undefined) {
+      obj.flags = Math.round(message.flags);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MessageIntent>, I>>(base?: I): MessageIntent {
+    return MessageIntent.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MessageIntent>, I>>(object: I): MessageIntent {
+    const message = createBaseMessageIntent();
+    message.nonce = object.nonce ?? undefined;
+    message.content = object.content ?? undefined;
+    message.attachments = object.attachments?.map((e) => e) || [];
+    message.replies = object.replies?.map((e) => ReplyIntent.fromPartial(e)) || [];
+    message.embeds = object.embeds?.map((e) => EmbedSendable.fromPartial(e)) || [];
+    message.masquerade = (object.masquerade !== undefined && object.masquerade !== null)
+      ? Masquerade.fromPartial(object.masquerade)
+      : undefined;
+    message.interactions = (object.interactions !== undefined && object.interactions !== null)
+      ? Interactions.fromPartial(object.interactions)
+      : undefined;
+    message.flags = object.flags ?? undefined;
     return message;
   },
 };

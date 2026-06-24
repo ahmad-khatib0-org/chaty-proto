@@ -1402,6 +1402,61 @@ pub struct ReplyIntent {
     #[prost(bool, tag = "3")]
     pub fail_if_not_exists: bool,
 }
+/// @description Representation of a text embed before it is sent.
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EmbedSendable {
+    /// icon_url field
+    #[prost(string, optional, tag = "1")]
+    pub icon_url: ::core::option::Option<::prost::alloc::string::String>,
+    /// url field
+    #[prost(string, optional, tag = "2")]
+    pub url: ::core::option::Option<::prost::alloc::string::String>,
+    /// title field
+    #[prost(string, optional, tag = "3")]
+    pub title: ::core::option::Option<::prost::alloc::string::String>,
+    /// description field
+    #[prost(string, optional, tag = "4")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// media field
+    #[prost(string, optional, tag = "5")]
+    pub media: ::core::option::Option<::prost::alloc::string::String>,
+    /// colour field
+    #[prost(string, optional, tag = "6")]
+    pub colour: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Data message for sending
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageIntent {
+    /// @description Unique token to prevent duplicate message sending
+    #[prost(string, optional, tag = "1")]
+    pub nonce: ::core::option::Option<::prost::alloc::string::String>,
+    /// @description Message content to send
+    #[prost(string, optional, tag = "2")]
+    pub content: ::core::option::Option<::prost::alloc::string::String>,
+    /// @description Attachments to include in message
+    #[prost(string, repeated, tag = "3")]
+    pub attachments: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// @description Messages to reply to
+    #[prost(message, repeated, tag = "4")]
+    pub replies: ::prost::alloc::vec::Vec<ReplyIntent>,
+    /// @description Embeds to include in message
+    ///
+    /// Text embed content contributes to the content length cap
+    #[prost(message, repeated, tag = "5")]
+    pub embeds: ::prost::alloc::vec::Vec<EmbedSendable>,
+    /// @description Masquerade to apply to this message
+    #[prost(message, optional, tag = "6")]
+    pub masquerade: ::core::option::Option<Masquerade>,
+    /// @description Information about how this message should be interacted with
+    #[prost(message, optional, tag = "7")]
+    pub interactions: ::core::option::Option<Interactions>,
+    /// Format: uint32
+    /// @description Bitfield of message flags
+    #[prost(uint32, optional, tag = "8")]
+    pub flags: ::core::option::Option<u32>,
+}
 /// Options for querying messages
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
