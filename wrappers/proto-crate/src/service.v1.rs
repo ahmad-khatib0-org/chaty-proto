@@ -1642,6 +1642,42 @@ pub struct SearchUser {
     #[prost(string, tag = "4")]
     pub avatar: ::prost::alloc::string::String,
 }
+/// Information about new server to create
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServersCreateRequest {
+    /// Server name
+    /// Validation: length(min = 1, max = 32)
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Server description
+    /// Validation: length(min = 0, max = 1024)
+    #[prost(string, optional, tag = "2")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// Whether this server is age-restricted
+    #[prost(bool, optional, tag = "3")]
+    pub nsfw: ::core::option::Option<bool>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServersCreateResponse {
+    #[prost(oneof = "servers_create_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<servers_create_response::Response>,
+}
+/// Nested message and enum types in `ServersCreateResponse`.
+pub mod servers_create_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::ServersCreateResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ServersCreateResponseData {}
 /// Generated client implementations.
 pub mod chaty_service_client {
     #![allow(
@@ -2003,6 +2039,30 @@ pub mod chaty_service_client {
                 .insert(GrpcMethod::new("service.v1.ChatyService", "MessagesSearch"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn servers_create(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ServersCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ServersCreateResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/ServersCreate",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "ServersCreate"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -2093,6 +2153,13 @@ pub mod chaty_service_server {
             request: tonic::Request<super::MessagesSearchRequest>,
         ) -> std::result::Result<
             tonic::Response<super::MessagesSearchResponse>,
+            tonic::Status,
+        >;
+        async fn servers_create(
+            &self,
+            request: tonic::Request<super::ServersCreateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ServersCreateResponse>,
             tonic::Status,
         >;
     }
@@ -2658,6 +2725,51 @@ pub mod chaty_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = MessagesSearchSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/service.v1.ChatyService/ServersCreate" => {
+                    #[allow(non_camel_case_types)]
+                    struct ServersCreateSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::ServersCreateRequest>
+                    for ServersCreateSvc<T> {
+                        type Response = super::ServersCreateResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ServersCreateRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::servers_create(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ServersCreateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

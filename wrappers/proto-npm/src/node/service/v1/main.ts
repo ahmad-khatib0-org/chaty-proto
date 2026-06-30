@@ -21,6 +21,7 @@ import { ChannelsGetRequest, ChannelsGetResponse } from "./channels.js";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
 import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages.js";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
+import { ServersCreateRequest, ServersCreateResponse } from "./servers.js";
 import {
   UsersCreateRequest,
   UsersCreateResponse,
@@ -149,6 +150,16 @@ export const ChatyServiceService = {
       Buffer.from(MessagesSearchResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MessagesSearchResponse => MessagesSearchResponse.decode(value),
   },
+  serversCreate: {
+    path: "/service.v1.ChatyService/ServersCreate",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: ServersCreateRequest): Buffer => Buffer.from(ServersCreateRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): ServersCreateRequest => ServersCreateRequest.decode(value),
+    responseSerialize: (value: ServersCreateResponse): Buffer =>
+      Buffer.from(ServersCreateResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): ServersCreateResponse => ServersCreateResponse.decode(value),
+  },
 } as const;
 
 export interface ChatyServiceServer extends UntypedServiceImplementation {
@@ -163,6 +174,7 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
   messagesGet: handleUnaryCall<MessagesGetRequest, MessagesGetResponse>;
   messagesSearch: handleUnaryCall<MessagesSearchRequest, MessagesSearchResponse>;
+  serversCreate: handleUnaryCall<ServersCreateRequest, ServersCreateResponse>;
 }
 
 export interface ChatyServiceClient extends Client {
@@ -330,6 +342,21 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
+  ): ClientUnaryCall;
+  serversCreate(
+    request: ServersCreateRequest,
+    callback: (error: ServiceError | null, response: ServersCreateResponse) => void,
+  ): ClientUnaryCall;
+  serversCreate(
+    request: ServersCreateRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: ServersCreateResponse) => void,
+  ): ClientUnaryCall;
+  serversCreate(
+    request: ServersCreateRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: ServersCreateResponse) => void,
   ): ClientUnaryCall;
 }
 

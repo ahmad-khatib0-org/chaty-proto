@@ -10,6 +10,7 @@ import { ChannelsGetRequest, ChannelsGetResponse } from "./channels";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups";
 import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages";
 import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search";
+import { ServersCreateRequest, ServersCreateResponse } from "./servers";
 import {
   UsersCreateRequest,
   UsersCreateResponse,
@@ -37,6 +38,7 @@ export interface ChatyService {
   SearchUsernames(request: SearchUsernamesRequest): Promise<SearchUsernamesResponse>;
   MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse>;
   MessagesSearch(request: MessagesSearchRequest): Promise<MessagesSearchResponse>;
+  ServersCreate(request: ServersCreateRequest): Promise<ServersCreateResponse>;
 }
 
 export const ChatyServiceServiceName = "service.v1.ChatyService";
@@ -57,6 +59,7 @@ export class ChatyServiceClientImpl implements ChatyService {
     this.SearchUsernames = this.SearchUsernames.bind(this);
     this.MessagesGet = this.MessagesGet.bind(this);
     this.MessagesSearch = this.MessagesSearch.bind(this);
+    this.ServersCreate = this.ServersCreate.bind(this);
   }
   UsersCreate(request: UsersCreateRequest): Promise<UsersCreateResponse> {
     const data = UsersCreateRequest.encode(request).finish();
@@ -122,6 +125,12 @@ export class ChatyServiceClientImpl implements ChatyService {
     const data = MessagesSearchRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "MessagesSearch", data);
     return promise.then((data) => MessagesSearchResponse.decode(new BinaryReader(data)));
+  }
+
+  ServersCreate(request: ServersCreateRequest): Promise<ServersCreateResponse> {
+    const data = ServersCreateRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "ServersCreate", data);
+    return promise.then((data) => ServersCreateResponse.decode(new BinaryReader(data)));
   }
 }
 

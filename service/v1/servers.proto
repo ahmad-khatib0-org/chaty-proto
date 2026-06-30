@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package service.v1;
+
+import "shared/v1/error.proto";
+
+// Information about new server to create
+message ServersCreateRequest {
+  // Server name
+  // Validation: length(min = 1, max = 32)
+  string name = 1;
+
+  // Server description
+  // Validation: length(min = 0, max = 1024)
+  optional string description = 2;
+
+  // Whether this server is age-restricted
+  optional bool nsfw = 3;
+}
+
+message ServersCreateResponse {
+  oneof response {
+    ServersCreateResponseData data = 1;
+    shared.v1.AppError error = 2;
+  }
+}
+
+message ServersCreateResponseData {}

@@ -11,5 +11,6 @@ export * as RolesDb from './roles_db_pb.js';
 export * as Search from './search_pb.js';
 export * as ServerMembersDb from './server_members_db_pb.js';
 export * as ServersDb from './servers_db_pb.js';
+export * as Servers from './servers_pb.js';
 export * as UsersDb from './users_db_pb.js';
 export * as Users from './users_pb.js';

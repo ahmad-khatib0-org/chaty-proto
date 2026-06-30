@@ -7,6 +7,7 @@ import "service/v1/groups.proto";
 import "service/v1/messages.proto";
 import "service/v1/search.proto";
 import "service/v1/users.proto";
+import "service/v1/servers.proto";
 
 service ChatyService {
   rpc UsersCreate(UsersCreateRequest) returns (UsersCreateResponse);
@@ -20,4 +21,5 @@ service ChatyService {
   rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
   rpc MessagesGet(MessagesGetRequest) returns (MessagesGetResponse);
   rpc MessagesSearch(MessagesSearchRequest) returns (MessagesSearchResponse);
+  rpc ServersCreate(ServersCreateRequest) returns (ServersCreateResponse);
 }
