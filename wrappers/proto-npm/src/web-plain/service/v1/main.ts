@@ -8,8 +8,8 @@
 import { BinaryReader } from "@bufbuild/protobuf/wire";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups";
-import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages";
-import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search";
+import { MessagesGetRequest, MessagesGetResponse } from "./messages";
+import { SearchMessageRequest, SearchMessageResponse, SearchUsernamesRequest, SearchUsernamesResponse } from "./search";
 import { ServersCreateRequest, ServersCreateResponse } from "./servers";
 import {
   UsersCreateRequest,
@@ -36,8 +36,8 @@ export interface ChatyService {
   GroupsCreate(request: GroupsCreateRequest): Promise<GroupsCreateResponse>;
   GroupsList(request: GroupsListRequest): Promise<GroupsListResponse>;
   SearchUsernames(request: SearchUsernamesRequest): Promise<SearchUsernamesResponse>;
+  SearchMessage(request: SearchMessageRequest): Promise<SearchMessageResponse>;
   MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse>;
-  MessagesSearch(request: MessagesSearchRequest): Promise<MessagesSearchResponse>;
   ServersCreate(request: ServersCreateRequest): Promise<ServersCreateResponse>;
 }
 
@@ -57,8 +57,8 @@ export class ChatyServiceClientImpl implements ChatyService {
     this.GroupsCreate = this.GroupsCreate.bind(this);
     this.GroupsList = this.GroupsList.bind(this);
     this.SearchUsernames = this.SearchUsernames.bind(this);
+    this.SearchMessage = this.SearchMessage.bind(this);
     this.MessagesGet = this.MessagesGet.bind(this);
-    this.MessagesSearch = this.MessagesSearch.bind(this);
     this.ServersCreate = this.ServersCreate.bind(this);
   }
   UsersCreate(request: UsersCreateRequest): Promise<UsersCreateResponse> {
@@ -115,16 +115,16 @@ export class ChatyServiceClientImpl implements ChatyService {
     return promise.then((data) => SearchUsernamesResponse.decode(new BinaryReader(data)));
   }
 
+  SearchMessage(request: SearchMessageRequest): Promise<SearchMessageResponse> {
+    const data = SearchMessageRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "SearchMessage", data);
+    return promise.then((data) => SearchMessageResponse.decode(new BinaryReader(data)));
+  }
+
   MessagesGet(request: MessagesGetRequest): Promise<MessagesGetResponse> {
     const data = MessagesGetRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "MessagesGet", data);
     return promise.then((data) => MessagesGetResponse.decode(new BinaryReader(data)));
-  }
-
-  MessagesSearch(request: MessagesSearchRequest): Promise<MessagesSearchResponse> {
-    const data = MessagesSearchRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "MessagesSearch", data);
-    return promise.then((data) => MessagesSearchResponse.decode(new BinaryReader(data)));
   }
 
   ServersCreate(request: ServersCreateRequest): Promise<ServersCreateResponse> {

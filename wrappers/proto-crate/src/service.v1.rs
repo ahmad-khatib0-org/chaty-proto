@@ -1512,59 +1512,6 @@ pub struct MessagesGetResponseData {
     #[prost(message, repeated, tag = "3")]
     pub members: ::prost::alloc::vec::Vec<ServerMember>,
 }
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MessagesSearchRequest {
-    /// Full-text search query
-    #[prost(string, optional, tag = "1")]
-    pub query: ::core::option::Option<::prost::alloc::string::String>,
-    /// Whether to only search for pinned messages, cannot be sent with query
-    #[prost(bool, optional, tag = "2")]
-    pub pinned: ::core::option::Option<bool>,
-    /// Maximum number of messages to fetch
-    #[prost(int64, optional, tag = "3")]
-    pub limit: ::core::option::Option<i64>,
-    /// Message id before which messages should be fetched
-    #[prost(string, optional, tag = "4")]
-    pub before: ::core::option::Option<::prost::alloc::string::String>,
-    /// Message id after which messages should be fetched
-    #[prost(string, optional, tag = "5")]
-    pub after: ::core::option::Option<::prost::alloc::string::String>,
-    /// Message sort direction
-    /// By default, it will be sorted by latest (default: RELEVANCE)
-    #[prost(enumeration = "MessageSort", optional, tag = "6")]
-    pub sort: ::core::option::Option<i32>,
-    /// Whether to include user (and member, if server channel) objects
-    #[prost(bool, optional, tag = "7")]
-    pub include_users: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MessagesSearchResponse {
-    #[prost(oneof = "messages_search_response::Response", tags = "1, 2")]
-    pub response: ::core::option::Option<messages_search_response::Response>,
-}
-/// Nested message and enum types in `MessagesSearchResponse`.
-pub mod messages_search_response {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Response {
-        #[prost(message, tag = "1")]
-        Data(super::MessagesSearchResponseData),
-        #[prost(message, tag = "2")]
-        Error(super::super::super::shared::v1::AppError),
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MessagesSearchResponseData {
-    #[prost(message, repeated, tag = "1")]
-    pub messages: ::prost::alloc::vec::Vec<Message>,
-    #[prost(message, repeated, tag = "2")]
-    pub users: ::prost::alloc::vec::Vec<ApiUser>,
-    #[prost(message, repeated, tag = "3")]
-    pub members: ::prost::alloc::vec::Vec<ServerMember>,
-}
 /// Message sort direction
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1641,6 +1588,59 @@ pub struct SearchUser {
     pub display_name: ::prost::alloc::string::String,
     #[prost(string, tag = "4")]
     pub avatar: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchMessageRequest {
+    /// Full-text search query
+    #[prost(string, optional, tag = "1")]
+    pub query: ::core::option::Option<::prost::alloc::string::String>,
+    /// Whether to only search for pinned messages, cannot be sent with query
+    #[prost(bool, optional, tag = "2")]
+    pub pinned: ::core::option::Option<bool>,
+    /// Maximum number of messages to fetch
+    #[prost(int64, optional, tag = "3")]
+    pub limit: ::core::option::Option<i64>,
+    /// Message id before which messages should be fetched
+    #[prost(string, optional, tag = "4")]
+    pub before: ::core::option::Option<::prost::alloc::string::String>,
+    /// Message id after which messages should be fetched
+    #[prost(string, optional, tag = "5")]
+    pub after: ::core::option::Option<::prost::alloc::string::String>,
+    /// Message sort direction
+    /// By default, it will be sorted by latest (default: RELEVANCE)
+    #[prost(enumeration = "MessageSort", optional, tag = "6")]
+    pub sort: ::core::option::Option<i32>,
+    /// Whether to include user (and member, if server channel) objects
+    #[prost(bool, optional, tag = "7")]
+    pub include_users: ::core::option::Option<bool>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchMessageResponse {
+    #[prost(oneof = "search_message_response::Response", tags = "1, 2")]
+    pub response: ::core::option::Option<search_message_response::Response>,
+}
+/// Nested message and enum types in `SearchMessageResponse`.
+pub mod search_message_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Data(super::SearchMessageResponseData),
+        #[prost(message, tag = "2")]
+        Error(super::super::super::shared::v1::AppError),
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchMessageResponseData {
+    #[prost(message, repeated, tag = "1")]
+    pub messages: ::prost::alloc::vec::Vec<Message>,
+    #[prost(message, repeated, tag = "2")]
+    pub users: ::prost::alloc::vec::Vec<ApiUser>,
+    #[prost(message, repeated, tag = "3")]
+    pub members: ::prost::alloc::vec::Vec<ServerMember>,
 }
 /// Information about new server to create
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1991,6 +1991,30 @@ pub mod chaty_service_client {
                 .insert(GrpcMethod::new("service.v1.ChatyService", "SearchUsernames"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn search_message(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchMessageRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchMessageResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/service.v1.ChatyService/SearchMessage",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("service.v1.ChatyService", "SearchMessage"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn messages_get(
             &mut self,
             request: impl tonic::IntoRequest<super::MessagesGetRequest>,
@@ -2013,30 +2037,6 @@ pub mod chaty_service_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("service.v1.ChatyService", "MessagesGet"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn messages_search(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MessagesSearchRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MessagesSearchResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/service.v1.ChatyService/MessagesSearch",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("service.v1.ChatyService", "MessagesSearch"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn servers_create(
@@ -2141,18 +2141,18 @@ pub mod chaty_service_server {
             tonic::Response<super::SearchUsernamesResponse>,
             tonic::Status,
         >;
+        async fn search_message(
+            &self,
+            request: tonic::Request<super::SearchMessageRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchMessageResponse>,
+            tonic::Status,
+        >;
         async fn messages_get(
             &self,
             request: tonic::Request<super::MessagesGetRequest>,
         ) -> std::result::Result<
             tonic::Response<super::MessagesGetResponse>,
-            tonic::Status,
-        >;
-        async fn messages_search(
-            &self,
-            request: tonic::Request<super::MessagesSearchRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MessagesSearchResponse>,
             tonic::Status,
         >;
         async fn servers_create(
@@ -2650,6 +2650,51 @@ pub mod chaty_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/service.v1.ChatyService/SearchMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchMessageSvc<T: ChatyService>(pub Arc<T>);
+                    impl<
+                        T: ChatyService,
+                    > tonic::server::UnaryService<super::SearchMessageRequest>
+                    for SearchMessageSvc<T> {
+                        type Response = super::SearchMessageResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchMessageRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ChatyService>::search_message(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SearchMessageSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/service.v1.ChatyService/MessagesGet" => {
                     #[allow(non_camel_case_types)]
                     struct MessagesGetSvc<T: ChatyService>(pub Arc<T>);
@@ -2680,51 +2725,6 @@ pub mod chaty_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = MessagesGetSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/service.v1.ChatyService/MessagesSearch" => {
-                    #[allow(non_camel_case_types)]
-                    struct MessagesSearchSvc<T: ChatyService>(pub Arc<T>);
-                    impl<
-                        T: ChatyService,
-                    > tonic::server::UnaryService<super::MessagesSearchRequest>
-                    for MessagesSearchSvc<T> {
-                        type Response = super::MessagesSearchResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::MessagesSearchRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChatyService>::messages_search(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = MessagesSearchSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

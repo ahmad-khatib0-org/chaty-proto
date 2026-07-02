@@ -18,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/messages.proto.
  */
 export const file_service_v1_messages: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIItMBCg1FbWJlZFNlbmRhYmxlEhUKCGljb25fdXJsGAEgASgJSACIAQESEAoDdXJsGAIgASgJSAGIAQESEgoFdGl0bGUYAyABKAlIAogBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgDiAEBEhIKBW1lZGlhGAUgASgJSASIAQESEwoGY29sb3VyGAYgASgJSAWIAQFCCwoJX2ljb25fdXJsQgYKBF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIICgZfbWVkaWFCCQoHX2NvbG91ciLdAgoNTWVzc2FnZUludGVudBISCgVub25jZRgBIAEoCUgAiAEBEhQKB2NvbnRlbnQYAiABKAlIAYgBARITCgthdHRhY2htZW50cxgDIAMoCRIoCgdyZXBsaWVzGAQgAygLMhcuc2VydmljZS52MS5SZXBseUludGVudBIpCgZlbWJlZHMYBSADKAsyGS5zZXJ2aWNlLnYxLkVtYmVkU2VuZGFibGUSLwoKbWFzcXVlcmFkZRgGIAEoCzIWLnNlcnZpY2UudjEuTWFzcXVlcmFkZUgCiAEBEjMKDGludGVyYWN0aW9ucxgHIAEoCzIYLnNlcnZpY2UudjEuSW50ZXJhY3Rpb25zSAOIAQESEgoFZmxhZ3MYCCABKA1IBIgBAUIICgZfbm9uY2VCCgoIX2NvbnRlbnRCDQoLX21hc3F1ZXJhZGVCDwoNX2ludGVyYWN0aW9uc0IICgZfZmxhZ3MihwIKEk1lc3NhZ2VzR2V0UmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKBWxpbWl0GAIgASgDSACIAQESEwoGYmVmb3JlGAMgASgJSAGIAQESEgoFYWZ0ZXIYBCABKAlIAogBARIqCgRzb3J0GAUgASgOMhcuc2VydmljZS52MS5NZXNzYWdlU29ydEgDiAEBEhMKBm5lYXJieRgGIAEoCUgEiAEBEhoKDWluY2x1ZGVfdXNlcnMYByABKAhIBYgBAUIICgZfbGltaXRCCQoHX2JlZm9yZUIICgZfYWZ0ZXJCBwoFX3NvcnRCCQoHX25lYXJieUIQCg5faW5jbHVkZV91c2VycyJ8ChNNZXNzYWdlc0dldFJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKPAQoXTWVzc2FnZXNHZXRSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyIpQCChVNZXNzYWdlc1NlYXJjaFJlcXVlc3QSEgoFcXVlcnkYASABKAlIAIgBARITCgZwaW5uZWQYAiABKAhIAYgBARISCgVsaW1pdBgDIAEoA0gCiAEBEhMKBmJlZm9yZRgEIAEoCUgDiAEBEhIKBWFmdGVyGAUgASgJSASIAQESKgoEc29ydBgGIAEoDjIXLnNlcnZpY2UudjEuTWVzc2FnZVNvcnRIBYgBARIaCg1pbmNsdWRlX3VzZXJzGAcgASgISAaIAQFCCAoGX3F1ZXJ5QgkKB19waW5uZWRCCAoGX2xpbWl0QgkKB19iZWZvcmVCCAoGX2FmdGVyQgcKBV9zb3J0QhAKDl9pbmNsdWRlX3VzZXJzIoIBChZNZXNzYWdlc1NlYXJjaFJlc3BvbnNlEjYKBGRhdGEYASABKAsyJi5zZXJ2aWNlLnYxLk1lc3NhZ2VzU2VhcmNoUmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKSAQoaTWVzc2FnZXNTZWFyY2hSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL21lc3NhZ2VzLnByb3RvEgpzZXJ2aWNlLnYxIkYKC1JlcGx5SW50ZW50EgoKAmlkGAEgASgJEg8KB21lbnRpb24YAiABKAgSGgoSZmFpbF9pZl9ub3RfZXhpc3RzGAMgASgIItMBCg1FbWJlZFNlbmRhYmxlEhUKCGljb25fdXJsGAEgASgJSACIAQESEAoDdXJsGAIgASgJSAGIAQESEgoFdGl0bGUYAyABKAlIAogBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgDiAEBEhIKBW1lZGlhGAUgASgJSASIAQESEwoGY29sb3VyGAYgASgJSAWIAQFCCwoJX2ljb25fdXJsQgYKBF91cmxCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkIICgZfbWVkaWFCCQoHX2NvbG91ciLdAgoNTWVzc2FnZUludGVudBISCgVub25jZRgBIAEoCUgAiAEBEhQKB2NvbnRlbnQYAiABKAlIAYgBARITCgthdHRhY2htZW50cxgDIAMoCRIoCgdyZXBsaWVzGAQgAygLMhcuc2VydmljZS52MS5SZXBseUludGVudBIpCgZlbWJlZHMYBSADKAsyGS5zZXJ2aWNlLnYxLkVtYmVkU2VuZGFibGUSLwoKbWFzcXVlcmFkZRgGIAEoCzIWLnNlcnZpY2UudjEuTWFzcXVlcmFkZUgCiAEBEjMKDGludGVyYWN0aW9ucxgHIAEoCzIYLnNlcnZpY2UudjEuSW50ZXJhY3Rpb25zSAOIAQESEgoFZmxhZ3MYCCABKA1IBIgBAUIICgZfbm9uY2VCCgoIX2NvbnRlbnRCDQoLX21hc3F1ZXJhZGVCDwoNX2ludGVyYWN0aW9uc0IICgZfZmxhZ3MihwIKEk1lc3NhZ2VzR2V0UmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKBWxpbWl0GAIgASgDSACIAQESEwoGYmVmb3JlGAMgASgJSAGIAQESEgoFYWZ0ZXIYBCABKAlIAogBARIqCgRzb3J0GAUgASgOMhcuc2VydmljZS52MS5NZXNzYWdlU29ydEgDiAEBEhMKBm5lYXJieRgGIAEoCUgEiAEBEhoKDWluY2x1ZGVfdXNlcnMYByABKAhIBYgBAUIICgZfbGltaXRCCQoHX2JlZm9yZUIICgZfYWZ0ZXJCBwoFX3NvcnRCCQoHX25lYXJieUIQCg5faW5jbHVkZV91c2VycyJ8ChNNZXNzYWdlc0dldFJlc3BvbnNlEjMKBGRhdGEYASABKAsyIy5zZXJ2aWNlLnYxLk1lc3NhZ2VzR2V0UmVzcG9uc2VEYXRhSAASJAoFZXJyb3IYAiABKAsyEy5zaGFyZWQudjEuQXBwRXJyb3JIAEIKCghyZXNwb25zZSKPAQoXTWVzc2FnZXNHZXRSZXNwb25zZURhdGESJQoIbWVzc2FnZXMYASADKAsyEy5zZXJ2aWNlLnYxLk1lc3NhZ2USIgoFdXNlcnMYAiADKAsyEy5zZXJ2aWNlLnYxLkFQSVVzZXISKQoHbWVtYmVycxgDIAMoCzIYLnNlcnZpY2UudjEuU2VydmVyTWVtYmVyKnkKC01lc3NhZ2VTb3J0EhwKGE1FU1NBR0VfU09SVF9VTlNQRUNJRklFRBAAEhcKE01FU1NBR0VfU09SVF9MQVRFU1QQARIXChNNRVNTQUdFX1NPUlRfT0xERVNUEAISGgoWTUVTU0FHRV9TT1JUX1JFTEVWQU5DRRADYgZwcm90bzM", [file_service_v1_messages_db, file_service_v1_server_members_db, file_service_v1_users, file_shared_v1_error]);
 
 /**
  * *  What this message should reply to and how 
@@ -303,124 +303,6 @@ export type MessagesGetResponseData = Message<"service.v1.MessagesGetResponseDat
  */
 export const MessagesGetResponseDataSchema: GenMessage<MessagesGetResponseData> = /*@__PURE__*/
   messageDesc(file_service_v1_messages, 5);
-
-/**
- * @generated from message service.v1.MessagesSearchRequest
- */
-export type MessagesSearchRequest = Message<"service.v1.MessagesSearchRequest"> & {
-  /**
-   * Full-text search query
-   *
-   * @generated from field: optional string query = 1;
-   */
-  query?: string;
-
-  /**
-   * Whether to only search for pinned messages, cannot be sent with query
-   *
-   * @generated from field: optional bool pinned = 2;
-   */
-  pinned?: boolean;
-
-  /**
-   * Maximum number of messages to fetch
-   *
-   * @generated from field: optional int64 limit = 3;
-   */
-  limit?: bigint;
-
-  /**
-   * Message id before which messages should be fetched
-   *
-   * @generated from field: optional string before = 4;
-   */
-  before?: string;
-
-  /**
-   * Message id after which messages should be fetched
-   *
-   * @generated from field: optional string after = 5;
-   */
-  after?: string;
-
-  /**
-   * Message sort direction
-   * By default, it will be sorted by latest (default: RELEVANCE)
-   *
-   * @generated from field: optional service.v1.MessageSort sort = 6;
-   */
-  sort?: MessageSort;
-
-  /**
-   * Whether to include user (and member, if server channel) objects
-   *
-   * @generated from field: optional bool include_users = 7;
-   */
-  includeUsers?: boolean;
-};
-
-/**
- * Describes the message service.v1.MessagesSearchRequest.
- * Use `create(MessagesSearchRequestSchema)` to create a new message.
- */
-export const MessagesSearchRequestSchema: GenMessage<MessagesSearchRequest> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 6);
-
-/**
- * @generated from message service.v1.MessagesSearchResponse
- */
-export type MessagesSearchResponse = Message<"service.v1.MessagesSearchResponse"> & {
-  /**
-   * @generated from oneof service.v1.MessagesSearchResponse.response
-   */
-  response: {
-    /**
-     * @generated from field: service.v1.MessagesSearchResponseData data = 1;
-     */
-    value: MessagesSearchResponseData;
-    case: "data";
-  } | {
-    /**
-     * @generated from field: shared.v1.AppError error = 2;
-     */
-    value: AppError;
-    case: "error";
-  } | { case: undefined; value?: undefined };
-};
-
-/**
- * Describes the message service.v1.MessagesSearchResponse.
- * Use `create(MessagesSearchResponseSchema)` to create a new message.
- */
-export const MessagesSearchResponseSchema: GenMessage<MessagesSearchResponse> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 7);
-
-/**
- * @generated from message service.v1.MessagesSearchResponseData
- */
-export type MessagesSearchResponseData = Message<"service.v1.MessagesSearchResponseData"> & {
-  /**
-   * @generated from field: repeated service.v1.Message messages = 1;
-   */
-  messages: Message$1[];
-
-  /**
-   * @generated from field: repeated service.v1.APIUser users = 2;
-   */
-  users: APIUser[];
-
-  /**
-   * @generated from field: repeated service.v1.ServerMember members = 3;
-   */
-  members: ServerMember[];
-};
-
-/**
- * Describes the message service.v1.MessagesSearchResponseData.
- * Use `create(MessagesSearchResponseDataSchema)` to create a new message.
- */
-export const MessagesSearchResponseDataSchema: GenMessage<MessagesSearchResponseData> = /*@__PURE__*/
-  messageDesc(file_service_v1_messages, 8);
 
 /**
  * Message sort direction

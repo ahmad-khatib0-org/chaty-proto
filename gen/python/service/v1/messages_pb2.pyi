@@ -102,39 +102,3 @@ class MessagesGetResponseData(_message.Message):
     users: _containers.RepeatedCompositeFieldContainer[_users_pb2.APIUser]
     members: _containers.RepeatedCompositeFieldContainer[_server_members_db_pb2.ServerMember]
     def __init__(self, messages: _Optional[_Iterable[_Union[_messages_db_pb2.Message, _Mapping]]] = ..., users: _Optional[_Iterable[_Union[_users_pb2.APIUser, _Mapping]]] = ..., members: _Optional[_Iterable[_Union[_server_members_db_pb2.ServerMember, _Mapping]]] = ...) -> None: ...
-
-class MessagesSearchRequest(_message.Message):
-    __slots__ = ("query", "pinned", "limit", "before", "after", "sort", "include_users")
-    QUERY_FIELD_NUMBER: _ClassVar[int]
-    PINNED_FIELD_NUMBER: _ClassVar[int]
-    LIMIT_FIELD_NUMBER: _ClassVar[int]
-    BEFORE_FIELD_NUMBER: _ClassVar[int]
-    AFTER_FIELD_NUMBER: _ClassVar[int]
-    SORT_FIELD_NUMBER: _ClassVar[int]
-    INCLUDE_USERS_FIELD_NUMBER: _ClassVar[int]
-    query: str
-    pinned: bool
-    limit: int
-    before: str
-    after: str
-    sort: MessageSort
-    include_users: bool
-    def __init__(self, query: _Optional[str] = ..., pinned: bool = ..., limit: _Optional[int] = ..., before: _Optional[str] = ..., after: _Optional[str] = ..., sort: _Optional[_Union[MessageSort, str]] = ..., include_users: bool = ...) -> None: ...
-
-class MessagesSearchResponse(_message.Message):
-    __slots__ = ("data", "error")
-    DATA_FIELD_NUMBER: _ClassVar[int]
-    ERROR_FIELD_NUMBER: _ClassVar[int]
-    data: MessagesSearchResponseData
-    error: _error_pb2.AppError
-    def __init__(self, data: _Optional[_Union[MessagesSearchResponseData, _Mapping]] = ..., error: _Optional[_Union[_error_pb2.AppError, _Mapping]] = ...) -> None: ...
-
-class MessagesSearchResponseData(_message.Message):
-    __slots__ = ("messages", "users", "members")
-    MESSAGES_FIELD_NUMBER: _ClassVar[int]
-    USERS_FIELD_NUMBER: _ClassVar[int]
-    MEMBERS_FIELD_NUMBER: _ClassVar[int]
-    messages: _containers.RepeatedCompositeFieldContainer[_messages_db_pb2.Message]
-    users: _containers.RepeatedCompositeFieldContainer[_users_pb2.APIUser]
-    members: _containers.RepeatedCompositeFieldContainer[_server_members_db_pb2.ServerMember]
-    def __init__(self, messages: _Optional[_Iterable[_Union[_messages_db_pb2.Message, _Mapping]]] = ..., users: _Optional[_Iterable[_Union[_users_pb2.APIUser, _Mapping]]] = ..., members: _Optional[_Iterable[_Union[_server_members_db_pb2.ServerMember, _Mapping]]] = ...) -> None: ...

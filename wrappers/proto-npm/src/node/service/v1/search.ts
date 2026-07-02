@@ -7,6 +7,10 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { AppError } from "../../shared/v1/error.js";
+import { MessageSort, messageSortFromJSON, messageSortToJSON } from "./messages.js";
+import { Message } from "./messages_db.js";
+import { ServerMember } from "./server_members_db.js";
+import { APIUser } from "./users.js";
 
 export const protobufPackage = "service.v1";
 
@@ -29,6 +33,49 @@ export interface SearchUser {
   username: string;
   displayName: string;
   avatar: string;
+}
+
+export interface SearchMessageRequest {
+  /** Full-text search query */
+  query?:
+    | string
+    | undefined;
+  /** Whether to only search for pinned messages, cannot be sent with query */
+  pinned?:
+    | boolean
+    | undefined;
+  /** Maximum number of messages to fetch */
+  limit?:
+    | number
+    | undefined;
+  /** Message id before which messages should be fetched */
+  before?:
+    | string
+    | undefined;
+  /** Message id after which messages should be fetched */
+  after?:
+    | string
+    | undefined;
+  /**
+   * Message sort direction
+   * By default, it will be sorted by latest (default: RELEVANCE)
+   */
+  sort?:
+    | MessageSort
+    | undefined;
+  /** Whether to include user (and member, if server channel) objects */
+  includeUsers?: boolean | undefined;
+}
+
+export interface SearchMessageResponse {
+  data?: SearchMessageResponseData | undefined;
+  error?: AppError | undefined;
+}
+
+export interface SearchMessageResponseData {
+  messages: Message[];
+  users: APIUser[];
+  members: ServerMember[];
 }
 
 function createBaseSearchUsernamesRequest(): SearchUsernamesRequest {
@@ -355,6 +402,344 @@ export const SearchUser: MessageFns<SearchUser> = {
   },
 };
 
+function createBaseSearchMessageRequest(): SearchMessageRequest {
+  return {
+    query: undefined,
+    pinned: undefined,
+    limit: undefined,
+    before: undefined,
+    after: undefined,
+    sort: undefined,
+    includeUsers: undefined,
+  };
+}
+
+export const SearchMessageRequest: MessageFns<SearchMessageRequest> = {
+  encode(message: SearchMessageRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.query !== undefined) {
+      writer.uint32(10).string(message.query);
+    }
+    if (message.pinned !== undefined) {
+      writer.uint32(16).bool(message.pinned);
+    }
+    if (message.limit !== undefined) {
+      writer.uint32(24).int64(message.limit);
+    }
+    if (message.before !== undefined) {
+      writer.uint32(34).string(message.before);
+    }
+    if (message.after !== undefined) {
+      writer.uint32(42).string(message.after);
+    }
+    if (message.sort !== undefined) {
+      writer.uint32(48).int32(message.sort);
+    }
+    if (message.includeUsers !== undefined) {
+      writer.uint32(56).bool(message.includeUsers);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SearchMessageRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSearchMessageRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.query = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.pinned = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.limit = longToNumber(reader.int64());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.before = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.after = reader.string();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.sort = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.includeUsers = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SearchMessageRequest {
+    return {
+      query: isSet(object.query) ? globalThis.String(object.query) : undefined,
+      pinned: isSet(object.pinned) ? globalThis.Boolean(object.pinned) : undefined,
+      limit: isSet(object.limit) ? globalThis.Number(object.limit) : undefined,
+      before: isSet(object.before) ? globalThis.String(object.before) : undefined,
+      after: isSet(object.after) ? globalThis.String(object.after) : undefined,
+      sort: isSet(object.sort) ? messageSortFromJSON(object.sort) : undefined,
+      includeUsers: isSet(object.includeUsers) ? globalThis.Boolean(object.includeUsers) : undefined,
+    };
+  },
+
+  toJSON(message: SearchMessageRequest): unknown {
+    const obj: any = {};
+    if (message.query !== undefined) {
+      obj.query = message.query;
+    }
+    if (message.pinned !== undefined) {
+      obj.pinned = message.pinned;
+    }
+    if (message.limit !== undefined) {
+      obj.limit = Math.round(message.limit);
+    }
+    if (message.before !== undefined) {
+      obj.before = message.before;
+    }
+    if (message.after !== undefined) {
+      obj.after = message.after;
+    }
+    if (message.sort !== undefined) {
+      obj.sort = messageSortToJSON(message.sort);
+    }
+    if (message.includeUsers !== undefined) {
+      obj.includeUsers = message.includeUsers;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SearchMessageRequest>, I>>(base?: I): SearchMessageRequest {
+    return SearchMessageRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SearchMessageRequest>, I>>(object: I): SearchMessageRequest {
+    const message = createBaseSearchMessageRequest();
+    message.query = object.query ?? undefined;
+    message.pinned = object.pinned ?? undefined;
+    message.limit = object.limit ?? undefined;
+    message.before = object.before ?? undefined;
+    message.after = object.after ?? undefined;
+    message.sort = object.sort ?? undefined;
+    message.includeUsers = object.includeUsers ?? undefined;
+    return message;
+  },
+};
+
+function createBaseSearchMessageResponse(): SearchMessageResponse {
+  return { data: undefined, error: undefined };
+}
+
+export const SearchMessageResponse: MessageFns<SearchMessageResponse> = {
+  encode(message: SearchMessageResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data !== undefined) {
+      SearchMessageResponseData.encode(message.data, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== undefined) {
+      AppError.encode(message.error, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SearchMessageResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSearchMessageResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = SearchMessageResponseData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.error = AppError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SearchMessageResponse {
+    return {
+      data: isSet(object.data) ? SearchMessageResponseData.fromJSON(object.data) : undefined,
+      error: isSet(object.error) ? AppError.fromJSON(object.error) : undefined,
+    };
+  },
+
+  toJSON(message: SearchMessageResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = SearchMessageResponseData.toJSON(message.data);
+    }
+    if (message.error !== undefined) {
+      obj.error = AppError.toJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SearchMessageResponse>, I>>(base?: I): SearchMessageResponse {
+    return SearchMessageResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SearchMessageResponse>, I>>(object: I): SearchMessageResponse {
+    const message = createBaseSearchMessageResponse();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? SearchMessageResponseData.fromPartial(object.data)
+      : undefined;
+    message.error = (object.error !== undefined && object.error !== null)
+      ? AppError.fromPartial(object.error)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSearchMessageResponseData(): SearchMessageResponseData {
+  return { messages: [], users: [], members: [] };
+}
+
+export const SearchMessageResponseData: MessageFns<SearchMessageResponseData> = {
+  encode(message: SearchMessageResponseData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.messages) {
+      Message.encode(v!, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.users) {
+      APIUser.encode(v!, writer.uint32(18).fork()).join();
+    }
+    for (const v of message.members) {
+      ServerMember.encode(v!, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SearchMessageResponseData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSearchMessageResponseData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.messages.push(Message.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.users.push(APIUser.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.members.push(ServerMember.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SearchMessageResponseData {
+    return {
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Message.fromJSON(e)) : [],
+      users: globalThis.Array.isArray(object?.users) ? object.users.map((e: any) => APIUser.fromJSON(e)) : [],
+      members: globalThis.Array.isArray(object?.members)
+        ? object.members.map((e: any) => ServerMember.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: SearchMessageResponseData): unknown {
+    const obj: any = {};
+    if (message.messages?.length) {
+      obj.messages = message.messages.map((e) => Message.toJSON(e));
+    }
+    if (message.users?.length) {
+      obj.users = message.users.map((e) => APIUser.toJSON(e));
+    }
+    if (message.members?.length) {
+      obj.members = message.members.map((e) => ServerMember.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SearchMessageResponseData>, I>>(base?: I): SearchMessageResponseData {
+    return SearchMessageResponseData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SearchMessageResponseData>, I>>(object: I): SearchMessageResponseData {
+    const message = createBaseSearchMessageResponseData();
+    message.messages = object.messages?.map((e) => Message.fromPartial(e)) || [];
+    message.users = object.users?.map((e) => APIUser.fromPartial(e)) || [];
+    message.members = object.members?.map((e) => ServerMember.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
@@ -366,6 +751,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -19,8 +19,13 @@ import {
 } from "@grpc/grpc-js";
 import { ChannelsGetRequest, ChannelsGetResponse } from "./channels.js";
 import { GroupsCreateRequest, GroupsCreateResponse, GroupsListRequest, GroupsListResponse } from "./groups.js";
-import { MessagesGetRequest, MessagesGetResponse, MessagesSearchRequest, MessagesSearchResponse } from "./messages.js";
-import { SearchUsernamesRequest, SearchUsernamesResponse } from "./search.js";
+import { MessagesGetRequest, MessagesGetResponse } from "./messages.js";
+import {
+  SearchMessageRequest,
+  SearchMessageResponse,
+  SearchUsernamesRequest,
+  SearchUsernamesResponse,
+} from "./search.js";
 import { ServersCreateRequest, ServersCreateResponse } from "./servers.js";
 import {
   UsersCreateRequest,
@@ -130,6 +135,16 @@ export const ChatyServiceService = {
       Buffer.from(SearchUsernamesResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): SearchUsernamesResponse => SearchUsernamesResponse.decode(value),
   },
+  searchMessage: {
+    path: "/service.v1.ChatyService/SearchMessage",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: SearchMessageRequest): Buffer => Buffer.from(SearchMessageRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): SearchMessageRequest => SearchMessageRequest.decode(value),
+    responseSerialize: (value: SearchMessageResponse): Buffer =>
+      Buffer.from(SearchMessageResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): SearchMessageResponse => SearchMessageResponse.decode(value),
+  },
   messagesGet: {
     path: "/service.v1.ChatyService/MessagesGet",
     requestStream: false,
@@ -138,17 +153,6 @@ export const ChatyServiceService = {
     requestDeserialize: (value: Buffer): MessagesGetRequest => MessagesGetRequest.decode(value),
     responseSerialize: (value: MessagesGetResponse): Buffer => Buffer.from(MessagesGetResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MessagesGetResponse => MessagesGetResponse.decode(value),
-  },
-  messagesSearch: {
-    path: "/service.v1.ChatyService/MessagesSearch",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: MessagesSearchRequest): Buffer =>
-      Buffer.from(MessagesSearchRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MessagesSearchRequest => MessagesSearchRequest.decode(value),
-    responseSerialize: (value: MessagesSearchResponse): Buffer =>
-      Buffer.from(MessagesSearchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MessagesSearchResponse => MessagesSearchResponse.decode(value),
   },
   serversCreate: {
     path: "/service.v1.ChatyService/ServersCreate",
@@ -172,8 +176,8 @@ export interface ChatyServiceServer extends UntypedServiceImplementation {
   groupsCreate: handleUnaryCall<GroupsCreateRequest, GroupsCreateResponse>;
   groupsList: handleUnaryCall<GroupsListRequest, GroupsListResponse>;
   searchUsernames: handleUnaryCall<SearchUsernamesRequest, SearchUsernamesResponse>;
+  searchMessage: handleUnaryCall<SearchMessageRequest, SearchMessageResponse>;
   messagesGet: handleUnaryCall<MessagesGetRequest, MessagesGetResponse>;
-  messagesSearch: handleUnaryCall<MessagesSearchRequest, MessagesSearchResponse>;
   serversCreate: handleUnaryCall<ServersCreateRequest, ServersCreateResponse>;
 }
 
@@ -313,6 +317,21 @@ export interface ChatyServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: SearchUsernamesResponse) => void,
   ): ClientUnaryCall;
+  searchMessage(
+    request: SearchMessageRequest,
+    callback: (error: ServiceError | null, response: SearchMessageResponse) => void,
+  ): ClientUnaryCall;
+  searchMessage(
+    request: SearchMessageRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: SearchMessageResponse) => void,
+  ): ClientUnaryCall;
+  searchMessage(
+    request: SearchMessageRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: SearchMessageResponse) => void,
+  ): ClientUnaryCall;
   messagesGet(
     request: MessagesGetRequest,
     callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
@@ -327,21 +346,6 @@ export interface ChatyServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: MessagesGetResponse) => void,
-  ): ClientUnaryCall;
-  messagesSearch(
-    request: MessagesSearchRequest,
-    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
-  ): ClientUnaryCall;
-  messagesSearch(
-    request: MessagesSearchRequest,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
-  ): ClientUnaryCall;
-  messagesSearch(
-    request: MessagesSearchRequest,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MessagesSearchResponse) => void,
   ): ClientUnaryCall;
   serversCreate(
     request: ServersCreateRequest,

@@ -19,7 +19,7 @@ service ChatyService {
   rpc GroupsCreate(GroupsCreateRequest) returns (GroupsCreateResponse);
   rpc GroupsList(GroupsListRequest) returns (GroupsListResponse);
   rpc SearchUsernames(SearchUsernamesRequest) returns (SearchUsernamesResponse);
+  rpc SearchMessage(SearchMessageRequest) returns (SearchMessageResponse);
   rpc MessagesGet(MessagesGetRequest) returns (MessagesGetResponse);
-  rpc MessagesSearch(MessagesSearchRequest) returns (MessagesSearchResponse);
   rpc ServersCreate(ServersCreateRequest) returns (ServersCreateResponse);
 }

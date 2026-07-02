@@ -22,22 +22,32 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from service.v1 import messages_pb2 as service_dot_v1_dot_messages__pb2
+from service.v1 import messages_db_pb2 as service_dot_v1_dot_messages__db__pb2
+from service.v1 import server_members_db_pb2 as service_dot_v1_dot_server__members__db__pb2
+from service.v1 import users_pb2 as service_dot_v1_dot_users__pb2
 from shared.v1 import error_pb2 as shared_dot_v1_dot_error__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17service/v1/search.proto\x12\nservice.v1\x1a\x15shared/v1/error.proto\"6\n\x16SearchUsernamesRequest\x12\r\n\x05query\x18\x01 \x01(\t\x12\r\n\x05limit\x18\x02 \x01(\x05\"\x84\x01\n\x17SearchUsernamesResponse\x12\x37\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\'.service.v1.SearchUsernamesResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"D\n\x1bSearchUsernamesResponseData\x12%\n\x05users\x18\x01 \x03(\x0b\x32\x16.service.v1.SearchUser\"P\n\nSearchUser\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x03 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17service/v1/search.proto\x12\nservice.v1\x1a\x19service/v1/messages.proto\x1a\x1cservice/v1/messages_db.proto\x1a\"service/v1/server_members_db.proto\x1a\x16service/v1/users.proto\x1a\x15shared/v1/error.proto\"6\n\x16SearchUsernamesRequest\x12\r\n\x05query\x18\x01 \x01(\t\x12\r\n\x05limit\x18\x02 \x01(\x05\"\x84\x01\n\x17SearchUsernamesResponse\x12\x37\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\'.service.v1.SearchUsernamesResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"D\n\x1bSearchUsernamesResponseData\x12%\n\x05users\x18\x01 \x03(\x0b\x32\x16.service.v1.SearchUser\"P\n\nSearchUser\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x03 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\t\"\x93\x02\n\x14SearchMessageRequest\x12\x12\n\x05query\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x06pinned\x18\x02 \x01(\x08H\x01\x88\x01\x01\x12\x12\n\x05limit\x18\x03 \x01(\x03H\x02\x88\x01\x01\x12\x13\n\x06\x62\x65\x66ore\x18\x04 \x01(\tH\x03\x88\x01\x01\x12\x12\n\x05\x61\x66ter\x18\x05 \x01(\tH\x04\x88\x01\x01\x12*\n\x04sort\x18\x06 \x01(\x0e\x32\x17.service.v1.MessageSortH\x05\x88\x01\x01\x12\x1a\n\rinclude_users\x18\x07 \x01(\x08H\x06\x88\x01\x01\x42\x08\n\x06_queryB\t\n\x07_pinnedB\x08\n\x06_limitB\t\n\x07_beforeB\x08\n\x06_afterB\x07\n\x05_sortB\x10\n\x0e_include_users\"\x80\x01\n\x15SearchMessageResponse\x12\x35\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32%.service.v1.SearchMessageResponseDataH\x00\x12$\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x13.shared.v1.AppErrorH\x00\x42\n\n\x08response\"\x91\x01\n\x19SearchMessageResponseData\x12%\n\x08messages\x18\x01 \x03(\x0b\x32\x13.service.v1.Message\x12\"\n\x05users\x18\x02 \x03(\x0b\x32\x13.service.v1.APIUser\x12)\n\x07members\x18\x03 \x03(\x0b\x32\x18.service.v1.ServerMemberb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service.v1.search_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_SEARCHUSERNAMESREQUEST']._serialized_start=62
-  _globals['_SEARCHUSERNAMESREQUEST']._serialized_end=116
-  _globals['_SEARCHUSERNAMESRESPONSE']._serialized_start=119
-  _globals['_SEARCHUSERNAMESRESPONSE']._serialized_end=251
-  _globals['_SEARCHUSERNAMESRESPONSEDATA']._serialized_start=253
-  _globals['_SEARCHUSERNAMESRESPONSEDATA']._serialized_end=321
-  _globals['_SEARCHUSER']._serialized_start=323
-  _globals['_SEARCHUSER']._serialized_end=403
+  _globals['_SEARCHUSERNAMESREQUEST']._serialized_start=179
+  _globals['_SEARCHUSERNAMESREQUEST']._serialized_end=233
+  _globals['_SEARCHUSERNAMESRESPONSE']._serialized_start=236
+  _globals['_SEARCHUSERNAMESRESPONSE']._serialized_end=368
+  _globals['_SEARCHUSERNAMESRESPONSEDATA']._serialized_start=370
+  _globals['_SEARCHUSERNAMESRESPONSEDATA']._serialized_end=438
+  _globals['_SEARCHUSER']._serialized_start=440
+  _globals['_SEARCHUSER']._serialized_end=520
+  _globals['_SEARCHMESSAGEREQUEST']._serialized_start=523
+  _globals['_SEARCHMESSAGEREQUEST']._serialized_end=798
+  _globals['_SEARCHMESSAGERESPONSE']._serialized_start=801
+  _globals['_SEARCHMESSAGERESPONSE']._serialized_end=929
+  _globals['_SEARCHMESSAGERESPONSEDATA']._serialized_start=932
+  _globals['_SEARCHMESSAGERESPONSEDATA']._serialized_end=1077
 # @@protoc_insertion_point(module_scope)
