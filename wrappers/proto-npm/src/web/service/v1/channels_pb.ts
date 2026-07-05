@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/channels.proto.
  */
 export const file_service_v1_channels: GenFile = /*@__PURE__*/
-  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxInAKDUNoYW5uZWxVbnJlYWQSKwoCaWQYASABKAsyHy5zZXJ2aWNlLnYxLkNoYW5uZWxDb21wb3NpdGVLZXkSFAoHbGFzdF9pZBgCIAEoCUgAiAEBEhAKCG1lbnRpb25zGAMgAygJQgoKCF9sYXN0X2lkIjQKE0NoYW5uZWxDb21wb3NpdGVLZXkSDwoHY2hhbm5lbBgBIAEoCRIMCgR1c2VyGAIgASgJIiAKEkNoYW5uZWxzR2V0UmVxdWVzdBIKCgJpZBgBIAEoCSJsChNDaGFubmVsc0dldFJlc3BvbnNlEiMKBGRhdGEYASABKAsyEy5zZXJ2aWNlLnYxLkNoYW5uZWxIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlYgZwcm90bzM", [file_service_v1_channels_db, file_shared_v1_error]);
+  fileDesc("ChlzZXJ2aWNlL3YxL2NoYW5uZWxzLnByb3RvEgpzZXJ2aWNlLnYxInAKDUNoYW5uZWxVbnJlYWQSKwoCaWQYASABKAsyHy5zZXJ2aWNlLnYxLkNoYW5uZWxDb21wb3NpdGVLZXkSFAoHbGFzdF9pZBgCIAEoCUgAiAEBEhAKCG1lbnRpb25zGAMgAygJQgoKCF9sYXN0X2lkIjQKE0NoYW5uZWxDb21wb3NpdGVLZXkSDwoHY2hhbm5lbBgBIAEoCRIMCgR1c2VyGAIgASgJIiAKEkNoYW5uZWxzR2V0UmVxdWVzdBIKCgJpZBgBIAEoCSJsChNDaGFubmVsc0dldFJlc3BvbnNlEiMKBGRhdGEYASABKAsyEy5zZXJ2aWNlLnYxLkNoYW5uZWxIABIkCgVlcnJvchgCIAEoCzITLnNoYXJlZC52MS5BcHBFcnJvckgAQgoKCHJlc3BvbnNlIrMBChVDaGFubmVsc0NyZWF0ZVJlcXVlc3QSFAoMY2hhbm5lbF90eXBlGAEgASgJEgwKBG5hbWUYAiABKAkSGAoLZGVzY3JpcHRpb24YAyABKAlIAIgBARIRCgRuc2Z3GAQgASgISAGIAQESHAoPdm9pY2VfbWF4X3VzZXJzGAUgASgNSAKIAQFCDgoMX2Rlc2NyaXB0aW9uQgcKBV9uc2Z3QhIKEF92b2ljZV9tYXhfdXNlcnMiGAoWQ2hhbm5lbHNDcmVhdGVSZXNwb25zZWIGcHJvdG8z", [file_service_v1_channels_db, file_shared_v1_error]);
 
 /**
  * Channel Unread
@@ -124,4 +124,66 @@ export type ChannelsGetResponse = Message<"service.v1.ChannelsGetResponse"> & {
  */
 export const ChannelsGetResponseSchema: GenMessage<ChannelsGetResponse> = /*@__PURE__*/
   messageDesc(file_service_v1_channels, 3);
+
+/**
+ * @generated from message service.v1.ChannelsCreateRequest
+ */
+export type ChannelsCreateRequest = Message<"service.v1.ChannelsCreateRequest"> & {
+  /**
+   * Channel type (voice or text)
+   *
+   * @generated from field: string channel_type = 1;
+   */
+  channelType: string;
+
+  /**
+   * Channel name
+   * Validation: length(min = 1, max = 32)
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * Channel description
+   * Validation: length(min = 0, max = 1024)
+   *
+   * @generated from field: optional string description = 3;
+   */
+  description?: string;
+
+  /**
+   * Whether this channel is age restricted
+   *
+   * @generated from field: optional bool nsfw = 4;
+   */
+  nsfw?: boolean;
+
+  /**
+   * Voice Information for when this channel is also a voice channel
+   *
+   * @generated from field: optional uint32 voice_max_users = 5;
+   */
+  voiceMaxUsers?: number;
+};
+
+/**
+ * Describes the message service.v1.ChannelsCreateRequest.
+ * Use `create(ChannelsCreateRequestSchema)` to create a new message.
+ */
+export const ChannelsCreateRequestSchema: GenMessage<ChannelsCreateRequest> = /*@__PURE__*/
+  messageDesc(file_service_v1_channels, 4);
+
+/**
+ * @generated from message service.v1.ChannelsCreateResponse
+ */
+export type ChannelsCreateResponse = Message<"service.v1.ChannelsCreateResponse"> & {
+};
+
+/**
+ * Describes the message service.v1.ChannelsCreateResponse.
+ * Use `create(ChannelsCreateResponseSchema)` to create a new message.
+ */
+export const ChannelsCreateResponseSchema: GenMessage<ChannelsCreateResponse> = /*@__PURE__*/
+  messageDesc(file_service_v1_channels, 5);
 

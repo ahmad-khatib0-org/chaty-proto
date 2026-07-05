@@ -212,6 +212,30 @@ pub mod channels_get_response {
         Error(super::super::super::shared::v1::AppError),
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelsCreateRequest {
+    /// Channel type (voice or text)
+    #[prost(string, tag = "1")]
+    pub channel_type: ::prost::alloc::string::String,
+    /// Channel name
+    /// Validation: length(min = 1, max = 32)
+    #[prost(string, tag = "2")]
+    pub name: ::prost::alloc::string::String,
+    /// Channel description
+    /// Validation: length(min = 0, max = 1024)
+    #[prost(string, optional, tag = "3")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// Whether this channel is age restricted
+    #[prost(bool, optional, tag = "4")]
+    pub nsfw: ::core::option::Option<bool>,
+    /// Voice Information for when this channel is also a voice channel
+    #[prost(uint32, optional, tag = "5")]
+    pub voice_max_users: ::core::option::Option<u32>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ChannelsCreateResponse {}
 /// Chaty API Configuration
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]

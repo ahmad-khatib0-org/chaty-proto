@@ -42,6 +42,32 @@ export interface ChannelsGetResponse {
   error?: AppError | undefined;
 }
 
+export interface ChannelsCreateRequest {
+  /** Channel type (voice or text) */
+  channelType: string;
+  /**
+   * Channel name
+   * Validation: length(min = 1, max = 32)
+   */
+  name: string;
+  /**
+   * Channel description
+   * Validation: length(min = 0, max = 1024)
+   */
+  description?:
+    | string
+    | undefined;
+  /** Whether this channel is age restricted */
+  nsfw?:
+    | boolean
+    | undefined;
+  /** Voice Information for when this channel is also a voice channel */
+  voiceMaxUsers?: number | undefined;
+}
+
+export interface ChannelsCreateResponse {
+}
+
 function createBaseChannelUnread(): ChannelUnread {
   return { id: undefined, lastId: undefined, mentions: [] };
 }
@@ -344,6 +370,173 @@ export const ChannelsGetResponse: MessageFns<ChannelsGetResponse> = {
     message.error = (object.error !== undefined && object.error !== null)
       ? AppError.fromPartial(object.error)
       : undefined;
+    return message;
+  },
+};
+
+function createBaseChannelsCreateRequest(): ChannelsCreateRequest {
+  return { channelType: "", name: "", description: undefined, nsfw: undefined, voiceMaxUsers: undefined };
+}
+
+export const ChannelsCreateRequest: MessageFns<ChannelsCreateRequest> = {
+  encode(message: ChannelsCreateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.channelType !== "") {
+      writer.uint32(10).string(message.channelType);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.description !== undefined) {
+      writer.uint32(26).string(message.description);
+    }
+    if (message.nsfw !== undefined) {
+      writer.uint32(32).bool(message.nsfw);
+    }
+    if (message.voiceMaxUsers !== undefined) {
+      writer.uint32(40).uint32(message.voiceMaxUsers);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChannelsCreateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChannelsCreateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channelType = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.nsfw = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.voiceMaxUsers = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChannelsCreateRequest {
+    return {
+      channelType: isSet(object.channelType) ? globalThis.String(object.channelType) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : undefined,
+      nsfw: isSet(object.nsfw) ? globalThis.Boolean(object.nsfw) : undefined,
+      voiceMaxUsers: isSet(object.voiceMaxUsers) ? globalThis.Number(object.voiceMaxUsers) : undefined,
+    };
+  },
+
+  toJSON(message: ChannelsCreateRequest): unknown {
+    const obj: any = {};
+    if (message.channelType !== "") {
+      obj.channelType = message.channelType;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== undefined) {
+      obj.description = message.description;
+    }
+    if (message.nsfw !== undefined) {
+      obj.nsfw = message.nsfw;
+    }
+    if (message.voiceMaxUsers !== undefined) {
+      obj.voiceMaxUsers = Math.round(message.voiceMaxUsers);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChannelsCreateRequest>, I>>(base?: I): ChannelsCreateRequest {
+    return ChannelsCreateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChannelsCreateRequest>, I>>(object: I): ChannelsCreateRequest {
+    const message = createBaseChannelsCreateRequest();
+    message.channelType = object.channelType ?? "";
+    message.name = object.name ?? "";
+    message.description = object.description ?? undefined;
+    message.nsfw = object.nsfw ?? undefined;
+    message.voiceMaxUsers = object.voiceMaxUsers ?? undefined;
+    return message;
+  },
+};
+
+function createBaseChannelsCreateResponse(): ChannelsCreateResponse {
+  return {};
+}
+
+export const ChannelsCreateResponse: MessageFns<ChannelsCreateResponse> = {
+  encode(_: ChannelsCreateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChannelsCreateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChannelsCreateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ChannelsCreateResponse {
+    return {};
+  },
+
+  toJSON(_: ChannelsCreateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChannelsCreateResponse>, I>>(base?: I): ChannelsCreateResponse {
+    return ChannelsCreateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChannelsCreateResponse>, I>>(_: I): ChannelsCreateResponse {
+    const message = createBaseChannelsCreateResponse();
     return message;
   },
 };

@@ -38,3 +38,21 @@ class ChannelsGetResponse(_message.Message):
     data: _channels_db_pb2.Channel
     error: _error_pb2.AppError
     def __init__(self, data: _Optional[_Union[_channels_db_pb2.Channel, _Mapping]] = ..., error: _Optional[_Union[_error_pb2.AppError, _Mapping]] = ...) -> None: ...
+
+class ChannelsCreateRequest(_message.Message):
+    __slots__ = ("channel_type", "name", "description", "nsfw", "voice_max_users")
+    CHANNEL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    NSFW_FIELD_NUMBER: _ClassVar[int]
+    VOICE_MAX_USERS_FIELD_NUMBER: _ClassVar[int]
+    channel_type: str
+    name: str
+    description: str
+    nsfw: bool
+    voice_max_users: int
+    def __init__(self, channel_type: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., nsfw: bool = ..., voice_max_users: _Optional[int] = ...) -> None: ...
+
+class ChannelsCreateResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...

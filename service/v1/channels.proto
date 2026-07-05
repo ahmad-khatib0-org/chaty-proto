@@ -32,3 +32,24 @@ message ChannelsGetResponse {
     shared.v1.AppError error = 2;
   }
 }
+
+message ChannelsCreateRequest {
+  // Channel type (voice or text)
+  string channel_type = 1;
+
+  // Channel name
+  // Validation: length(min = 1, max = 32)
+  string name = 2;
+
+  // Channel description
+  // Validation: length(min = 0, max = 1024)
+  optional string description = 3;
+
+  // Whether this channel is age restricted
+  optional bool nsfw = 4;
+
+  // Voice Information for when this channel is also a voice channel
+  optional uint32 voice_max_users = 5;
+}
+
+message ChannelsCreateResponse {}
