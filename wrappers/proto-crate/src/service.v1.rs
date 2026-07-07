@@ -135,7 +135,12 @@ pub struct ChannelDirectMessage {
 /// MAIN CHANNELS TABLE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Channel {
     /// ULID
@@ -925,7 +930,12 @@ pub struct Masquerade {
 /// MAIN MESSAGE
 /// ===========================================
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
     /// Unique Id
@@ -989,7 +999,12 @@ pub struct Message {
     pub created_at: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerMember {
     /// Server ID (partition key)
@@ -2850,7 +2865,12 @@ pub mod chaty_service_server {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Server {
     #[prost(string, tag = "1")]
@@ -2934,7 +2954,12 @@ pub struct ServerSystemMessagesChannels {
     pub user_banned: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
-#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ServerStats {
     #[prost(int32, tag = "1")]

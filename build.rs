@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.Channel",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
     .type_attribute(
       "service.v1.MessageWebhook",
@@ -174,7 +174,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.Message",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
     .type_attribute(
       "shared.v1.Timestamp",
@@ -218,11 +218,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.ServerMember",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
     .type_attribute(
       "service.v1.Server",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
     .type_attribute(
       "service.v1.Category",
@@ -234,7 +234,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.ServerStats",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
     .file_descriptor_set_path(format!("{}/descriptor.bin", out_dir))
     .compile_protos(

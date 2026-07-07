@@ -1,6 +1,6 @@
 {
   "name": "@chaty-app/proto",
-  "version": "0.2.23",
+  "version": "0.2.25",
   "description": "TypeScript Protobuf bindings for Chaty (Pure ESM)",
   "license": "MIT",
   "type": "module",
