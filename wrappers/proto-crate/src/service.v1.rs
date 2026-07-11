@@ -2872,6 +2872,26 @@ pub mod chaty_service_server {
     scylla::SerializeRow
 )]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServerBan {
+    #[prost(string, tag = "1")]
+    pub server_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub user_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub reason: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub banned_by: ::prost::alloc::string::String,
+    #[prost(int64, tag = "5")]
+    pub banned_at: i64,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(
+    scylla::SerializeValue,
+    scylla::DeserializeValue,
+    scylla::DeserializeRow,
+    scylla::SerializeRow
+)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Server {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,

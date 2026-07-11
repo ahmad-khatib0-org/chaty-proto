@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package service.v1;
+
+message ServerBan {
+  string server_id = 1;
+  string user_id = 2;
+  string reason = 3;
+  string banned_by = 4;
+  int64 banned_at = 5;
+}

@@ -217,6 +217,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue)]",
     )
     .type_attribute(
+      "service.v1.ServerBan",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
+    )
+    .type_attribute(
       "service.v1.ServerMember",
       "#[derive(scylla::SerializeValue, scylla::DeserializeValue, scylla::DeserializeRow, scylla::SerializeRow)]",
     )
@@ -257,6 +261,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "service/v1/messages_db.proto",
         "service/v1/roles_db.proto",
         "service/v1/search.proto",
+        "service/v1/server_bans_db.proto",
         "service/v1/server_members_db.proto",
         "service/v1/servers_db.proto",
         "service/v1/servers.proto",

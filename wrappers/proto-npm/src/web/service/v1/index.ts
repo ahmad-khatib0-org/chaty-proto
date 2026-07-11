@@ -9,6 +9,7 @@ export * as MessagesDb from './messages_db_pb.js';
 export * as Messages from './messages_pb.js';
 export * as RolesDb from './roles_db_pb.js';
 export * as Search from './search_pb.js';
+export * as ServerBansDb from './server_bans_db_pb.js';
 export * as ServerMembersDb from './server_members_db_pb.js';
 export * as ServersDb from './servers_db_pb.js';
 export * as Servers from './servers_pb.js';
