@@ -999,6 +999,7 @@ pub struct Message {
     pub created_at: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[derive(scylla::SerializeValue, scylla::DeserializeValue, Eq, PartialEq, Hash)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerMemberCompositeKey {
     #[prost(string, tag = "1")]
