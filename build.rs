@@ -222,7 +222,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .type_attribute(
       "service.v1.ServerMemberCompositeKey",
-      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, Eq, PartialEq, Hash)]",
+      "#[derive(scylla::SerializeValue, scylla::DeserializeValue, Eq, Hash)]",
     )
     .type_attribute(
       "service.v1.ServerMember",
