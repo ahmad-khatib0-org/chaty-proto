@@ -12,7 +12,29 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/server_members_db.proto.
  */
 export const file_service_v1_server_members_db: GenFile = /*@__PURE__*/
-  fileDesc("CiJzZXJ2aWNlL3YxL3NlcnZlcl9tZW1iZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIocCCgxTZXJ2ZXJNZW1iZXISEQoJc2VydmVyX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSEAoIdXNlcm5hbWUYAyABKAkSJAoGYXZhdGFyGAQgASgLMg8uc2hhcmVkLnYxLkZpbGVIAIgBARIVCghuaWNrbmFtZRgFIAEoCUgBiAEBEhEKCWpvaW5lZF9hdBgGIAEoAxINCgVyb2xlcxgHIAMoCRIUCgd0aW1lb3V0GAggASgDSAKIAQESEwoLY2FuX3B1Ymxpc2gYCSABKAgSEwoLY2FuX3JlY2VpdmUYCiABKAhCCQoHX2F2YXRhckILCglfbmlja25hbWVCCgoIX3RpbWVvdXRiBnByb3RvMw", [file_shared_v1_files]);
+  fileDesc("CiJzZXJ2aWNlL3YxL3NlcnZlcl9tZW1iZXJzX2RiLnByb3RvEgpzZXJ2aWNlLnYxIj4KGFNlcnZlck1lbWJlckNvbXBvc2l0ZUtleRIRCglzZXJ2ZXJfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCSKHAgoMU2VydmVyTWVtYmVyEhEKCXNlcnZlcl9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEhAKCHVzZXJuYW1lGAMgASgJEiQKBmF2YXRhchgEIAEoCzIPLnNoYXJlZC52MS5GaWxlSACIAQESFQoIbmlja25hbWUYBSABKAlIAYgBARIRCglqb2luZWRfYXQYBiABKAMSDQoFcm9sZXMYByADKAkSFAoHdGltZW91dBgIIAEoA0gCiAEBEhMKC2Nhbl9wdWJsaXNoGAkgASgIEhMKC2Nhbl9yZWNlaXZlGAogASgIQgkKB19hdmF0YXJCCwoJX25pY2tuYW1lQgoKCF90aW1lb3V0YgZwcm90bzM", [file_shared_v1_files]);
+
+/**
+ * @generated from message service.v1.ServerMemberCompositeKey
+ */
+export type ServerMemberCompositeKey = Message<"service.v1.ServerMemberCompositeKey"> & {
+  /**
+   * @generated from field: string server_id = 1;
+   */
+  serverId: string;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message service.v1.ServerMemberCompositeKey.
+ * Use `create(ServerMemberCompositeKeySchema)` to create a new message.
+ */
+export const ServerMemberCompositeKeySchema: GenMessage<ServerMemberCompositeKey> = /*@__PURE__*/
+  messageDesc(file_service_v1_server_members_db, 0);
 
 /**
  * @generated from message service.v1.ServerMember
@@ -90,5 +112,5 @@ export type ServerMember = Message<"service.v1.ServerMember"> & {
  * Use `create(ServerMemberSchema)` to create a new message.
  */
 export const ServerMemberSchema: GenMessage<ServerMember> = /*@__PURE__*/
-  messageDesc(file_service_v1_server_members_db, 0);
+  messageDesc(file_service_v1_server_members_db, 1);
 

@@ -6,6 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class ServerMemberCompositeKey(_message.Message):
+    __slots__ = ("server_id", "user_id")
+    SERVER_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    server_id: str
+    user_id: str
+    def __init__(self, server_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
 class ServerMember(_message.Message):
     __slots__ = ("server_id", "user_id", "username", "avatar", "nickname", "joined_at", "roles", "timeout", "can_publish", "can_receive")
     SERVER_ID_FIELD_NUMBER: _ClassVar[int]

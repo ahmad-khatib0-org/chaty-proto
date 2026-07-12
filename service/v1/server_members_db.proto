@@ -4,6 +4,11 @@ package service.v1;
 
 import "shared/v1/files.proto";
 
+message ServerMemberCompositeKey {
+  string server_id = 1;
+  string user_id = 2;
+}
+
 message ServerMember {
   // Server ID (partition key)
   string server_id = 1;

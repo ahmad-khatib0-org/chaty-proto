@@ -10,6 +10,11 @@ import { File } from "../../shared/v1/files.js";
 
 export const protobufPackage = "service.v1";
 
+export interface ServerMemberCompositeKey {
+  serverId: string;
+  userId: string;
+}
+
 export interface ServerMember {
   /** Server ID (partition key) */
   serverId: string;
@@ -36,6 +41,82 @@ export interface ServerMember {
   canPublish: boolean;
   canReceive: boolean;
 }
+
+function createBaseServerMemberCompositeKey(): ServerMemberCompositeKey {
+  return { serverId: "", userId: "" };
+}
+
+export const ServerMemberCompositeKey: MessageFns<ServerMemberCompositeKey> = {
+  encode(message: ServerMemberCompositeKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.serverId !== "") {
+      writer.uint32(10).string(message.serverId);
+    }
+    if (message.userId !== "") {
+      writer.uint32(18).string(message.userId);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ServerMemberCompositeKey {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseServerMemberCompositeKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.serverId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.userId = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ServerMemberCompositeKey {
+    return {
+      serverId: isSet(object.serverId) ? globalThis.String(object.serverId) : "",
+      userId: isSet(object.userId) ? globalThis.String(object.userId) : "",
+    };
+  },
+
+  toJSON(message: ServerMemberCompositeKey): unknown {
+    const obj: any = {};
+    if (message.serverId !== "") {
+      obj.serverId = message.serverId;
+    }
+    if (message.userId !== "") {
+      obj.userId = message.userId;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ServerMemberCompositeKey>, I>>(base?: I): ServerMemberCompositeKey {
+    return ServerMemberCompositeKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ServerMemberCompositeKey>, I>>(object: I): ServerMemberCompositeKey {
+    const message = createBaseServerMemberCompositeKey();
+    message.serverId = object.serverId ?? "";
+    message.userId = object.userId ?? "";
+    return message;
+  },
+};
 
 function createBaseServerMember(): ServerMember {
   return {
