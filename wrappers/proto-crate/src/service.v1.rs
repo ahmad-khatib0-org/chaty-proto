@@ -2996,3 +2996,20 @@ pub struct ServerStats {
     #[prost(int32, tag = "2")]
     pub channels_count: i32,
 }
+/// / Voice State information for a user
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UserVoiceState {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(int64, tag = "2")]
+    pub joined_at: i64,
+    #[prost(bool, tag = "3")]
+    pub is_receiving: bool,
+    #[prost(bool, tag = "4")]
+    pub is_publishing: bool,
+    #[prost(bool, tag = "5")]
+    pub screensharing: bool,
+    #[prost(bool, tag = "6")]
+    pub camera: bool,
+}

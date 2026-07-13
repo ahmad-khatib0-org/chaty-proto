@@ -15,3 +15,4 @@ export * as ServersDb from './servers_db_pb.js';
 export * as Servers from './servers_pb.js';
 export * as UsersDb from './users_db_pb.js';
 export * as Users from './users_pb.js';
+export * as Voice from './voice_pb.js';

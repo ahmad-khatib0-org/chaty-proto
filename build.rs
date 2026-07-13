@@ -271,6 +271,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "service/v1/servers.proto",
         "service/v1/users.proto",
         "service/v1/users_db.proto",
+        "service/v1/voice.proto",
       ],
       &["."],
     )?;

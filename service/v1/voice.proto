@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package service.v1;
+
+/// Voice State information for a user
+message UserVoiceState {
+  string id = 1;
+  int64 joined_at = 2;
+  bool is_receiving = 3;
+  bool is_publishing = 4;
+  bool screensharing = 5;
+  bool camera = 6;
+}
