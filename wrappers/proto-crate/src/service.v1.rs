@@ -3013,3 +3013,12 @@ pub struct UserVoiceState {
     #[prost(bool, tag = "6")]
     pub camera: bool,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChannelVoiceState {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// The states of the users who are connected to the channel
+    #[prost(message, repeated, tag = "2")]
+    pub participants: ::prost::alloc::vec::Vec<UserVoiceState>,
+}

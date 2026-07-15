@@ -19,6 +19,12 @@ export interface UserVoiceState {
   camera: boolean;
 }
 
+export interface ChannelVoiceState {
+  id: string;
+  /** The states of the users who are connected to the channel */
+  participants: UserVoiceState[];
+}
+
 function createBaseUserVoiceState(): UserVoiceState {
   return { id: "", joinedAt: 0n, isReceiving: false, isPublishing: false, screensharing: false, camera: false };
 }
@@ -158,6 +164,84 @@ export const UserVoiceState: MessageFns<UserVoiceState> = {
     message.isPublishing = object.isPublishing ?? false;
     message.screensharing = object.screensharing ?? false;
     message.camera = object.camera ?? false;
+    return message;
+  },
+};
+
+function createBaseChannelVoiceState(): ChannelVoiceState {
+  return { id: "", participants: [] };
+}
+
+export const ChannelVoiceState: MessageFns<ChannelVoiceState> = {
+  encode(message: ChannelVoiceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    for (const v of message.participants) {
+      UserVoiceState.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChannelVoiceState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChannelVoiceState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.participants.push(UserVoiceState.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChannelVoiceState {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      participants: globalThis.Array.isArray(object?.participants)
+        ? object.participants.map((e: any) => UserVoiceState.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ChannelVoiceState): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.participants?.length) {
+      obj.participants = message.participants.map((e) => UserVoiceState.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChannelVoiceState>, I>>(base?: I): ChannelVoiceState {
+    return ChannelVoiceState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChannelVoiceState>, I>>(object: I): ChannelVoiceState {
+    const message = createBaseChannelVoiceState();
+    message.id = object.id ?? "";
+    message.participants = object.participants?.map((e) => UserVoiceState.fromPartial(e)) || [];
     return message;
   },
 };

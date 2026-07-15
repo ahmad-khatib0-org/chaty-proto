@@ -11,3 +11,9 @@ message UserVoiceState {
   bool screensharing = 5;
   bool camera = 6;
 }
+
+message ChannelVoiceState {
+  string id = 1;
+  // The states of the users who are connected to the channel
+  repeated UserVoiceState participants = 2;
+}

@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16service/v1/voice.proto\x12\nservice.v1\"\x83\x01\n\x0eUserVoiceState\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tjoined_at\x18\x02 \x01(\x03\x12\x14\n\x0cis_receiving\x18\x03 \x01(\x08\x12\x15\n\ris_publishing\x18\x04 \x01(\x08\x12\x15\n\rscreensharing\x18\x05 \x01(\x08\x12\x0e\n\x06\x63\x61mera\x18\x06 \x01(\x08\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16service/v1/voice.proto\x12\nservice.v1\"\x83\x01\n\x0eUserVoiceState\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tjoined_at\x18\x02 \x01(\x03\x12\x14\n\x0cis_receiving\x18\x03 \x01(\x08\x12\x15\n\ris_publishing\x18\x04 \x01(\x08\x12\x15\n\rscreensharing\x18\x05 \x01(\x08\x12\x0e\n\x06\x63\x61mera\x18\x06 \x01(\x08\"Q\n\x11\x43hannelVoiceState\x12\n\n\x02id\x18\x01 \x01(\t\x12\x30\n\x0cparticipants\x18\x02 \x03(\x0b\x32\x1a.service.v1.UserVoiceStateb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,4 +33,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_USERVOICESTATE']._serialized_start=39
   _globals['_USERVOICESTATE']._serialized_end=170
+  _globals['_CHANNELVOICESTATE']._serialized_start=172
+  _globals['_CHANNELVOICESTATE']._serialized_end=253
 # @@protoc_insertion_point(module_scope)

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file service/v1/voice.proto.
  */
 export const file_service_v1_voice: GenFile = /*@__PURE__*/
-  fileDesc("ChZzZXJ2aWNlL3YxL3ZvaWNlLnByb3RvEgpzZXJ2aWNlLnYxIoMBCg5Vc2VyVm9pY2VTdGF0ZRIKCgJpZBgBIAEoCRIRCglqb2luZWRfYXQYAiABKAMSFAoMaXNfcmVjZWl2aW5nGAMgASgIEhUKDWlzX3B1Ymxpc2hpbmcYBCABKAgSFQoNc2NyZWVuc2hhcmluZxgFIAEoCBIOCgZjYW1lcmEYBiABKAhiBnByb3RvMw");
+  fileDesc("ChZzZXJ2aWNlL3YxL3ZvaWNlLnByb3RvEgpzZXJ2aWNlLnYxIoMBCg5Vc2VyVm9pY2VTdGF0ZRIKCgJpZBgBIAEoCRIRCglqb2luZWRfYXQYAiABKAMSFAoMaXNfcmVjZWl2aW5nGAMgASgIEhUKDWlzX3B1Ymxpc2hpbmcYBCABKAgSFQoNc2NyZWVuc2hhcmluZxgFIAEoCBIOCgZjYW1lcmEYBiABKAgiUQoRQ2hhbm5lbFZvaWNlU3RhdGUSCgoCaWQYASABKAkSMAoMcGFydGljaXBhbnRzGAIgAygLMhouc2VydmljZS52MS5Vc2VyVm9pY2VTdGF0ZWIGcHJvdG8z");
 
 /**
  * / Voice State information for a user
@@ -55,4 +55,28 @@ export type UserVoiceState = Message<"service.v1.UserVoiceState"> & {
  */
 export const UserVoiceStateSchema: GenMessage<UserVoiceState> = /*@__PURE__*/
   messageDesc(file_service_v1_voice, 0);
+
+/**
+ * @generated from message service.v1.ChannelVoiceState
+ */
+export type ChannelVoiceState = Message<"service.v1.ChannelVoiceState"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The states of the users who are connected to the channel
+   *
+   * @generated from field: repeated service.v1.UserVoiceState participants = 2;
+   */
+  participants: UserVoiceState[];
+};
+
+/**
+ * Describes the message service.v1.ChannelVoiceState.
+ * Use `create(ChannelVoiceStateSchema)` to create a new message.
+ */
+export const ChannelVoiceStateSchema: GenMessage<ChannelVoiceState> = /*@__PURE__*/
+  messageDesc(file_service_v1_voice, 1);
 
