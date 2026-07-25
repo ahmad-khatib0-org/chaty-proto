@@ -47,12 +47,16 @@ class FileMetadata(_message.Message):
     def __init__(self, file: _Optional[_Union[FileMetadataFile, _Mapping]] = ..., text: _Optional[_Union[FileMetadataText, _Mapping]] = ..., image: _Optional[_Union[FileMetadataImage, _Mapping]] = ..., video: _Optional[_Union[FileMetadataVideo, _Mapping]] = ..., audio: _Optional[_Union[FileMetadataAudio, _Mapping]] = ...) -> None: ...
 
 class FileMetadataFile(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("file_type",)
+    FILE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    file_type: str
+    def __init__(self, file_type: _Optional[str] = ...) -> None: ...
 
 class FileMetadataText(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("text_length",)
+    TEXT_LENGTH_FIELD_NUMBER: _ClassVar[int]
+    text_length: str
+    def __init__(self, text_length: _Optional[str] = ...) -> None: ...
 
 class FileMetadataImage(_message.Message):
     __slots__ = ("width", "height")
@@ -71,5 +75,7 @@ class FileMetadataVideo(_message.Message):
     def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
 
 class FileMetadataAudio(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("audio_duration",)
+    AUDIO_DURATION_FIELD_NUMBER: _ClassVar[int]
+    audio_duration: int
+    def __init__(self, audio_duration: _Optional[int] = ...) -> None: ...

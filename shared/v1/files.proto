@@ -36,10 +36,10 @@ message File {
   // Whether this file was reported
   optional bool reported = 10;
 
-  FileMetadata metadata = 11;
+  optional FileMetadata metadata = 11;
 
   // Whether this file should have a spoiler
-  bool is_spoiler = 12;
+  optional bool is_spoiler = 12;
 }
 
 message FileMetadata {
@@ -50,9 +50,13 @@ message FileMetadata {
   FileMetadataAudio audio = 5;
 }
 
-message FileMetadataFile {}
+message FileMetadataFile {
+  string file_type = 1;
+}
 
-message FileMetadataText {}
+message FileMetadataText {
+  string text_length = 1;
+}
 
 message FileMetadataImage {
   int32 width = 1;
@@ -64,4 +68,6 @@ message FileMetadataVideo {
   int32 height = 2;
 }
 
-message FileMetadataAudio {}
+message FileMetadataAudio {
+  int64 audio_duration = 1;
+}

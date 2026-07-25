@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/files.proto.
  */
 export const file_shared_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSKVAgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIpCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGESEgoKaXNfc3BvaWxlchgMIAEoCEIKCghfZGVsZXRlZEILCglfcmVwb3J0ZWQi6wEKDEZpbGVNZXRhZGF0YRIpCgRmaWxlGAEgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUZpbGUSKQoEdGV4dBgCIAEoCzIbLnNoYXJlZC52MS5GaWxlTWV0YWRhdGFUZXh0EisKBWltYWdlGAMgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUltYWdlEisKBXZpZGVvGAQgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVZpZGVvEisKBWF1ZGlvGAUgASgLMhwuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YUF1ZGlvIhIKEEZpbGVNZXRhZGF0YUZpbGUiEgoQRmlsZU1ldGFkYXRhVGV4dCIyChFGaWxlTWV0YWRhdGFJbWFnZRINCgV3aWR0aBgBIAEoBRIOCgZoZWlnaHQYAiABKAUiMgoRRmlsZU1ldGFkYXRhVmlkZW8SDQoFd2lkdGgYASABKAUSDgoGaGVpZ2h0GAIgASgFIhMKEUZpbGVNZXRhZGF0YUF1ZGlvYgZwcm90bzM");
+  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSK7AgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIuCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGFIAogBARIXCgppc19zcG9pbGVyGAwgASgISAOIAQFCCgoIX2RlbGV0ZWRCCwoJX3JlcG9ydGVkQgsKCV9tZXRhZGF0YUINCgtfaXNfc3BvaWxlciLrAQoMRmlsZU1ldGFkYXRhEikKBGZpbGUYASABKAsyGy5zaGFyZWQudjEuRmlsZU1ldGFkYXRhRmlsZRIpCgR0ZXh0GAIgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVRleHQSKwoFaW1hZ2UYAyABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhSW1hZ2USKwoFdmlkZW8YBCABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhVmlkZW8SKwoFYXVkaW8YBSABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhQXVkaW8iJQoQRmlsZU1ldGFkYXRhRmlsZRIRCglmaWxlX3R5cGUYASABKAkiJwoQRmlsZU1ldGFkYXRhVGV4dBITCgt0ZXh0X2xlbmd0aBgBIAEoCSIyChFGaWxlTWV0YWRhdGFJbWFnZRINCgV3aWR0aBgBIAEoBRIOCgZoZWlnaHQYAiABKAUiMgoRRmlsZU1ldGFkYXRhVmlkZW8SDQoFd2lkdGgYASABKAUSDgoGaGVpZ2h0GAIgASgFIisKEUZpbGVNZXRhZGF0YUF1ZGlvEhYKDmF1ZGlvX2R1cmF0aW9uGAEgASgDYgZwcm90bzM");
 
 /**
  * ===========================================
@@ -91,16 +91,16 @@ export type File = Message<"shared.v1.File"> & {
   reported?: boolean;
 
   /**
-   * @generated from field: shared.v1.FileMetadata metadata = 11;
+   * @generated from field: optional shared.v1.FileMetadata metadata = 11;
    */
   metadata?: FileMetadata;
 
   /**
    * Whether this file should have a spoiler
    *
-   * @generated from field: bool is_spoiler = 12;
+   * @generated from field: optional bool is_spoiler = 12;
    */
-  isSpoiler: boolean;
+  isSpoiler?: boolean;
 };
 
 /**
@@ -151,6 +151,10 @@ export const FileMetadataSchema: GenMessage<FileMetadata> = /*@__PURE__*/
  * @generated from message shared.v1.FileMetadataFile
  */
 export type FileMetadataFile = Message<"shared.v1.FileMetadataFile"> & {
+  /**
+   * @generated from field: string file_type = 1;
+   */
+  fileType: string;
 };
 
 /**
@@ -164,6 +168,10 @@ export const FileMetadataFileSchema: GenMessage<FileMetadataFile> = /*@__PURE__*
  * @generated from message shared.v1.FileMetadataText
  */
 export type FileMetadataText = Message<"shared.v1.FileMetadataText"> & {
+  /**
+   * @generated from field: string text_length = 1;
+   */
+  textLength: string;
 };
 
 /**
@@ -221,6 +229,10 @@ export const FileMetadataVideoSchema: GenMessage<FileMetadataVideo> = /*@__PURE_
  * @generated from message shared.v1.FileMetadataAudio
  */
 export type FileMetadataAudio = Message<"shared.v1.FileMetadataAudio"> & {
+  /**
+   * @generated from field: int64 audio_duration = 1;
+   */
+  audioDuration: bigint;
 };
 
 /**

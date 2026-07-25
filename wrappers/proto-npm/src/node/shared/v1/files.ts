@@ -41,7 +41,7 @@ export interface File {
     | FileMetadata
     | undefined;
   /** Whether this file should have a spoiler */
-  isSpoiler: boolean;
+  isSpoiler?: boolean | undefined;
 }
 
 export interface FileMetadata {
@@ -53,9 +53,11 @@ export interface FileMetadata {
 }
 
 export interface FileMetadataFile {
+  fileType: string;
 }
 
 export interface FileMetadataText {
+  textLength: string;
 }
 
 export interface FileMetadataImage {
@@ -69,6 +71,7 @@ export interface FileMetadataVideo {
 }
 
 export interface FileMetadataAudio {
+  audioDuration: number;
 }
 
 function createBaseFile(): File {
@@ -84,7 +87,7 @@ function createBaseFile(): File {
     deleted: undefined,
     reported: undefined,
     metadata: undefined,
-    isSpoiler: false,
+    isSpoiler: undefined,
   };
 }
 
@@ -123,7 +126,7 @@ export const File: MessageFns<File> = {
     if (message.metadata !== undefined) {
       FileMetadata.encode(message.metadata, writer.uint32(90).fork()).join();
     }
-    if (message.isSpoiler !== false) {
+    if (message.isSpoiler !== undefined) {
       writer.uint32(96).bool(message.isSpoiler);
     }
     return writer;
@@ -254,7 +257,7 @@ export const File: MessageFns<File> = {
       deleted: isSet(object.deleted) ? globalThis.Boolean(object.deleted) : undefined,
       reported: isSet(object.reported) ? globalThis.Boolean(object.reported) : undefined,
       metadata: isSet(object.metadata) ? FileMetadata.fromJSON(object.metadata) : undefined,
-      isSpoiler: isSet(object.isSpoiler) ? globalThis.Boolean(object.isSpoiler) : false,
+      isSpoiler: isSet(object.isSpoiler) ? globalThis.Boolean(object.isSpoiler) : undefined,
     };
   },
 
@@ -293,7 +296,7 @@ export const File: MessageFns<File> = {
     if (message.metadata !== undefined) {
       obj.metadata = FileMetadata.toJSON(message.metadata);
     }
-    if (message.isSpoiler !== false) {
+    if (message.isSpoiler !== undefined) {
       obj.isSpoiler = message.isSpoiler;
     }
     return obj;
@@ -317,7 +320,7 @@ export const File: MessageFns<File> = {
     message.metadata = (object.metadata !== undefined && object.metadata !== null)
       ? FileMetadata.fromPartial(object.metadata)
       : undefined;
-    message.isSpoiler = object.isSpoiler ?? false;
+    message.isSpoiler = object.isSpoiler ?? undefined;
     return message;
   },
 };
@@ -457,11 +460,14 @@ export const FileMetadata: MessageFns<FileMetadata> = {
 };
 
 function createBaseFileMetadataFile(): FileMetadataFile {
-  return {};
+  return { fileType: "" };
 }
 
 export const FileMetadataFile: MessageFns<FileMetadataFile> = {
-  encode(_: FileMetadataFile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: FileMetadataFile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.fileType !== "") {
+      writer.uint32(10).string(message.fileType);
+    }
     return writer;
   },
 
@@ -472,6 +478,14 @@ export const FileMetadataFile: MessageFns<FileMetadataFile> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.fileType = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -481,30 +495,37 @@ export const FileMetadataFile: MessageFns<FileMetadataFile> = {
     return message;
   },
 
-  fromJSON(_: any): FileMetadataFile {
-    return {};
+  fromJSON(object: any): FileMetadataFile {
+    return { fileType: isSet(object.fileType) ? globalThis.String(object.fileType) : "" };
   },
 
-  toJSON(_: FileMetadataFile): unknown {
+  toJSON(message: FileMetadataFile): unknown {
     const obj: any = {};
+    if (message.fileType !== "") {
+      obj.fileType = message.fileType;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<FileMetadataFile>, I>>(base?: I): FileMetadataFile {
     return FileMetadataFile.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FileMetadataFile>, I>>(_: I): FileMetadataFile {
+  fromPartial<I extends Exact<DeepPartial<FileMetadataFile>, I>>(object: I): FileMetadataFile {
     const message = createBaseFileMetadataFile();
+    message.fileType = object.fileType ?? "";
     return message;
   },
 };
 
 function createBaseFileMetadataText(): FileMetadataText {
-  return {};
+  return { textLength: "" };
 }
 
 export const FileMetadataText: MessageFns<FileMetadataText> = {
-  encode(_: FileMetadataText, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: FileMetadataText, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.textLength !== "") {
+      writer.uint32(10).string(message.textLength);
+    }
     return writer;
   },
 
@@ -515,6 +536,14 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.textLength = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -524,20 +553,24 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
     return message;
   },
 
-  fromJSON(_: any): FileMetadataText {
-    return {};
+  fromJSON(object: any): FileMetadataText {
+    return { textLength: isSet(object.textLength) ? globalThis.String(object.textLength) : "" };
   },
 
-  toJSON(_: FileMetadataText): unknown {
+  toJSON(message: FileMetadataText): unknown {
     const obj: any = {};
+    if (message.textLength !== "") {
+      obj.textLength = message.textLength;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<FileMetadataText>, I>>(base?: I): FileMetadataText {
     return FileMetadataText.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FileMetadataText>, I>>(_: I): FileMetadataText {
+  fromPartial<I extends Exact<DeepPartial<FileMetadataText>, I>>(object: I): FileMetadataText {
     const message = createBaseFileMetadataText();
+    message.textLength = object.textLength ?? "";
     return message;
   },
 };
@@ -695,11 +728,14 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
 };
 
 function createBaseFileMetadataAudio(): FileMetadataAudio {
-  return {};
+  return { audioDuration: 0 };
 }
 
 export const FileMetadataAudio: MessageFns<FileMetadataAudio> = {
-  encode(_: FileMetadataAudio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: FileMetadataAudio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.audioDuration !== 0) {
+      writer.uint32(8).int64(message.audioDuration);
+    }
     return writer;
   },
 
@@ -710,6 +746,14 @@ export const FileMetadataAudio: MessageFns<FileMetadataAudio> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.audioDuration = longToNumber(reader.int64());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -719,20 +763,24 @@ export const FileMetadataAudio: MessageFns<FileMetadataAudio> = {
     return message;
   },
 
-  fromJSON(_: any): FileMetadataAudio {
-    return {};
+  fromJSON(object: any): FileMetadataAudio {
+    return { audioDuration: isSet(object.audioDuration) ? globalThis.Number(object.audioDuration) : 0 };
   },
 
-  toJSON(_: FileMetadataAudio): unknown {
+  toJSON(message: FileMetadataAudio): unknown {
     const obj: any = {};
+    if (message.audioDuration !== 0) {
+      obj.audioDuration = Math.round(message.audioDuration);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<FileMetadataAudio>, I>>(base?: I): FileMetadataAudio {
     return FileMetadataAudio.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FileMetadataAudio>, I>>(_: I): FileMetadataAudio {
+  fromPartial<I extends Exact<DeepPartial<FileMetadataAudio>, I>>(object: I): FileMetadataAudio {
     const message = createBaseFileMetadataAudio();
+    message.audioDuration = object.audioDuration ?? 0;
     return message;
   },
 };

@@ -65,12 +65,12 @@ pub struct File {
     #[prost(message, optional, tag = "11")]
     pub metadata: ::core::option::Option<FileMetadata>,
     /// Whether this file should have a spoiler
-    #[prost(bool, tag = "12")]
-    pub is_spoiler: bool,
+    #[prost(bool, optional, tag = "12")]
+    pub is_spoiler: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileMetadata {
     #[prost(message, optional, tag = "1")]
     pub file: ::core::option::Option<FileMetadataFile>,
@@ -85,12 +85,18 @@ pub struct FileMetadata {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileMetadataFile {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FileMetadataFile {
+    #[prost(string, tag = "1")]
+    pub file_type: ::prost::alloc::string::String,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileMetadataText {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FileMetadataText {
+    #[prost(string, tag = "1")]
+    pub text_length: ::prost::alloc::string::String,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -112,7 +118,10 @@ pub struct FileMetadataVideo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct FileMetadataAudio {}
+pub struct FileMetadataAudio {
+    #[prost(int64, tag = "1")]
+    pub audio_duration: i64,
+}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PaginationSort {
