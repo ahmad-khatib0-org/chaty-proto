@@ -57,7 +57,7 @@ export interface FileMetadataFile {
 }
 
 export interface FileMetadataText {
-  textLength: string;
+  textLength: number;
 }
 
 export interface FileMetadataImage {
@@ -518,13 +518,13 @@ export const FileMetadataFile: MessageFns<FileMetadataFile> = {
 };
 
 function createBaseFileMetadataText(): FileMetadataText {
-  return { textLength: "" };
+  return { textLength: 0 };
 }
 
 export const FileMetadataText: MessageFns<FileMetadataText> = {
   encode(message: FileMetadataText, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.textLength !== "") {
-      writer.uint32(10).string(message.textLength);
+    if (message.textLength !== 0) {
+      writer.uint32(8).int64(message.textLength);
     }
     return writer;
   },
@@ -537,11 +537,11 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.textLength = reader.string();
+          message.textLength = longToNumber(reader.int64());
           continue;
         }
       }
@@ -554,13 +554,13 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
   },
 
   fromJSON(object: any): FileMetadataText {
-    return { textLength: isSet(object.textLength) ? globalThis.String(object.textLength) : "" };
+    return { textLength: isSet(object.textLength) ? globalThis.Number(object.textLength) : 0 };
   },
 
   toJSON(message: FileMetadataText): unknown {
     const obj: any = {};
-    if (message.textLength !== "") {
-      obj.textLength = message.textLength;
+    if (message.textLength !== 0) {
+      obj.textLength = Math.round(message.textLength);
     }
     return obj;
   },
@@ -570,7 +570,7 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
   },
   fromPartial<I extends Exact<DeepPartial<FileMetadataText>, I>>(object: I): FileMetadataText {
     const message = createBaseFileMetadataText();
-    message.textLength = object.textLength ?? "";
+    message.textLength = object.textLength ?? 0;
     return message;
   },
 };
@@ -582,10 +582,10 @@ function createBaseFileMetadataImage(): FileMetadataImage {
 export const FileMetadataImage: MessageFns<FileMetadataImage> = {
   encode(message: FileMetadataImage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.width !== 0) {
-      writer.uint32(8).int32(message.width);
+      writer.uint32(8).int64(message.width);
     }
     if (message.height !== 0) {
-      writer.uint32(16).int32(message.height);
+      writer.uint32(16).int64(message.height);
     }
     return writer;
   },
@@ -602,7 +602,7 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
             break;
           }
 
-          message.width = reader.int32();
+          message.width = longToNumber(reader.int64());
           continue;
         }
         case 2: {
@@ -610,7 +610,7 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
             break;
           }
 
-          message.height = reader.int32();
+          message.height = longToNumber(reader.int64());
           continue;
         }
       }
@@ -658,10 +658,10 @@ function createBaseFileMetadataVideo(): FileMetadataVideo {
 export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
   encode(message: FileMetadataVideo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.width !== 0) {
-      writer.uint32(8).int32(message.width);
+      writer.uint32(8).int64(message.width);
     }
     if (message.height !== 0) {
-      writer.uint32(16).int32(message.height);
+      writer.uint32(16).int64(message.height);
     }
     return writer;
   },
@@ -678,7 +678,7 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
             break;
           }
 
-          message.width = reader.int32();
+          message.width = longToNumber(reader.int64());
           continue;
         }
         case 2: {
@@ -686,7 +686,7 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
             break;
           }
 
-          message.height = reader.int32();
+          message.height = longToNumber(reader.int64());
           continue;
         }
       }

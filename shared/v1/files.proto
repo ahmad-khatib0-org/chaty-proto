@@ -55,17 +55,17 @@ message FileMetadataFile {
 }
 
 message FileMetadataText {
-  string text_length = 1;
+  int64 text_length = 1;
 }
 
 message FileMetadataImage {
-  int32 width = 1;
-  int32 height = 2;
+  int64 width = 1;
+  int64 height = 2;
 }
 
 message FileMetadataVideo {
-  int32 width = 1;
-  int32 height = 2;
+  int64 width = 1;
+  int64 height = 2;
 }
 
 message FileMetadataAudio {

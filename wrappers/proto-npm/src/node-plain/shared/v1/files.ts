@@ -57,17 +57,17 @@ export interface FileMetadataFile {
 }
 
 export interface FileMetadataText {
-  textLength: string;
+  textLength: bigint;
 }
 
 export interface FileMetadataImage {
-  width: number;
-  height: number;
+  width: bigint;
+  height: bigint;
 }
 
 export interface FileMetadataVideo {
-  width: number;
-  height: number;
+  width: bigint;
+  height: bigint;
 }
 
 export interface FileMetadataAudio {
@@ -524,13 +524,16 @@ export const FileMetadataFile: MessageFns<FileMetadataFile> = {
 };
 
 function createBaseFileMetadataText(): FileMetadataText {
-  return { textLength: "" };
+  return { textLength: 0n };
 }
 
 export const FileMetadataText: MessageFns<FileMetadataText> = {
   encode(message: FileMetadataText, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.textLength !== "") {
-      writer.uint32(10).string(message.textLength);
+    if (message.textLength !== 0n) {
+      if (BigInt.asIntN(64, message.textLength) !== message.textLength) {
+        throw new globalThis.Error("value provided for field message.textLength of type int64 too large");
+      }
+      writer.uint32(8).int64(message.textLength);
     }
     return writer;
   },
@@ -543,11 +546,11 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.textLength = reader.string();
+          message.textLength = reader.int64() as bigint;
           continue;
         }
       }
@@ -560,13 +563,13 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
   },
 
   fromJSON(object: any): FileMetadataText {
-    return { textLength: isSet(object.textLength) ? globalThis.String(object.textLength) : "" };
+    return { textLength: isSet(object.textLength) ? BigInt(object.textLength) : 0n };
   },
 
   toJSON(message: FileMetadataText): unknown {
     const obj: any = {};
-    if (message.textLength !== "") {
-      obj.textLength = message.textLength;
+    if (message.textLength !== 0n) {
+      obj.textLength = message.textLength.toString();
     }
     return obj;
   },
@@ -576,22 +579,28 @@ export const FileMetadataText: MessageFns<FileMetadataText> = {
   },
   fromPartial<I extends Exact<DeepPartial<FileMetadataText>, I>>(object: I): FileMetadataText {
     const message = createBaseFileMetadataText();
-    message.textLength = object.textLength ?? "";
+    message.textLength = object.textLength ?? 0n;
     return message;
   },
 };
 
 function createBaseFileMetadataImage(): FileMetadataImage {
-  return { width: 0, height: 0 };
+  return { width: 0n, height: 0n };
 }
 
 export const FileMetadataImage: MessageFns<FileMetadataImage> = {
   encode(message: FileMetadataImage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.width !== 0) {
-      writer.uint32(8).int32(message.width);
+    if (message.width !== 0n) {
+      if (BigInt.asIntN(64, message.width) !== message.width) {
+        throw new globalThis.Error("value provided for field message.width of type int64 too large");
+      }
+      writer.uint32(8).int64(message.width);
     }
-    if (message.height !== 0) {
-      writer.uint32(16).int32(message.height);
+    if (message.height !== 0n) {
+      if (BigInt.asIntN(64, message.height) !== message.height) {
+        throw new globalThis.Error("value provided for field message.height of type int64 too large");
+      }
+      writer.uint32(16).int64(message.height);
     }
     return writer;
   },
@@ -608,7 +617,7 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
             break;
           }
 
-          message.width = reader.int32();
+          message.width = reader.int64() as bigint;
           continue;
         }
         case 2: {
@@ -616,7 +625,7 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
             break;
           }
 
-          message.height = reader.int32();
+          message.height = reader.int64() as bigint;
           continue;
         }
       }
@@ -630,18 +639,18 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
 
   fromJSON(object: any): FileMetadataImage {
     return {
-      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
-      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+      width: isSet(object.width) ? BigInt(object.width) : 0n,
+      height: isSet(object.height) ? BigInt(object.height) : 0n,
     };
   },
 
   toJSON(message: FileMetadataImage): unknown {
     const obj: any = {};
-    if (message.width !== 0) {
-      obj.width = Math.round(message.width);
+    if (message.width !== 0n) {
+      obj.width = message.width.toString();
     }
-    if (message.height !== 0) {
-      obj.height = Math.round(message.height);
+    if (message.height !== 0n) {
+      obj.height = message.height.toString();
     }
     return obj;
   },
@@ -651,23 +660,29 @@ export const FileMetadataImage: MessageFns<FileMetadataImage> = {
   },
   fromPartial<I extends Exact<DeepPartial<FileMetadataImage>, I>>(object: I): FileMetadataImage {
     const message = createBaseFileMetadataImage();
-    message.width = object.width ?? 0;
-    message.height = object.height ?? 0;
+    message.width = object.width ?? 0n;
+    message.height = object.height ?? 0n;
     return message;
   },
 };
 
 function createBaseFileMetadataVideo(): FileMetadataVideo {
-  return { width: 0, height: 0 };
+  return { width: 0n, height: 0n };
 }
 
 export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
   encode(message: FileMetadataVideo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.width !== 0) {
-      writer.uint32(8).int32(message.width);
+    if (message.width !== 0n) {
+      if (BigInt.asIntN(64, message.width) !== message.width) {
+        throw new globalThis.Error("value provided for field message.width of type int64 too large");
+      }
+      writer.uint32(8).int64(message.width);
     }
-    if (message.height !== 0) {
-      writer.uint32(16).int32(message.height);
+    if (message.height !== 0n) {
+      if (BigInt.asIntN(64, message.height) !== message.height) {
+        throw new globalThis.Error("value provided for field message.height of type int64 too large");
+      }
+      writer.uint32(16).int64(message.height);
     }
     return writer;
   },
@@ -684,7 +699,7 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
             break;
           }
 
-          message.width = reader.int32();
+          message.width = reader.int64() as bigint;
           continue;
         }
         case 2: {
@@ -692,7 +707,7 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
             break;
           }
 
-          message.height = reader.int32();
+          message.height = reader.int64() as bigint;
           continue;
         }
       }
@@ -706,18 +721,18 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
 
   fromJSON(object: any): FileMetadataVideo {
     return {
-      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
-      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+      width: isSet(object.width) ? BigInt(object.width) : 0n,
+      height: isSet(object.height) ? BigInt(object.height) : 0n,
     };
   },
 
   toJSON(message: FileMetadataVideo): unknown {
     const obj: any = {};
-    if (message.width !== 0) {
-      obj.width = Math.round(message.width);
+    if (message.width !== 0n) {
+      obj.width = message.width.toString();
     }
-    if (message.height !== 0) {
-      obj.height = Math.round(message.height);
+    if (message.height !== 0n) {
+      obj.height = message.height.toString();
     }
     return obj;
   },
@@ -727,8 +742,8 @@ export const FileMetadataVideo: MessageFns<FileMetadataVideo> = {
   },
   fromPartial<I extends Exact<DeepPartial<FileMetadataVideo>, I>>(object: I): FileMetadataVideo {
     const message = createBaseFileMetadataVideo();
-    message.width = object.width ?? 0;
-    message.height = object.height ?? 0;
+    message.width = object.width ?? 0n;
+    message.height = object.height ?? 0n;
     return message;
   },
 };

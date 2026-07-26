@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/files.proto.
  */
 export const file_shared_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSK7AgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIuCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGFIAogBARIXCgppc19zcG9pbGVyGAwgASgISAOIAQFCCgoIX2RlbGV0ZWRCCwoJX3JlcG9ydGVkQgsKCV9tZXRhZGF0YUINCgtfaXNfc3BvaWxlciLrAQoMRmlsZU1ldGFkYXRhEikKBGZpbGUYASABKAsyGy5zaGFyZWQudjEuRmlsZU1ldGFkYXRhRmlsZRIpCgR0ZXh0GAIgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVRleHQSKwoFaW1hZ2UYAyABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhSW1hZ2USKwoFdmlkZW8YBCABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhVmlkZW8SKwoFYXVkaW8YBSABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhQXVkaW8iJQoQRmlsZU1ldGFkYXRhRmlsZRIRCglmaWxlX3R5cGUYASABKAkiJwoQRmlsZU1ldGFkYXRhVGV4dBITCgt0ZXh0X2xlbmd0aBgBIAEoCSIyChFGaWxlTWV0YWRhdGFJbWFnZRINCgV3aWR0aBgBIAEoBRIOCgZoZWlnaHQYAiABKAUiMgoRRmlsZU1ldGFkYXRhVmlkZW8SDQoFd2lkdGgYASABKAUSDgoGaGVpZ2h0GAIgASgFIisKEUZpbGVNZXRhZGF0YUF1ZGlvEhYKDmF1ZGlvX2R1cmF0aW9uGAEgASgDYgZwcm90bzM");
+  fileDesc("ChVzaGFyZWQvdjEvZmlsZXMucHJvdG8SCXNoYXJlZC52MSK7AgoERmlsZRIKCgJpZBgBIAEoCRITCgt1cGxvYWRlcl9pZBgCIAEoCRIOCgZidWNrZXQYAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSFAoMY29udGVudF90eXBlGAUgASgJEgwKBHNpemUYBiABKAMSDAoEaGFzaBgHIAEoCRITCgt1cGxvYWRlZF9hdBgIIAEoAxIUCgdkZWxldGVkGAkgASgISACIAQESFQoIcmVwb3J0ZWQYCiABKAhIAYgBARIuCghtZXRhZGF0YRgLIAEoCzIXLnNoYXJlZC52MS5GaWxlTWV0YWRhdGFIAogBARIXCgppc19zcG9pbGVyGAwgASgISAOIAQFCCgoIX2RlbGV0ZWRCCwoJX3JlcG9ydGVkQgsKCV9tZXRhZGF0YUINCgtfaXNfc3BvaWxlciLrAQoMRmlsZU1ldGFkYXRhEikKBGZpbGUYASABKAsyGy5zaGFyZWQudjEuRmlsZU1ldGFkYXRhRmlsZRIpCgR0ZXh0GAIgASgLMhsuc2hhcmVkLnYxLkZpbGVNZXRhZGF0YVRleHQSKwoFaW1hZ2UYAyABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhSW1hZ2USKwoFdmlkZW8YBCABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhVmlkZW8SKwoFYXVkaW8YBSABKAsyHC5zaGFyZWQudjEuRmlsZU1ldGFkYXRhQXVkaW8iJQoQRmlsZU1ldGFkYXRhRmlsZRIRCglmaWxlX3R5cGUYASABKAkiJwoQRmlsZU1ldGFkYXRhVGV4dBITCgt0ZXh0X2xlbmd0aBgBIAEoAyIyChFGaWxlTWV0YWRhdGFJbWFnZRINCgV3aWR0aBgBIAEoAxIOCgZoZWlnaHQYAiABKAMiMgoRRmlsZU1ldGFkYXRhVmlkZW8SDQoFd2lkdGgYASABKAMSDgoGaGVpZ2h0GAIgASgDIisKEUZpbGVNZXRhZGF0YUF1ZGlvEhYKDmF1ZGlvX2R1cmF0aW9uGAEgASgDYgZwcm90bzM");
 
 /**
  * ===========================================
@@ -169,9 +169,9 @@ export const FileMetadataFileSchema: GenMessage<FileMetadataFile> = /*@__PURE__*
  */
 export type FileMetadataText = Message<"shared.v1.FileMetadataText"> & {
   /**
-   * @generated from field: string text_length = 1;
+   * @generated from field: int64 text_length = 1;
    */
-  textLength: string;
+  textLength: bigint;
 };
 
 /**
@@ -186,14 +186,14 @@ export const FileMetadataTextSchema: GenMessage<FileMetadataText> = /*@__PURE__*
  */
 export type FileMetadataImage = Message<"shared.v1.FileMetadataImage"> & {
   /**
-   * @generated from field: int32 width = 1;
+   * @generated from field: int64 width = 1;
    */
-  width: number;
+  width: bigint;
 
   /**
-   * @generated from field: int32 height = 2;
+   * @generated from field: int64 height = 2;
    */
-  height: number;
+  height: bigint;
 };
 
 /**
@@ -208,14 +208,14 @@ export const FileMetadataImageSchema: GenMessage<FileMetadataImage> = /*@__PURE_
  */
 export type FileMetadataVideo = Message<"shared.v1.FileMetadataVideo"> & {
   /**
-   * @generated from field: int32 width = 1;
+   * @generated from field: int64 width = 1;
    */
-  width: number;
+  width: bigint;
 
   /**
-   * @generated from field: int32 height = 2;
+   * @generated from field: int64 height = 2;
    */
-  height: number;
+  height: bigint;
 };
 
 /**

@@ -55,8 +55,8 @@ class FileMetadataFile(_message.Message):
 class FileMetadataText(_message.Message):
     __slots__ = ("text_length",)
     TEXT_LENGTH_FIELD_NUMBER: _ClassVar[int]
-    text_length: str
-    def __init__(self, text_length: _Optional[str] = ...) -> None: ...
+    text_length: int
+    def __init__(self, text_length: _Optional[int] = ...) -> None: ...
 
 class FileMetadataImage(_message.Message):
     __slots__ = ("width", "height")

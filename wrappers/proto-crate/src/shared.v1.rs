@@ -92,28 +92,28 @@ pub struct FileMetadataFile {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadataText {
-    #[prost(string, tag = "1")]
-    pub text_length: ::prost::alloc::string::String,
+    #[prost(int64, tag = "1")]
+    pub text_length: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadataImage {
-    #[prost(int32, tag = "1")]
-    pub width: i32,
-    #[prost(int32, tag = "2")]
-    pub height: i32,
+    #[prost(int64, tag = "1")]
+    pub width: i64,
+    #[prost(int64, tag = "2")]
+    pub height: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FileMetadataVideo {
-    #[prost(int32, tag = "1")]
-    pub width: i32,
-    #[prost(int32, tag = "2")]
-    pub height: i32,
+    #[prost(int64, tag = "1")]
+    pub width: i64,
+    #[prost(int64, tag = "2")]
+    pub height: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(scylla::SerializeValue, scylla::DeserializeValue)]
